@@ -9,6 +9,7 @@ import Maps from "@/pages/Maps.vue";
 import Notifications from "@/pages/Notifications.vue";
 import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
 import BuyProduct from "../pages/BuyProduct";
+import OfferProduct from "../pages/OfferProduct";
 
 const routes = [
   {
@@ -45,6 +46,11 @@ const routes = [
         path: "buyproduct",
         name: "BuyProduct",
         component: BuyProduct
+      },
+      {
+        path: "offerproduct",
+        name: "OfferProduct",
+        component: OfferProduct
       },
       {
         path: "maps",

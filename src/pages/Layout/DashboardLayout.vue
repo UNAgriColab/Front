@@ -39,6 +39,10 @@
         <md-icon>notifications</md-icon>
         <p>Buy Product</p>
       </sidebar-link>
+      <sidebar-link to="/offerproduct">
+        <md-icon>notifications</md-icon>
+        <p>Offer Product</p>
+      </sidebar-link>
 
       <sidebar-link to="/upgrade" class="active-pro">
         <md-icon>unarchive</md-icon>

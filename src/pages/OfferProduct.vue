@@ -6,44 +6,6 @@
       >
         <md-card>
           <md-card-header data-background-color="green">
-            <h1 class="title">{{ product.name }}</h1>
-            <p class="category">{{ product.user}}</p>
-          </md-card-header>
-          <div id="product">
-            <div class="product">
-              <img v-bind:src="product.types[0].img"
-              class="img"/>
-              <div class="details">
-                <span v-if="product.quantity >= 20" class="stock in-stock">
-                  Unidades disponibles
-                </span>
-                <span
-                  v-else-if="product.quantity > 0 && product.quantity < 20"
-                  class="stock low-stock"
-                >
-                  quedan pocas unidades
-                </span>
-                <span v-else class="stock out-of-stock">
-                  agotado
-                </span>
-                <span>Select type:</span>
-                <div class="types">
-                  <span
-                    class="color-box"
-                    v-for="types in product.types"
-                    v-bind:key="types.id"
-                    v-bind:title="types.name"
-                    v-bind:style="{ backgroundColor: types.code }"
-                    v-bind:class="{ 'color-box': true}"
-                  >
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </md-card>
-        <md-card>
-          <md-card-header data-background-color="green">
             <h1 class="title">¡Compra!</h1>
           </md-card-header>
           <div class="dr">
@@ -62,7 +24,7 @@
           <md-card-header data-background-color="green">
             <h1 class="title">Descripción</h1>
           </md-card-header>
-          <p class="category">{{ product.description}}</p>
+          <p class="category">{{ product.description }}</p>
         </md-card>
       </div>
     </div>
@@ -74,7 +36,7 @@ export default {
   name: "product",
   data: function() {
     return {
-      selected:'',
+      selected: '',
       product: {
         name: "frutas",
         description: "esta es la descripcion de una fruta",
