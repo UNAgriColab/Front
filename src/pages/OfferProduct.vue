@@ -16,6 +16,7 @@
               <option>unidad dos</option>
               <option>unidad tres</option>
               <option>unidad cuatro</option>
+              <option>unidad cinco</option>
             </select>
             <span>Seleccionado: {{ selected }}</span>
             <p class="category">Precio total:</p>
@@ -37,7 +38,7 @@ export default {
   name: "product",
   data: function() {
     return {
-      selected: '',
+      selected: "",
       product: {
         name: "frutas",
         description: "esta es la descripcion de una fruta",
