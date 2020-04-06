@@ -15,6 +15,7 @@
               <option>unidad uno</option>
               <option>unidad dos</option>
               <option>unidad tres</option>
+              <option>unidad cuatro</option>
             </select>
             <span>Seleccionado: {{ selected }}</span>
             <p class="category">Precio total:</p>
