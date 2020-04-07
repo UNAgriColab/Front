@@ -9,7 +9,7 @@ import Maps from "@/pages/Maps.vue";
 import Notifications from "@/pages/Notifications.vue";
 import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
 import BuyProduct from "../pages/BuyProduct";
-import OfferProduct from "../pages/OfferProduct";
+import OfferProduct from "@/pages/OfferProduct.vue"
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 
