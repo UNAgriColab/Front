@@ -17,6 +17,10 @@
         </sidebar-link>
       </div>
       <mobile-menu slot="content"></mobile-menu>
+      <sidebar-link to="/dashboard">
+        <md-icon>dashboard</md-icon>
+        <p>Dashboard</p>
+      </sidebar-link>
       <sidebar-link to="/user">
         <md-icon>person</md-icon>
         <p>User Profile</p>
@@ -28,7 +32,17 @@
       <sidebar-link to="/offerproduct">
         <md-icon>store</md-icon>
         <p>Offer Product</p>
+
+      <sidebar-link to="/OfferProduct" >
+        <md-icon>unarchive</md-icon>
+        <p>OfferProduct</p>
       </sidebar-link>
+
+      <sidebar-link to="/upgrade" class="active-pro">
+        <md-icon>unarchive</md-icon>
+        <p>Upgrade to PRO</p>
+      </sidebar-link>
+
     </side-bar>
 
     <div class="main-panel">
@@ -60,7 +74,7 @@ export default {
     DashboardContent,
     ContentFooter,
     MobileMenu,
-    //FixedPlugin
+    FixedPlugin
   },
   data() {
     return {

@@ -50,11 +50,6 @@ const routes = [
         component: BuyProduct
       },
       {
-        path: "offerproduct",
-        name: "OfferProduct",
-        component: OfferProduct
-      },
-      {
         path: "maps",
         name: "Maps",
         meta: {
@@ -81,6 +76,11 @@ const routes = [
         path: "upgrade",
         name: "Upgrade to PRO",
         component: UpgradeToPRO
+      },
+      {
+        path: "offerProduct",
+        name: "OfferProduct",
+        component: OfferProduct
       }
     ]
   }
