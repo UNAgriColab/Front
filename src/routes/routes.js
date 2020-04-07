@@ -11,6 +11,7 @@ import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
 import BuyProduct from "../pages/BuyProduct";
 import OfferProduct from "@/pages/OfferProduct.vue"
 
+
 const routes = [
   {
     path: "/",
@@ -46,6 +47,11 @@ const routes = [
         path: "buyproduct",
         name: "BuyProduct",
         component: BuyProduct
+      },
+      {
+        path: "offerproduct",
+        name: "OfferProduct",
+        component: OfferProduct
       },
       {
         path: "maps",
