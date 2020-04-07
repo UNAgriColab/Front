@@ -2,10 +2,7 @@
   <div class="wrapper" :class="{ 'nav-open': $sidebar.showSidebar }">
     <notifications></notifications>
 
-    <side-bar
-      :sidebar-item-color="sidebarBackground"
-      :sidebar-background-image="sidebarBackgroundImage"
-    >
+    <side-bar :sidebar-item-color="sidebarBackground" :sidebar-background-image="sidebarBackgroundImage">
       <div>
         <sidebar-link to="/login">
           <md-icon>face</md-icon>
@@ -32,7 +29,7 @@
       <sidebar-link to="/offerproduct">
         <md-icon>store</md-icon>
         <p>Offer Product</p>
-
+      </sidebar-link>
       <sidebar-link to="/OfferProduct" >
         <md-icon>unarchive</md-icon>
         <p>OfferProduct</p>
@@ -42,7 +39,6 @@
         <md-icon>unarchive</md-icon>
         <p>Upgrade to PRO</p>
       </sidebar-link>
-
     </side-bar>
 
     <div class="main-panel">
