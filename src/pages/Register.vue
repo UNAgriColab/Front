@@ -30,6 +30,15 @@
               />
             </h3>
             <h3>
+              <label for="edad">Age</label>
+              <input
+                      id="edad"
+                      v-model="user.edad"
+                      type="text"
+                      placeholder="Age"
+              />
+            </h3>
+            <h3>
               <label for="password">Password</label>
               <input
                 id="password"
