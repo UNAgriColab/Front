@@ -21,15 +21,6 @@
               />
             </h3>
             <h3>
-              <label for="email">Correo</label>
-              <input
-                id="email"
-                v-model="user.email"
-                type="text"
-                placeholder="email"
-              />
-            </h3>
-            <h3>
               <label for="password">Password</label>
               <input
                 id="password"
@@ -54,8 +45,7 @@ export default {
     return {
       user: {
         email: null,
-        username: null,
-        password: null
+        username: null
       },
       submitData: null
     };
