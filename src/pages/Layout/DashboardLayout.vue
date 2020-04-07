@@ -6,6 +6,16 @@
       :sidebar-item-color="sidebarBackground"
       :sidebar-background-image="sidebarBackgroundImage"
     >
+      <div>
+        <sidebar-link to="/login">
+          <md-icon>face</md-icon>
+          <p>Login</p>
+        </sidebar-link>
+        <sidebar-link to="/register">
+          <md-icon>how_to_reg</md-icon>
+          <p>Register</p>
+        </sidebar-link>
+      </div>
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/dashboard">
         <md-icon>dashboard</md-icon>
