@@ -90,7 +90,7 @@ export default {
       numberOfUnits: null,
       totalPrice: null,
       description:
-        "En este espacio puedes realizar una pequeña descripión de tu producto."
+            "En este espacio puedes realizar una pequeña descripión de tu producto."
     };
   }
 };
