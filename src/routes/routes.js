@@ -10,7 +10,8 @@ import Notifications from "@/pages/Notifications.vue";
 import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
 import BuyProduct from "../pages/BuyProduct";
 import OfferProduct from "@/pages/OfferProduct.vue"
-
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 const routes = [
   {
@@ -49,11 +50,6 @@ const routes = [
         component: BuyProduct
       },
       {
-        path: "offerproduct",
-        name: "OfferProduct",
-        component: OfferProduct
-      },
-      {
         path: "maps",
         name: "Maps",
         meta: {
@@ -65,6 +61,16 @@ const routes = [
         path: "notifications",
         name: "Notifications",
         component: Notifications
+      },
+      {
+        path: "login",
+        name: "Login",
+        component: Login
+      },
+      {
+        path: "/register",
+        name: "register",
+        component: Register
       },
       {
         path: "upgrade",
