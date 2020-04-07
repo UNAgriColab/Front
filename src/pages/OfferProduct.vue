@@ -7,35 +7,63 @@
       </md-card-header>
 
       <md-card-content>
-        <div class="md-layout">
-          <div class="md-layout-item md-small-size-100 md-size-100">
+        <div class="md-layout-item"><!-- Layaot item list-->
+            <div class="md-layout-item md-small-size-100 md-size-100">
+                <md-field>
+                    <label for="productName">Tipo de producto</label>
+                    <md-select v-model="productName" name="productName" id="productName" md-dense>
+                        <md-optgroup label="Hortalizas">
+                        <md-option value="ACELGA">ACELGA</md-option>
+                        <md-option value="CEBOLLA CABEZONA BLANCA">CEBOLLA CABEZONA BLANCA</md-option>
+                        </md-optgroup>
+
+                        <md-optgroup label="Frutas">
+                        <md-option value="AGUACATE HASS">AGUACATE HASS</md-option>
+                        <md-option value="BANANO CRIOLLO">BANANO CRIOLLO</md-option>
+                        <md-option value="CURUBA BOYACENCE">CURUBA BOYACENCE</md-option>
+                        <md-option value="TOMATE DE ARBOL">TOMATE DE ARBOL</md-option>
+                        </md-optgroup>
+
+                        <md-optgroup label="Tuberculos">
+                        <md-option value="PAPA CRIOLLA LAVADA">PAPA CRIOLLA LAVADA</md-option>
+                        <md-option value="PAPA PASTUSA">PAPA PASTUSA</md-option>
+                        <md-option value="PAPA R12 INDUSTRIAL">PAPA R12 INDUSTRIAL</md-option>
+                        </md-optgroup>
+                    </md-select>
+                </md-field>
+            </div>
+        </div>
+        <div class="md-layout"><!-- Layaot item -->
+            <div class="md-layout-item md-small-size-100 md-size-33">
+                <md-field>
+                <label for="country">Unidad</label>
+                <md-select v-model="country" name="country" id="country" md-dense>
+                    <md-option value="Gramos">Gramos</md-option>
+                    <md-option value="Libras">Libras</md-option>
+                    <md-option value="Kilogramos">Kilogramos</md-option>
+                    <md-option value="Arrobas">Arrobas</md-option>
+                    <md-option value="Bultos(50 Kg)">Bultos(50 Kg)</md-option>
+                </md-select>
+                </md-field>
+            </div>
+            <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
-              <label>Nombre del producto</label>
-              <md-input v-model="productName" type="text"></md-input>
+                <label>Numero de unidades</label>
+                <md-input v-model="numberOfUnits" type="Number"></md-input>
             </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
-            <md-field>
-              <label>Unidad</label>
-              <md-input v-model="unit" type="text"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
-            <md-field>
-              <label>Numero de unidades</label>
-              <md-input v-model="numberOfUnits" type="text"></md-input>
-            </md-field>
-          </div>
+            </div>
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
               <label>Precio por unidad</label>
               <md-input v-model="totalPrice" type="text"></md-input>
+              <md-icon>attach_money</md-icon>
             </md-field>
           </div>
           <div class="md-layout-item md-size-100">
             <md-field maxlength="5">
               <label>Descripción</label>
-              <md-textarea v-model="Description"></md-textarea>
+              <md-textarea v-model="description"></md-textarea>
+              <md-icon>description</md-icon>
             </md-field>
           </div>
           <div class="md-layout-item md-size-100 text-right">
@@ -57,12 +85,12 @@ export default {
   },
   data() {
     return {
-      productName: null,
+      productName: tomate,
       unit: null,
       numberOfUnits: null,
       totalPrice: null,
-      Description:
-        "En este espacio puedes realizar una pequeña descripión de tu producto."
+      description:
+            "En este espacio puedes realizar una pequeña descripión de tu producto."
     };
   }
 };
