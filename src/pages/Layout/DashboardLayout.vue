@@ -25,25 +25,16 @@
         <md-icon>shopping_cart</md-icon>
         <p>Buy Product</p>
       </sidebar-link>
-<<<<<<<<< Temporary merge branch 1
-
-      <sidebar-link to="/OfferProduct" >
-        <md-icon>unarchive</md-icon>
-        <p>OfferProduct</p>
-      </sidebar-link>
-
       <sidebar-link to="/upgrade" class="active-pro">
         <md-icon>unarchive</md-icon>
         <p>Upgrade to PRO</p>
-=========
+      </sidebar-link>
+
       <sidebar-link to="/offerproduct">
         <md-icon>store</md-icon>
         <p>Offer Product</p>
->>>>>>>>> Temporary merge branch 2
       </sidebar-link>
-
     </side-bar>
-
     <div class="main-panel">
       <top-navbar></top-navbar>
 
@@ -73,7 +64,7 @@ export default {
     DashboardContent,
     ContentFooter,
     MobileMenu,
-    //FixedPlugin
+    FixedPlugin
   },
   data() {
     return {
