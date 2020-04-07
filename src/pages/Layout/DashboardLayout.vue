@@ -25,11 +25,6 @@
         <md-icon>shopping_cart</md-icon>
         <p>Buy Product</p>
       </sidebar-link>
-      <sidebar-link to="/upgrade" class="active-pro">
-        <md-icon>unarchive</md-icon>
-        <p>Upgrade to PRO</p>
-      </sidebar-link>
-
       <sidebar-link to="/offerproduct">
         <md-icon>store</md-icon>
         <p>Offer Product</p>
