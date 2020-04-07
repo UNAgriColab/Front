@@ -2,7 +2,10 @@
   <div class="wrapper" :class="{ 'nav-open': $sidebar.showSidebar }">
     <notifications></notifications>
 
-    <side-bar :sidebar-item-color="sidebarBackground" :sidebar-background-image="sidebarBackgroundImage">
+    <side-bar
+      :sidebar-item-color="sidebarBackground"
+      :sidebar-background-image="sidebarBackgroundImage"
+    >
       <div>
         <sidebar-link to="/login">
           <md-icon>face</md-icon>
@@ -14,10 +17,6 @@
         </sidebar-link>
       </div>
       <mobile-menu slot="content"></mobile-menu>
-      <sidebar-link to="/dashboard">
-        <md-icon>dashboard</md-icon>
-        <p>Dashboard</p>
-      </sidebar-link>
       <sidebar-link to="/user">
         <md-icon>person</md-icon>
         <p>User Profile</p>
@@ -26,10 +25,8 @@
         <md-icon>shopping_cart</md-icon>
         <p>Buy Product</p>
       </sidebar-link>
-      <sidebar-link to="/offerproduct">
-        <md-icon>store</md-icon>
-        <p>Offer Product</p>
-      </sidebar-link>
+<<<<<<<<< Temporary merge branch 1
+
       <sidebar-link to="/OfferProduct" >
         <md-icon>unarchive</md-icon>
         <p>OfferProduct</p>
@@ -38,7 +35,13 @@
       <sidebar-link to="/upgrade" class="active-pro">
         <md-icon>unarchive</md-icon>
         <p>Upgrade to PRO</p>
+=========
+      <sidebar-link to="/offerproduct">
+        <md-icon>store</md-icon>
+        <p>Offer Product</p>
+>>>>>>>>> Temporary merge branch 2
       </sidebar-link>
+
     </side-bar>
 
     <div class="main-panel">
@@ -70,7 +73,7 @@ export default {
     DashboardContent,
     ContentFooter,
     MobileMenu,
-    FixedPlugin
+    //FixedPlugin
   },
   data() {
     return {
