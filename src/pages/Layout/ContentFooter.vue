@@ -11,16 +11,6 @@
               Acerca de
             </a>
           </li>
-          <li>
-            <a>
-              Blog
-            </a>
-          </li>
-          <li>
-            <a>
-              Licencia
-            </a>
-          </li>
         </ul>
       </nav>
       <div class="copyright text-center">

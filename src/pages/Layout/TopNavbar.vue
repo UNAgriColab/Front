@@ -45,7 +45,7 @@
               </drop-down>
             </md-list-item> -->
 
-            <md-list-item href="#/shoppingcar">
+            <md-list-item href="#/shoppingCar">
               <i class="material-icons">shopping_cart</i>
               <p class="hidden-lg hidden-md">Carrito de compras</p>
             </md-list-item>

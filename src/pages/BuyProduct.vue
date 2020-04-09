@@ -6,23 +6,23 @@
       >
         <md-card>
           <md-card-header data-background-color="green">
-            <h1 class="title">{{ product.types[0].name }}</h1>
-            <p class="category">{{ product.types[0].user }}</p>
+            <h1 class="title">{{ product.selected.name }}</h1>
+            <p class="category">{{ product.selected.user }}</p>
           </md-card-header>
           <div id="product">
             <div class="product">
-              <img v-bind:src="product.types[0].img" class="img" alt="" />
+              <img v-bind:src="product.selected.img" class="img" alt="" />
               <div class="details">
                 <span
-                  v-if="product.types[0].quantity >= 20"
+                  v-if="product.selected.quantity >= 20"
                   class="stock in-stock"
                 >
                   Unidades disponibles
                 </span>
                 <span
                   v-else-if="
-                    product.types[0].quantity > 0 &&
-                      product.types[0].quantity < 20
+                    product.selected.quantity > 0 &&
+                      product.selected.quantity < 20
                   "
                   class="stock low-stock"
                 >
@@ -32,7 +32,7 @@
                   agotado
                 </span>
                 <div class="md-layout-item md-size-100 md-size-33">
-                  <h3 class="title">Precio: {{ product.types[0].price }}</h3>
+                  <h3 class="title">Precio: {{ product.selected.price }}</h3>
                 </div>
               </div>
             </div>
@@ -72,7 +72,7 @@
               </div>
               <div class="md-layout-item md-size-100 md-size-33">
                 <h3 class="title">
-                  Precio final: {{ product.types[0].price }}
+                  Precio final: {{ product.selected.price }}
                 </h3>
               </div>
               <div class="md-layout-item md-size-100 text-right">
@@ -87,7 +87,7 @@
           </md-card-header>
           <div class="md-layout-item md-size-100 md-size-33">
             <p class="category">
-              {{ product.types[0].description }}
+              {{ product.selected.description }}
             </p>
           </div>
         </md-card>
@@ -103,13 +103,24 @@ export default {
     return {
       selected: "",
       product: {
-        types: [
+        selected: {
+          id: 1,
+          name: "Fresa",
+          user: "usuario1",
+          price: 50000,
+          color: "#38393e",
+          quantity: 50,
+          description: "esta es la descripcion de una fruta",
+          img:
+            "https://ep01.epimg.net/elpais/imagenes/2020/02/26/estilo/1582729350_677456_1582730523_noticia_normal.jpg"
+        },
+        models: [
           {
             id: 1,
             name: "Fresa",
             user: "usuario1",
             price: 50000,
-            code: "#38393e",
+            color: "#38393e",
             quantity: 50,
             description: "esta es la descripcion de una fruta",
             img:
@@ -119,7 +130,7 @@ export default {
             id: 2,
             name: "Mango ",
             user: "usuario1",
-            code: "#696969",
+            color: "#696969",
             price: 60000,
             quantity: 50,
             description: "esta es la descripcion de una fruta2",
