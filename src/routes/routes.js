@@ -1,5 +1,7 @@
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 
+import Vue from "vue";
+import Router from "vue-router";
 import Dashboard from "@/pages/Dashboard.vue";
 import UserProfile from "@/pages/UserProfile.vue";
 import TableList from "@/pages/TableList.vue";
@@ -13,6 +15,8 @@ import OfferProduct from "@/pages/OfferProduct.vue";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import ShoppingCar from "../pages/ShoppingCar";
+
+Vue.use(Router);
 
 const routes = [
   {

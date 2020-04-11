@@ -32,10 +32,10 @@
             <h3>
               <label for="edad">Age</label>
               <input
-                      id="edad"
-                      v-model="user.edad"
-                      type="text"
-                      placeholder="Age"
+                id="edad"
+                v-model="user.age"
+                type="text"
+                placeholder="Age"
               />
             </h3>
             <h3>
@@ -47,10 +47,12 @@
                 placeholder="Password"
               />
             </h3>
-            <button type="submit" class="pure-button pure-button-primary">
+            <button
+              v-on:click="saveCustomer"
+              class="pure-button pure-button-primary"
+            >
               Logearse
             </button>
-            <p v-if="submitData">{{ submitData | json }}</p>
           </fieldset>
         </form>
       </md-card>
@@ -58,21 +60,50 @@
   </div>
 </template>
 <script>
+import http from "../http-common";
+
 export default {
+  name: "add-customer",
   data: function() {
     return {
       user: {
-        email: null,
-        username: null,
-        password: null
+        id: 0,
+        name: "",
+        email: "",
+        age: 0,
+        password: "",
+        active: false
       },
-      submitData: null
+      submitted: false
     };
   },
   methods: {
-    doRegister: function() {
-      this.submitData = this.user;
+    /* eslint-disable no-console */
+    saveCustomer() {
+      const data = {
+        name: this.user.username,
+        email: this.user.email,
+        age: this.user.age,
+        password: this.user.password
+      };
+
+      http
+        .post("/v1/user", data)
+        .then(response => {
+          this.customer.id = response.data.id;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+      this.submitted = true;
+    },
+    newCustomer() {
+      this.submitted = false;
+      this.customer = {};
     }
+    /* eslint-enable no-console */
   }
 };
 </script>

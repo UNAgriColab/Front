@@ -47,7 +47,15 @@
               <div class="md-layout-item md-small-size-100 md-size-33">
                 <md-field>
                   <label>Numero de unidades</label>
-                  <md-input v-model="numberOfUnits" type="Number"></md-input>
+                  <md-input
+                    id="numberOfUnits"
+                    type="Number"
+                    min="1"
+                    required
+                    v-model="product.selected.numberOfUnits"
+                    name="numberOfUnits"
+                  >
+                  </md-input>
                 </md-field>
               </div>
               <div class="md-layout-item md-small-size-100 md-size-33">
@@ -76,7 +84,13 @@
                 </h3>
               </div>
               <div class="md-layout-item md-size-100 text-right">
-                <md-button class="md-raised md-success">Comprar</md-button>
+                <md-button
+                  v-on:click="saveCustomer"
+                  class="md-raised md-success"
+                  :disabled="numberOfUnits"
+                >
+                  Comprar
+                </md-button>
               </div>
             </div>
           </md-card-content>
@@ -97,9 +111,11 @@
 </template>
 
 <script>
+import http from "../http-common";
+
 export default {
   name: "product",
-  data: function() {
+  data() {
     return {
       selected: "",
       product: {
@@ -109,37 +125,39 @@ export default {
           user: "usuario1",
           price: 50000,
           color: "#38393e",
-          quantity: 50,
+          quantity: 2,
+          numberOfUnits: 0,
           description: "esta es la descripcion de una fruta",
           img:
             "https://ep01.epimg.net/elpais/imagenes/2020/02/26/estilo/1582729350_677456_1582730523_noticia_normal.jpg"
-        },
-        models: [
-          {
-            id: 1,
-            name: "Fresa",
-            user: "usuario1",
-            price: 50000,
-            color: "#38393e",
-            quantity: 50,
-            description: "esta es la descripcion de una fruta",
-            img:
-              "https://ep01.epimg.net/elpais/imagenes/2020/02/26/estilo/1582729350_677456_1582730523_noticia_normal.jpg"
-          },
-          {
-            id: 2,
-            name: "Mango ",
-            user: "usuario1",
-            color: "#696969",
-            price: 60000,
-            quantity: 50,
-            description: "esta es la descripcion de una fruta2",
-            img:
-              "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Mango_and_cross_section_edit.jpg/800px-Mango_and_cross_section_edit.jpg"
-          }
-        ]
+        }
       }
     };
+  },
+  methods: {
+    /* eslint-disable no-console */
+    saveCustomer() {
+      const data = {
+        numberOfUnits: this.product.selected.numberOfUnits
+      };
+
+      http
+        .post("/v1/user", data)
+        .then(response => {
+          this.customer.id = response.data.id;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+      this.submitted = true;
+    },
+    newCustomer() {
+      this.submitted = false;
+      this.customer = {};
+    }
+    /* eslint-enable no-console */
   }
 };
 </script>

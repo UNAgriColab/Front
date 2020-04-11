@@ -38,7 +38,7 @@ const router = new VueRouter({
 });
 
 Vue.prototype.$Chartist = Chartist;
-
+Vue.config.productionTip = false;
 Vue.use(VueRouter);
 Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);
