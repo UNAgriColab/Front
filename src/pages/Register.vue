@@ -68,7 +68,7 @@ export default {
     return {
       user: {
         id: 0,
-        name: "",
+        username: "",
         email: "",
         age: 0,
         password: "",
