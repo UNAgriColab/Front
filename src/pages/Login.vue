@@ -1,41 +1,74 @@
 <template>
   <div class="content">
     <div class="md-layout">
-      <md-card>
-        <md-card-header data-background-color="green">
-          <h1 class="title">Registrarse</h1>
-        </md-card-header>
-        <form
-          class="pure-form pure-form-stacked"
-          v-on:submit.prevent="doLogin"
-          id="form"
-        >
-          <fieldset>
-            <h3>
-              <label for="username">Username</label>
-              <input
-                id="username"
-                v-model="user.username"
-                type="text"
-                placeholder="Username"
-              />
-            </h3>
-            <h3>
-              <label for="password">Password</label>
-              <input
-                id="password"
-                v-model="user.password"
-                type="password"
-                placeholder="Password"
-              />
-            </h3>
-            <button type="submit" class="pure-button pure-button-primary">
-              Logearse
-            </button>
-            <p v-if="submitData">{{ submitData | json }}</p>
-          </fieldset>
-        </form>
-      </md-card>
+      <div class="md-layout-item">
+        <md-card>
+          <md-card-header data-background-color="green">
+            <h5 class="title text-center">Ingresa tus datos</h5>
+          </md-card-header>
+
+          <md-card-content>
+            <form
+              class="pure-form pure-form-stacked"
+              v-on:submit.prevent="doLogin"
+              id="form"
+            >
+              <div class="md-layout-item md-small-size-100 md-size-100">
+                <md-field>
+                  <label for="username">Email</label>
+                  <md-icon>mail_outline</md-icon>
+                  <md-input
+                    id="username"
+                    v-model="user.username"
+                    type="text"
+                    placeholder="Email"
+                  >
+                  </md-input>
+                </md-field>
+              </div>
+
+              <div class="md-layout-item md-small-size-100 md-size-100">
+                <md-field>
+                  <label for="password">Contraseña</label>
+                  <md-icon>lock_open</md-icon>
+                  <md-input
+                    id="password"
+                    v-model="user.password"
+                    type="password"
+                    placeholder="Contraseña"
+                  >
+                  </md-input>
+                </md-field>
+              </div>
+
+              <div class="md-layout-item md-size-100 text-center">
+                <md-button type="submit" class="md-raised md-success">
+                  Ingresar
+                </md-button>
+                <p v-if="submitData">{{ submitData | json }}</p>
+              </div>
+            </form>
+          </md-card-content>
+        </md-card>
+
+        <div class="md-layout">
+          <div class="md-layout-item md-size-50 text-left">
+            <router-link to="/register" class="text-white">
+              <small style="font-weight: initial">
+                ¿Olvidaste tu contraseña?
+              </small>
+            </router-link>
+          </div>
+
+          <div class="md-layout-item md-size-50 text-right">
+            <router-link to="/register" class="text-white">
+              <small style="font-weight: initial">
+                Crea una nueva cuenta
+              </small>
+            </router-link>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>

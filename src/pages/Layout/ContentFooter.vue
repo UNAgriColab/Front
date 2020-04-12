@@ -1,22 +1,29 @@
 <template>
   <footer class="footer">
-    <div class="container">
-      <nav>
-        <ul>
-          <li>
-            <a>Agricolab</a>
-          </li>
-          <li>
-            <a>
-              Acerca de
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <div class="copyright text-center">
-        &copy; {{ new Date().getFullYear() }} Agricolab
+    <md-toolbar md-elevation="0" class="md-transparent">
+      <div class="md-toolbar-row">
+        <div class="md-toolbar-section-start">
+          <md-list>
+            <md-list-item href="#/login">
+              <p class="text-gray-light">
+                <i class="material-icons">eco</i>
+                Acerca de
+              </p>
+            </md-list-item>
+          </md-list>
+        </div>
+        <div class="md-toolbar-section-end">
+          <md-list>
+            <md-list-item href="#/login">
+              <p class="text-gray-light">
+                <i class="material-icons">copyright</i>
+                {{ new Date().getFullYear() }} Agricolab
+              </p>
+            </md-list-item>
+          </md-list>
+        </div>
       </div>
-    </div>
+    </md-toolbar>
   </footer>
 </template>
 <script>

@@ -1,4 +1,5 @@
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
+import AuthLayout from "../pages/Layout/AuthLayout";
 
 import Vue from "vue";
 import Router from "vue-router";
@@ -68,16 +69,6 @@ const routes = [
         component: Notifications
       },
       {
-        path: "login",
-        name: "Login",
-        component: Login
-      },
-      {
-        path: "/register",
-        name: "register",
-        component: Register
-      },
-      {
         path: "upgrade",
         name: "Upgrade to PRO",
         component: UpgradeToPRO
@@ -92,6 +83,23 @@ const routes = [
         name: "Shopping Car",
         component: ShoppingCar
       }
+    ]
+  },
+  {
+    path: "/",
+    component: AuthLayout,
+    redirect: "/auth",
+    children: [
+      {
+        path: "login",
+        name: "Login",
+        component: Login
+      },
+      {
+        path: "/register",
+        name: "register",
+        component: Register
+      },
     ]
   }
 ];
