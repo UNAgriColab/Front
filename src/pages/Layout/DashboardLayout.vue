@@ -6,31 +6,20 @@
       :sidebar-item-color="sidebarBackground"
       :sidebar-background-image="sidebarBackgroundImage"
     >
-      <div>
-        <sidebar-link to="/login">
-          <md-icon>face</md-icon>
-          <p>Login</p>
-        </sidebar-link>
-        <sidebar-link to="/register">
-          <md-icon>how_to_reg</md-icon>
-          <p>Register</p>
-        </sidebar-link>
-      </div>
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/user">
         <md-icon>person</md-icon>
-        <p>User Profile</p>
+        <p>Perfil</p>
       </sidebar-link>
       <sidebar-link to="/buyproduct">
         <md-icon>shopping_cart</md-icon>
-        <p>Buy Product</p>
+        <p>Compra productos</p>
       </sidebar-link>
 
       <sidebar-link to="/offerproduct">
         <md-icon>store</md-icon>
-        <p>Offer Product</p>
+        <p>Vende productos</p>
       </sidebar-link>
-
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>

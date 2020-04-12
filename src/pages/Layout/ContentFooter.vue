@@ -4,7 +4,7 @@
       <div class="md-toolbar-row">
         <div class="md-toolbar-section-start">
           <md-list>
-            <md-list-item href="#/login">
+            <md-list-item href="#/user">
               <p class="text-gray-light">
                 <i class="material-icons">eco</i>
                 Acerca de
@@ -17,7 +17,7 @@
             <md-list-item href="#/login">
               <p class="text-gray-light">
                 <i class="material-icons">copyright</i>
-                {{ new Date().getFullYear() }} Agricolab
+                {{ new Date().getFullYear() }} AgriColab
               </p>
             </md-list-item>
           </md-list>

@@ -5,9 +5,9 @@
     :data-image="sidebarBackgroundImage"
     :style="sidebarStyle"
   >
-    <div class="logo">
+    <div class="logo text-center">
       <a
-        href="https://www.creative-tim.com/product/vue-material-dashboard"
+        href="#/login"
         target="_blank"
         class="simple-text logo-normal"
       >
