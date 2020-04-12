@@ -1,61 +1,92 @@
 <template>
   <div class="content">
     <div class="md-layout">
-      <md-card>
-        <md-card-header data-background-color="green">
-          <h1 class="title">Registrarse</h1>
-        </md-card-header>
-        <form
-          class="pure-form pure-form-stacked"
-          v-on:submit.prevent="doLogin"
-          id="form"
-        >
-          <fieldset>
-            <h3>
-              <label for="username">Username</label>
-              <input
-                id="username"
-                v-model="user.username"
-                type="text"
-                placeholder="Username"
-              />
-            </h3>
-            <h3>
-              <label for="email">Correo</label>
-              <input
-                id="email"
-                v-model="user.email"
-                type="text"
-                placeholder="email"
-              />
-            </h3>
-            <h3>
-              <label for="edad">Age</label>
-              <input
-                id="edad"
-                v-model="user.age"
-                type="text"
-                placeholder="Age"
-              />
-            </h3>
-            <h3>
-              <label for="password">Password</label>
-              <input
-                id="password"
-                v-model="user.password"
-                type="password"
-                placeholder="Password"
-              />
-            </h3>
-            <button
-              v-on:click="saveCustomer"
-              class="pure-button pure-button-primary"
+      <div class="md-layout-item">
+        <md-card>
+          <md-card-header data-background-color="green">
+            <h5 class="title text-center">Registra tus datos</h5>
+          </md-card-header>
+
+          <md-card-content>
+            <form
+              class="pure-form pure-form-stacked"
+              v-on:submit.prevent="doLogin"
+              id="form"
             >
-              Logearse
-            </button>
-          </fieldset>
-        </form>
-      </md-card>
+              <div class="md-layout-item md-small-size-100 md-size-100">
+                <md-field>
+                  <label for="username">Nombre</label>
+                  <md-icon>portrait</md-icon>
+                  <md-input
+                    id="username"
+                    v-model="user.username"
+                    type="text"
+                    placeholder="Nombre"
+                  >
+                  </md-input>
+                </md-field>
+              </div>
+              <div class="md-layout-item md-small-size-100 md-size-100">
+                <md-field>
+                  <label for="email">Correo</label>
+                  <md-icon>mail_outline</md-icon>
+                  <md-input
+                    id="email"
+                    v-model="user.email"
+                    type="text"
+                    placeholder="Correo electrónico"
+                  >
+                  </md-input>
+                </md-field>
+              </div>
+              <div class="md-layout-item md-small-size-100 md-size-100">
+                <md-field>
+                  <label for="age">Edad</label>
+                  <md-icon>date_range</md-icon>
+                  <md-input
+                    id="age"
+                    v-model="user.age"
+                    type="number"
+                    placeholder="Edad"
+                  >
+                  </md-input>
+                </md-field>
+              </div>
+              <div class="md-layout-item md-small-size-100 md-size-100">
+                <md-field>
+                  <label for="password">Contraseña</label>
+                  <md-icon>lock_open</md-icon>
+                  <md-input
+                    id="password"
+                    v-model="user.password"
+                    type="password"
+                    placeholder="Contraseña"
+                  >
+                  </md-input>
+                </md-field>
+              </div>
+              <div class="md-layout-item md-size-100 text-center">
+                <md-button
+                  v-on:click="saveCustomer"
+                  type="submit"
+                  class="md-raised md-success"
+                >
+                  Registro
+                </md-button>
+              </div>
+            </form>
+          </md-card-content>
+        </md-card>
+
+        <div class="md-layout-item md-size-100 text-right">
+          <router-link to="/login" class="text-white">
+            <small style="font-weight: initial">
+              Ingresa a tu cuenta
+            </small>
+          </router-link>
+        </div>
+
+      </div>
     </div>
   </div>
 </template>
@@ -70,7 +101,7 @@ export default {
         id: 0,
         username: "",
         email: "",
-        age: 0,
+        age: "",
         password: "",
         active: false
       },
