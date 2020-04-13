@@ -6,23 +6,22 @@
       >
         <md-card>
           <md-card-header data-background-color="green">
-            <h1 class="title">{{ product.selected.name }}</h1>
-            <p class="category">{{ product.selected.user }}</p>
+            <h1 class="title">{{ product.name }}</h1>
+            <p class="category">{{ product.user }}</p>
           </md-card-header>
           <div id="product">
             <div class="product">
-              <img v-bind:src="product.selected.img" class="img" alt="" />
-              <div class="details">
+              <div class="md-layout-item md-size-100 md-size-33">
                 <span
-                  v-if="product.selected.quantity >= 20"
+                  v-if="product.quantity >= 20"
                   class="stock in-stock"
                 >
                   Unidades disponibles
                 </span>
                 <span
                   v-else-if="
-                    product.selected.quantity > 0 &&
-                      product.selected.quantity < 20
+                    product.quantity > 0 &&
+                      product.quantity < 20
                   "
                   class="stock low-stock"
                 >
@@ -31,9 +30,7 @@
                 <span v-else class="stock out-of-stock">
                   agotado
                 </span>
-                <div class="md-layout-item md-size-100 md-size-33">
-                  <h3 class="title">Precio: {{ product.selected.price }}</h3>
-                </div>
+                <h3 class="title" >Precio: {{ this.getPrice }}</h3>
               </div>
             </div>
           </div>
@@ -52,7 +49,7 @@
                     type="Number"
                     min="1"
                     required
-                    v-model="product.selected.numberOfUnits"
+                    v-model="product.numberOfUnits"
                     name="numberOfUnits"
                   >
                   </md-input>
@@ -80,7 +77,7 @@
               </div>
               <div class="md-layout-item md-size-100 md-size-33">
                 <h3 class="title">
-                  Precio final: {{ product.selected.price }}
+                  Precio final: {{ product.price }}
                 </h3>
               </div>
               <div class="md-layout-item md-size-100 text-right">
@@ -101,7 +98,7 @@
           </md-card-header>
           <div class="md-layout-item md-size-100 md-size-33">
             <p class="category">
-              {{ product.selected.description }}
+              {{ product.description }}
             </p>
           </div>
         </md-card>
@@ -117,28 +114,37 @@ export default {
   name: "product",
   data() {
     return {
-      selected: "",
       product: {
-        selected: {
-          id: 1,
-          name: "Fresa",
-          user: "usuario1",
-          price: 50000,
-          color: "#38393e",
-          quantity: 2,
-          numberOfUnits: 0,
-          description: "esta es la descripcion de una fruta",
-          img:
-            "https://ep01.epimg.net/elpais/imagenes/2020/02/26/estilo/1582729350_677456_1582730523_noticia_normal.jpg"
-        }
+        id: 1,
+        name: "",
+        user: "",
+        price: 0,
+        quantity: 0,
+        numberOfUnits: 0,
+        description: "",
       }
     };
+  },
+  mounted() {
+    http.
+    get("/v1/request/CwsFsN7d5ee0c3ZuDpc1").
+    then(response => {
+      this.product.price = response.data.totalPrice,
+      this.product.user = response.data.userEmail,
+      this.product.name = response.data.productName,
+      this.product.numberOfUnits = response.data.numberOfUnits,
+      this.product.description = response.data.description
+      console.log(response.data);
+    })
+            .catch(e => {
+              console.log(e);
+            })
   },
   methods: {
     /* eslint-disable no-console */
     saveCustomer() {
       const data = {
-        numberOfUnits: this.product.selected.numberOfUnits
+        numberOfUnits: this.product.numberOfUnits
       };
 
       http

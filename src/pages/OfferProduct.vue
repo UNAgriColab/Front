@@ -73,7 +73,7 @@
             </md-field>
           </div>
           <div class="md-layout-item md-size-100 text-right">
-            <md-button  v-on:click="saveOffer" class="md-raised md-success">Publicar oferta</md-button>
+            <md-button  v-on:click="saveOffer" class="md-raised md-success" type="submit">Publicar oferta</md-button>
           </div>
         </div>
       </md-card-content>
@@ -88,12 +88,12 @@ export default {
   data: function() {
     return {
       offer:{
+        id: "",
         productName: "",
         unit: 0,
         numberOfUnits: 0,
         unitPrice: 0,
-        description:
-          "En este espacio puedes realizar una pequeña descripción de tu producto."
+        description: ""
       },
       submitted: false
     };
@@ -101,6 +101,7 @@ export default {
   methods: {
     /* eslint-disable no-console */
     saveOffer() {
+      console.log("safeOffer");
       const data = {
         productName: this.offer.productName,
         unit: this.offer.unit,
@@ -108,11 +109,11 @@ export default {
         unitPrice: this.offer.unitPrice,
         description: this.offer.description
       };
-    }
-    /*  http
-              .post("/v1/user", data)
+      http
+              .post("/v1/offer", data)
               .then(response => {
-                this.customer.id = response.data.id;
+                console.log("se espera respuesta");
+                this.offer.id = response.data.id;
                 console.log(response.data);
               })
               .catch(e => {
