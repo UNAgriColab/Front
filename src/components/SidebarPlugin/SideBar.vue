@@ -8,7 +8,6 @@
     <div class="logo text-center">
       <a
         href="#/login"
-        target="_blank"
         class="simple-text logo-normal"
       >
         <img :src="title" alt="logo agricolab"/>

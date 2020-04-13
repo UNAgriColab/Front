@@ -2,74 +2,68 @@
   <form>
     <md-card>
       <md-card-header :data-background-color="dataBackgroundColor">
-        <h4 class="title">Edit Profile</h4>
-        <p class="category">Complete your profile</p>
+        <h4 class="title">Hola, Jorge Hernández</h4>
+        <p class="category">Actualiza tu perfil</p>
       </md-card-header>
 
       <md-card-content>
         <div class="md-layout">
-          <div class="md-layout-item md-small-size-100 md-size-33">
+          <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
-              <label>Company (disabled)</label>
-              <md-input v-model="disabled" disabled></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
-            <md-field>
-              <label>User Name</label>
+              <label>Username</label>
               <md-input v-model="username" type="text"></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
+          <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
-              <label>Email Address</label>
+              <label>Correo electrónico</label>
               <md-input v-model="emailadress" type="email"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
-              <label>First Name</label>
+              <label>Primer nombre</label>
               <md-input v-model="firstname" type="text"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
-              <label>Last Name</label>
+              <label>Primer Apellido</label>
               <md-input v-model="lastname" type="text"></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-100">
+          <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
-              <label>Adress</label>
+              <label>Dirección</label>
               <md-input v-model="address" type="text"></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
+          <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
-              <label>City</label>
+              <label>Teléfono</label>
+              <md-input v-model="phone" type="number"></md-input>
+            </md-field>
+          </div>
+          <div class="md-layout-item md-small-size-100 md-size-50">
+            <md-field>
+              <label>Ciudad</label>
               <md-input v-model="city" type="text"></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
+          <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
-              <label>Country</label>
+              <label>País</label>
               <md-input v-model="country" type="text"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
-            <md-field>
-              <label>Postal Code</label>
-              <md-input v-model="code" type="number"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-size-100">
             <md-field maxlength="5">
-              <label>About Me</label>
+              <label>Acerca de mi</label>
               <md-textarea v-model="aboutme"></md-textarea>
             </md-field>
           </div>
           <div class="md-layout-item md-size-100 text-right">
-            <md-button class="md-raised md-success">Update Profile</md-button>
+            <md-button class="md-raised md-success">Actualizar perfil</md-button>
           </div>
         </div>
       </md-card-content>
@@ -97,7 +91,7 @@ export default {
       country: null,
       code: null,
       aboutme:
-        "Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
+        ""
     };
   }
 };
