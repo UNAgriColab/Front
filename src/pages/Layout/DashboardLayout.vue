@@ -17,9 +17,15 @@
       </sidebar-link>
 
       <sidebar-link to="/offerproduct">
-        <md-icon>store</md-icon>
-        <p>Vende productos</p>
+      <md-icon>store</md-icon>
+      <p>Vende productos</p>
       </sidebar-link>
+
+      <sidebar-link to="/offerList">
+        <md-icon>store</md-icon>
+        <p>Lista de productos</p>
+      </sidebar-link>
+
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>

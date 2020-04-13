@@ -13,8 +13,7 @@
           <!-- Layout item list-->
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
-              <!-- label for="productName">Tipo de producto</label-->
-              <label>Tipo de producto</label>
+              <label for="productName">Tipo de producto</label>
               <md-select v-model="offer.productName" name="productName" id="productName" md-dense>
                 <md-optgroup label="Hortalizas">
                   <md-option value="ACELGA">ACELGA</md-option>
@@ -42,26 +41,26 @@
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
               <!-- label for="unit">Unidad</label -->
-              <label>Unidad</label>
-              <md-select v-model="offer.unit" name="unit" id="unit" md-dense>
-                <md-option value="Gramos">Gramos</md-option>
-                <md-option value="Libras">Libras</md-option>
-                <md-option value="Kilogramos">Kilogramos</md-option>
-                <md-option value="Arrobas">Arrobas</md-option>
-                <md-option value="Bultos(50 Kg)">Bultos(50 Kg)</md-option>
+              <label for="presentation">Unidad</label>
+              <md-select v-model="offer.presentation" name="presentation" id="presentation" md-dense>
+                <md-option value="0.01">Gramos</md-option>
+                <md-option value="0.5">Libras</md-option>
+                <md-option value="1">Kilogramos</md-option>
+                <md-option value="12.5">Arrobas</md-option>
+                <md-option value="50">Bultos(50 Kg)</md-option>
               </md-select>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
-              <label>Numero de unidades</label>
-              <md-input v-model="offer.numberOfUnits" type="Number"></md-input>
+              <label for="minQuantity">Numero de unidades</label>
+              <md-input id="minQuantity" v-model="offer.minQuantity" type="number"  placeholder="unidades"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
               <label>Precio por unidad</label>
-              <md-input v-model="offer.unitPrice" type="text"></md-input>
+              <md-input v-model="offer.pricePresentation" type="number"></md-input>
               <md-icon>attach_money</md-icon>
             </md-field>
           </div>
@@ -89,10 +88,11 @@ export default {
     return {
       offer:{
         id: "",
+        userEmail:"luis@unal.edu.co",
         productName: "",
-        unit: 0,
-        numberOfUnits: 0,
-        unitPrice: 0,
+        presentation: "",
+        minQuantity: "",
+        pricePresentation: "",
         description: ""
       },
       submitted: false
@@ -100,13 +100,14 @@ export default {
   },
   methods: {
     /* eslint-disable no-console */
-    saveOffer() {
+    saveOffer: function () {
       console.log("safeOffer");
       const data = {
+        userEmail: this.offer.userEmail,
         productName: this.offer.productName,
-        unit: this.offer.unit,
-        numberOfUnits: this.offer.numberOfUnits,
-        unitPrice: this.offer.unitPrice,
+        presentation: this.offer.presentation,
+        minQuantity: this.offer.minQuantity,
+        pricePresentation: this.offer.pricePresentation,
         description: this.offer.description
       };
       http

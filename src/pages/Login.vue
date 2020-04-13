@@ -42,10 +42,9 @@
               </div>
 
               <div class="md-layout-item md-size-100 text-center">
-                <md-button type="submit" class="md-raised md-success">
+                <md-button  v-on:click="saveLogin" type="submit" class="md-raised md-success">
                   Ingresar
                 </md-button>
-                <p v-if="submitData">{{ submitData | json }}</p>
               </div>
             </form>
           </md-card-content>
@@ -73,6 +72,7 @@
   </div>
 </template>
 <script>
+  import http from '../http-common';
 export default {
   data: function() {
     return {
@@ -80,13 +80,9 @@ export default {
         email: null,
         username: null
       },
-      submitData: null
+      submitData: false
     };
-  },
-  methods: {
-    doRegister: function() {
-      this.submitData = this.user;
-    }
   }
+
 };
 </script>

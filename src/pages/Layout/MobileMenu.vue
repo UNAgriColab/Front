@@ -28,6 +28,12 @@
         <p>Carrito</p>
       </a>
     </li>
+    <li>
+      <a href="#/offerList" data-toggle="dropdown" class="dropdown-toggle">
+        <i class="material-icons">shopping_cart</i>
+        <p>Lista de productos</p>
+      </a>
+    </li>
   </ul>
 </template>
 <script>
