@@ -16,6 +16,7 @@ import OfferProduct from "@/pages/OfferProduct.vue";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import ShoppingCar from "../pages/ShoppingCar";
+import OfferList from "../pages/OfferList";
 
 Vue.use(Router);
 
@@ -82,6 +83,11 @@ const routes = [
         path: "shoppingCar",
         name: "Shopping Car",
         component: ShoppingCar
+      },
+      {
+        path: "offerList",
+        name: "Offer list",
+        component: OfferList
       }
     ]
   },

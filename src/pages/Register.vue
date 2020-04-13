@@ -110,6 +110,7 @@ export default {
   methods: {
     /* eslint-disable no-console */
     saveCustomer() {
+      console.log("Boton pulsado");
       const data = {
         name: this.user.username,
         email: this.user.email,
@@ -120,6 +121,7 @@ export default {
       http
         .post("/v1/user", data)
         .then(response => {
+          console.log("se espera respuesta");
           this.customer.id = response.data.id;
           console.log(response.data);
         })
