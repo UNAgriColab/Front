@@ -1,5 +1,4 @@
 <template>
-
   <div class="content">
     <div class="md-layout">
       <div class="md-layout-item text-center">
@@ -43,15 +42,15 @@
       }
     },
     mounted(){
-      console.log('Hola mounted')
+      console.log('Hola mounted');
       this.getOffers();
     },
     methods:{
       getOffers(){
-        console.log('metodo get offers')
+        console.log('metodo get offers');
         axios.get('http://localhost:8080/api/v1/offer')
         .then(response =>{
-          console.log(response)
+          console.log(response);
           this.offers=response.data
         }).catch(e => console.log(e))
       }
