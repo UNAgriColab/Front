@@ -16,9 +16,10 @@ import OfferProduct from "@/pages/OfferProduct.vue";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import ShoppingCar from "../pages/ShoppingCar";
-import UserOffers from "../pages/UserOffers";
 import OfferList from "../pages/OfferList";
 import RequestList from "../pages/RequestList";
+import UserOffers from "../pages/UserOffers";
+import UserRequests from "../pages/UserRequests";
 
 Vue.use(Router);
 
@@ -87,11 +88,6 @@ const routes = [
         component: ShoppingCar
       },
       {
-        path: "UserOffers",
-        name: "Productos ofertados",
-        component: UserOffers
-      },
-      {
         path: "offerList",
         name: "lista de ofertas",
         component: OfferList
@@ -100,6 +96,16 @@ const routes = [
         path: "requestList",
         name: "RequestList",
         component: RequestList
+      },
+      {
+        path: "UserOffers",
+        name: "Productos ofertados",
+        component: UserOffers
+      },
+      {
+        path: "UserRequests",
+        name: "Solicitudes realizadas",
+        component: UserRequests
       }
     ]
   },

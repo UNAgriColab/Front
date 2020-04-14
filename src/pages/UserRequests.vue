@@ -3,11 +3,11 @@
     <div>
       <md-card>
         <md-card-header data-background-color="green">
-          <h4 class="title">Productos</h4>
-          <p class="category">Lista de los productos que has ofertado</p>
+          <h4 class="title">Solicitudes</h4>
+          <p class="category">Lista de las solicitudes que has realizado</p>
         </md-card-header>
         <md-card-content>
-          <user-offers-table table-header-color="green"></user-offers-table>
+          <user-requests-table table-header-color="green"></user-requests-table>
         </md-card-content>
       </md-card>
     </div>
@@ -15,11 +15,11 @@
 </template>
 
 <script>
-import { UserOffersTable } from "@/components";
+import { UserRequestsTable } from "@/components";
 
 export default {
   components: {
-    UserOffersTable
+    UserRequestsTable
   }
 };
 </script>

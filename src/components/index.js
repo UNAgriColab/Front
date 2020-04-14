@@ -7,8 +7,7 @@ import StatsCard from "./Cards/StatsCard.vue";
 import NavTabsTable from "./Tables/NavTabsTable.vue";
 import OrderedTable from "./Tables/OrderedTable.vue";
 import SimpleTable from "./Tables/SimpleTable.vue";
-import ProductsTable from "./Tables/UserOffersTable.vue";
-import RequestsTable from "./Tables/RequestsTable.vue";
+import UserRequestsTable from "./Tables/UserRequestsTable.vue";
 import UserOffersTable from "./Tables/UserOffersTable";
 
 export {
@@ -19,5 +18,5 @@ export {
   OrderedTable,
   SimpleTable,
   UserOffersTable,
-  RequestsTable
+  UserRequestsTable
 };

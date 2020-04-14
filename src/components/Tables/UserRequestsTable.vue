@@ -28,29 +28,29 @@
         </form>
       </md-card>
     </div>
-    <md-table v-model="userOffers" :table-header-color="tableHeaderColor">
+    <md-table v-model="userRequests" :table-header-color="tableHeaderColor">
       <md-table-row>
         <md-table-head>Producto</md-table-head>
-        <md-table-head>Presentación</md-table-head>
-        <md-table-head>Cantidad mínima</md-table-head>
-        <md-table-head>Precio por presentación</md-table-head>
+        <md-table-head>Unidad</md-table-head>
+        <md-table-head>Número de unidades</md-table-head>
+        <md-table-head>Precio total</md-table-head>
       </md-table-row>
       <md-table-row
         slot="md-table-row"
-        v-for="(userOffer, index) in userOffers"
+        v-for="(userRequest, index) in userRequests"
         v-bind:key="index"
       >
         <md-table-cell md-label="Producto">{{
-          userOffer.productName
+          userRequest.productName
         }}</md-table-cell>
-        <md-table-cell md-label="Presentación">{{
-          userOffer.presentation
-        }}</md-table-cell>
-        <md-table-cell md-label="Cantidad mínima">{{
-          userOffer.minQuantity
+        <md-table-cel md-label="Unidad">{{
+          userRequest.unit
+        }}</md-table-cel>
+        <md-table-cell md-label="Cantidad minima">{{
+          userRequest.numberOfUnits
         }}</md-table-cell>
         <md-table-cell md-label="Precio por unidad"
-          >$ {{ userOffer.pricePresentation }}</md-table-cell
+          >$ {{ userRequest.totalPrice }}</md-table-cell
         >
       </md-table-row>
     </md-table>
@@ -65,12 +65,12 @@ export default {
     return {
       email: "",
       selected: [],
-      userOffers: null
+      userRequests: null
     };
   },
   mounted() {
     console.log("Hola mounted");
-    this.getUserOffers();
+    this.getUserRequests();
   },
   methods: {
     saveEmail() {
@@ -78,13 +78,13 @@ export default {
         email: this.email
       };
     },
-    getUserOffers() {
-      console.log("Metodo get user offers");
+    getUserRequests() {
+      console.log("Metodo get user requests");
       axios
-        .get(`http://localhost:8080/api/v1/offer/user/ayuda@unal.edu.co`)
+        .get(`http://localhost:8080/api/v1/request/user/ayuda@unal.edu.co`)
         .then(response => {
           console.log(response);
-          this.userOffers = response.data;
+          this.userRequests = response.data;
         })
         .catch(e => console.log(e));
     }

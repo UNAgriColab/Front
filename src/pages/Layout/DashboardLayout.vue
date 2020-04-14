@@ -22,8 +22,13 @@
       </sidebar-link>
 
       <sidebar-link to="/offerList">
-        <md-icon>store</md-icon>
+        <md-icon>eco</md-icon>
         <p>Lista de productos</p>
+      </sidebar-link>
+
+      <sidebar-link to="/requestList">
+        <md-icon>list</md-icon>
+        <p>Lista de pedidos</p>
       </sidebar-link>
 
       <sidebar-link to="/userOffers">
@@ -31,11 +36,10 @@
         <p>Mis productos</p>
       </sidebar-link>
 
-      <sidebar-link to="/requestList">
-        <md-icon>store</md-icon>
-        <p>Lista de pedidos</p>
+      <sidebar-link to="/userRequests">
+        <md-icon>add_to_photos</md-icon>
+        <p>Mis solicitudes</p>
       </sidebar-link>
-
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>
