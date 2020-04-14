@@ -26,6 +26,10 @@
         <p>Lista de productos</p>
       </sidebar-link>
 
+      <sidebar-link to="/requestList">
+        <md-icon>store</md-icon>
+        <p>Lista de pedidos</p>
+      </sidebar-link>
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>

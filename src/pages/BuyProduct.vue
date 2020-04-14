@@ -13,7 +13,7 @@
             <div class="product">
               <div class="md-layout-item md-size-100 md-size-33">
                 <span
-                  v-if="product.quantity >= 20"
+                  v-if="product.quantity > 20"
                   class="stock in-stock"
                 >
                   Unidades disponibles
@@ -127,7 +127,7 @@ export default {
   },
   mounted() {
     http.
-    get("/v1/request/CwsFsN7d5ee0c3ZuDpc1").
+    get("/v1/offer/c14dDAvRQ81aKpPgB5OA").
     then(response => {
       this.product.price = response.data.totalPrice,
       this.product.user = response.data.userEmail,
