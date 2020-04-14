@@ -17,8 +17,8 @@
       </sidebar-link>
 
       <sidebar-link to="/offerproduct">
-      <md-icon>store</md-icon>
-      <p>Vende productos</p>
+        <md-icon>store</md-icon>
+        <p>Vende productos</p>
       </sidebar-link>
 
       <sidebar-link to="/offerList">
@@ -29,6 +29,11 @@
       <sidebar-link to="/userOffers">
         <md-icon>spa</md-icon>
         <p>Mis productos</p>
+      </sidebar-link>
+
+      <sidebar-link to="/requestList">
+        <md-icon>store</md-icon>
+        <p>Lista de pedidos</p>
       </sidebar-link>
 
     </side-bar>
