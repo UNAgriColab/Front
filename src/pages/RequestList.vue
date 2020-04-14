@@ -62,12 +62,6 @@
 import axios from 'axios';
 import http from "../http-common";
 
-export function getProfileData() {
-  return request({
-    url: `http://localhost:8080/api/v1/request/user/${ this.user }`,
-    method: 'get',
-  })
-}
   export default {
     name: 'DoubleLine',
     data(){
@@ -83,7 +77,9 @@ export function getProfileData() {
     methods:{
       getRequest(){
         console.log('metodo get request');
-        return getProfileData().then(response =>{
+        axios
+                .get("http://localhost:8080/api/v1/request/user/ayuda@unal.edu.co")
+                .then(response => {
           console.log(response);
           this.requests=response.data
         }).catch(e => console.log(e))
