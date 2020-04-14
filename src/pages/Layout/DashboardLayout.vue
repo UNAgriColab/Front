@@ -26,6 +26,11 @@
         <p>Lista de productos</p>
       </sidebar-link>
 
+      <sidebar-link to="/userOffers">
+        <md-icon>spa</md-icon>
+        <p>Mis productos</p>
+      </sidebar-link>
+
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>

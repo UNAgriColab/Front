@@ -8,7 +8,8 @@
       <h6 class="category text-gray">Vendedor / Mercaprospero</h6>
       <h4 class="card-title">Jorge Hernández</h4>
       <p class="card-description">
-        Distribuidor minorista de vegetales y frutas a través del minimercado "Mercaprospero"
+        Distribuidor minorista de vegetales y frutas a través del minimercado
+        "Mercaprospero"
       </p>
       <md-button class="md-round md-success">Editar Perfil</md-button>
     </md-card-content>

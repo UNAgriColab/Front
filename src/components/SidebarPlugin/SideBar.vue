@@ -6,11 +6,8 @@
     :style="sidebarStyle"
   >
     <div class="logo text-center">
-      <a
-        href="#/login"
-        class="simple-text logo-normal"
-      >
-        <img :src="title" alt="logo agricolab"/>
+      <a href="#/login" class="simple-text logo-normal">
+        <img :src="title" alt="logo agricolab" />
       </a>
     </div>
     <div class="sidebar-wrapper">

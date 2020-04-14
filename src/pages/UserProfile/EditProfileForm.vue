@@ -63,7 +63,9 @@
             </md-field>
           </div>
           <div class="md-layout-item md-size-100 text-right">
-            <md-button class="md-raised md-success">Actualizar perfil</md-button>
+            <md-button class="md-raised md-success"
+              >Actualizar perfil</md-button
+            >
           </div>
         </div>
       </md-card-content>
@@ -90,8 +92,7 @@ export default {
       city: null,
       country: null,
       code: null,
-      aboutme:
-        ""
+      aboutme: ""
     };
   }
 };

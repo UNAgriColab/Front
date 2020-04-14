@@ -14,23 +14,36 @@
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
               <label for="productName">Tipo de producto</label>
-              <md-select v-model="offer.productName" name="productName" id="productName" md-dense>
+              <md-select
+                v-model="offer.productName"
+                name="productName"
+                id="productName"
+                md-dense
+              >
                 <md-optgroup label="Hortalizas">
                   <md-option value="ACELGA">ACELGA</md-option>
-                  <md-option value="CEBOLLA CABEZONA BLANCA">CEBOLLA CABEZONA BLANCA</md-option>
+                  <md-option value="CEBOLLA CABEZONA BLANCA"
+                    >CEBOLLA CABEZONA BLANCA</md-option
+                  >
                 </md-optgroup>
 
                 <md-optgroup label="Frutas">
                   <md-option value="AGUACATE HASS">AGUACATE HASS</md-option>
                   <md-option value="BANANO CRIOLLO">BANANO CRIOLLO</md-option>
-                  <md-option value="CURUBA BOYACENCE">CURUBA BOYACENCE</md-option>
+                  <md-option value="CURUBA BOYACENCE"
+                    >CURUBA BOYACENCE</md-option
+                  >
                   <md-option value="TOMATE DE ARBOL">TOMATE DE ARBOL</md-option>
                 </md-optgroup>
 
                 <md-optgroup label="Tuberculos">
-                  <md-option value="PAPA CRIOLLA LAVADA">PAPA CRIOLLA LAVADA</md-option>
+                  <md-option value="PAPA CRIOLLA LAVADA"
+                    >PAPA CRIOLLA LAVADA</md-option
+                  >
                   <md-option value="PAPA PASTUSA">PAPA PASTUSA</md-option>
-                  <md-option value="PAPA R12 INDUSTRIAL">PAPA R12 INDUSTRIAL</md-option>
+                  <md-option value="PAPA R12 INDUSTRIAL"
+                    >PAPA R12 INDUSTRIAL</md-option
+                  >
                 </md-optgroup>
               </md-select>
             </md-field>
@@ -42,7 +55,12 @@
             <md-field>
               <!-- label for="unit">Unidad</label -->
               <label for="presentation">Unidad</label>
-              <md-select v-model="offer.presentation" name="presentation" id="presentation" md-dense>
+              <md-select
+                v-model="offer.presentation"
+                name="presentation"
+                id="presentation"
+                md-dense
+              >
                 <md-option value="0.01">Gramos</md-option>
                 <md-option value="0.5">Libras</md-option>
                 <md-option value="1">Kilogramos</md-option>
@@ -54,13 +72,21 @@
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
               <label for="minQuantity">Numero de unidades</label>
-              <md-input id="minQuantity" v-model="offer.minQuantity" type="number"  placeholder="unidades"></md-input>
+              <md-input
+                id="minQuantity"
+                v-model="offer.minQuantity"
+                type="number"
+                placeholder="unidades"
+              ></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
               <label>Precio por unidad</label>
-              <md-input v-model="offer.pricePresentation" type="number"></md-input>
+              <md-input
+                v-model="offer.pricePresentation"
+                type="number"
+              ></md-input>
               <md-icon>attach_money</md-icon>
             </md-field>
           </div>
@@ -72,7 +98,12 @@
             </md-field>
           </div>
           <div class="md-layout-item md-size-100 text-right">
-            <md-button  v-on:click="saveOffer" class="md-raised md-success" type="submit">Publicar oferta</md-button>
+            <md-button
+              v-on:click="saveOffer"
+              class="md-raised md-success"
+              type="submit"
+              >Publicar oferta</md-button
+            >
           </div>
         </div>
       </md-card-content>
@@ -86,9 +117,9 @@ export default {
   name: "add-offer",
   data: function() {
     return {
-      offer:{
+      offer: {
         id: "",
-        userEmail:"luis@unal.edu.co",
+        userEmail: "luis@unal.edu.co",
         productName: "",
         presentation: "",
         minQuantity: "",
@@ -100,7 +131,7 @@ export default {
   },
   methods: {
     /* eslint-disable no-console */
-    saveOffer: function () {
+    saveOffer: function() {
       console.log("safeOffer");
       const data = {
         userEmail: this.offer.userEmail,
@@ -111,15 +142,15 @@ export default {
         description: this.offer.description
       };
       http
-              .post("/v1/offer", data)
-              .then(response => {
-                console.log("se espera respuesta");
-                this.offer.id = response.data.id;
-                console.log(response.data);
-              })
-              .catch(e => {
-                console.log(e);
-              });
+        .post("/v1/offer", data)
+        .then(response => {
+          console.log("se espera respuesta");
+          this.offer.id = response.data.id;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
 
       this.submitted = true;
     },
