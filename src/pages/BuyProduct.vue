@@ -16,7 +16,7 @@
                   v-if="product.quantity > 20"
                   class="stock in-stock"
                 >
-                  Unidades disponibles
+                  quedan {{product.quantity}} unidades
                 </span>
                 <span
                   v-else-if="
@@ -25,12 +25,12 @@
                   "
                   class="stock low-stock"
                 >
-                  quedan pocas unidades
+                  quedan {{product.quantity}} unidades
                 </span>
                 <span v-else class="stock out-of-stock">
-                  agotado
+                  No quedan unidades
                 </span>
-                <h3 class="title" >Precio: {{ this.getPrice }}</h3>
+                <h3 class="title" >Precio: {{ product.price }}</h3>
               </div>
             </div>
           </div>
@@ -57,18 +57,13 @@
               </div>
               <div class="md-layout-item md-small-size-100 md-size-33">
                 <md-field>
-                  <label for="country">Unidad</label>
-                  <md-select
-                    v-model="country"
-                    name="country"
-                    id="country"
-                    md-dense
-                  >
-                    <md-option value="Gramos">Gramos</md-option>
-                    <md-option value="Libras">Libras</md-option>
-                    <md-option value="Kilogramos">Kilogramos</md-option>
-                    <md-option value="Arrobas">Arrobas</md-option>
-                    <md-option value="Bultos(50 Kg)">Bultos(50 Kg)</md-option>
+                  <label for="presentation">Unidad</label>
+                  <md-select v-model="product.presentation" name="presentation" id="presentation" md-dense>
+                    <md-option value=1>Gramos</md-option>
+                    <md-option value=2>Libras</md-option>
+                    <md-option value=3>Kilogramos</md-option>
+                    <md-option value=4>Arrobas</md-option>
+                    <md-option value=5>Bultos(50 Kg)</md-option>
                   </md-select>
                 </md-field>
               </div>
@@ -82,7 +77,7 @@
               </div>
               <div class="md-layout-item md-size-100 text-right">
                 <md-button
-                  v-on:click="saveCustomer"
+                  v-on:click="saveRequest"
                   class="md-raised md-success"
                   :disabled="numberOfUnits"
                 >
@@ -115,26 +110,28 @@ export default {
   data() {
     return {
       product: {
-        id: 1,
+        id: "",
         name: "",
         user: "",
         price: 0,
         quantity: 0,
         numberOfUnits: 0,
         description: "",
+        presentation: "",
+        userEmail : "ayuda@unal.edu.co",
+        totalPrice: 0
       }
     };
   },
   mounted() {
     http.
-    get("/v1/offer/c14dDAvRQ81aKpPgB5OA").
+    get("/v1/offer/AmLWSjisopG5mZHlTN4x").
     then(response => {
-      this.product.price = response.data.totalPrice,
+      this.product.price = response.data.pricePresentation,
       this.product.user = response.data.userEmail,
       this.product.name = response.data.productName,
-      this.product.numberOfUnits = response.data.numberOfUnits,
+      this.product.quantity = response.data.minQuantity,
       this.product.description = response.data.description
-      console.log(response.data);
     })
             .catch(e => {
               console.log(e);
@@ -142,15 +139,20 @@ export default {
   },
   methods: {
     /* eslint-disable no-console */
-    saveCustomer() {
+    saveRequest() {
       const data = {
-        numberOfUnits: this.product.numberOfUnits
+        numberOfUnits: this.product.numberOfUnits,
+        unit: this.product.presentation,
+        description: this.product.description,
+        name: this.product.productName,
+        totalPrice: this.product.price,
+        userEmail: this.product.userEmail
       };
 
       http
-        .post("/v1/user", data)
+        .post("/v1/request", data)
         .then(response => {
-          this.customer.id = response.data.id;
+          this.product.id = response.data.id;
           console.log(response.data);
         })
         .catch(e => {
