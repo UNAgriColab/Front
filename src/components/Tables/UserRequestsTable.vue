@@ -43,9 +43,9 @@
         <md-table-cell md-label="Producto">{{
           userRequest.productName
         }}</md-table-cell>
-        <md-table-cel md-label="Unidad">{{
+        <md-table-cell md-label="Unidad">{{
           userRequest.unit
-        }}</md-table-cel>
+        }}</md-table-cell>
         <md-table-cell md-label="Cantidad minima">{{
           userRequest.numberOfUnits
         }}</md-table-cell>
@@ -81,7 +81,7 @@ export default {
     getUserRequests() {
       console.log("Metodo get user requests");
       axios
-        .get(`http://localhost:8080/api/v1/request/user/ayuda@unal.edu.co`)
+        .get(`http://localhost:8080/api/v1/request/user/3@unal.edu.co`)
         .then(response => {
           console.log(response);
           this.userRequests = response.data;

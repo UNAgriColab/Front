@@ -125,7 +125,7 @@ export default {
   },
   mounted() {
     http.
-    get("/v1/offer/AmLWSjisopG5mZHlTN4x").
+    get("/v1/offer/s2naUii68eBbMjxikNfZ").
     then(response => {
       this.product.price = response.data.pricePresentation,
       this.product.user = response.data.userEmail,
