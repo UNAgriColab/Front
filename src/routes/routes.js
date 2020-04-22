@@ -1,22 +1,23 @@
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 import AuthLayout from "../pages/Layout/AuthLayout";
-
 import Vue from "vue";
 import Router from "vue-router";
+
 import Dashboard from "@/pages/Dashboard.vue";
 import UserProfile from "@/pages/UserProfile.vue";
-
-
 import Notifications from "@/pages/Notifications.vue";
-import BuyProduct from "../pages/BuyProduct";
-import OfferProduct from "@/pages/OfferProduct.vue";
+
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-
-import OfferList from "../pages/OfferList";
-import RequestList from "../pages/RequestList";
-import UserOffers from "../pages/UserOffers";
-import UserRequests from "../pages/UserRequests";
+import BuyerListMyOrders from "../pages/BuyerListMyOrders";
+import BuyerBuyProduct from "../pages/BuyBuyerProduct";
+import SellerOfferProduct from "../pages/SellerOfferProduct";
+import BuyerListAllOffers from "../pages/BuyerListAllOffers";
+import SellerListMyOrders from "../pages/SellerListMyOrders";
+import SellerListMyOffers from "../pages/SellerListMyOffers";
+import SellerEditMyOffer from "../pages/SellerEditMyOffer";
+import SellerEditMyOrder from "../pages/SellerEditMyOrder";
+import BuyerEditMyOrder from "../pages/BuyerEditMyOrder";
 
 Vue.use(Router);
 
@@ -37,9 +38,9 @@ const routes = [
         component: UserProfile
       },
       {
-        path: "buyproduct",
-        name: "BuyProduct",
-        component: BuyProduct
+        path: "buyerBuyProduct",
+        name: "BuyerBuyProduct",
+        component: BuyerBuyProduct
       },
       {
         path: "notifications",
@@ -47,30 +48,45 @@ const routes = [
         component: Notifications
       },
       {
-        path: "offerProduct",
-        name: "OfferProduct",
-        component: OfferProduct
+        path: "sellerOfferProduct",
+        name: "SellerOfferProduct",
+        component: SellerOfferProduct
       },
       {
-        path: "offerList",
-        name: "lista de ofertas",
-        component: OfferList
+        path: "buyerListAllOffers",
+        name: "BuyerListAllOffers",
+        component: BuyerListAllOffers
       },
       {
-        path: "requestList",
-        name: "RequestList",
-        component: RequestList
+        path: "sellerListMyOrders",
+        name: "SellerListMyOrders",
+        component: SellerListMyOrders
       },
       {
-        path: "UserOffers",
-        name: "Productos ofertados",
-        component: UserOffers
+        path: "SellerListMyOffers",
+        name: "SellerListMyOffers",
+        component: SellerListMyOffers
       },
       {
-        path: "UserRequests",
-        name: "Solicitudes realizadas",
-        component: UserRequests
-      }
+        path: "BuyerListMyOrders",
+        name: "BuyerListMyOrders",
+        component: BuyerListMyOrders
+      },
+      {
+        path: "sellerEditMyOffer",
+        name: "SellerEditMyOffer",
+        component: SellerEditMyOffer
+      },
+      {
+        path: "sellerEditMyOrder",
+        name: "SellerEditMyOrder",
+        component: SellerEditMyOrder
+      },
+      {
+        path: "buyerEditMyOrder",
+        name: "BuyerEditMyOrder",
+        component: BuyerEditMyOrder
+      },
     ]
   },
   {
