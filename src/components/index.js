@@ -7,8 +7,8 @@ import StatsCard from "./Cards/StatsCard.vue";
 import NavTabsTable from "./Tables/NavTabsTable.vue";
 import OrderedTable from "./Tables/OrderedTable.vue";
 import SimpleTable from "./Tables/SimpleTable.vue";
-import UserRequestsTable from "./Tables/UserRequestsTable.vue";
-import UserOffersTable from "./Tables/UserOffersTable";
+import BuyerListMyOrdersTable from "./Tables/BuyerListMyOrdersTable.vue";
+import SellerListMyOffersTable from "./Tables/SellerListMyOffersTable";
 
 export {
   ChartCard,
@@ -17,6 +17,6 @@ export {
   NavTabsTable,
   OrderedTable,
   SimpleTable,
-  UserOffersTable,
-  UserRequestsTable
+  SellerListMyOffersTable,
+  BuyerListMyOrdersTable
 };
