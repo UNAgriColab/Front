@@ -28,7 +28,7 @@
         </form>
       </md-card>
     </div>
-    <md-table v-model="userRequests" :table-header-color="tableHeaderColor">
+    <md-table v-model="buyerListMyOrders" :table-header-color="tableHeaderColor">
       <md-table-row>
         <md-table-head>Producto</md-table-head>
         <md-table-head>Unidad</md-table-head>
@@ -37,20 +37,20 @@
       </md-table-row>
       <md-table-row
         slot="md-table-row"
-        v-for="(userRequest, index) in userRequests"
+        v-for="(buyerListMyOrders, index) in buyerListMyOrders"
         v-bind:key="index"
       >
         <md-table-cell md-label="Producto">{{
-          userRequest.productName
+          buyerListMyOrders.productName
         }}</md-table-cell>
         <md-table-cell md-label="Unidad">{{
-          userRequest.unit
+          buyerListMyOrders.unit
         }}</md-table-cell>
         <md-table-cell md-label="Cantidad minima">{{
-          userRequest.numberOfUnits
+          buyerListMyOrders.numberOfUnits
         }}</md-table-cell>
         <md-table-cell md-label="Precio por unidad"
-          >$ {{ userRequest.totalPrice }}</md-table-cell
+          >$ {{ buyerListMyOrders.totalPrice }}</md-table-cell
         >
       </md-table-row>
     </md-table>
@@ -65,12 +65,12 @@ export default {
     return {
       email: "",
       selected: [],
-      userRequests: null
+      buyerListMyOrders: null
     };
   },
   mounted() {
     console.log("Hola mounted");
-    this.getUserRequests();
+    this.getBuyerListMyOrders();
   },
   methods: {
     saveEmail() {
@@ -78,13 +78,13 @@ export default {
         email: this.email
       };
     },
-    getUserRequests() {
+    getBuyerListMyOrders() {
       console.log("Metodo get user requests");
       axios
         .get(`http://localhost:8080/api/v1/request/user/3@unal.edu.co`)
         .then(response => {
           console.log(response);
-          this.userRequests = response.data;
+          this.buyerListMyOrders = response.data;
         })
         .catch(e => console.log(e));
     }

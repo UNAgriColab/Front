@@ -1,7 +1,6 @@
 <template>
   <div class="wrapper" :class="{ 'nav-open': $sidebar.showSidebar }">
     <notifications></notifications>
-
     <side-bar
       :sidebar-item-color="sidebarBackground"
       :sidebar-background-image="sidebarBackgroundImage"
@@ -31,7 +30,7 @@
         <p>Lista de pedidos</p>
       </sidebar-link>
 
-      <sidebar-link to="/userOffers">
+      <sidebar-link to="/SellerListMyOffers">
         <md-icon>spa</md-icon>
         <p>Mis productos</p>
       </sidebar-link>

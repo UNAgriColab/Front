@@ -15,8 +15,8 @@ import Register from "../pages/Register";
 
 import OfferList from "../pages/OfferList";
 import RequestList from "../pages/RequestList";
-import UserOffers from "../pages/UserOffers";
-import UserRequests from "../pages/UserRequests";
+import SellerListMyOffers from "../pages/SellerListMyOffers";
+import BuyerListMyOrders from "../pages/BuyerListMyOrders";
 
 Vue.use(Router);
 
@@ -62,14 +62,14 @@ const routes = [
         component: RequestList
       },
       {
-        path: "UserOffers",
-        name: "Productos ofertados",
-        component: UserOffers
+        path: "SellerListMyOffers",
+        name: "Mis productos ofertados",
+        component: SellerListMyOffers
       },
       {
         path: "UserRequests",
-        name: "Solicitudes realizadas",
-        component: UserRequests
+        name: "Mis solicitudes realizadas",
+        component: BuyerListMyOrders
       }
     ]
   },
