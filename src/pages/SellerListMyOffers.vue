@@ -7,7 +7,7 @@
           <p class="category">Lista de los productos que has ofertado</p>
         </md-card-header>
         <md-card-content>
-          <user-offers-table table-header-color="green"></user-offers-table>
+          <seller-list-my-offers-table table-header-color="green"></seller-list-my-offers-table>
         </md-card-content>
       </md-card>
     </div>
@@ -15,11 +15,11 @@
 </template>
 
 <script>
-import { UserOffersTable } from "@/components";
+import { SellerListMyOffersTable } from "@/components";
 
 export default {
   components: {
-    UserOffersTable
+    SellerListMyOffersTable
   }
 };
 </script>

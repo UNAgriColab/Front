@@ -9,15 +9,16 @@ import Notifications from "@/pages/Notifications.vue";
 
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import BuyerListMyOrders from "../pages/BuyerListMyOrders";
+
 import BuyerBuyProduct from "../pages/BuyBuyerProduct";
 import SellerOfferProduct from "../pages/SellerOfferProduct";
 import BuyerListAllOffers from "../pages/BuyerListAllOffers";
 import SellerListMyOrders from "../pages/SellerListMyOrders";
-import SellerListMyOffers from "../pages/SellerListMyOffers";
 import SellerEditMyOffer from "../pages/SellerEditMyOffer";
 import SellerEditMyOrder from "../pages/SellerEditMyOrder";
 import BuyerEditMyOrder from "../pages/BuyerEditMyOrder";
+import SellerListMyOffers from "../pages/SellerListMyOffers";
+import BuyerListMyOrders from "../pages/BuyerListMyOrders";
 
 Vue.use(Router);
 
@@ -64,12 +65,12 @@ const routes = [
       },
       {
         path: "SellerListMyOffers",
-        name: "SellerListMyOffers",
+        name: "Mis productos ofertados",
         component: SellerListMyOffers
       },
       {
         path: "BuyerListMyOrders",
-        name: "BuyerListMyOrders",
+        name: "Mis solicitudes realizadas",
         component: BuyerListMyOrders
       },
       {
