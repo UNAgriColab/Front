@@ -5,19 +5,20 @@
       :sidebar-item-color="sidebarBackground"
       :sidebar-background-image="sidebarBackgroundImage"
     >
-      <mobile-menu slot="content"></mobile-menu>2
+      <mobile-menu slot="content"></mobile-menu>
+
       <sidebar-link to="/user">
         <md-icon>person</md-icon>
         <p>Perfil</p>
       </sidebar-link>
+
+      <div class="md-content md-theme-selection" style="background-color: rgba(65,154,28,0.7); margin-top: 12px">
+        <h5 style="color: #FFFFFF"> <md-icon>shopping_cart</md-icon> Compras </h5>
+      </div>
+
       <sidebar-link to="/BuyerBuyProduct">
         <md-icon>shopping_cart</md-icon>
         <p>Compra productos</p>
-      </sidebar-link>
-
-      <sidebar-link to="/SellerOfferProduct">
-        <md-icon>store</md-icon>
-        <p>Vende productos</p>
       </sidebar-link>
 
       <sidebar-link to="/BuyerListAllOffers">
@@ -25,9 +26,23 @@
         <p>Lista de productos</p>
       </sidebar-link>
 
-      <sidebar-link to="/SellerListMyOrders">
-        <md-icon>list</md-icon>
-        <p>Lista de pedidos</p>
+      <sidebar-link to="/BuyerListMyOrders">
+        <md-icon>add_to_photos</md-icon>
+        <p>Mis solicitudes</p>
+      </sidebar-link>
+
+      <sidebar-link to="/BuyerEditMyOrder">
+        <md-icon>create</md-icon>
+        <p>Editar mis solicitudes</p>
+      </sidebar-link>
+
+      <div class="md-content md-theme-selection" style="background-color: rgba(65,154,28,0.7); margin-top: 12px">
+        <h5 style="color: #FFFFFF"> <md-icon>store</md-icon> Ventas </h5>
+      </div>
+
+      <sidebar-link to="/SellerOfferProduct">
+        <md-icon>store</md-icon>
+        <p>Vende productos</p>
       </sidebar-link>
 
       <sidebar-link to="/SellerListMyOffers">
@@ -35,25 +50,21 @@
         <p>Mis productos</p>
       </sidebar-link>
 
-      <sidebar-link to="/BuyerListMyOrders">
-        <md-icon>add_to_photos</md-icon>
-        <p>Mis solicitudes</p>
+      <sidebar-link to="/SellerListMyOrders">
+        <md-icon>list</md-icon>
+        <p>Lista de pedidos</p>
       </sidebar-link>
 
       <sidebar-link to="/SellerEditMyOffer">
-        <md-icon>add_to_photos</md-icon>
-        <p>Editar oferta como vendedor</p>
+        <md-icon>create</md-icon>
+        <p>Editar mis productos</p>
       </sidebar-link>
 
-      <sidebar-link to="/SellerEditMyOrder">
-        <md-icon>add_to_photos</md-icon>
-        <p>Editar orden como vendedor</p>
+      <sidebar-link to="/SellerEditMyOrder" style="margin-bottom: 18px">
+        <md-icon>create</md-icon>
+        <p>Editar pedidos</p>
       </sidebar-link>
 
-      <sidebar-link to="/BuyerEditMyOrder">
-        <md-icon>add_to_photos</md-icon>
-        <p>Editar orden como comprador</p>
-      </sidebar-link>
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>
