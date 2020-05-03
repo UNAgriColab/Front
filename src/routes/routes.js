@@ -87,7 +87,7 @@ const routes = [
         path: "buyerEditMyOrder",
         name: "BuyerEditMyOrder",
         component: BuyerEditMyOrder
-      },
+      }
     ]
   },
   {

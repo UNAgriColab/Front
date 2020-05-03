@@ -1,63 +1,86 @@
 <template>
+
   <div class="content">
-     <div class="md-layout">
-       <div class="md-layout-item text-center">
-          <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-60">
+    <div class="md-layout">
+      <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-60">
+        <md-card>
+          <md-card-header data-background-color="green">
+            <h1>Digite el usuario</h1>
+          </md-card-header>
+          <md-card-content>
+            <md-field>
+              <label for="path">Usuario de las ordenes a ver:</label><br>
+              <md-input v-model="path" placeholder="path"></md-input>
+            </md-field>
+            <md-button
+                    v-on:click="getOffers"
+                    type="submit"
+                    class="md-raised md-success">
+              Ingresar
+            </md-button>
+          </md-card-content>
+        </md-card>
 
-            <md-list class="md-double-line  md-elevation-24" v-for="(request, index) in requests" v-bind:key="index">
-              <md-subheader>{{request.productName}}</md-subheader>
-              <md-divider></md-divider>
-              <md-list-item>
-                <md-icon class="md-primary md-size-2x">storefront</md-icon>
+        <md-list class="md-double-line  md-elevation-24"  v-for="(offer, index) in offers" v-bind:key="index">
+          <md-subheader>ID de la oferta relacionada {{offer.offerReference}}</md-subheader>
+          <md-divider></md-divider>
+          <md-list-item>
+            <md-icon class="md-primary md-size-2x">storefront</md-icon>
 
-                <div class="md-list-item-text">
-                  <span> Precio: {{request.totalPrice}}</span>
-                  <span>Unidades solicitadas:{{request.unit}}</span>
-                </div>
-              </md-list-item>
+            <div class="md-list-item-text">
+              <span>Oferta hecha por: {{offer.userEmail}}</span>
+              <span v-if="offer.state ==1">Estado: Por aceptar</span>
+              <span v-if="offer.state ==2">Estado: Aceptada</span>
+              <span v-if="offer.state ==3">Estado: En camino</span>
+            </div>
+          </md-list-item>
 
-              <md-list-item class="md-inset md-expand">
-                <div class="md-list-item-text">
-                  <span>{{request.description}}</span>
-                </div>
+          <md-list-item class="md-inset md-expand">
+            <div class="md-list-item-text">
+              <span>{{offer.description}}</span>
+            </div>
 
-                <md-button class="md-primary md-icon-button md-list-action">
-                    <span>Ver</span>
-                </md-button>
-              </md-list-item>
-            </md-list>
-          </div>
-        </div>
+            <md-button class="md-primary md-icon-button md-list-action">
+              <md-icon>shopping_cart</md-icon>
+            </md-button>
+          </md-list-item>
+        </md-list>
+
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-import http from "../http-common";
-
+  import axios from 'axios'
   export default {
     name: 'DoubleLine',
     data(){
       return{
-        requests: null,
-        user: "ayuda@unal.edu.co"
+        path: '',
+        offers: null,
+        order: null
       }
     },
     mounted(){
-      console.log('Hola mounted');
-      this.getRequest();
     },
     methods:{
-      getRequest(){
-        console.log('metodo get request');
-        axios
-                .get("v1/order/seller/samoralespu@unal.edu.co")
-                .then(response => {
-          console.log(response);
-          this.requests=response.data
-        }).catch(e => console.log(e))
-      }
+      getOffers(){
+        console.log('metodo get offers');
+        axios.get('http://localhost:8080/api/v1/order/seller/'+ this.path)
+                .then(response =>{
+                  console.log(response);
+                  this.offers=response.data;
+                  /*axios.get('http://localhost:8080/api/v1/offer/'+ response.data.offerReference)
+                          .then(response =>{
+
+                            alert(response.data.offerReference)
+                            console.log(response);
+                            this.order=response.data
+                          })*/
+                }).catch(e => console.log(e))
+      },
+
     }
   }
 </script>
