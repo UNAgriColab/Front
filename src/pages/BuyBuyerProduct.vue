@@ -8,7 +8,7 @@
           <md-card-header data-background-color="green">
             <h1 class="title">{{ product.name }}</h1>
             <p class="category">{{ product.user }}</p>
-          </md-card-header>
+          </md-card-header>G
           <div id="product">
             <div class="product">
               <div class="md-layout-item md-size-100 md-size-33">
@@ -125,7 +125,7 @@ export default {
   },
   mounted() {
     http.
-    get("/v1/offer/s2naUii68eBbMjxikNfZ").
+    get("/v1/offer/1").
     then(response => {
       this.product.price = response.data.pricePresentation,
       this.product.user = response.data.userEmail,

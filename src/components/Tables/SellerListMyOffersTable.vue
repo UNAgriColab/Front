@@ -81,7 +81,7 @@ export default {
     getUserOffers() {
       console.log("Metodo get user offers");
       axios
-        .get(`http://localhost:8080/api/v1/offer/user/ayuda@unal.edu.co`)
+        .get(`http://localhost:8080/api/v1/offer/`)
         .then(response => {
           console.log(response);
           this.userOffers = response.data;
