@@ -1,8 +1,8 @@
 <template>
   <form>
     <md-card>
-      <md-card-header :data-background-color="dataBackgroundColor">
-        <h4 class="title">Oferta de un nuevo producto</h4>
+      <md-card-header data-background-color="green">
+        <h4 class="title">Nuevo producto</h4>
         <p class="category">
           Información necesaria para la creación de una nueva oferta
         </p>
