@@ -35,12 +35,12 @@ const routes = [
       },
       {
         path: "user",
-        name: "User Profile",
+        name: "Mi perfil",
         component: UserProfile
       },
       {
         path: "buyerBuyProduct",
-        name: "BuyerBuyProduct",
+        name: "Comprar producto",
         component: BuyerBuyProduct
       },
       {
@@ -50,42 +50,42 @@ const routes = [
       },
       {
         path: "sellerOfferProduct",
-        name: "SellerOfferProduct",
+        name: "Oferta de producto",
         component: SellerOfferProduct
       },
       {
         path: "buyerListAllOffers",
-        name: "BuyerListAllOffers",
+        name: "Ofertas",
         component: BuyerListAllOffers
       },
       {
         path: "sellerListMyOrders",
-        name: "SellerListMyOrders",
+        name: "Mis pedidos",
         component: SellerListMyOrders
       },
       {
         path: "SellerListMyOffers",
-        name: "Mis productos ofertados",
+        name: "Mis productos",
         component: SellerListMyOffers
       },
       {
         path: "BuyerListMyOrders",
-        name: "Mis solicitudes realizadas",
+        name: "Mis solicitudes",
         component: BuyerListMyOrders
       },
       {
         path: "sellerEditMyOffer",
-        name: "SellerEditMyOffer",
+        name: "Editar oferta",
         component: SellerEditMyOffer
       },
       {
         path: "sellerEditMyOrder",
-        name: "SellerEditMyOrder",
+        name: "Editar pedido",
         component: SellerEditMyOrder
       },
       {
         path: "buyerEditMyOrder",
-        name: "BuyerEditMyOrder",
+        name: "Editar solicitud",
         component: BuyerEditMyOrder
       },
     ]

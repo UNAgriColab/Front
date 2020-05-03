@@ -12,7 +12,7 @@
         <p>Perfil</p>
       </sidebar-link>
 
-      <div class="md-content md-theme-selection" style="background-color: rgba(65,154,28,0.7); margin-top: 12px">
+      <div class="md-content md-theme-selection" style="background-color: rgba(83,163,85,0.8); margin-top: 12px">
         <h5 style="color: #FFFFFF"> <md-icon>shopping_cart</md-icon> Compras </h5>
       </div>
 
@@ -36,7 +36,7 @@
         <p>Editar mis solicitudes</p>
       </sidebar-link>
 
-      <div class="md-content md-theme-selection" style="background-color: rgba(65,154,28,0.7); margin-top: 12px">
+      <div class="md-content md-theme-selection" style="background-color: rgba(83,163,85,0.8); margin-top: 12px">
         <h5 style="color: #FFFFFF"> <md-icon>store</md-icon> Ventas </h5>
       </div>
 
