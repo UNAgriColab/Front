@@ -87,7 +87,7 @@ const routes = [
         path: "buyerEditMyOrder",
         name: "Editar solicitud",
         component: BuyerEditMyOrder
-      },
+      }
     ]
   },
   {

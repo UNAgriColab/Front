@@ -6,6 +6,18 @@
       >
         <md-card>
           <md-card-header data-background-color="green">
+            <div>
+              <md-field>
+                <label for="path">Id de la orden a ver:</label><br>
+                <md-input v-model="product.path" placeholder="path"></md-input>
+              </md-field>
+              <md-button
+                v-on:click="leerAPI"
+                type="submit"
+                class="md-raised md-success">
+                Ingresar
+              </md-button>
+            </div>
             <h1 class="title">{{ product.name }}</h1>
             <p class="category">De: {{ product.user }}</p>
           </md-card-header>
@@ -36,37 +48,21 @@
                 </div>
               </div>
             </div>
-            <div class="md-layout">
-              <div class="md-layout-item md-small-size-100 md-size-33">
-                <h4></h4>
-              </div>
-              <div class="md-layout-item md-size-100 text-left">
-                <md-button
-                        v-on:click="saveRequest"
-                        class="md-raised md-success"
-                        :disabled="numberOfUnits"
-                >
-                  Prueba
-                </md-button>
-                <md-button
-                        v-on:click="saveRequest"
-                        class="md-raised md-success"
-                        :disabled="numberOfUnits"
-                 >
-                  Editar orden
-                </md-button>
-              </div>
-
+              <h2 class="title">Descripción</h2>
+            <div class="md-layout-item md-size-100 md-size-33">
+              <p class="category">
+                {{ product.description }}
+              </p>
             </div>
+            <div class="md-layout-item md-size-100 text-right">
+              <md-button
 
-          <md-card-header data-background-color="green">
-            <h1 class="title">Descripción</h1>
-          </md-card-header>
-          <div class="md-layout-item md-size-100 md-size-33">
-            <p class="category">
-              {{ product.description }}
-            </p>
-          </div>
+                      class="md-raised md-success"
+                      :disabled="numberOfUnits"
+              >
+                Guardar cambios
+              </md-button>
+            </div>
           </md-card-content>
         </md-card>
       </div>
@@ -81,6 +77,7 @@
     name: "product",
     data() {
       return {
+
         product: {
           //orden
           offerReference: "",
@@ -95,47 +92,39 @@
           price: 0,
           name: "",
           //unused
-          userEmail : "",
+          path : '',
         }
       };
     },
     mounted() {
-      http.
-      get("/v1/order/1").   //hacer dinámico para que cambie
-      then(response => {
-        this.product.offerReference = response.data.offerReference;
-        this.product.id = response.data.id;
-        this.product.user = response.data.userEmail;
-        this.product.presentation = response.data.unit;
-        this.product.numberOfUnits = response.data.numberOfUnits;
-        this.product.totalPrice = response.data.totalPrice;
-        this.product.description = response.data.description;
-        // this.product.status = response.data.status;
-      })
-      .catch(e => {
-        console.log(e);
-      })
 
-      http.
-      get("/v1/offer/3").   //hacer dinámico para que cambie offerReference
-      then(response => {
-        this.product.name = response.data.productName;
-        this.product.price = response.data.pricePresentation;
-      })
-      .catch(e => {
-        console.log(e);
-      })
     },
     methods: {
-      /* eslint-disable no-console */
-      saveRequest() {
+      leerAPI(){
+        http.
+        get('/v1/order/' + this.product.path ).   //hacer dinámico para que cambie
+                then(response => {
+                  this.product.offerReference = response.data.offerReference;
+                  this.product.id = response.data.id;
+                  this.product.user = response.data.userEmail;
+                  this.product.presentation = response.data.unit;
+                  this.product.numberOfUnits = response.data.numberOfUnits;
+                  this.product.totalPrice = response.data.totalPrice;
+                  this.product.description = response.data.description;
+                  // this.product.status = response.data.status;
+                  http.get('/v1/offer/' + response.data.offerReference).then(response => {
+                    this.product.name = response.data.productName;
+                    this.product.price = response.data.pricePresentation;
+
+                  })
+                })
+                .catch(e => {
+                  console.log(e);
+                })
+      },
+      updateStatus() {
         const data = {
-          numberOfUnits: this.product.numberOfUnits,
-          unit: this.product.presentation,
-          description: this.product.description,
-          name: this.product.productName,
-          totalPrice: this.product.price,
-          userEmail: this.product.userEmail
+
         };
 
         http
@@ -153,8 +142,14 @@
       newCustomer() {
         this.submitted = false;
         this.customer = {};
-      }
+      },
       /* eslint-enable no-console */
     }
   };
 </script>
+
+<style lang="scss" scoped>
+  .md-steppers {
+
+  }
+</style>
