@@ -6,18 +6,23 @@
       >
         <md-card>
           <md-card-header data-background-color="green">
-            <div>
-              <md-field>
-                <label for="path">Id de la orden a ver:</label><br>
-                <md-input v-model="product.path" placeholder="path"></md-input>
-              </md-field>
-              <md-button
-                v-on:click="leerAPI"
-                type="submit"
-                class="md-raised md-success">
-                Ingresar
-              </md-button>
-            </div>
+            <h1>Ingresa La orden a ver</h1>
+          </md-card-header>
+          <md-card-content>
+            <md-field>
+              <label for="path">Id de la orden a ver:</label><br>
+              <md-input v-model="product.path" placeholder="path"></md-input>
+            </md-field>
+            <md-button
+                    v-on:click="leerAPI"
+                    type="submit"
+                    class="md-raised md-success">
+              Ingresar
+            </md-button>
+          </md-card-content>
+        </md-card>
+        <md-card>
+          <md-card-header data-background-color="green">
             <h1 class="title">{{ product.name }}</h1>
             <p class="category">De: {{ product.user }}</p>
           </md-card-header>
@@ -54,13 +59,17 @@
                 {{ product.description }}
               </p>
             </div>
+            <div class="md-layout-item md-size-100 md-size-33">
+              <p class="category">
+                Estado actual de la orden: {{ product.state }}
+              </p>
+            </div>
             <div class="md-layout-item md-size-100 text-right">
               <md-button
-
                       class="md-raised md-success"
-                      :disabled="numberOfUnits"
+                      v-on:click="cancelOrder"
               >
-                Guardar cambios
+                cancelar producto
               </md-button>
             </div>
           </md-card-content>
@@ -88,6 +97,10 @@
           description: "",
           id: "",
           presentation: "",
+
+          state:0,
+          canceled:false,
+
           //oferta
           price: 0,
           name: "",
@@ -111,7 +124,7 @@
                   this.product.numberOfUnits = response.data.numberOfUnits;
                   this.product.totalPrice = response.data.totalPrice;
                   this.product.description = response.data.description;
-                  // this.product.status = response.data.status;
+                  this.product.state = response.data.state;
                   http.get('/v1/offer/' + response.data.offerReference).then(response => {
                     this.product.name = response.data.productName;
                     this.product.price = response.data.pricePresentation;
@@ -122,15 +135,15 @@
                   console.log(e);
                 })
       },
-      updateStatus() {
+      cancelOrder() {
         const data = {
-
+          canceled: this.product.canceled,
+          orderId:  this.product.id
         };
 
         http
-                .post("/v1/request", data)
+                .put("/v1/order/buyer", data)
                 .then(response => {
-                  this.product.id = response.data.id;
                   console.log(response.data);
                 })
                 .catch(e => {

@@ -147,6 +147,8 @@ export default {
         userEmail : "",
         totalPrice: 0,
         description2: "",
+        state: 0,
+        canceled: false,
         path: ''
       }
     };
@@ -161,34 +163,16 @@ export default {
       get('/v1/offer/'+ this.product.path).
       then(response => {
         this.product.price = response.data.pricePresentation,
-                this.product.user = response.data.userEmail,
-                this.product.name = response.data.productName,
-                this.product.quantity = response.data.minQuantity,
-                this.product.presentation = response.data.presentation,
-                this.product.description = response.data.description
+        this.product.user = response.data.userEmail,
+        this.product.name = response.data.productName,
+        this.product.quantity = response.data.minQuantity,
+        this.product.presentation = response.data.presentation,
+        this.product.description = response.data.description,
+        this.product.state = response.data.state
       })
               .catch(e => {
                 console.log(e);
               })
-    },
-    saveRequest() {
-      const data = {
-        userEmail: this.product.userEmail,
-        offerReference: this.product.path,
-        numberOfUnits: this.product.numberOfUnits,
-        description: this.product.description2
-      };
-      http
-        .post("/v1/order", data)
-        .then(response => {1
-          alert("envia");
-          console.log(response.data);
-        })
-        .catch(e => {
-          console.log(e);
-        });
-
-      this.submitted = true;
     },
     newCustomer() {
       this.submitted = false;
