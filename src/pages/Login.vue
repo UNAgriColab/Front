@@ -10,7 +10,7 @@
           <md-card-content>
             <form
               class="pure-form pure-form-stacked"
-              v-on:submit.prevent="doLogin"
+              v-on:submit.prevent="saveLogin"
               id="form"
             >
               <div class="md-layout-item md-small-size-100 md-size-100">
@@ -19,7 +19,7 @@
                   <md-icon>mail_outline</md-icon>
                   <md-input
                     id="username"
-                    v-model="user.username"
+                    v-model="user.email"
                     type="text"
                     placeholder="Email"
                   >
@@ -30,7 +30,7 @@
               <div class="md-layout-item md-small-size-100 md-size-100">
                 <md-field>
                   <label for="password">Contraseña</label>
-                  <md-icon>lock_open</md-icon>
+                  <md-icon >lock_open</md-icon>
                   <md-input
                     id="password"
                     v-model="user.password"
@@ -42,7 +42,7 @@
               </div>
 
               <div class="md-layout-item md-size-100 text-center">
-                <md-button  v-on:click="saveLogin" type="submit" class="md-raised md-success">
+                <md-button   v-on:click="saveLogin" type="submit" class="md-raised md-success">
                   Ingresar
                 </md-button>
               </div>
@@ -72,16 +72,39 @@
   </div>
 </template>
 <script>
-  import http from '../http-common';
+  import http from "../http-common";
 export default {
+  name:"login",
   data: function() {
     return {
       user: {
-        email: null,
-        username: null
+        email: "",
+        password: "",
+        token: ""
       },
       submitData: false
     };
+  },
+  methods:{
+    saveLogin: function(){
+      const data = {
+        email: this.user.email,
+        password: this.user.password,
+      };
+      http
+              .post("/auth", data)
+              .then(response => {
+                this.user.token = response.data;
+                localStorage.setItem( "TokenSession", JSON.stringify(response.data) );
+                console.log("log-in")
+              })
+              .catch(e => {
+                console.log(e);
+              });
+      localStorage.setItem( "userSession", JSON.stringify(this.user) );
+
+      window.location.href = '/dashboard';
+    }
   }
 
 };
