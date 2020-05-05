@@ -1,31 +1,5 @@
 <template>
   <div>
-    <div class="md-layout">
-      <md-card>
-        <div class="md-layout-item md-small-size-100 md-size-50">
-          <md-field>
-            <label for="email">Correo electrónico</label>
-            <md-icon>mail_outline</md-icon>
-            <md-input
-              id="email"
-              type="text"
-              placeholder="Correo electrónico"
-              v-model="email"
-            >
-            </md-input>
-          </md-field>
-        </div>
-        <div class="md-layout-item md-small-size-100 md-size-50 text-center">
-          <md-button
-            type="submit"
-            class="md-raised md-success"
-            v-on:click="getBuyerOrders"
-          >
-            Consultar
-          </md-button>
-        </div>
-      </md-card>
-    </div>
     <md-table
       v-model="buyerOrders"
       :table-header-color="tableHeaderColor"
@@ -65,12 +39,19 @@ export default {
   data() {
     return {
       buyerOrders: null,
-      email: ""
+      email: "",
+      aux: null
     };
   },
-  mounted() {},
+  mounted() {
+    this.getBuyerOrders();
+  },
   methods: {
     getBuyerOrders() {
+      if (localStorage.getItem("userSession")){
+        this.aux = JSON.parse(localStorage.getItem("userSession"));
+        this.email = this.aux.email;
+      }
       console.log("Get Buyer Orders");
       axios
         .get("http://localhost:8080/api/v1/order/user/" + this.email)

@@ -30,7 +30,7 @@
               <div class="md-layout-item md-small-size-100 md-size-100">
                 <md-field>
                   <label for="password">Contraseña</label>
-                  <md-icon >lock_open</md-icon>
+                  <md-icon>lock_open</md-icon>
                   <md-input
                     id="password"
                     v-model="user.password"
@@ -40,12 +40,17 @@
                   </md-input>
                 </md-field>
               </div>
-
-              <div class="md-layout-item md-size-100 text-center">
-                <md-button   v-on:click="saveLogin" type="submit" class="md-raised md-success">
-                  Ingresar
-                </md-button>
-              </div>
+              <router-link to="/dashboard" class="text-white">
+                <div class="md-layout-item md-size-100 text-center">
+                  <md-button
+                    v-on:click="saveLogin"
+                    type="submit"
+                    class="md-raised md-success"
+                  >
+                    Ingresar
+                  </md-button>
+                </div>
+              </router-link>
             </form>
           </md-card-content>
         </md-card>
@@ -72,9 +77,9 @@
   </div>
 </template>
 <script>
-  import http from "../http-common";
+import http from "../http-common";
 export default {
-  name:"login",
+  name: "login",
   data: function() {
     return {
       user: {
@@ -85,27 +90,25 @@ export default {
       submitData: false
     };
   },
-  methods:{
-    saveLogin: function(){
+  methods: {
+    saveLogin: function() {
       const data = {
         email: this.user.email,
-        password: this.user.password,
+        password: this.user.password
       };
-      http
-              .post("/auth", data)
-              .then(response => {
-                this.user.token = response.data;
-                localStorage.setItem( "TokenSession", JSON.stringify(response.data) );
-                console.log("log-in")
-              })
-              .catch(e => {
-                console.log(e);
-              });
-      localStorage.setItem( "userSession", JSON.stringify(this.user) );
-
-      window.location.href = '/dashboard';
+      /*http
+        .post("/auth", data)
+        .then(response => {
+          this.user.token = response.data;
+          localStorage.setItem("TokenSession", JSON.stringify(response.data));
+          console.log("log-in");
+        })
+        .catch(e => {
+          console.log(e);
+        });
+      */
+      localStorage.setItem("userSession", JSON.stringify(this.user));
     }
   }
-
 };
 </script>

@@ -25,6 +25,23 @@ Vue.use(Router);
 const routes = [
   {
     path: "/",
+    component: AuthLayout,
+    redirect: "/login",
+    children: [
+      {
+        path: "login",
+        name: "Login",
+        component: Login
+      },
+      {
+        path: "/register",
+        name: "register",
+        component: Register
+      }
+    ]
+  },
+  {
+    path: "/",
     component: DashboardLayout,
     redirect: "/dashboard",
     children: [
@@ -87,23 +104,6 @@ const routes = [
         path: "buyerEditMyOrder",
         name: "Editar solicitud",
         component: BuyerEditMyOrder
-      }
-    ]
-  },
-  {
-    path: "/",
-    component: AuthLayout,
-    redirect: "/auth",
-    children: [
-      {
-        path: "login",
-        name: "Login",
-        component: Login
-      },
-      {
-        path: "/register",
-        name: "register",
-        component: Register
       }
     ]
   }
