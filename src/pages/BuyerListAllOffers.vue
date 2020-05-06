@@ -39,7 +39,10 @@
     name: 'DoubleLine',
     data(){
       return{
-        offers: null
+        offers: null,
+        token:'',
+        tokenHeader:'',
+        aux: ''
       }
     },
     mounted(){
@@ -47,13 +50,33 @@
       this.getOffers();
     },
     methods:{
-      getOffers(){
+      getOffers: function () {
+        if (localStorage.getItem("userSession")) {
+          this.aux = JSON.parse(localStorage.getItem("userSession"));
+          this.token = this.aux.token;
+          this.tokenHeader = "Bearer "+this.token;
+          alert(this.tokenHeader)
+        }
         console.log('metodo get offers');
-        axios.get('http://localhost:8080/api/v1/offer')
-        .then(response =>{
-          console.log(response);
-          this.offers=response.data
-        }).catch(e => console.log(e))
+
+        const auth = {
+          headers: { Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJsZnNhbmRvdmFsZkB1bmFsLmVkdS5jbyIsImV4cCI6MTU4ODczNTUxMSwiaWF0IjoxNTg4NzE3NTExfQ.2q1DuF_8VWLGBmr6PEZ0ZM2fBJXkbumLZql9oSkfLZxDGtejU9laXvdzPlO_ZtMKhloiKSUMmZAY5MQGTXocKg' }
+        }
+        axios.
+        get('http://localhost:8080/api/v1/offer',auth)
+                .then(
+                        result => {
+                          console.log(result.data)
+                        })
+        axios.get('http://localhost:8080/api/v1/offer', {
+          headers: {
+            'Authorization':'Bearer ' + this.tokenHeader
+          }
+        })
+                .then(response => {
+                  console.log(response);
+                  this.offers = response.data
+                }).catch(e => console.log(e))
       }
     }
   }

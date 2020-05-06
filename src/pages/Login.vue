@@ -96,18 +96,19 @@ export default {
         email: this.user.email,
         password: this.user.password
       };
-      /*http
+      http
         .post("/auth", data)
         .then(response => {
           this.user.token = response.data;
-          localStorage.setItem("TokenSession", JSON.stringify(response.data));
+          this.user.password = '';
+          localStorage.setItem('TokenSession', JSON.stringify(response.data));
+          localStorage.setItem('userSession', JSON.stringify(this.user));
           console.log("log-in");
         })
         .catch(e => {
           console.log(e);
         });
-      */
-      localStorage.setItem("userSession", JSON.stringify(this.user));
+      /*localStorage.setItem("userSession", JSON.stringify(this.user));*/
     }
   }
 };

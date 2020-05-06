@@ -25,12 +25,12 @@
         <md-table-cell md-label="Precio por unidad"
           >$ {{ sellerOffer.pricePresentation }}</md-table-cell
         >
-        <!--<md-table-cell md-label="Acciones">
-          <md-button class="md-raised md-success" v-bind:value="{value: sellerOffer.id}">
+        <md-table-cell md-label="Acciones">
+          <md-button class="md-raised md-success" :value="sellerOffer.id">
             <md-icon>create</md-icon>
           </md-button>
         </md-table-cell>
-        -->
+
       </md-table-row>
     </md-table>
   </div>
