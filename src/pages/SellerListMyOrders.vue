@@ -67,6 +67,10 @@
     methods:{
       getOffers(){
         console.log('metodo get offers');
+        if (localStorage.getItem("userSession")){
+          this.aux = JSON.parse(localStorage.getItem("userSession"));
+          this.email = this.aux.email;
+        }
         axios.get('http://localhost:8080/api/v1/order/seller/'+ this.path)
                 .then(response =>{
                   console.log(response);

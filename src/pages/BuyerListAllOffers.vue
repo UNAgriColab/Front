@@ -22,7 +22,7 @@
                 <span>{{offer.description}}</span>
               </div>
 
-              <md-button class="md-primary md-icon-button md-list-action">
+              <md-button class="md-primary md-icon-button md-list-action" :value="offer.id">
                 <md-icon>shopping_cart</md-icon>
               </md-button>
             </md-list-item>
@@ -39,7 +39,8 @@
     name: 'DoubleLine',
     data(){
       return{
-        offers: null
+        offers: null,
+
       }
     },
     mounted(){
@@ -48,8 +49,9 @@
     },
     methods:{
       getOffers(){
+
         console.log('metodo get offers');
-        axios.get('http://localhost:8080/api/v1/offer')
+        axios.get('http://localhost:8080/api/v1/offer/')
         .then(response =>{
           console.log(response);
           this.offers=response.data

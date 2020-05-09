@@ -18,7 +18,7 @@
                 </md-field>
                 <md-field>
                   <label for="path">Id del usuario que crea la oferta:</label><br>
-                  <md-input v-model="product.userEmail" placeholder="path"></md-input>
+                  <md-input v-model="product.userEmail" placeholder="userEmail"></md-input>
                 </md-field>
                 <md-button
                         v-on:click="leerAPI"
@@ -159,6 +159,7 @@ export default {
   methods: {
     /* eslint-disable no-console */
     leerAPI(){
+      alert(this.product.path)
       http.
       get('/v1/offer/'+ this.product.path).
       then(response => {

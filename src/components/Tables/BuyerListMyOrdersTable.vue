@@ -52,6 +52,10 @@
         <md-table-cell md-label="Precio por unidad"
           >$ {{ buyerListMyOrders.totalPrice }}</md-table-cell
         >
+        <md-button
+                class="md-raised md-success" :value="buyerOrder.id">
+          <md-icon>create</md-icon>
+        </md-button>
       </md-table-row>
     </md-table>
   </div>

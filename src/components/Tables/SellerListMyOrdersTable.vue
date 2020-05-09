@@ -52,6 +52,9 @@
         <md-table-cell md-label="Precio por unidad"
           >$ {{ userOffer.pricePresentation }}</md-table-cell
         >
+         <md-button class="md-raised md-success" :value="userOffer.id">
+              <md-icon>create</md-icon>
+         </md-button>
       </md-table-row>
     </md-table>
   </div>
@@ -65,7 +68,8 @@ export default {
     return {
       email: "",
       selected: [],
-      userOffers: null
+      userOffers: null,
+      aux: null
     };
   },
   mounted() {
@@ -79,9 +83,13 @@ export default {
       };
     },
     getUserOffers() {
-      console.log("Metodo get user offers");
+        if (localStorage.getItem("userSession")){
+            this.aux = JSON.parse(localStorage.getItem("userSession"));
+            this.email = this.aux.email;
+        }
+        console.log("Metodo get user offers");
       axios
-        .get(`localhost:8080/api/v1/order/seller/samoralespu@unal.edu.co`)
+        .get(`localhost:8080/api/v1/order/seller/` + this.email)
         .then(response => {
           console.log(response);
           this.userOffers = response.data;

@@ -1,57 +1,37 @@
 <template>
   <div>
-    <div class="md-layout">
-      <md-card>
-        <form>
-          <div class="md-layout-item md-small-size-100 md-size-50">
-            <md-field>
-              <label for="username">email</label>
-              <md-icon>mail_outline</md-icon>
-              <md-input
-                id="username"
-                type="text"
-                placeholder="Correo electrónico"
-                v-model="email"
-              >
-              </md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-50 text-center">
-            <md-button
-              type="submit"
-              class="md-raised md-success"
-              v-on:click="saveEmail"
-            >
-              Consultar
-            </md-button>
-          </div>
-        </form>
-      </md-card>
-    </div>
-    <md-table v-model="userOffers" :table-header-color="tableHeaderColor">
+    <md-table v-model="sellerOffers" :table-header-color="tableHeaderColor">
       <md-table-row>
         <md-table-head>Producto</md-table-head>
         <md-table-head>Presentación</md-table-head>
         <md-table-head>Cantidad mínima</md-table-head>
         <md-table-head>Precio por presentación</md-table-head>
+        <!--<md-table-head>Acciones</md-table-head>-->
       </md-table-row>
       <md-table-row
         slot="md-table-row"
-        v-for="(userOffer, index) in userOffers"
+        v-for="(sellerOffer, index) in sellerOffers"
         v-bind:key="index"
       >
         <md-table-cell md-label="Producto">{{
-          userOffer.productName
+          sellerOffer.productName
         }}</md-table-cell>
         <md-table-cell md-label="Presentación">{{
-          userOffer.presentation
+          sellerOffer.presentation
         }}</md-table-cell>
         <md-table-cell md-label="Cantidad mínima">{{
-          userOffer.minQuantity
+          sellerOffer.minQuantity
         }}</md-table-cell>
         <md-table-cell md-label="Precio por unidad"
-          >$ {{ userOffer.pricePresentation }}</md-table-cell
+          >$ {{ sellerOffer.pricePresentation }}</md-table-cell
         >
+        <md-table-cell md-label="Acciones">
+          <md-button
+                  class="md-raised md-success" :value="sellerOffer.id">
+            <md-icon>create</md-icon>
+          </md-button>
+        </md-table-cell>
+
       </md-table-row>
     </md-table>
   </div>
@@ -61,32 +41,31 @@
 import axios from "axios";
 export default {
   name: "simple-table",
-  data: function() {
+  data() {
     return {
+      sellerOffers: null,
       email: "",
-      selected: [],
-      userOffers: null
+      aux: null,
     };
   },
   mounted() {
-    console.log("Hola mounted");
-    this.getUserOffers();
+    this.getSellerOffers();
   },
   methods: {
-    saveEmail() {
-      const data = {
-        email: this.email
-      };
-    },
-    getUserOffers() {
-      console.log("Metodo get user offers");
+    getSellerOffers() {
+
+      if (localStorage.getItem("userSession")){
+        this.aux = JSON.parse(localStorage.getItem("userSession"));
+        this.email = this.aux.email;
+      }
+      console.log("Get Seller Offers");
       axios
-        .get(`http://localhost:8080/api/v1/offer/`)
+        .get("http://localhost:8080/api/v1/offer/user/" + this.email)
         .then(response => {
-          console.log(response);
-          this.userOffers = response.data;
+          this.sellerOffers = response.data;
         })
         .catch(e => console.log(e));
+
     }
   }
 };
