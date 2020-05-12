@@ -1,9 +1,9 @@
 <template>
-  <div class="content">
-  <div class="md-layout">
+    <div class="content">
+        <div class="md-layout">
 
-  </div>
-</div>
+        </div>
+    </div>
 </template>
 
 <script>
