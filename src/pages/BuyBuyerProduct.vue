@@ -118,7 +118,6 @@
             </div>
           </md-card-content>
         </md-card>
-
       </div>
     </div>
   </div>
@@ -178,7 +177,7 @@
             this.product.state = response.data.state;
           })
           .catch(e => {
-            console.log(e);
+            console.log(e);1
           })
       },
       saveRequest() {
