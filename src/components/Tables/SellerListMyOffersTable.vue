@@ -40,6 +40,12 @@
 import axios from "axios";
 export default {
   name: "simple-table",
+  props: {
+    tableHeaderColor: {
+      type: String,
+      default: ""
+    }
+  },
   data() {
     return {
       sellerOffers: null,
