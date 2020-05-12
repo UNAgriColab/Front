@@ -9,35 +9,7 @@
             <h1 class="title">{{ product.name }}</h1>
             <p class="category">{{ product.user }}</p>
           </md-card-header>
-          <div id="product">
-            <div class="product">
-              <div class="md-layout-item md-size-100 md-size-33">
-                <md-field>
-                  <label for="path">Id de la oferta a ver:</label> <br />
-                  <md-input
-                    v-model="product.path"
-                    placeholder="path"
-                  ></md-input>
-                  <label for="path">Id de la oferta a ver:</label><br />
-                  <md-input v-model="product.path"></md-input>
-                </md-field>
-                <md-field>
-                  <label for="path">Id del usuario que crea la oferta:</label
-                  ><br />
-                  <md-input v-model="product.userEmail"></md-input>
-                </md-field>
-              </div>
-              <div class="md-layout-item md-size-100 text-center">
-                <md-button
-                  v-on:click="leerAPI"
-                  type="submit"
-                  class="md-raised md-success"
-                >
-                  Ingresar
-                </md-button>
-              </div>
-            </div>
-          </div>
+
         </md-card>
         <md-card>
           <md-card-header data-background-color="green">
@@ -176,6 +148,7 @@ export default {
   },
   mounted() {
     this.storage();
+    this.leerAPI();
   },
   methods: {
     /* eslint-disable no-console */
@@ -186,8 +159,11 @@ export default {
         this.product.userEmail = this.aux.email;
       }
       if(localStorage.getItem("buyerOrderId")){
-        this.product.id = localStorage.getItem("buyerOrderId");
+        this.product.path = localStorage.getItem("buyerOrderId");
       }
+    },
+    precioFinal() {
+
     },
     leerAPI() {
       http
@@ -225,7 +201,6 @@ export default {
           withCredentials: false
         })
         .then(response => {
-          alert("envia");
           console.log(response.data);
         })
         .catch(e => {
