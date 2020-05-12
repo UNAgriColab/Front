@@ -27,9 +27,9 @@
 
     <md-card>
       <md-card-header data-background-color="green">
-        <h4 class="title">Oferta de un nuevo producto</h4>
+        <h4 class="title">Edita tu producto</h4>
         <p class="category">
-          Información necesaria para la creación de una nueva oferta
+          Información necesaria para la edición de una oferta
         </p>
       </md-card-header>
 

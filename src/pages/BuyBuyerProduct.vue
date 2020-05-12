@@ -125,7 +125,7 @@
                   v-on:click="saveRequest"
                   class="md-raised md-success"
                 >
-                  Comprar
+                  <md-icon>queue</md-icon> Comprar
                 </md-button>
               </div>
             </div>
