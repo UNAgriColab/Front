@@ -185,6 +185,9 @@ export default {
         this.token = this.aux.token;
         this.product.userEmail = this.aux.email;
       }
+      if(localStorage.getItem("buyerOrderId")){
+        this.product.id = localStorage.getItem("buyerOrderId");
+      }
     },
     leerAPI() {
       http
