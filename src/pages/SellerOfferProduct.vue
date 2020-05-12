@@ -92,7 +92,6 @@
                       v-model="offer.minQuantity"
                       min="1"
                       type="number"
-                      placeholder="unidades"
                     ></md-input>
                   </md-field>
                 </div>

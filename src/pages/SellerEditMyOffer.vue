@@ -37,10 +37,9 @@
         <div class="md-layout">
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
-              <label for="user">Id de la oferta a ver:</label><br />
+              <label for="user">Usuario</label><br />
               <md-input
                 v-model="offer.userEmail"
-                placeholder="Usuario"
                 disabled
               ></md-input>
             </md-field>
