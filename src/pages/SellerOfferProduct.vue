@@ -2,7 +2,7 @@
   <div class="content">
     <div class="md-layout">
       <div
-              class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-60"
+              class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
         <form>
           <md-card>
@@ -14,15 +14,15 @@
             </md-card-header>
 
             <md-card-content>
-              <div class="md-layout-item">
+              <div class="md-layout">
                 <div class="md-layout-item md-small-size-100 md-size-100">
                   <md-field>
-                    <label for="user">Id de la oferta a ver:</label><br>
-                    <md-input v-model="offer.userEmail" placeholder="Usuario"></md-input>
+                    <label for="user">Usuario</label><br>
+                    <md-input v-model="offer.userEmail"></md-input>
                   </md-field>
                 </div>
               </div>
-              <div class="md-layout-item">
+              <div class="md-layout">
                 <!-- Layout item list-->
                 <div class="md-layout-item md-small-size-100 md-size-100">
 
@@ -119,7 +119,7 @@
                     v-on:click="saveOffer"
                     class="md-raised md-success"
                     type="submit"
-                    >Publicar oferta</md-button
+                    ><md-icon>library_add_check</md-icon> Publicar oferta</md-button
                   >
                 </div>
               </div>
