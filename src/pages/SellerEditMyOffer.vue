@@ -199,16 +199,12 @@ export default {
         minQuantity: this.offer.minQuantity,
         pricePresentation: this.offer.pricePresentation,
         description: this.offer.description,
-        id: this.offer.id,
-
-        presentation: this.offer.presentation,
-        pricePresentation: this.offer.pricePresentation,
-        productName: this.offer.productName,
-        userEmail: this.offer.userEmail
+        id: this.offer.id
       };
       http
-        .put("/v1/offer/" + this.offer.id, data)
+        .put("/v1/offer/", data)
         .then(response => {
+          alert("edita");
           console.log(response.data);
         })
         .catch(e => {

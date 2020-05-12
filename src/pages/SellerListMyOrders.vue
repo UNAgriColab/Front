@@ -66,12 +66,17 @@
     },
     methods:{
       getOffers(){
-        console.log('metodo get offers');
-        if (localStorage.getItem("userSession")){
+        if (localStorage.getItem("userSession")) {
           this.aux = JSON.parse(localStorage.getItem("userSession"));
-          this.email = this.aux.email;
-        }
-        axios.get('http://localhost:8080/api/v1/order/seller/'+ this.path)
+          this.token = this.aux.token;
+        };
+        console.log('metodo get offers');
+        axios.get('http://localhost:8080/api/v1/order/seller/'+ this.path,
+                {
+                  headers:{
+                    Authorization : `Bearer ${this.token}`,
+                  },
+                  withCredentials: false})
                 .then(response =>{
                   console.log(response);
                   this.offers=response.data;

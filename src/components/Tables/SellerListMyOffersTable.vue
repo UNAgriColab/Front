@@ -26,8 +26,7 @@
           >$ {{ sellerOffer.pricePresentation }}</md-table-cell
         >
         <md-table-cell md-label="Acciones">
-          <md-button
-                  class="md-raised md-success" :value="sellerOffer.id">
+          <md-button class="md-raised md-success" :value="sellerOffer.id">
             <md-icon>create</md-icon>
           </md-button>
         </md-table-cell>
@@ -45,7 +44,7 @@ export default {
     return {
       sellerOffers: null,
       email: "",
-      aux: null,
+      aux: null
     };
   },
   mounted() {
@@ -53,7 +52,6 @@ export default {
   },
   methods: {
     getSellerOffers() {
-
       if (localStorage.getItem("userSession")){
         this.aux = JSON.parse(localStorage.getItem("userSession"));
         this.email = this.aux.email;
@@ -65,7 +63,6 @@ export default {
           this.sellerOffers = response.data;
         })
         .catch(e => console.log(e));
-
     }
   }
 };

@@ -1,56 +1,31 @@
 <template>
   <div>
-    <div class="md-layout">
-      <md-card>
-        <form>
-          <div class="md-layout-item md-small-size-100 md-size-50">
-            <md-field>
-              <label for="username">email</label>
-              <md-icon>mail_outline</md-icon>
-              <md-input
-                id="username"
-                type="text"
-                placeholder="Correo electrónico"
-                v-model="email"
-              >
-              </md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-50 text-center">
-            <md-button
-              type="submit"
-              class="md-raised md-success"
-              v-on:click="saveEmail"
-            >
-              Consultar
-            </md-button>
-          </div>
-        </form>
-      </md-card>
-    </div>
-    <md-table v-model="buyerListMyOrders" :table-header-color="tableHeaderColor">
+    <md-table
+      v-model="buyerOrders"
+      :table-header-color="tableHeaderColor"
+    >
       <md-table-row>
-        <md-table-head>Producto</md-table-head>
+        <md-table-head>Oferta</md-table-head>
         <md-table-head>Unidad</md-table-head>
         <md-table-head>Número de unidades</md-table-head>
         <md-table-head>Precio total</md-table-head>
       </md-table-row>
       <md-table-row
         slot="md-table-row"
-        v-for="(buyerListMyOrders, index) in buyerListMyOrders"
+        v-for="(buyerOrder, index) in buyerOrders"
         v-bind:key="index"
       >
         <md-table-cell md-label="Producto">{{
-          buyerListMyOrders.productName
+          buyerOrder.offerReference
         }}</md-table-cell>
         <md-table-cell md-label="Unidad">{{
-          buyerListMyOrders.unit
+          buyerOrder.unit
         }}</md-table-cell>
         <md-table-cell md-label="Cantidad minima">{{
-          buyerListMyOrders.numberOfUnits
+          buyerOrder.numberOfUnits
         }}</md-table-cell>
         <md-table-cell md-label="Precio por unidad"
-          >$ {{ buyerListMyOrders.totalPrice }}</md-table-cell
+          >$ {{ buyerOrder.totalPrice }}</md-table-cell
         >
         <md-button
                 class="md-raised md-success" :value="buyerOrder.id">
@@ -65,30 +40,33 @@
 import axios from "axios";
 export default {
   name: "simple-table",
-  data: function() {
+  data() {
     return {
+      buyerOrders: null,
       email: "",
-      selected: [],
-      buyerListMyOrders: null
+      aux: null
     };
   },
   mounted() {
-    console.log("Hola mounted");
-    this.getBuyerListMyOrders();
+    this.getBuyerOrders();
   },
   methods: {
-    saveEmail() {
-      const data = {
-        email: this.email
-      };
-    },
-    getBuyerListMyOrders() {
-      console.log("Metodo get user requests");
+    getBuyerOrders() {
+      if (localStorage.getItem("userSession")){
+        this.aux = JSON.parse(localStorage.getItem("userSession"));
+        this.token = this.aux.token;
+        this.email = this.aux.email;
+      }
+      console.log("Get Buyer Orders");
       axios
-        .get(`http://localhost:8080/api/v1/request/user/3@unal.edu.co`)
+        .get("http://localhost:8080/api/v1/order/user/" + this.email, {
+          headers:{
+            Authorization : `Bearer ${this.token}`,
+          },
+          withCredentials: false
+        })
         .then(response => {
-          console.log(response);
-          this.buyerListMyOrders = response.data;
+          this.buyerOrders = response.data;
         })
         .catch(e => console.log(e));
     }

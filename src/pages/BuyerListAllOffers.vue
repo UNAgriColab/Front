@@ -22,7 +22,7 @@
                 <span>{{offer.description}}</span>
               </div>
 
-              <md-button class="md-primary md-icon-button md-list-action" :value="offer.id">
+              <md-button class="md-primary md-icon-button md-list-action">
                 <md-icon>shopping_cart</md-icon>
               </md-button>
             </md-list-item>
@@ -35,12 +35,16 @@
 
 <script>
   import axios from 'axios'
+  axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+  axios.defaults.headers.common['Access-Control-Allow-Methods'] = '*';
   export default {
     name: 'DoubleLine',
     data(){
       return{
         offers: null,
-
+        token:'',
+        tokenHeader:'',
+        aux: ''
       }
     },
     mounted(){
@@ -48,14 +52,26 @@
       this.getOffers();
     },
     methods:{
-      getOffers(){
+      getOffers: function () {
+        if (localStorage.getItem("userSession")) {
+          this.aux = JSON.parse(localStorage.getItem("userSession"));
+          this.token = this.aux.token;
+          this.tokenHeader = "Bearer "+this.token;
+        };
 
-        console.log('metodo get offers');
-        axios.get('http://localhost:8080/api/v1/offer/')
-        .then(response =>{
-          console.log(response);
-          this.offers=response.data
-        }).catch(e => console.log(e))
+        console.log(`Bearer ${this.token}`);
+        axios.
+        get('http://localhost:8080/api/v1/offer', {
+          headers:{
+            Authorization : `Bearer ${this.token}`,
+          },
+          withCredentials: false
+        })
+                .then(response => {
+                  console.log(response);
+                  this.offers = response.data
+                }).catch(e => console.log(e))
+
       }
     }
   }
