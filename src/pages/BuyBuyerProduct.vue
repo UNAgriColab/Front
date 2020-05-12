@@ -21,11 +21,6 @@
                   <label for="path">Id de la oferta a ver:</label><br />
                   <md-input v-model="product.path"></md-input>
                 </md-field>
-                <md-field>
-                  <label for="path">Id del usuario que crea la oferta:</label
-                  ><br />
-                  <md-input v-model="product.userEmail"></md-input>
-                </md-field>
               </div>
               <div class="md-layout-item md-size-100 text-center">
                 <md-button
