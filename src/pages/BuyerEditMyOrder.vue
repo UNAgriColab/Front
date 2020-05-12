@@ -113,6 +113,7 @@ export default {
   },
   mounted() {
     this.storage();
+    this.leerAPI();
   },
   methods: {
     storage() {
@@ -120,6 +121,9 @@ export default {
         this.aux = JSON.parse(localStorage.getItem("userSession"));
         this.token = this.aux.token;
         this.product.userEmail = this.aux.email;
+      }
+      if(localStorage.getItem("buyerOrderId1")){
+        this.product.path = localStorage.getItem("buyerOrderId1");
       }
     },
     leerAPI() {
