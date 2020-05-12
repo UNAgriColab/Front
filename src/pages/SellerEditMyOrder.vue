@@ -10,7 +10,7 @@
           </md-card-header>
           <md-card-content>
             <md-field>
-              <label for="path">Id de la orden a ver:</label><br />
+              <label for="path">Id de la orden a ver:</label> <br />
               <md-input v-model="product.path" placeholder="path"></md-input>
             </md-field>
             <md-button
@@ -33,19 +33,19 @@
                 <div class="md-layout-item md-size-100 md-size-33">
                   <h3 class="title">
                     {{ product.numberOfUnits }}
-                    <span v-if="product.presentation == 1">
+                    <span v-if="product.presentation === 1">
                       Gramos pedidos.
                     </span>
-                    <span v-if="product.presentation == 2">
+                    <span v-if="product.presentation === 2">
                       Libras pedidas.
                     </span>
-                    <span v-if="product.presentation == 3">
+                    <span v-if="product.presentation === 3">
                       Kilogramos pedidos.
                     </span>
-                    <span v-if="product.presentation == 4">
+                    <span v-if="product.presentation === 4">
                       Arrobas pedidas.
                     </span>
-                    <span v-if="product.presentation == 5">
+                    <span v-if="product.presentation === 5">
                       Bultos pedidos.
                     </span>
                   </h3>
@@ -108,16 +108,32 @@ export default {
         //oferta
         price: 0,
         name: "",
-        //unused
+        userEmail: "",
+        //
         path: ""
       }
     };
   },
-  mounted() {},
+  mounted() {
+    this.storage();
+    this.leerAPI();
+  },
   methods: {
+    storage() {
+      if (localStorage.getItem("userSession")) {
+        this.aux = JSON.parse(localStorage.getItem("userSession"));
+        this.token = this.aux.token;
+        this.product.userEmail = this.aux.email;
+      }
+    },
     leerAPI() {
       http
-        .get("/v1/order/" + this.product.path) //hacer dinámico para que cambie
+        .get("/v1/order/" + this.product.path, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
         .then(response => {
           this.product.offerReference = response.data.offerReference;
           this.product.id = response.data.id;
@@ -128,7 +144,12 @@ export default {
           this.product.description = response.data.description;
           this.product.state = response.data.state;
           http
-            .get("/v1/offer/" + response.data.offerReference)
+            .get("/v1/offer/" + response.data.offerReference, {
+              headers: {
+                Authorization: `Bearer ${this.token}`
+              },
+              withCredentials: false
+            })
             .then(response => {
               this.product.name = response.data.productName;
               this.product.price = response.data.pricePresentation;
@@ -145,7 +166,12 @@ export default {
       };
 
       http
-        .put("/v1/order/seller", data)
+        .put("/v1/order/seller", data, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
         .then(response => {
           console.log(response.data);
         })
@@ -162,7 +188,12 @@ export default {
       };
 
       http
-        .put("/v1/order/seller", data)
+        .put("/v1/order/seller", data, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
         .then(response => {
           alert("envia");
 
@@ -173,12 +204,7 @@ export default {
         });
 
       this.submitted = true;
-    },
-    newCustomer() {
-      this.submitted = false;
-      this.customer = {};
     }
-    /* eslint-enable no-console */
   }
 };
 </script>

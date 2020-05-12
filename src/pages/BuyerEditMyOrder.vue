@@ -2,7 +2,7 @@
   <div class="content">
     <div class="md-layout">
       <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
+        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-60"
       >
         <md-card>
           <md-card-content>
@@ -36,19 +36,19 @@
                   <p class="category">De: {{ product.user }}</p>
                   <h3 class="title">
                     {{ product.numberOfUnits }}
-                    <span v-if="product.presentation == 1">
+                    <span v-if="product.presentation === 1">
                       Gramos pedidos.
                     </span>
-                    <span v-if="product.presentation == 2">
+                    <span v-if="product.presentation === 2">
                       Libras pedidas.
                     </span>
-                    <span v-if="product.presentation == 3">
+                    <span v-if="product.presentation === 3">
                       Kilogramos pedidos.
                     </span>
-                    <span v-if="product.presentation == 4">
+                    <span v-if="product.presentation === 4">
                       Arrobas pedidas.
                     </span>
-                    <span v-if="product.presentation == 5">
+                    <span v-if="product.presentation === 5">
                       Bultos pedidos.
                     </span>
                   </h3>
@@ -111,11 +111,26 @@ export default {
       }
     };
   },
-  mounted() {},
+  mounted() {
+    this.storage();
+  },
   methods: {
+    storage() {
+      if (localStorage.getItem("userSession")) {
+        this.aux = JSON.parse(localStorage.getItem("userSession"));
+        this.token = this.aux.token;
+        this.product.userEmail = this.aux.email;
+      }
+    },
     leerAPI() {
-      http
-        .get("/v1/order/" + this.product.path) //hacer dinámico para que cambie
+      http.get(
+        '/v1/order/' + this.product.path,
+        {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
         .then(response => {
           this.product.offerReference = response.data.offerReference;
           this.product.id = response.data.id;
@@ -125,12 +140,18 @@ export default {
           this.product.totalPrice = response.data.totalPrice;
           this.product.description = response.data.description;
           this.product.state = response.data.state;
-          http
-            .get("/v1/offer/" + response.data.offerReference)
+          http.get(
+            '/v1/offer/' + response.data.offerReference,
+            {
+              headers: {
+                Authorization: `Bearer ${this.token}`
+              },
+              withCredentials: false
+            })
             .then(response => {
               this.product.name = response.data.productName;
               this.product.price = response.data.pricePresentation;
-            });
+            })
         })
         .catch(e => {
           console.log(e);
@@ -143,21 +164,19 @@ export default {
       };
 
       http
-        .put("/v1/order/buyer", data)
+        .put("/v1/order/buyer", data, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
         .then(response => {
           console.log(response.data);
         })
         .catch(e => {
           console.log(e);
         });
-
-      this.submitted = true;
-    },
-    newCustomer() {
-      this.submitted = false;
-      this.customer = {};
     }
-    /* eslint-enable no-console */
   }
 };
 </script>

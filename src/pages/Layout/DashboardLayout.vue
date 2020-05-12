@@ -12,8 +12,14 @@
         <p>Perfil</p>
       </sidebar-link>
 
-      <div class="md-content md-theme-selection" style="background-color: rgba(90,178,94,0.7); margin-top: 12px">
-        <h5 style="color: #FFFFFF"> <md-icon>shopping_cart</md-icon> Compras </h5>
+      <div
+        class="md-content md-theme-selection"
+        style="background-color: rgba(90,178,94,0.7); margin-top: 12px"
+      >
+        <h5 style="color: #FFFFFF">
+          <md-icon>shopping_cart</md-icon>
+          Compras
+        </h5>
       </div>
 
       <sidebar-link to="/BuyerBuyProduct">
@@ -36,8 +42,14 @@
         <p>Editar mis solicitudes</p>
       </sidebar-link>
 
-      <div class="md-content md-theme-selection" style="background-color: rgba(90,178,94,0.7); margin-top: 12px">
-        <h5 style="color: #FFFFFF"> <md-icon>store</md-icon> Ventas </h5>
+      <div
+        class="md-content md-theme-selection"
+        style="background-color: rgba(90,178,94,0.7); margin-top: 12px"
+      >
+        <h5 style="color: #FFFFFF">
+          <md-icon>store</md-icon>
+          Ventas
+        </h5>
       </div>
 
       <sidebar-link to="/SellerOfferProduct">
@@ -64,12 +76,11 @@
         <md-icon>create</md-icon>
         <p>Editar pedidos</p>
       </sidebar-link>
-
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>
 
-      <dashboard-content> </dashboard-content>
+      <dashboard-content></dashboard-content>
 
       <content-footer v-if="!$route.meta.hideFooter"></content-footer>
     </div>

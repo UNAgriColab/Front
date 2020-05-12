@@ -2,7 +2,7 @@
   <div class="content">
     <div class="md-layout">
       <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
+        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-60"
       >
         <md-card>
           <md-card-header data-background-color="green">
@@ -13,6 +13,11 @@
             <div class="product">
               <div class="md-layout-item md-size-100 md-size-33">
                 <md-field>
+                  <label for="path">Id de la oferta a ver:</label> <br />
+                  <md-input
+                    v-model="product.path"
+                    placeholder="path"
+                  ></md-input>
                   <label for="path">Id de la oferta a ver:</label><br />
                   <md-input v-model="product.path"></md-input>
                 </md-field>
@@ -119,7 +124,9 @@
                   <md-icon>description</md-icon>
                 </md-field>
               </div>
-
+              <div class="md-layout-item md-size-100 md-size-33">
+                <h3 class="title">Precio final: {{ product.price }}</h3>
+              </div>
               <div class="md-layout-item md-size-100 text-right">
                 <md-button
                   v-on:click="saveRequest"
@@ -161,30 +168,63 @@ export default {
       }
     };
   },
-  mounted() {},
+  mounted() {
+    this.storage();
+  },
   methods: {
     /* eslint-disable no-console */
+    storage() {
+      if (localStorage.getItem("userSession")) {
+        this.aux = JSON.parse(localStorage.getItem("userSession"));
+        this.token = this.aux.token;
+        this.product.userEmail = this.aux.email;
+      }
+    },
     leerAPI() {
-      http
-        .get("/v1/offer/" + this.product.path)
+      http.get(
+        "/v1/offer/" + this.product.path,
+        {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
         .then(response => {
-          (this.product.price = response.data.pricePresentation),
-            (this.product.user = response.data.userEmail),
-            (this.product.name = response.data.productName),
-            (this.product.quantity = response.data.minQuantity),
-            (this.product.presentation = response.data.presentation),
-            (this.product.description = response.data.description),
-            (this.product.state = response.data.state);
+          this.product.price = response.data.pricePresentation;
+          this.product.user = response.data.userEmail;
+          this.product.name = response.data.productName;
+          this.product.quantity = response.data.minQuantity;
+          this.product.presentation = response.data.presentation;
+          this.product.description = response.data.description;
+          this.product.state = response.data.state;
         })
         .catch(e => {
           console.log(e);
         });
     },
-    newCustomer() {
-      this.submitted = false;
-      this.customer = {};
+    saveRequest() {
+      const data = {
+        userEmail: this.product.userEmail,
+        offerReference: this.product.path,
+        numberOfUnits: this.product.numberOfUnits,
+        description: this.product.description2
+      };
+      http
+        .post("/v1/order", data, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
+        .then(response => {
+          alert("envia");
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+      this.submitted = true;
     }
-    /* eslint-enable no-console */
   }
 };
 </script>

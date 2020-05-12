@@ -7,7 +7,8 @@
           <p class="category">Lista de los productos que has ofertado</p>
         </md-card-header>
         <md-card-content>
-          <seller-list-my-offers-table table-header-color="green"></seller-list-my-offers-table>
+          <seller-list-my-offers-table table-header-color="green">
+          </seller-list-my-offers-table>
         </md-card-content>
       </md-card>
     </div>

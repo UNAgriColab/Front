@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { BuyerListMyOrdersTable } from "@/components";
+import {BuyerListMyOrdersTable} from "@/components";
 
 export default {
   components: {

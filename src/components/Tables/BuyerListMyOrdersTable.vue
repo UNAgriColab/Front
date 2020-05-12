@@ -1,9 +1,6 @@
 <template>
   <div>
-    <md-table
-      v-model="buyerOrders"
-      :table-header-color="tableHeaderColor"
-    >
+    <md-table v-model="buyerOrders" :table-header-color="tableHeaderColor">
       <md-table-row>
         <md-table-head>Oferta</md-table-head>
         <md-table-head>Unidad</md-table-head>
@@ -15,18 +12,21 @@
         v-for="(buyerOrder, index) in buyerOrders"
         v-bind:key="index"
       >
-        <md-table-cell md-label="Producto">{{
-          buyerOrder.offerReference
-        }}</md-table-cell>
-        <md-table-cell md-label="Unidad">{{
-          buyerOrder.unit
-        }}</md-table-cell>
-        <md-table-cell md-label="Cantidad minima">{{
-          buyerOrder.numberOfUnits
-        }}</md-table-cell>
-        <md-table-cell md-label="Precio por unidad"
-          >$ {{ buyerOrder.totalPrice }}</md-table-cell
-        >
+        <md-table-cell md-label="Producto">
+          {{ buyerOrder.offerReference }}
+        </md-table-cell>
+        <md-table-cell md-label="Unidad">
+          {{ buyerOrder.unit }}
+        </md-table-cell>
+        <md-table-cell md-label="Cantidad minima">
+          {{ buyerOrder.numberOfUnits }}
+        </md-table-cell>
+        <md-table-cell md-label="Precio por unidad">
+          $ {{ buyerOrder.totalPrice }}
+        </md-table-cell>
+        <md-button class="md-raised md-success" :value="buyerOrder.id">
+          <md-icon>create</md-icon>
+        </md-button>
       </md-table-row>
     </md-table>
   </div>
@@ -34,6 +34,7 @@
 
 <script>
 import axios from "axios";
+
 export default {
   name: "simple-table",
   props: {
@@ -54,13 +55,19 @@ export default {
   },
   methods: {
     getBuyerOrders() {
-      if (localStorage.getItem("userSession")){
+      if (localStorage.getItem("userSession")) {
         this.aux = JSON.parse(localStorage.getItem("userSession"));
+        this.token = this.aux.token;
         this.email = this.aux.email;
       }
       console.log("Get Buyer Orders");
       axios
-        .get("http://localhost:8080/api/v1/order/user/" + this.email)
+        .get("http://localhost:8080/api/v1/order/user/" + this.email, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
         .then(response => {
           this.buyerOrders = response.data;
         })

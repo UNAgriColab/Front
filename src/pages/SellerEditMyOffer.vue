@@ -59,28 +59,28 @@
               >
                 <md-optgroup label="Hortalizas">
                   <md-option value="ACELGA">ACELGA</md-option>
-                  <md-option value="CEBOLLA CABEZONA BLANCA"
-                    >CEBOLLA CABEZONA BLANCA</md-option
-                  >
+                  <md-option value="CEBOLLA CABEZONA BLANCA">
+                    CEBOLLA CABEZONA BLANCA
+                  </md-option>
                 </md-optgroup>
 
                 <md-optgroup label="Frutas">
                   <md-option value="AGUACATE HASS">AGUACATE HASS</md-option>
                   <md-option value="BANANO CRIOLLO">BANANO CRIOLLO</md-option>
-                  <md-option value="CURUBA BOYACENCE"
-                    >CURUBA BOYACENCE</md-option
-                  >
+                  <md-option value="CURUBA BOYACENCE">
+                    CURUBA BOYACENCE
+                  </md-option>
                   <md-option value="TOMATE DE ARBOL">TOMATE DE ARBOL</md-option>
                 </md-optgroup>
 
                 <md-optgroup label="Tuberculos">
-                  <md-option value="PAPA CRIOLLA LAVADA"
-                    >PAPA CRIOLLA LAVADA</md-option
-                  >
+                  <md-option value="PAPA CRIOLLA LAVADA">
+                    PAPA CRIOLLA LAVADA
+                  </md-option>
                   <md-option value="PAPA PASTUSA">PAPA PASTUSA</md-option>
-                  <md-option value="PAPA R12 INDUSTRIAL"
-                    >PAPA R12 INDUSTRIAL</md-option
-                  >
+                  <md-option value="PAPA R12 INDUSTRIAL">
+                    PAPA R12 INDUSTRIAL
+                  </md-option>
                 </md-optgroup>
               </md-select>
             </md-field>
@@ -143,13 +143,17 @@
               class="md-raised md-danger"
               type="submit"
               style="margin-right: 10px"
-              ><md-icon>delete</md-icon> Eliminar
+            >
+              <md-icon>delete</md-icon>
+              Eliminar
             </md-button>
             <md-button
               v-on:click="updateOffer"
               class="md-raised md-success"
               type="submit"
-              ><md-icon>create</md-icon> Editar
+            >
+              <md-icon>create</md-icon>
+              Editar
             </md-button>
           </div>
         </div>
@@ -176,11 +180,25 @@ export default {
       }
     };
   },
-  mounted() {},
+  mounted() {
+    this.storage();
+  },
   methods: {
+    storage() {
+      if (localStorage.getItem("userSession")) {
+        this.aux = JSON.parse(localStorage.getItem("userSession"));
+        this.token = this.aux.token;
+        this.offer.userEmail = this.aux.email;
+      }
+    },
     getOffer() {
       http
-        .get("/v1/offer/" + this.path)
+        .get("/v1/offer/" + this.path, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
         .then(response => {
           this.offer.description = response.data.description;
           this.offer.id = response.data.id;
@@ -192,7 +210,6 @@ export default {
         })
         .catch(e => console.log(e));
     },
-
     updateOffer() {
       const data = {
         minQuantity: this.offer.minQuantity,
@@ -201,7 +218,12 @@ export default {
         id: this.offer.id
       };
       http
-        .put("/v1/offer/", data)
+        .put("/v1/offer/", data, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
         .then(response => {
           alert("edita");
           console.log(response.data);
@@ -213,7 +235,12 @@ export default {
 
     deleteOffer() {
       http
-        .delete("v1/offer/del/" + this.path)
+        .delete("v1/offer/del/" + this.path, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
         .then(response => {
           alert("elimina");
           console.log(response.data);

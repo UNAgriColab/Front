@@ -46,6 +46,7 @@
                   <md-input
                     id="age"
                     v-model="user.age"
+                    min="18"
                     type="number"
                     placeholder="Edad"
                   >

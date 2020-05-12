@@ -25,9 +25,7 @@
               <div class="md-layout">
                 <!-- Layout item list-->
                 <div class="md-layout-item md-small-size-100 md-size-100">
-
                   <md-field>
-
                     <label for="productName">Tipo de producto</label>
                     <md-select
                       v-model="offer.productName"
@@ -37,28 +35,34 @@
                     >
                       <md-optgroup label="Hortalizas">
                         <md-option value="ACELGA">ACELGA</md-option>
-                        <md-option value="CEBOLLA CABEZONA BLANCA"
-                          >CEBOLLA CABEZONA BLANCA</md-option
-                        >
+                        <md-option value="CEBOLLA CABEZONA BLANCA">
+                          CEBOLLA CABEZONA BLANCA
+                        </md-option>
                       </md-optgroup>
 
                       <md-optgroup label="Frutas">
-                        <md-option value="AGUACATE HASS">AGUACATE HASS</md-option>
-                        <md-option value="BANANO CRIOLLO">BANANO CRIOLLO</md-option>
-                        <md-option value="CURUBA BOYACENCE"
-                          >CURUBA BOYACENCE</md-option
-                        >
-                        <md-option value="TOMATE DE ARBOL">TOMATE DE ARBOL</md-option>
+                        <md-option value="AGUACATE HASS">
+                          AGUACATE HASS
+                        </md-option>
+                        <md-option value="BANANO CRIOLLO">
+                          BANANO CRIOLLO
+                        </md-option>
+                        <md-option value="CURUBA BOYACENCE">
+                          CURUBA BOYACENCE
+                        </md-option>
+                        <md-option value="TOMATE DE ARBOL">
+                          TOMATE DE ARBOL
+                        </md-option>
                       </md-optgroup>
 
                       <md-optgroup label="Tuberculos">
-                        <md-option value="PAPA CRIOLLA LAVADA"
-                          >PAPA CRIOLLA LAVADA</md-option
-                        >
+                        <md-option value="PAPA CRIOLLA LAVADA">
+                          PAPA CRIOLLA LAVADA
+                        </md-option>
                         <md-option value="PAPA PASTUSA">PAPA PASTUSA</md-option>
-                        <md-option value="PAPA R12 INDUSTRIAL"
-                          >PAPA R12 INDUSTRIAL</md-option
-                        >
+                        <md-option value="PAPA R12 INDUSTRIAL">
+                          PAPA R12 INDUSTRIAL
+                        </md-option>
                       </md-optgroup>
                     </md-select>
                   </md-field>
@@ -132,6 +136,7 @@
 
 <script>
 import http from "../http-common";
+
 export default {
   name: "add-offer",
   data: function() {
@@ -148,7 +153,18 @@ export default {
       submitted: false
     };
   },
+  mounted() {
+    this.storage();
+  },
   methods: {
+    /* eslint-disable no-console */
+    storage() {
+      if (localStorage.getItem("userSession")) {
+        this.aux = JSON.parse(localStorage.getItem("userSession"));
+        this.token = this.aux.token;
+        this.offer.userEmail = this.aux.email;
+      }
+    },
     /* eslint-disable no-console */
     saveOffer: function() {
       console.log("safeOffer");
@@ -161,7 +177,12 @@ export default {
         description: this.offer.description
       };
       http
-        .post("/v1/offer", data)
+        .post("/v1/offer", data, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
         .then(response => {
           console.log("se espera respuesta");
           this.offer.id = response.data.id;
@@ -172,12 +193,7 @@ export default {
         });
 
       this.submitted = true;
-    },
-    newOffer() {
-      this.submitted = false;
-      this.offer = {};
     }
-    /* eslint-enable no-console */
   }
 };
 </script>
