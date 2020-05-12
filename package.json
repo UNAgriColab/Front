@@ -19,7 +19,8 @@
     "vue-material": "^1.0.0-beta-11",
     "vue-router": "^3.1.6",
     "vue-social-sharing": "2.4.7",
-    "vue-stepper": "^1.4.2"
+    "vue-stepper": "^1.4.2",
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "4.2.3",
