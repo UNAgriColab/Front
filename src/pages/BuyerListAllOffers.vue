@@ -1,5 +1,4 @@
 <template>
-
   <div class="content">
     <div class="md-layout">
       <div class="md-layout-item text-center">
@@ -34,55 +33,55 @@
 </template>
 
 <script>
-  import axios from 'axios'
+import axios from 'axios'
 
-  axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-  axios.defaults.headers.common['Access-Control-Allow-Methods'] = '*';
-  export default {
-    name: 'DoubleLine',
-    data() {
-      return {
-        offers: null,
-        token: '',
-        tokenHeader: '',
-        aux: ''
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+axios.defaults.headers.common['Access-Control-Allow-Methods'] = '*';
+export default {
+  name: 'DoubleLine',
+  data() {
+    return {
+      offers: null,
+      token: '',
+      tokenHeader: '',
+      aux: ''
+    }
+  },
+  mounted() {
+    console.log('Hola mounted');
+    this.getOffers();
+  },
+  methods: {
+    getOffers: function () {
+      if (localStorage.getItem("userSession")) {
+        this.aux = JSON.parse(localStorage.getItem("userSession"));
+        this.token = this.aux.token;
+        this.tokenHeader = "Bearer " + this.token;
       }
-    },
-    mounted() {
-      console.log('Hola mounted');
-      this.getOffers();
-    },
-    methods: {
-      getOffers: function () {
-        if (localStorage.getItem("userSession")) {
-          this.aux = JSON.parse(localStorage.getItem("userSession"));
-          this.token = this.aux.token;
-          this.tokenHeader = "Bearer " + this.token;
-        }
 
-        console.log(`Bearer ${this.token}`);
-        axios.get('http://localhost:8080/api/v1/offer', {
-          headers: {
-            Authorization: `Bearer ${this.token}`,
-          },
-          withCredentials: false
-        })
-          .then(response => {
-            console.log(response);
-            this.offers = response.data
-          }).catch(e => console.log(e))
+      console.log(`Bearer ${this.token}`);
+      axios.get('http://localhost:8080/api/v1/offer', {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+        withCredentials: false
+      })
+        .then(response => {
+          console.log(response);
+          this.offers = response.data
+        }).catch(e => console.log(e))
 
-      }
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
-  .md-list {
-    width: 640px;
-    max-width: 100%;
-    display: inline-block;
-    vertical-align: top;
-    border: 1px solid rgba(#000, .12);
-  }
+.md-list {
+  width: 640px;
+  max-width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  border: 1px solid rgba(#000, .12);
+}
 </style>

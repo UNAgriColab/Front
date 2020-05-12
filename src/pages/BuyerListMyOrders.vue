@@ -15,11 +15,11 @@
 </template>
 
 <script>
-  import {BuyerListMyOrdersTable} from "@/components";
+import {BuyerListMyOrdersTable} from "@/components";
 
-  export default {
-    components: {
-      BuyerListMyOrdersTable
-    }
-  };
+export default {
+  components: {
+    BuyerListMyOrdersTable
+  }
+};
 </script>

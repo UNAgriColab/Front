@@ -13,29 +13,27 @@
             <div class="product">
               <div class="md-layout-item md-size-100 md-size-33">
                 <md-field>
-                  <label for="path">Id de la oferta a ver:</label><br>
-                  <md-input v-model="product.path" placeholder="path"></md-input>
+                  <label for="path">Id de la oferta a ver:</label> <br />
+                  <md-input
+                    v-model="product.path"
+                    placeholder="path"
+                  ></md-input>
                 </md-field>
                 <md-button
                   v-on:click="leerAPI"
                   type="submit"
-                  class="md-raised md-success">
+                  class="md-raised md-success"
+                >
                   Ingresar
                 </md-button>
-                <span
-                  v-if="product.quantity > 20"
-                  class="stock in-stock"
-                >
-                  quedan {{product.quantity}} unidades
+                <span v-if="product.quantity > 20" class="stock in-stock">
+                  quedan {{ product.quantity }} unidades
                 </span>
                 <span
-                  v-else-if="
-                    product.quantity > 0 &&
-                      product.quantity < 20
-                  "
+                  v-else-if="product.quantity > 0 && product.quantity < 20"
                   class="stock low-stock"
                 >
-                  quedan {{product.quantity}} unidades
+                  quedan {{ product.quantity }} unidades
                 </span>
                 <span v-else class="stock out-of-stock">
                   No quedan unidades
@@ -76,21 +74,21 @@
                 </md-field>
               </div>
               <div class="md-layout-item md-small-size-100 md-size-33">
-                  <span v-if="(product.presentation ===1) ">
-                      Gramos pedidos.
-                    </span>
-                <span v-if="product.presentation ===2 ">
-                      Libras pedidas.
-                    </span>
-                <span v-if="product.presentation ===3 ">
-                      Kilogramos pedidos.
-                    </span>
-                <span v-if="product.presentation ===4 ">
-                      Arrobas pedidas.
-                    </span>
-                <span v-if="product.presentation ===5 ">
-                      Bultos pedidos.
-                    </span>
+                <span v-if="product.presentation === 1">
+                  Gramos pedidos.
+                </span>
+                <span v-if="product.presentation === 2">
+                  Libras pedidas.
+                </span>
+                <span v-if="product.presentation === 3">
+                  Kilogramos pedidos.
+                </span>
+                <span v-if="product.presentation === 4">
+                  Arrobas pedidas.
+                </span>
+                <span v-if="product.presentation === 5">
+                  Bultos pedidos.
+                </span>
               </div>
               <div class="md-layout-item md-small-size-100 md-size-33">
                 <h4></h4>
@@ -103,9 +101,7 @@
                 </md-field>
               </div>
               <div class="md-layout-item md-size-100 md-size-33">
-                <h3 class="title">
-                  Precio final: {{ product.price }}
-                </h3>
+                <h3 class="title">Precio final: {{ product.price }}</h3>
               </div>
               <div class="md-layout-item md-size-100 text-right">
                 <md-button
@@ -124,86 +120,87 @@
 </template>
 
 <script>
-  import http from "../http-common";
+import http from "../http-common";
 
-  export default {
-    name: "product",
-    data() {
-      return {
-        product: {
-          id: "",
-          name: "",
-          user: "",
-          price: 0,
-          quantity: 0,
-          numberOfUnits: 0,
-          description: "",
-          presentation: "",
-          userEmail: "",
-          totalPrice: 0,
-          description2: "",
-          state: 0,
-          canceled: false,
-          path: '1'
-        }
-      };
+export default {
+  name: "product",
+  data() {
+    return {
+      product: {
+        id: "",
+        name: "",
+        user: "",
+        price: 0,
+        quantity: 0,
+        numberOfUnits: 0,
+        description: "",
+        presentation: "",
+        userEmail: "",
+        totalPrice: 0,
+        description2: "",
+        state: 0,
+        canceled: false,
+        path: ""
+      }
+    };
+  },
+  mounted() {
+    this.storage();
+  },
+  methods: {
+    /* eslint-disable no-console */
+    storage() {
+      if (localStorage.getItem("userSession")) {
+        this.aux = JSON.parse(localStorage.getItem("userSession"));
+        this.token = this.aux.token;
+        this.product.userEmail = this.aux.email;
+      }
     },
-    mounted() {
-      this.storage();
-    },
-    methods: {
-      /* eslint-disable no-console */
-      storage() {
-        if (localStorage.getItem("userSession")) {
-          this.aux = JSON.parse(localStorage.getItem("userSession"));
-          this.token = this.aux.token;
-          this.product.userEmail = this.aux.email;
-        }
-      },
-      leerAPI() {
-        http.get('/v1/offer/' + this.product.path, {
+    leerAPI() {
+      http.get(
+        "/v1/offer/" + this.product.path,
+        {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
           withCredentials: false
         })
-          .then(response => {
-            this.product.price = response.data.pricePresentation;
-            this.product.user = response.data.userEmail;
-            this.product.name = response.data.productName;
-            this.product.quantity = response.data.minQuantity;
-            this.product.presentation = response.data.presentation;
-            this.product.description = response.data.description;
-            this.product.state = response.data.state;
-          })
-          .catch(e => {
-            console.log(e);1
-          })
-      },
-      saveRequest() {
-        const data = {
-          userEmail: this.product.userEmail,
-          offerReference: this.product.path,
-          numberOfUnits: this.product.numberOfUnits,
-          description: this.product.description2
-        };
-        http
-          .post("/v1/order", data, {
-            headers: {
-              Authorization: `Bearer ${this.token}`
-            },
-            withCredentials: false
-          })
-          .then(response => {
-            alert("envia");
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-        this.submitted = true;
-      },
-      /* eslint-enable no-console */
+        .then(response => {
+          this.product.price = response.data.pricePresentation;
+          this.product.user = response.data.userEmail;
+          this.product.name = response.data.productName;
+          this.product.quantity = response.data.minQuantity;
+          this.product.presentation = response.data.presentation;
+          this.product.description = response.data.description;
+          this.product.state = response.data.state;
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    saveRequest() {
+      const data = {
+        userEmail: this.product.userEmail,
+        offerReference: this.product.path,
+        numberOfUnits: this.product.numberOfUnits,
+        description: this.product.description2
+      };
+      http
+        .post("/v1/order", data, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
+        .then(response => {
+          alert("envia");
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+      this.submitted = true;
     }
-  };
+  }
+};
 </script>

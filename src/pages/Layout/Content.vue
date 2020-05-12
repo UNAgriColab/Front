@@ -4,16 +4,13 @@
   </transition>
 </template>
 <script>
-  export default {};
+export default {};
 </script>
 <style>
-
-  {
-    transition: opacity 0.1s
-  ;
-  }
-  {
-    opacity: 0
-  ;
-  }
+ {
+  transition: opacity 0.1s;
+}
+ {
+  opacity: 0;
+}
 </style>

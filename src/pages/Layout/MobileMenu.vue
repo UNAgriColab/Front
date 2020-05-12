@@ -17,13 +17,17 @@
       </drop-down>
     </li>
     <li>
-      <a href="#" data-toggle="dropdown" class="dropdown-toggle"
-      ><i class="material-icons">person</i>
-        <p>Profile</p></a
-      >
+      <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+        <i class="material-icons">person</i>
+        <p>Profile</p>
+      </a>
     </li>
     <li>
-      <a href="#/SellerOfferProduct" data-toggle="dropdown" class="dropdown-toggle">
+      <a
+        href="#/SellerOfferProduct"
+        data-toggle="dropdown"
+        class="dropdown-toggle"
+      >
         <i class="material-icons">shopping_cart</i>
         <p>Lista de productos</p>
       </a>
@@ -31,22 +35,22 @@
   </ul>
 </template>
 <script>
-  export default {
-    data() {
-      return {
-        search: null,
-        selectedEmployee: null,
-        employees: [
-          "Jim Halpert",
-          "Dwight Schrute",
-          "Michael Scott",
-          "Pam Beesly",
-          "Angela Martin",
-          "Kelly Kapoor",
-          "Ryan Howard",
-          "Kevin Malone"
-        ]
-      };
-    }
-  };
+export default {
+  data() {
+    return {
+      search: null,
+      selectedEmployee: null,
+      employees: [
+        "Jim Halpert",
+        "Dwight Schrute",
+        "Michael Scott",
+        "Pam Beesly",
+        "Angela Martin",
+        "Kelly Kapoor",
+        "Ryan Howard",
+        "Kevin Malone"
+      ]
+    };
+  }
+};
 </script>

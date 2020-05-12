@@ -22,24 +22,24 @@
   </div>
 </template>
 <script>
-  export default {
-    name: "drop-down",
-    props: {
-      title: String,
-      icon: String
+export default {
+  name: "drop-down",
+  props: {
+    title: String,
+    icon: String
+  },
+  data() {
+    return {
+      isOpen: false
+    };
+  },
+  methods: {
+    toggleDropDown() {
+      this.isOpen = !this.isOpen;
     },
-    data() {
-      return {
-        isOpen: false
-      };
-    },
-    methods: {
-      toggleDropDown() {
-        this.isOpen = !this.isOpen;
-      },
-      closeDropDown() {
-        this.isOpen = false;
-      }
+    closeDropDown() {
+      this.isOpen = false;
     }
-  };
+  }
+};
 </script>

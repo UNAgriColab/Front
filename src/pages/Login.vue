@@ -77,40 +77,40 @@
   </div>
 </template>
 <script>
-  import http from "../http-common";
+import http from "../http-common";
 
-  export default {
-    name: "login",
-    data: function () {
-      return {
-        user: {
-          email: "",
-          password: "",
-          token: ""
-        },
-        submitData: false
+export default {
+  name: "login",
+  data: function() {
+    return {
+      user: {
+        email: "",
+        password: "",
+        token: ""
+      },
+      submitData: false
+    };
+  },
+  methods: {
+    saveLogin: function() {
+      const data = {
+        email: this.user.email,
+        password: this.user.password
       };
-    },
-    methods: {
-      saveLogin: function () {
-        const data = {
-          email: this.user.email,
-          password: this.user.password
-        };
-        http
-          .post("/auth", data)
-          .then(response => {
-            this.user.token = response.data;
-            this.user.password = '';
-            localStorage.setItem('TokenSession', JSON.stringify(response.data));
-            localStorage.setItem('userSession', JSON.stringify(this.user));
-            console.log("log-in");
-          })
-          .catch(e => {
-            console.log(e);
-          });
-        /*localStorage.setItem("userSession", JSON.stringify(this.user));*/
-      }
+      http
+        .post("/auth", data)
+        .then(response => {
+          this.user.token = response.data;
+          this.user.password = "";
+          localStorage.setItem("TokenSession", JSON.stringify(response.data));
+          localStorage.setItem("userSession", JSON.stringify(this.user));
+          console.log("log-in");
+        })
+        .catch(e => {
+          console.log(e);
+        });
+      /*localStorage.setItem("userSession", JSON.stringify(this.user));*/
     }
-  };
+  }
+};
 </script>

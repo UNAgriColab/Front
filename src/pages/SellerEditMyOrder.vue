@@ -10,7 +10,7 @@
           </md-card-header>
           <md-card-content>
             <md-field>
-              <label for="path">Id de la orden a ver:</label><br/>
+              <label for="path">Id de la orden a ver:</label> <br />
               <md-input v-model="product.path" placeholder="path"></md-input>
             </md-field>
             <md-button
@@ -85,132 +85,131 @@
 </template>
 
 <script>
-  import http from "../http-common";
+import http from "../http-common";
 
-  export default {
-    name: "product",
-    data() {
-      return {
-        product: {
-          //orden
-          offerReference: "",
-          user: "",
-          quantity: 0,
-          numberOfUnits: 0,
-          totalPrice: 0,
-          description: "",
-          id: "",
-          presentation: "",
+export default {
+  name: "product",
+  data() {
+    return {
+      product: {
+        //orden
+        offerReference: "",
+        user: "",
+        quantity: 0,
+        numberOfUnits: 0,
+        totalPrice: 0,
+        description: "",
+        id: "",
+        presentation: "",
 
-          state: 0,
-          canceled: true,
+        state: 0,
+        canceled: true,
 
-          //oferta
-          price: 0,
-          name: "",
-          userEmail: "",
-          //
-          path: ""
-        }
+        //oferta
+        price: 0,
+        name: "",
+        userEmail: "",
+        //
+        path: ""
+      }
+    };
+  },
+  mounted() {
+    this.storage();
+    this.leerAPI();
+  },
+  methods: {
+    storage() {
+      if (localStorage.getItem("userSession")) {
+        this.aux = JSON.parse(localStorage.getItem("userSession"));
+        this.token = this.aux.token;
+        this.product.userEmail = this.aux.email;
+      }
+    },
+    leerAPI() {
+      http
+        .get("/v1/order/" + this.product.path, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
+        .then(response => {
+          this.product.offerReference = response.data.offerReference;
+          this.product.id = response.data.id;
+          this.product.user = response.data.userEmail;
+          this.product.presentation = response.data.unit;
+          this.product.numberOfUnits = response.data.numberOfUnits;
+          this.product.totalPrice = response.data.totalPrice;
+          this.product.description = response.data.description;
+          this.product.state = response.data.state;
+          http
+            .get("/v1/offer/" + response.data.offerReference, {
+              headers: {
+                Authorization: `Bearer ${this.token}`
+              },
+              withCredentials: false
+            })
+            .then(response => {
+              this.product.name = response.data.productName;
+              this.product.price = response.data.pricePresentation;
+            });
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    cancelOrder() {
+      const data = {
+        canceled: (this.product.canceled = false),
+        orderId: this.product.id
       };
+
+      http
+        .put("/v1/order/seller", data, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+      this.submitted = true;
     },
-    mounted() {
-      this.storage();
-      this.leerAPI();
-    },
-    methods: {
-      storage() {
-        if (localStorage.getItem("userSession")) {
-          this.aux = JSON.parse(localStorage.getItem("userSession"));
-          this.token = this.aux.token;
-          this.product.userEmail = this.aux.email;
-        }
-      },
-      leerAPI() {
-        http
-          .get("/v1/order/" + this.product.path, {
-            headers: {
-              Authorization: `Bearer ${this.token}`
-            },
-            withCredentials: false
-          })
-          .then(response => {
-            this.product.offerReference = response.data.offerReference;
-            this.product.id = response.data.id;
-            this.product.user = response.data.userEmail;
-            this.product.presentation = response.data.unit;
-            this.product.numberOfUnits = response.data.numberOfUnits;
-            this.product.totalPrice = response.data.totalPrice;
-            this.product.description = response.data.description;
-            this.product.state = response.data.state;
-            http
-              .get("/v1/offer/" + response.data.offerReference, {
-                headers: {
-                  Authorization: `Bearer ${this.token}`
-                },
-                withCredentials: false
-              })
-              .then(response => {
-                this.product.name = response.data.productName;
-                this.product.price = response.data.pricePresentation;
-              });
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      },
-      cancelOrder() {
-        const data = {
-          canceled: (this.product.canceled = false),
-          orderId: this.product.id
-        };
+    updateOrder() {
+      const data = {
+        canceled: (this.product.canceled = true),
+        orderId: this.product.id
+      };
 
-        http
-          .put("/v1/order/seller", data, {
-            headers: {
-              Authorization: `Bearer ${this.token}`
-            },
-            withCredentials: false
-          })
-          .then(response => {
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
+      http
+        .put("/v1/order/seller", data, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
+        .then(response => {
+          alert("envia");
 
-        this.submitted = true;
-      },
-      updateOrder() {
-        const data = {
-          canceled: (this.product.canceled = true),
-          orderId: this.product.id
-        };
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
 
-        http
-          .put("/v1/order/seller", data, {
-            headers: {
-              Authorization: `Bearer ${this.token}`
-            },
-            withCredentials: false
-          })
-          .then(response => {
-            alert("envia");
-
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-
-        this.submitted = true;
-      },
-      /* eslint-enable no-console */
+      this.submitted = true;
     }
-  };
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-  .md-steppers {
-  }
+.md-steppers {
+}
 </style>

@@ -91,52 +91,52 @@
   </div>
 </template>
 <script>
-  import http from "../http-common";
+import http from "../http-common";
 
-  export default {
-    name: "add-customer",
-    data: function () {
-      return {
-        user: {
-          id: 0,
-          username: "",
-          email: "",
-          age: "",
-          password: "",
-          active: false
-        },
-        submitted: false
-      };
-    },
-    methods: {
-      /* eslint-disable no-console */
-      saveCustomer() {
-        console.log("Boton pulsado");
-        const data = {
-          name: this.user.username,
-          email: this.user.email,
-          age: this.user.age,
-          password: this.user.password
-        };
-
-        http
-          .post("/v1/user", data)
-          .then(response => {
-            console.log("se espera respuesta");
-            this.customer.id = response.data.id;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-
-        this.submitted = true;
+export default {
+  name: "add-customer",
+  data: function() {
+    return {
+      user: {
+        id: 0,
+        username: "",
+        email: "",
+        age: "",
+        password: "",
+        active: false
       },
-      newCustomer() {
-        this.submitted = false;
-        this.customer = {};
-      }
-      /* eslint-enable no-console */
+      submitted: false
+    };
+  },
+  methods: {
+    /* eslint-disable no-console */
+    saveCustomer() {
+      console.log("Boton pulsado");
+      const data = {
+        name: this.user.username,
+        email: this.user.email,
+        age: this.user.age,
+        password: this.user.password
+      };
+
+      http
+        .post("/v1/user", data)
+        .then(response => {
+          console.log("se espera respuesta");
+          this.customer.id = response.data.id;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+      this.submitted = true;
+    },
+    newCustomer() {
+      this.submitted = false;
+      this.customer = {};
     }
-  };
+    /* eslint-enable no-console */
+  }
+};
 </script>

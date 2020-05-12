@@ -12,12 +12,12 @@
 </template>
 
 <script>
-  import {EditProfileForm, UserCard} from "@/pages";
+import { EditProfileForm, UserCard } from "@/pages";
 
-  export default {
-    components: {
-      EditProfileForm,
-      UserCard
-    }
-  };
+export default {
+  components: {
+    EditProfileForm,
+    UserCard
+  }
+};
 </script>

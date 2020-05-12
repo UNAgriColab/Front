@@ -12,7 +12,10 @@
         <p>Perfil</p>
       </sidebar-link>
 
-      <div class="md-content md-theme-selection" style="background-color: rgba(90,178,94,0.7); margin-top: 12px">
+      <div
+        class="md-content md-theme-selection"
+        style="background-color: rgba(90,178,94,0.7); margin-top: 12px"
+      >
         <h5 style="color: #FFFFFF">
           <md-icon>shopping_cart</md-icon>
           Compras
@@ -39,7 +42,10 @@
         <p>Editar mis solicitudes</p>
       </sidebar-link>
 
-      <div class="md-content md-theme-selection" style="background-color: rgba(90,178,94,0.7); margin-top: 12px">
+      <div
+        class="md-content md-theme-selection"
+        style="background-color: rgba(90,178,94,0.7); margin-top: 12px"
+      >
         <h5 style="color: #FFFFFF">
           <md-icon>store</md-icon>
           Ventas
@@ -70,7 +76,6 @@
         <md-icon>create</md-icon>
         <p>Editar pedidos</p>
       </sidebar-link>
-
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>
@@ -83,23 +88,23 @@
 </template>
 
 <script>
-  import TopNavbar from "./TopNavbar.vue";
-  import ContentFooter from "./ContentFooter.vue";
-  import DashboardContent from "./Content.vue";
-  import MobileMenu from "@/pages/Layout/MobileMenu.vue";
+import TopNavbar from "./TopNavbar.vue";
+import ContentFooter from "./ContentFooter.vue";
+import DashboardContent from "./Content.vue";
+import MobileMenu from "@/pages/Layout/MobileMenu.vue";
 
-  export default {
-    components: {
-      TopNavbar,
-      DashboardContent,
-      ContentFooter,
-      MobileMenu
-    },
-    data() {
-      return {
-        sidebarBackground: "green",
-        sidebarBackgroundImage: require("@/assets/img/sidebar-5.jpeg")
-      };
-    }
-  };
+export default {
+  components: {
+    TopNavbar,
+    DashboardContent,
+    ContentFooter,
+    MobileMenu
+  },
+  data() {
+    return {
+      sidebarBackground: "green",
+      sidebarBackgroundImage: require("@/assets/img/sidebar-5.jpeg")
+    };
+  }
+};
 </script>
