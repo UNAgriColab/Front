@@ -46,7 +46,10 @@
               Detalles de la oferta seleccionada
             </p>
           </md-card-header>
-          <div class="md-layout-item md-size-100 md-size-50" style="margin-top: 15px">
+          <div
+            class="md-layout-item md-size-100 md-size-50"
+            style="margin-top: 15px"
+          >
             <span v-if="product.quantity > 20" class="stock in-stock">
               Quedan {{ product.quantity }} unidades
             </span>
@@ -60,7 +63,10 @@
               No quedan unidades
             </span>
           </div>
-          <div class="md-layout-item md-size-100 md-size-50" style="margin-top: 15px">
+          <div
+            class="md-layout-item md-size-100 md-size-50"
+            style="margin-top: 15px"
+          >
             <h4 class="title">Precio: {{ product.price }}</h4>
           </div>
           <div class="md-layout-item md-size-100 md-size-100">
@@ -98,19 +104,19 @@
                 </md-field>
               </div>
               <div class="md-layout-item md-small-size-100 md-size-50">
-                <span v-if="product.presentation == 1">
+                <span v-if="product.presentation === 1">
                   Gramos pedidos.
                 </span>
-                <span v-if="product.presentation == 2">
+                <span v-if="product.presentation === 2">
                   Libras pedidas.
                 </span>
-                <span v-if="product.presentation == 3">
+                <span v-if="product.presentation === 3">
                   Kilogramos pedidos.
                 </span>
-                <span v-if="product.presentation == 4">
+                <span v-if="product.presentation === 4">
                   Arrobas pedidas.
                 </span>
-                <span v-if="product.presentation == 5">
+                <span v-if="product.presentation === 5">
                   Bultos pedidos.
                 </span>
               </div>
@@ -181,9 +187,8 @@ export default {
       }
     },
     leerAPI() {
-      http.get(
-        "/v1/offer/" + this.product.path,
-        {
+      http
+        .get("/v1/offer/" + this.product.path, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },

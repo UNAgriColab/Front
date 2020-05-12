@@ -7,7 +7,8 @@
           <p class="category">Lista de las solicitudes que has realizado</p>
         </md-card-header>
         <md-card-content>
-          <buyer-list-my-orders-table table-header-color="green"></buyer-list-my-orders-table>
+          <buyer-list-my-orders-table table-header-color="green">
+          </buyer-list-my-orders-table>
         </md-card-content>
       </md-card>
     </div>
@@ -15,7 +16,7 @@
 </template>
 
 <script>
-import {BuyerListMyOrdersTable} from "@/components";
+import { BuyerListMyOrdersTable } from "@/components";
 
 export default {
   components: {

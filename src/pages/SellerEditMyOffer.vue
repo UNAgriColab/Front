@@ -38,10 +38,7 @@
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
               <label for="user">Usuario</label><br />
-              <md-input
-                v-model="offer.userEmail"
-                disabled
-              ></md-input>
+              <md-input v-model="offer.userEmail" disabled></md-input>
             </md-field>
           </div>
         </div>
