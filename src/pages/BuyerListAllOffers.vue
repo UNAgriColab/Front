@@ -35,6 +35,8 @@
 
 <script>
   import axios from 'axios'
+  axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+  axios.defaults.headers.common['Access-Control-Allow-Methods'] = '*';
   export default {
     name: 'DoubleLine',
     data(){
@@ -55,28 +57,21 @@
           this.aux = JSON.parse(localStorage.getItem("userSession"));
           this.token = this.aux.token;
           this.tokenHeader = "Bearer "+this.token;
-          alert(this.tokenHeader)
-        }
-        console.log('metodo get offers');
+        };
 
-        const auth = {
-          headers: { Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJsZnNhbmRvdmFsZkB1bmFsLmVkdS5jbyIsImV4cCI6MTU4ODczNTUxMSwiaWF0IjoxNTg4NzE3NTExfQ.2q1DuF_8VWLGBmr6PEZ0ZM2fBJXkbumLZql9oSkfLZxDGtejU9laXvdzPlO_ZtMKhloiKSUMmZAY5MQGTXocKg' }
-        }
+        console.log(`Bearer ${this.token}`);
         axios.
-        get('http://localhost:8080/api/v1/offer',auth)
-                .then(
-                        result => {
-                          console.log(result.data)
-                        })
-        axios.get('http://localhost:8080/api/v1/offer', {
-          headers: {
-            'Authorization':'Bearer ' + this.tokenHeader
-          }
+        get('http://localhost:8080/api/v1/offer', {
+          headers:{
+            Authorization : `Bearer ${this.token}`,
+          },
+          withCredentials: false
         })
                 .then(response => {
                   console.log(response);
                   this.offers = response.data
                 }).catch(e => console.log(e))
+
       }
     }
   }

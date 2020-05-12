@@ -50,11 +50,17 @@ export default {
     getBuyerOrders() {
       if (localStorage.getItem("userSession")){
         this.aux = JSON.parse(localStorage.getItem("userSession"));
+        this.token = this.aux.token;
         this.email = this.aux.email;
       }
       console.log("Get Buyer Orders");
       axios
-        .get("http://localhost:8080/api/v1/order/user/" + this.email)
+        .get("http://localhost:8080/api/v1/order/user/" + this.email, {
+          headers:{
+            Authorization : `Bearer ${this.token}`,
+          },
+          withCredentials: false
+        })
         .then(response => {
           this.buyerOrders = response.data;
         })
