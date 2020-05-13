@@ -10,12 +10,12 @@
           <md-card-content>
             <form
               class="pure-form pure-form-stacked"
-              v-on:submit.prevent="doLogin"
+              v-on:submit.prevent="saveCustomer"
               id="form"
             >
               <div class="md-layout-item md-small-size-100 md-size-100">
                 <md-field>
-                  <label for="username">Nombre</label>
+                  <label>Nombre</label>
                   <md-icon>portrait</md-icon>
                   <md-input
                     id="username"
@@ -28,7 +28,7 @@
               </div>
               <div class="md-layout-item md-small-size-100 md-size-100">
                 <md-field>
-                  <label for="email">Correo</label>
+                  <label>Correo</label>
                   <md-icon>mail_outline</md-icon>
                   <md-input
                     id="email"
@@ -41,7 +41,7 @@
               </div>
               <div class="md-layout-item md-small-size-100 md-size-100">
                 <md-field>
-                  <label for="age">Edad</label>
+                  <label>Edad</label>
                   <md-icon>date_range</md-icon>
                   <md-input
                     id="age"
@@ -55,7 +55,7 @@
               </div>
               <div class="md-layout-item md-small-size-100 md-size-100">
                 <md-field>
-                  <label for="password">Contraseña</label>
+                  <label>Contraseña</label>
                   <md-icon>lock_open</md-icon>
                   <md-input
                     id="password"
@@ -85,6 +85,12 @@
               Ingresa a tu cuenta
             </small>
           </router-link>
+          <md-dialog-alert
+            :md-active.sync="confirmation"
+            md-title="Usuario Registrado!"
+            md-content="El <strong>usuario</strong> ha sido registrado con éxito."
+            md-confirm-text="ok!"
+          />
         </div>
       </div>
     </div>
@@ -105,12 +111,14 @@ export default {
         password: "",
         active: false
       },
-      submitted: false
+      submitted: false,
+      confirmation: false
     };
   },
   methods: {
     /* eslint-disable no-console */
     saveCustomer() {
+      this.confirmation = true;
       console.log("Boton pulsado");
       const data = {
         name: this.user.username,
@@ -118,13 +126,14 @@ export default {
         age: this.user.age,
         password: this.user.password
       };
-
       http
-        .post("/v1/user", data)
+        .post("https://agricolab-un.appspot.com/api/v1/user", data)
         .then(response => {
-          console.log("se espera respuesta");
-          this.customer.id = response.data.id;
           console.log(response.data);
+          if (JSON.stringify(response.data) === true) {
+
+            saveLogin();
+          }
         })
         .catch(e => {
           console.log(e);
@@ -132,11 +141,39 @@ export default {
 
       this.submitted = true;
     },
-    newCustomer() {
-      this.submitted = false;
-      this.customer = {};
+    saveLogin: function() {
+      const data = {
+        email: this.user.email,
+        password: this.user.password
+      };
+      http
+              .post("/auth", data)
+              .then(response => {
+                this.user.token = response.data;
+                this.user.password = "";
+                localStorage.setItem("TokenSession", JSON.stringify(response.data));
+                localStorage.setItem("userSession", JSON.stringify(this.user));
+                console.log("log-in");
+
+                if (localStorage.getItem("TokenSession")) {
+                  //router.push({ name: 'Dashboard'}) /BuyerListAllOffers
+                  this.$router.push("/BuyerListAllOffers");
+                  //this.$router.push("/dashboard");
+                }
+              })
+              .catch(e => {
+                console.log(e);
+              });
+      /*localStorage.setItem("userSession", JSON.stringify(this.user));*/
     }
-    /* eslint-enable no-console */
   }
 };
 </script>
+<style lang="scss" scoped>
+  .md-progress-bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+  }
+</style>

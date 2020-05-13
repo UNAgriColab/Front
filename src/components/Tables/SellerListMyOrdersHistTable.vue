@@ -9,7 +9,6 @@
         <md-table-head>Precio total</md-table-head>
         <md-table-head>N° Ref</md-table-head>
         <md-table-head>Estado</md-table-head>
-        <md-table-head>Editar</md-table-head>
       </md-table-row>
       <md-table-row
         slot="md-table-row"
@@ -77,17 +76,6 @@
         <md-table-cell md-label="Unidades" v-else>
           No asignado
         </md-table-cell>
-        <md-table-cell md-label="Editar">
-          <router-link to="/SellerEditMyOrder" class="text-white">
-            <md-button
-              class="md-fab md-icon-button md-raised md-success"
-              :value="offer.id"
-              @click="addIdSellerOrder(offer.id)"
-            >
-              <md-icon>create</md-icon>
-            </md-button>
-          </router-link>
-        </md-table-cell>
       </md-table-row>
     </md-table>
   </div>
@@ -139,7 +127,7 @@ export default {
       }
       axios
         .get(
-          "http://localhost:8080/api/v1/order/seller/actives/" +
+          "http://localhost:8080/api/v1/order/seller/" +
             this.email +
             "/" +
             this.temp.product +
@@ -157,8 +145,8 @@ export default {
         })
         .catch(e => console.log(e));
     },
-    addIdSellerOrder: function(Id) {
-      localStorage.setItem("sellerOrderId", Id);
+    addIdBuyerOrder: function(Id) {
+      localStorage.setItem("buyerOrderId", Id);
     }
   },
   created() {

@@ -8,11 +8,7 @@
           </md-card-header>
 
           <md-card-content>
-            <form
-              class="pure-form pure-form-stacked"
-              v-on:submit.prevent="saveLogin"
-              id="form"
-            >
+            <form class="pure-form pure-form-stacked" id="form">
               <div class="md-layout-item md-small-size-100 md-size-100">
                 <md-field>
                   <label for="username">Email</label>
@@ -20,7 +16,7 @@
                   <md-input
                     id="username"
                     v-model="user.email"
-                    type="text"
+                    type="email"
                     placeholder="Email"
                   >
                   </md-input>
@@ -40,17 +36,15 @@
                   </md-input>
                 </md-field>
               </div>
-              <router-link to="/dashboard" class="text-white">
-                <div class="md-layout-item md-size-100 text-center">
-                  <md-button
-                    v-on:click="saveLogin"
-                    type="submit"
-                    class="md-raised md-success"
-                  >
-                    Ingresar
-                  </md-button>
-                </div>
-              </router-link>
+              <div class="md-layout-item md-size-100 text-center">
+                <md-button
+                  v-on:click="saveLogin"
+                  type="submit"
+                  class="md-raised md-success"
+                >
+                  Ingresar
+                </md-button>
+              </div>
             </form>
           </md-card-content>
         </md-card>
@@ -78,6 +72,7 @@
 </template>
 <script>
 import http from "../http-common";
+import router from "../routes/routes.js";
 export default {
   name: "login",
   data: function() {
@@ -100,10 +95,15 @@ export default {
         .post("/auth", data)
         .then(response => {
           this.user.token = response.data;
-          this.user.password = '';
-          localStorage.setItem('TokenSession', JSON.stringify(response.data));
-          localStorage.setItem('userSession', JSON.stringify(this.user));
+          this.user.password = "";
+          localStorage.setItem("TokenSession", JSON.stringify(response.data));
+          localStorage.setItem("userSession", JSON.stringify(this.user));
           console.log("log-in");
+
+          if (localStorage.getItem("TokenSession")) {
+            //router.push({ name: 'Dashboard'})
+            this.$router.push("/dashboard");
+          }
         })
         .catch(e => {
           console.log(e);

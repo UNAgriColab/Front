@@ -2,7 +2,7 @@
   <div class="content">
     <div class="md-layout">
       <div
-              class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-60"
+        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
         <form>
           <md-card>
@@ -14,54 +14,48 @@
             </md-card-header>
 
             <md-card-content>
-              <div class="md-layout-item">
-                <div class="md-layout-item md-small-size-100 md-size-100">
-                  <md-field>
-                    <label for="user">Id de la oferta a ver:</label><br>
-                    <md-input v-model="offer.userEmail" placeholder="Usuario"></md-input>
-                  </md-field>
-                </div>
-              </div>
-              <div class="md-layout-item">
-                <!-- Layout item list-->
-                <div class="md-layout-item md-small-size-100 md-size-100">
-
-                  <md-field>
-
-                    <label for="productName">Tipo de producto</label>
-                    <md-select
-                      v-model="offer.productName"
-                      name="productName"
-                      id="productName"
-                      md-dense
-                    >
-                      <md-optgroup label="Hortalizas">
-                        <md-option value="ACELGA">ACELGA</md-option>
-                        <md-option value="CEBOLLA CABEZONA BLANCA"
-                          >CEBOLLA CABEZONA BLANCA</md-option
+              <div class="md-layout-item md-small-size-100 md-size-100">
+                <div class="md-layout">
+                  <div class="md-layout-item md-size-50">
+                    <md-field>
+                      <label>Categoria</label>
+                      <md-select
+                        v-model="products.categoria"
+                        name="categoria"
+                        id="cat"
+                        md-dense
+                      >
+                        <md-option
+                          v-for="(data, index) in json.myJson"
+                          v-bind:key="index"
+                          v-bind:value="data.categoria"
                         >
-                      </md-optgroup>
-
-                      <md-optgroup label="Frutas">
-                        <md-option value="AGUACATE HASS">AGUACATE HASS</md-option>
-                        <md-option value="BANANO CRIOLLO">BANANO CRIOLLO</md-option>
-                        <md-option value="CURUBA BOYACENCE"
-                          >CURUBA BOYACENCE</md-option
+                          {{ data.categoria }}
+                        </md-option>
+                      </md-select>
+                      <md-icon>location_city</md-icon>
+                    </md-field>
+                  </div>
+                  <div class="md-layout-item md-size-50">
+                    <md-field>
+                      <label>producto</label>
+                      <md-select
+                        v-model="offer.productName"
+                        name="productos"
+                        id="productos"
+                        md-dense
+                      >
+                        <md-option
+                          v-for="(option, index2) in setOptions"
+                          v-bind:key="index2"
+                          v-bind:value="option"
                         >
-                        <md-option value="TOMATE DE ARBOL">TOMATE DE ARBOL</md-option>
-                      </md-optgroup>
-
-                      <md-optgroup label="Tuberculos">
-                        <md-option value="PAPA CRIOLLA LAVADA"
-                          >PAPA CRIOLLA LAVADA</md-option
-                        >
-                        <md-option value="PAPA PASTUSA">PAPA PASTUSA</md-option>
-                        <md-option value="PAPA R12 INDUSTRIAL"
-                          >PAPA R12 INDUSTRIAL</md-option
-                        >
-                      </md-optgroup>
-                    </md-select>
-                  </md-field>
+                          {{ option }}
+                        </md-option>
+                      </md-select>
+                      <md-icon>apartment</md-icon>
+                    </md-field>
+                  </div>
                 </div>
               </div>
               <div class="md-layout">
@@ -92,7 +86,6 @@
                       v-model="offer.minQuantity"
                       min="1"
                       type="number"
-                      placeholder="unidades"
                     ></md-input>
                   </md-field>
                 </div>
@@ -119,13 +112,21 @@
                     v-on:click="saveOffer"
                     class="md-raised md-success"
                     type="submit"
-                    >Publicar oferta</md-button
                   >
+                    <md-icon>library_add_check</md-icon>
+                    Publicar oferta
+                  </md-button>
                 </div>
               </div>
             </md-card-content>
           </md-card>
         </form>
+        <md-dialog-alert
+          :md-active.sync="confirmation"
+          md-title="¡Oferta Publicada!"
+          md-content="la nueva oferta ha sido registrada con éxito."
+          md-confirm-text="ok!"
+        />
       </div>
     </div>
   </div>
@@ -133,28 +134,49 @@
 
 <script>
 import http from "../http-common";
+import json from "../jsons/productos.json";
+
 export default {
   name: "add-offer",
   data: function() {
     return {
       offer: {
         id: "",
-        userEmail: "",
+        sellerEmail: "",
         productName: "",
         presentation: "",
         minQuantity: "",
         pricePresentation: "",
         description: ""
       },
-      submitted: false
+      json: {
+        myJson: json
+      },
+      products: {
+        categoria: "",
+        producto: ""
+      },
+      submitted: false,
+      confirmation: false
     };
   },
+  mounted() {
+    this.storage();
+  },
   methods: {
+    /* eslint-disable no-console */
+    storage() {
+      if (localStorage.getItem("userSession")) {
+        this.aux = JSON.parse(localStorage.getItem("userSession"));
+        this.token = this.aux.token;
+        this.offer.sellerEmail = this.aux.email;
+      }
+    },
     /* eslint-disable no-console */
     saveOffer: function() {
       console.log("safeOffer");
       const data = {
-        userEmail: this.offer.userEmail,
+        sellerEmail: this.offer.sellerEmail,
         productName: this.offer.productName,
         presentation: this.offer.presentation,
         minQuantity: this.offer.minQuantity,
@@ -162,23 +184,36 @@ export default {
         description: this.offer.description
       };
       http
-        .post("/v1/offer", data)
+        .post("https://agricolab-un.appspot.com/api/v1/offer", data, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
         .then(response => {
           console.log("se espera respuesta");
           this.offer.id = response.data.id;
           console.log(response.data);
+          this.confirmation = true;
         })
         .catch(e => {
           console.log(e);
         });
 
       this.submitted = true;
-    },
-    newOffer() {
-      this.submitted = false;
-      this.offer = {};
     }
-    /* eslint-enable no-console */
+  },
+  computed: {
+    setOptions: function() {
+      let productos;
+      let options = this.json.myJson;
+      for (let i = 0; i < 7; i++) {
+        if (this.products.categoria === options[i]["categoria"]) {
+          productos = options[i]["productos"];
+        }
+      }
+      return productos;
+    }
   }
 };
 </script>

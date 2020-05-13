@@ -12,17 +12,18 @@
         <p>Perfil</p>
       </sidebar-link>
 
-      <div class="md-content md-theme-selection" style="background-color: rgba(90,178,94,0.7); margin-top: 12px">
-        <h5 style="color: #FFFFFF"> <md-icon>shopping_cart</md-icon> Compras </h5>
+      <div
+        class="md-content md-theme-selection"
+        style="background-color: rgba(90,178,94,0.7); margin-top: 12px"
+      >
+        <h5 style="color: #FFFFFF">
+          <md-icon>shopping_cart</md-icon>
+          Compras
+        </h5>
       </div>
 
-      <sidebar-link to="/BuyerBuyProduct">
-        <md-icon>shopping_cart</md-icon>
-        <p>Compra productos</p>
-      </sidebar-link>
-
       <sidebar-link to="/BuyerListAllOffers">
-        <md-icon>eco</md-icon>
+        <md-icon>shopping_cart</md-icon>
         <p>Lista de productos</p>
       </sidebar-link>
 
@@ -31,13 +32,14 @@
         <p>Mis solicitudes</p>
       </sidebar-link>
 
-      <sidebar-link to="/BuyerEditMyOrder">
-        <md-icon>create</md-icon>
-        <p>Editar mis solicitudes</p>
-      </sidebar-link>
-
-      <div class="md-content md-theme-selection" style="background-color: rgba(90,178,94,0.7); margin-top: 12px">
-        <h5 style="color: #FFFFFF"> <md-icon>store</md-icon> Ventas </h5>
+      <div
+        class="md-content md-theme-selection"
+        style="background-color: rgba(90,178,94,0.7); margin-top: 12px"
+      >
+        <h5 style="color: #FFFFFF">
+          <md-icon>store</md-icon>
+          Ventas
+        </h5>
       </div>
 
       <sidebar-link to="/SellerOfferProduct">
@@ -54,22 +56,11 @@
         <md-icon>list</md-icon>
         <p>Lista de pedidos</p>
       </sidebar-link>
-
-      <sidebar-link to="/SellerEditMyOffer">
-        <md-icon>create</md-icon>
-        <p>Editar mis productos</p>
-      </sidebar-link>
-
-      <sidebar-link to="/SellerEditMyOrder" style="margin-bottom: 18px">
-        <md-icon>create</md-icon>
-        <p>Editar pedidos</p>
-      </sidebar-link>
-
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>
 
-      <dashboard-content> </dashboard-content>
+      <dashboard-content></dashboard-content>
 
       <content-footer v-if="!$route.meta.hideFooter"></content-footer>
     </div>
