@@ -9,7 +9,6 @@
             <h1 class="title">{{ product.name }}</h1>
             <p class="category">{{ product.user }}</p>
           </md-card-header>
-
         </md-card>
         <md-card>
           <md-card-header data-background-color="green">
@@ -158,13 +157,11 @@ export default {
         this.token = this.aux.token;
         this.product.userEmail = this.aux.email;
       }
-      if(localStorage.getItem("buyerOrderId")){
+      if (localStorage.getItem("buyerOrderId")) {
         this.product.path = localStorage.getItem("buyerOrderId");
       }
     },
-    precioFinal() {
-
-    },
+    precioFinal() {},
     leerAPI() {
       http
         .get("/v1/offer/" + this.product.path, {

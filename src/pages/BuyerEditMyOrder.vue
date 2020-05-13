@@ -122,14 +122,13 @@ export default {
         this.token = this.aux.token;
         this.product.userEmail = this.aux.email;
       }
-      if(localStorage.getItem("buyerOrderId1")){
+      if (localStorage.getItem("buyerOrderId1")) {
         this.product.path = localStorage.getItem("buyerOrderId1");
       }
     },
     leerAPI() {
-      http.get(
-        '/v1/order/' + this.product.path,
-        {
+      http
+        .get("/v1/order/" + this.product.path, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
@@ -144,9 +143,8 @@ export default {
           this.product.totalPrice = response.data.totalPrice;
           this.product.description = response.data.description;
           this.product.state = response.data.state;
-          http.get(
-            '/v1/offer/' + response.data.offerReference,
-            {
+          http
+            .get("/v1/offer/" + response.data.offerReference, {
               headers: {
                 Authorization: `Bearer ${this.token}`
               },
@@ -155,7 +153,7 @@ export default {
             .then(response => {
               this.product.name = response.data.productName;
               this.product.price = response.data.pricePresentation;
-            })
+            });
         })
         .catch(e => {
           console.log(e);
