@@ -26,9 +26,15 @@
           $ {{ sellerOffer.pricePresentation }}
         </md-table-cell>
         <md-table-cell md-label="Acciones">
-          <md-button class="md-raised md-success" :value="sellerOffer.id">
-            <md-icon>create</md-icon>
-          </md-button>
+          <router-link to="SellerEditMyOffer" class="text-white">
+            <md-button
+              class="md-raised md-success"
+              :value="sellerOffer.id"
+              @click="addIdOffer(sellerOffer.id)"
+            >
+              <md-icon>create</md-icon>
+            </md-button>
+          </router-link>
         </md-table-cell>
       </md-table-row>
     </md-table>
@@ -78,6 +84,12 @@ export default {
           this.sellerOffers = response.data;
         })
         .catch(e => console.log(e));
+    },
+    addIdOffer: function(Id) {
+      let IdAux = Id;
+      alert(IdAux);
+      localStorage.setItem("buyerOrderId", IdAux);
+      alert(IdAux);
     }
   }
 };

@@ -78,10 +78,18 @@
       };
     },
     mounted() {
+      this.storage();
       console.log("Hola mounted");
       this.getUserOffers();
     },
     methods: {
+      storage() {
+        if (localStorage.getItem("userSession")) {
+          this.aux = JSON.parse(localStorage.getItem("userSession"));
+          this.token = this.aux.token;
+          this.userEmail = this.aux.email;
+        }
+      },
       saveEmail() {
         email: this.email
       },
@@ -92,7 +100,12 @@
         }
         console.log("Metodo get user offers");
         axios
-          .get(`localhost:8080/api/v1/order/seller/` + this.email)
+          .get(`localhost:8080/api/v1/order/seller/` + this.email, {
+            headers: {
+              Authorization: `Bearer ${this.token}`
+            },
+            withCredentials: false
+          })
           .then(response => {
             console.log(response);
             this.userOffers = response.data;

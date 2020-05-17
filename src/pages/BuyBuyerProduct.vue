@@ -157,6 +157,7 @@ export default {
         this.token = this.aux.token;
         this.product.userEmail = this.aux.email;
       }
+      console.log(localStorage.getItem("buyerOrderId"));
       if (localStorage.getItem("buyerOrderId")) {
         this.product.path = localStorage.getItem("buyerOrderId");
       }

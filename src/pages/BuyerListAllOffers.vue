@@ -24,7 +24,11 @@
               <span>{{ offer.description }}</span>
             </div>
             <router-link to="/BuyerBuyProduct" class="text-white">
-              <md-button class="md-primary md-icon-button md-list-action" :value="offer.id" @click="addIdOffer(offer.id)">
+              <md-button
+                class="md-primary md-icon-button md-list-action"
+                :value="offer.id"
+                @click="addIdOffer(offer.id)"
+              >
                 <md-icon>shopping_cart</md-icon>
               </md-button>
             </router-link>
@@ -74,8 +78,8 @@ export default {
         })
         .catch(e => console.log(e));
     },
-    addIdOffer: function(Id){
-      let IdAux =Id;
+    addIdOffer: function(Id) {
+      let IdAux = Id;
       alert(IdAux);
       localStorage.setItem("buyerOrderId", IdAux);
     }

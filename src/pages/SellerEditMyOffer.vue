@@ -1,31 +1,6 @@
 <template>
   <div class="content">
     <md-card>
-      <div class="md-layout-item md-small-size-100 md-size-50">
-        <md-field>
-          <label for="path"> Id de oferta </label>
-          <md-icon>mail_outline</md-icon>
-          <md-input
-            id="path"
-            type="text"
-            placeholder="Id de oferta"
-            v-model="path"
-          >
-          </md-input>
-        </md-field>
-      </div>
-      <div class="md-layout-item md-small-size-100 md-size-50 text-center">
-        <md-button
-          type="submit"
-          class="md-raised md-success"
-          v-on:click="getOffer"
-        >
-          Consultar
-        </md-button>
-      </div>
-    </md-card>
-
-    <md-card>
       <md-card-header data-background-color="green">
         <h4 class="title">Edita tu producto</h4>
         <p class="category">
@@ -179,6 +154,7 @@ export default {
   },
   mounted() {
     this.storage();
+    this.getOffer();
   },
   methods: {
     storage() {
@@ -187,10 +163,13 @@ export default {
         this.token = this.aux.token;
         this.offer.userEmail = this.aux.email;
       }
+      if (localStorage.getItem("buyerOrderId")) {
+        this.offer.path = localStorage.getItem("buyerOrderId");
+      }
     },
     getOffer() {
       http
-        .get("/v1/offer/" + this.path, {
+        .get("/v1/offer/" + this.offer.path, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
@@ -232,7 +211,7 @@ export default {
 
     deleteOffer() {
       http
-        .delete("v1/offer/del/" + this.path, {
+        .delete("v1/offer/del/" + this.offer.path, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },

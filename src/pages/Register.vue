@@ -10,7 +10,7 @@
           <md-card-content>
             <form
               class="pure-form pure-form-stacked"
-              v-on:submit.prevent="doLogin"
+              v-on:submit.prevent="saveCustomer"
               id="form"
             >
               <div class="md-layout-item md-small-size-100 md-size-100">
