@@ -24,9 +24,15 @@
         <md-table-cell md-label="Precio por unidad">
           $ {{ buyerOrder.totalPrice }}
         </md-table-cell>
-        <md-button class="md-raised md-success" :value="buyerOrder.id">
-          <md-icon>create</md-icon>
-        </md-button>
+        <router-link to="/BuyerBuyProduct" class="text-white">
+          <md-button
+            class="md-raised md-success"
+            :value="buyerOrder.id"
+            @click="addIdBuyerOrder(buyerOrder.id)"
+          >
+            <md-icon>create</md-icon>
+          </md-button>
+        </router-link>
       </md-table-row>
     </md-table>
   </div>
@@ -72,6 +78,11 @@ export default {
           this.buyerOrders = response.data;
         })
         .catch(e => console.log(e));
+    },
+    addIdBuyerOrder: function(Id) {
+      let IdAux = Id;
+      alert(IdAux);
+      localStorage.setItem("buyerOrderId1", IdAux);
     }
   }
 };
