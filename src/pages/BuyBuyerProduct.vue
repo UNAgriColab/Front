@@ -21,17 +21,8 @@
             class="md-layout-item md-size-100 md-size-50"
             style="margin-top: 15px"
           >
-            <span v-if="product.quantity > 20" class="stock in-stock">
-              Quedan {{ product.quantity }} unidades
-            </span>
-            <span
-              v-else-if="product.quantity > 0 && product.quantity < 20"
-              class="stock low-stock"
-            >
-              quedan {{ product.quantity }} unidades
-            </span>
-            <span v-else class="stock out-of-stock">
-              No quedan unidades
+            <span>
+              Lo minimo que puedes pedir son {{ product.quantity }} unidades
             </span>
           </div>
           <div

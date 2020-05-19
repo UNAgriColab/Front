@@ -11,7 +11,7 @@
           <md-card-content>
             <md-field>
               <label for="path">Id de la orden a ver:</label> <br />
-              <md-input v-model="product.path" placeholder="path"></md-input>
+              <md-input v-model="product.id" placeholder="path"></md-input>
             </md-field>
             <md-button
               v-on:click="leerAPI"
@@ -22,36 +22,44 @@
             </md-button>
           </md-card-content>
         </md-card>
+
         <md-card>
           <md-card-header data-background-color="green">
-            <h1 class="title">{{ product.name }}</h1>
-            <p class="category">De: {{ product.user }}</p>
+            <h4 class="title">Edita tu solicitud</h4>
+            <p class="category">
+              Información necesaria para la edición de una solicitud
+            </p>
           </md-card-header>
           <md-card-content>
             <div id="product">
               <div class="product">
                 <div class="md-layout-item md-size-100 md-size-33">
+                  <h1 class="title">{{ product.productName }}</h1>
+                  <p class="category">Vendedor: {{ product.sellerEmail }}</p>
+                  <p class="category">Id de la orden: {{ product.id }}</p>
+                  <p class="category">
+                    Id de la oferta referenciada {{ product.offerReference }}
+                  </p>
                   <h3 class="title">
                     {{ product.numberOfUnits }}
-                    <span v-if="product.presentation === 1">
+                    <span v-if="product.unit === 1">
                       Gramos pedidos.
                     </span>
-                    <span v-if="product.presentation === 2">
+                    <span v-if="product.unit === 2">
                       Libras pedidas.
                     </span>
-                    <span v-if="product.presentation === 3">
+                    <span v-if="product.unit === 3">
                       Kilogramos pedidos.
                     </span>
-                    <span v-if="product.presentation === 4">
+                    <span v-if="product.unit === 4">
                       Arrobas pedidas.
                     </span>
-                    <span v-if="product.presentation === 5">
+                    <span v-if="product.unit === 5">
                       Bultos pedidos.
                     </span>
                   </h3>
-                  <h4 class="title">Precio por unidad: {{ product.price }}</h4>
                   <h4 class="title">
-                    Precio total final: {{ product.totalPrice }}
+                    Precio total final: ${{ product.totalPrice }}
                   </h4>
                 </div>
               </div>
@@ -62,17 +70,55 @@
                 {{ product.description }}
               </p>
             </div>
-            <div class="md-layout-item md-size-100 md-size-33">
-              <p class="category">
-                Estado actual de la orden: {{ product.state }}
-              </p>
+            <div>
+              <h2>
+                Estado de la orden:
+              </h2>
             </div>
-            <div class="md-layout-item md-size-100 text-left">
+            <div class="md-layout-item md-size-100 md-size-33">
+              <md-steppers :md-active-step.sync="state.active" md-linear>
+                <md-step
+                  id="first"
+                  md-label="En espera"
+                  :md-editable="false"
+                  :md-done.sync="state.first"
+                >
+                  <p>Esperando confirmación de producto</p>
+                </md-step>
+
+                <md-step
+                  id="second"
+                  md-label="En proceso"
+                  :md-editable="false"
+                  :md-done.sync="state.second"
+                >
+                  <p>El producto está en proceso</p>
+                </md-step>
+
+                <md-step
+                  id="third"
+                  md-label="Enviado"
+                  :md-editable="false"
+                  :md-done.sync="state.third"
+                  class="md-stepper"
+                >
+                  <p>El producto ya ha sido enviado</p>
+                </md-step>
+
+                <md-step
+                  id="fourth"
+                  md-label="Recibido"
+                  :md-editable="false"
+                  :md-done.sync="state.fourth"
+                >
+                  <p>Ya recibiste el producto</p>
+                </md-step>
+              </md-steppers>
+            </div>
+            <div class="md-layout-item md-size-100 text-right">
               <md-button class="md-raised md-success" v-on:click="cancelOrder">
                 cancelar producto
               </md-button>
-            </div>
-            <div class="md-layout-item md-size-100 text-right">
               <md-button class="md-raised md-success" v-on:click="updateOrder">
                 Actualizar estado
               </md-button>
@@ -94,29 +140,33 @@ export default {
       product: {
         //orden
         offerReference: "",
-        user: "",
-        quantity: 0,
+        buyerEmail: "",
         numberOfUnits: 0,
-        totalPrice: 0,
         description: "",
         id: "",
-        presentation: "",
+        sellerEmail: "",
+        productName: "",
+        unit: "",
+        totalPrice: 0,
+        state: 1,
+        deliveryAdd: "",
 
-        state: 0,
-        canceled: true,
-
-        //oferta
-        price: 0,
-        name: "",
-        userEmail: "",
-        //
-        path: ""
+        canceled: true
+      },
+      state: {
+        active: "first",
+        first: false,
+        second: false,
+        third: false,
+        fourth: false,
+        zero: false
       }
     };
   },
   mounted() {
     this.storage();
     this.leerAPI();
+    this.stepStage();
   },
   methods: {
     storage() {
@@ -125,10 +175,13 @@ export default {
         this.token = this.aux.token;
         this.product.userEmail = this.aux.email;
       }
+      if (localStorage.getItem("buyerOrderId")) {
+        this.product.id = localStorage.getItem("buyerOrderId");
+      }
     },
     leerAPI() {
       http
-        .get("/v1/order/" + this.product.path, {
+        .get("/v1/order/" + this.product.id, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
@@ -136,24 +189,16 @@ export default {
         })
         .then(response => {
           this.product.offerReference = response.data.offerReference;
-          this.product.id = response.data.id;
-          this.product.user = response.data.userEmail;
-          this.product.presentation = response.data.unit;
+          this.product.buyerEmail = response.data.buyerEmail;
           this.product.numberOfUnits = response.data.numberOfUnits;
-          this.product.totalPrice = response.data.totalPrice;
           this.product.description = response.data.description;
+          this.product.id = response.data.id;
+          this.product.sellerEmail = response.data.sellerEmail;
+          this.product.productName = response.data.productName;
+          this.product.unit = response.data.unit;
+          this.product.totalPrice = response.data.totalPrice;
           this.product.state = response.data.state;
-          http
-            .get("/v1/offer/" + response.data.offerReference, {
-              headers: {
-                Authorization: `Bearer ${this.token}`
-              },
-              withCredentials: false
-            })
-            .then(response => {
-              this.product.name = response.data.productName;
-              this.product.price = response.data.pricePresentation;
-            });
+          this.product.deliveryAdd = response.data.deliveryAdd;
         })
         .catch(e => {
           console.log(e);
@@ -204,6 +249,23 @@ export default {
         });
 
       this.submitted = true;
+    },
+    stepStage() {
+      if (this.product.state === 0) {
+        this.state.active = "zero";
+      }
+      if (this.product.state === 1) {
+        this.state.active = "first";
+      }
+      if (this.product.state === 2) {
+        this.state.active = "second";
+      }
+      if (this.product.state === 3) {
+        this.state.active = "third";
+      }
+      if (this.product.state === 4) {
+        this.state.active = "fourth";
+      }
     }
   }
 };

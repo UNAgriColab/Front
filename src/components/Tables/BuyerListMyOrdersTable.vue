@@ -24,7 +24,7 @@
         <md-table-cell md-label="Precio por unidad">
           $ {{ buyerOrder.totalPrice }}
         </md-table-cell>
-        <router-link to="/BuyerBuyProduct" class="text-white">
+        <router-link to="/BuyerEditMyOrder" class="text-white">
           <md-button
             class="md-raised md-success"
             :value="buyerOrder.id"
@@ -80,9 +80,7 @@ export default {
         .catch(e => console.log(e));
     },
     addIdBuyerOrder: function(Id) {
-      let IdAux = Id;
-      alert(IdAux);
-      localStorage.setItem("buyerOrderId1", IdAux);
+      localStorage.setItem("buyerOrderId", Id);
     }
   }
 };
