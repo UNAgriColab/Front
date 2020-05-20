@@ -19,6 +19,7 @@ import SellerEditMyOrder from "../pages/SellerEditMyOrder";
 import BuyerEditMyOrder from "../pages/BuyerEditMyOrder";
 import SellerListMyOffers from "../pages/SellerListMyOffers";
 import BuyerListMyOrders from "../pages/BuyerListMyOrders";
+import BuyerPayOrder from "../pages/BuyerPayOrder";
 
 Vue.use(Router);
 
@@ -104,6 +105,11 @@ const routes = [
         path: "buyerEditMyOrder",
         name: "Editar solicitud",
         component: BuyerEditMyOrder
+      },
+      {
+        path: "buyerPayOrder",
+        name: "Pagar orden",
+        component: BuyerPayOrder
       }
     ]
   }
