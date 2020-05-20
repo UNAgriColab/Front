@@ -20,19 +20,34 @@
         <md-table-cell md-label="Producto">
           {{ sellerOffer.productName }}
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-if="sellerOffer.presentation === 1">
+        <md-table-cell
+          md-label="Unidades"
+          v-if="sellerOffer.presentation === 1"
+        >
           Gramos
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="sellerOffer.presentation === 2">
+        <md-table-cell
+          md-label="Unidades"
+          v-else-if="sellerOffer.presentation === 2"
+        >
           Libras
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="sellerOffer.presentation === 3">
+        <md-table-cell
+          md-label="Unidades"
+          v-else-if="sellerOffer.presentation === 3"
+        >
           Kilogramos
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="sellerOffer.presentation === 4">
+        <md-table-cell
+          md-label="Unidades"
+          v-else-if="sellerOffer.presentation === 4"
+        >
           Arrobas
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="sellerOffer.presentation === 5">
+        <md-table-cell
+          md-label="Unidades"
+          v-else-if="sellerOffer.presentation === 5"
+        >
           Bultos
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-else>

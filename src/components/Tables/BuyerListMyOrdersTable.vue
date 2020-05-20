@@ -9,7 +9,7 @@
         <md-table-head>Precio total</md-table-head>
         <md-table-head>N° Ref</md-table-head>
         <md-table-head>Estado</md-table-head>
-        <md-table-head>Acciones</md-table-head>
+        <md-table-head>Editar</md-table-head>
       </md-table-row>
       <md-table-row
         slot="md-table-row"
@@ -74,15 +74,6 @@
             @click="addIdBuyerOrder(buyerOrder.id)"
           >
             <md-icon>create</md-icon>
-          </md-button>
-        </router-link>
-        <router-link to="" class="text-white">
-          <md-button
-            class="md-fab md-icon-button md-raised md-danger"
-            :value="buyerOrder.id"
-            @click="addIdBuyerOrder(buyerOrder.id)"
-          >
-            <md-icon>delete</md-icon>
           </md-button>
         </router-link>
       </md-table-row>
