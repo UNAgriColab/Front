@@ -1,5 +1,6 @@
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 import AuthLayout from "../pages/Layout/AuthLayout";
+import IndexAgriColabLayout from "../pages/Layout/IndexAgriColabLayout";
 import Vue from "vue";
 import Router from "vue-router";
 
@@ -9,6 +10,7 @@ import Notifications from "@/pages/Notifications.vue";
 
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import IndexAgriColab from "../pages/IndexAgriColab";
 
 import BuyerBuyProduct from "../pages/BuyBuyerProduct";
 import SellerOfferProduct from "../pages/SellerOfferProduct";
@@ -19,10 +21,23 @@ import SellerEditMyOrder from "../pages/SellerEditMyOrder";
 import BuyerEditMyOrder from "../pages/BuyerEditMyOrder";
 import SellerListMyOffers from "../pages/SellerListMyOffers";
 import BuyerListMyOrders from "../pages/BuyerListMyOrders";
+import BuyerPayOrder from "../pages/BuyerPayOrder";
 
 Vue.use(Router);
 
 const routes = [
+  {
+    path: "/",
+    component: IndexAgriColabLayout,
+    redirect: "/indexAgriColab",
+    children: [
+      {
+        path: "indexAgriColab",
+        name: "IndexAgriColab",
+        component: IndexAgriColab
+      }
+    ]
+  },
   {
     path: "/",
     component: AuthLayout,
@@ -104,6 +119,11 @@ const routes = [
         path: "buyerEditMyOrder",
         name: "Editar solicitud",
         component: BuyerEditMyOrder
+      },
+      {
+        path: "buyerPayOrder",
+        name: "Pagar orden",
+        component: BuyerPayOrder
       }
     ]
   }

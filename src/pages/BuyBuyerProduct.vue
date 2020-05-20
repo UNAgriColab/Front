@@ -22,7 +22,7 @@
             style="margin-top: 15px"
           >
             <span>
-              Lo minimo que puedes pedir son {{ product.quantity }} unidades
+              Lo minimo que puedes pedir son {{ product.minQuantity }} unidades
             </span>
           </div>
           <div
@@ -59,7 +59,7 @@
                     type="Number"
                     min="1"
                     required
-                    v-model.number="product.numberOfUnits"
+                    v-model="product.numberOfUnits"
                     name="numberOfUnits"
                   >
                   </md-input>
@@ -83,17 +83,9 @@
                 </span>
               </div>
               <div class="md-layout-item md-size-100 md-size-33">
-                <h4 class="title">Precio total: {{ product.price }}</h4>
-              </div>
-              <div class="md-layout-item md-small-size-100 md-size-100">
-                <md-field>
-                  <label>Descripción</label>
-                  <md-textarea v-model="product.description2"></md-textarea>
-                  <md-icon>description</md-icon>
-                </md-field>
-              </div>
-              <div class="md-layout-item md-size-100 md-size-33">
-                <h3 class="title">Precio final: {{ product.price }}</h3>
+                <h3 class="title">
+                  Precio final: {{ product.numberOfUnits * product.price }}
+                </h3>
               </div>
               <div class="md-layout-item md-size-100 text-right">
                 <md-button
@@ -123,12 +115,12 @@ export default {
         name: "",
         user: "",
         price: 0,
-        quantity: 0,
+        minQuantity: 0,
         numberOfUnits: 0,
         description: "",
         presentation: "",
         userEmail: "",
-        totalPrice: 0,
+        totalPrice: "",
         description2: "",
         state: 0,
         canceled: false,
@@ -153,7 +145,6 @@ export default {
         this.product.path = localStorage.getItem("buyerOrderId");
       }
     },
-    precioFinal() {},
     leerAPI() {
       http
         .get("/v1/offer/" + this.product.path, {
@@ -166,7 +157,7 @@ export default {
           this.product.price = response.data.pricePresentation;
           this.product.user = response.data.userEmail;
           this.product.name = response.data.productName;
-          this.product.quantity = response.data.minQuantity;
+          this.product.minQuantity = response.data.minQuantity;
           this.product.presentation = response.data.presentation;
           this.product.description = response.data.description;
           this.product.state = response.data.state;

@@ -68,6 +68,7 @@
               </div>
               <div class="md-layout-item md-size-100 text-center">
                 <md-button
+                  to="/login"
                   v-on:click="saveCustomer"
                   type="submit"
                   class="md-raised md-success"
