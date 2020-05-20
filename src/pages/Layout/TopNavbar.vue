@@ -77,7 +77,7 @@
               <i class="material-icons">person</i>
               <p class="hidden-lg hidden-md">Profile</p>
             </md-list-item>
-            <md-list-item href="#/login">
+            <md-list-item  v-on:click="logout" href="#/login">
               <i class="material-icons">cancel</i>
               <p class="hidden-lg hidden-md">Profile</p>
             </md-list-item>
@@ -108,6 +108,13 @@ export default {
   methods: {
     toggleSidebar() {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
+    },logout(){
+      if(localStorage.getItem("userSession")) {
+        localStorage.removeItem("userSession");
+      }
+      if(localStorage.getItem("TokenSession")) {
+        localStorage.removeItem("TokenSession");
+      }
     }
   }
 };
