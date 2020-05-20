@@ -81,7 +81,6 @@ export default {
     },
     addIdBuyerOrder: function(Id) {
       localStorage.setItem("buyerOrderId", Id);
-
     }
   }
 };
