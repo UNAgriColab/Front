@@ -37,9 +37,9 @@
         <p>Mis solicitudes</p>
       </sidebar-link>
 
-      <sidebar-link to="/BuyerEditMyOrder">
+      <sidebar-link to="/BuyerPayOrder">
         <md-icon>create</md-icon>
-        <p>Editar mis solicitudes</p>
+        <p>Pagar mis solicitudes</p>
       </sidebar-link>
 
       <div
