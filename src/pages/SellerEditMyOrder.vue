@@ -6,25 +6,6 @@
       >
         <md-card>
           <md-card-header data-background-color="green">
-            <h1>Ingresa La orden a ver</h1>
-          </md-card-header>
-          <md-card-content>
-            <md-field>
-              <label for="path">Id de la orden a ver:</label> <br />
-              <md-input v-model="product.id" placeholder="path"></md-input>
-            </md-field>
-            <md-button
-              v-on:click="leerAPI"
-              type="submit"
-              class="md-raised md-success"
-            >
-              Ingresar
-            </md-button>
-          </md-card-content>
-        </md-card>
-
-        <md-card>
-          <md-card-header data-background-color="green">
             <h4 class="title">Edita tu solicitud</h4>
             <p class="category">
               Información necesaria para la edición de una solicitud
@@ -175,8 +156,8 @@ export default {
         this.token = this.aux.token;
         this.product.userEmail = this.aux.email;
       }
-      if (localStorage.getItem("buyerOrderId")) {
-        this.product.id = localStorage.getItem("buyerOrderId");
+      if (localStorage.getItem("sellerOrderId")) {
+        this.product.id = localStorage.getItem("sellerOrderId");
       }
     },
     leerAPI() {
