@@ -77,6 +77,10 @@
               <i class="material-icons">person</i>
               <p class="hidden-lg hidden-md">Profile</p>
             </md-list-item>
+            <md-list-item href="#/login">
+              <i class="material-icons">cancel</i>
+              <p class="hidden-lg hidden-md">Profile</p>
+            </md-list-item>
           </md-list>
         </div>
       </div>

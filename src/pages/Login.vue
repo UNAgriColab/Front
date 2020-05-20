@@ -92,12 +92,12 @@ export default {
     };
   },
   methods: {
-    saveLogin: function() {
+    saveLogin: async function() {
       const data = {
         email: this.user.email,
         password: this.user.password
       };
-      http
+      await http
         .post("/auth", data)
         .then(response => {
           this.user.token = response.data;
