@@ -113,7 +113,6 @@ export default {
       }
     },
     getOffers() {
-      alert("hola")
       console.log("metodo get offers");
       axios
         .get("http://localhost:8080/api/v1/order/seller/" + this.userEmail, {
@@ -123,7 +122,6 @@ export default {
           withCredentials: false
         })
         .then(response => {
-          alert("hola")
           console.log(response);
           this.offers = response.data;
           /*axios.get('http://localhost:8080/api/v1/offer/'+ response.data.offerReference)
