@@ -104,8 +104,7 @@ export default {
           localStorage.setItem("userSession", JSON.stringify(this.user));
           console.log("log-in");
           if (localStorage.getItem("TokenSession")) {
-              router.push({ name: 'Dashboard'})
-              //this.$router.push('/');
+              this.$router.push('/dashboard');
           }
         })
         .catch(e => {
