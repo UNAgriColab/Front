@@ -1,5 +1,6 @@
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 import AuthLayout from "../pages/Layout/AuthLayout";
+import IndexAgriColabLayout from "../pages/Layout/IndexAgriColabLayout";
 import Vue from "vue";
 import Router from "vue-router";
 
@@ -9,6 +10,7 @@ import Notifications from "@/pages/Notifications.vue";
 
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import IndexAgriColab from "../pages/IndexAgriColab";
 
 import BuyerBuyProduct from "../pages/BuyBuyerProduct";
 import SellerOfferProduct from "../pages/SellerOfferProduct";
@@ -24,6 +26,18 @@ import BuyerPayOrder from "../pages/BuyerPayOrder";
 Vue.use(Router);
 
 const routes = [
+  {
+    path: "/",
+    component: IndexAgriColabLayout,
+    redirect: "/indexAgriColab",
+    children: [
+      {
+        path: "indexAgriColab",
+        name: "IndexAgriColab",
+        component: IndexAgriColab
+      }
+    ]
+  },
   {
     path: "/",
     component: AuthLayout,

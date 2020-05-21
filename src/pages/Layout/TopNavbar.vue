@@ -78,7 +78,7 @@
               <p class="hidden-lg hidden-md">Profile</p>
             </md-list-item>
             <md-list-item href="#/login">
-              <i class="material-icons">cancel</i>
+              <i class="material-icons">power_settings_new</i>
               <p class="hidden-lg hidden-md">Profile</p>
             </md-list-item>
           </md-list>

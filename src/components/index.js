@@ -9,6 +9,7 @@ import OrderedTable from "./Tables/OrderedTable.vue";
 import SimpleTable from "./Tables/SimpleTable.vue";
 import BuyerListMyOrdersTable from "./Tables/BuyerListMyOrdersTable.vue";
 import SellerListMyOffersTable from "./Tables/SellerListMyOffersTable";
+import SellerListMyOrdersTable from "./Tables/SellerListMyOrdersTable";
 
 export {
   ChartCard,
@@ -18,5 +19,6 @@ export {
   OrderedTable,
   SimpleTable,
   SellerListMyOffersTable,
-  BuyerListMyOrdersTable
+  BuyerListMyOrdersTable,
+  SellerListMyOrdersTable
 };
