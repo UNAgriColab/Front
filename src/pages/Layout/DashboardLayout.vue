@@ -22,13 +22,8 @@
         </h5>
       </div>
 
-      <sidebar-link to="/BuyerBuyProduct">
-        <md-icon>shopping_cart</md-icon>
-        <p>Compra productos</p>
-      </sidebar-link>
-
       <sidebar-link to="/BuyerListAllOffers">
-        <md-icon>eco</md-icon>
+        <md-icon>shopping_cart</md-icon>
         <p>Lista de productos</p>
       </sidebar-link>
 
@@ -65,16 +60,6 @@
       <sidebar-link to="/SellerListMyOrders">
         <md-icon>list</md-icon>
         <p>Lista de pedidos</p>
-      </sidebar-link>
-
-      <sidebar-link to="/SellerEditMyOffer">
-        <md-icon>create</md-icon>
-        <p>Editar mis productos</p>
-      </sidebar-link>
-
-      <sidebar-link to="/SellerEditMyOrder" style="margin-bottom: 18px">
-        <md-icon>create</md-icon>
-        <p>Editar pedidos</p>
       </sidebar-link>
     </side-bar>
     <div class="main-panel">
