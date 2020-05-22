@@ -108,7 +108,8 @@ export default {
   methods: {
     toggleSidebar() {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
-    },logout(){
+    },
+    logout() {
       if (localStorage.getItem("TokenSession")) {
         localStorage.removeItem("TokenSession");
       }

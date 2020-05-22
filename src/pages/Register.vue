@@ -10,7 +10,7 @@
           <md-card-content>
             <form
               class="pure-form pure-form-stacked"
-              v-on:submit.prevent="doLogin"
+              v-on:submit.prevent="saveCustomer"
               id="form"
             >
               <div class="md-layout-item md-small-size-100 md-size-100">
@@ -68,7 +68,6 @@
               </div>
               <div class="md-layout-item md-size-100 text-center">
                 <md-button
-                  to="/login"
                   v-on:click="saveCustomer"
                   type="submit"
                   class="md-raised md-success"
@@ -123,8 +122,6 @@ export default {
       http
         .post("/v1/user", data)
         .then(response => {
-          console.log("se espera respuesta");
-          this.customer.id = response.data.id;
           console.log(response.data);
         })
         .catch(e => {
@@ -132,12 +129,7 @@ export default {
         });
 
       this.submitted = true;
-    },
-    newCustomer() {
-      this.submitted = false;
-      this.customer = {};
     }
-    /* eslint-enable no-console */
   }
 };
 </script>
