@@ -5,32 +5,16 @@
         <a slot="title" class="dropdown-toggle" data-toggle="dropdown">
           <i class="material-icons">notifications</i>
           <span class="notification">5</span>
-          <p>Notifications</p>
+          <p>Notificaciones</p>
         </a>
         <ul class="dropdown-menu dropdown-menu-right">
-          <li><a href="#">Mike John responded to your email</a></li>
-          <li><a href="#">You have 5 new tasks</a></li>
-          <li><a href="#">You're now friend with Andrew</a></li>
-          <li><a href="#">Another Notification</a></li>
-          <li><a href="#">Another One</a></li>
+          <li><a href="#">Nuevo estado de tu compra</a></li>
+          <li><a href="#">Nueva venta realizada</a></li>
+          <li><a href="#">Producto en camino</a></li>
+          <li><a href="#">Orden entregada</a></li>
+          <li><a href="#">Te han hecho una pregunta</a></li>
         </ul>
       </drop-down>
-    </li>
-    <li>
-      <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-        <i class="material-icons">person</i>
-        <p>Profile</p>
-      </a>
-    </li>
-    <li>
-      <a
-        href="#/SellerOfferProduct"
-        data-toggle="dropdown"
-        class="dropdown-toggle"
-      >
-        <i class="material-icons">shopping_cart</i>
-        <p>Lista de productos</p>
-      </a>
     </li>
   </ul>
 </template>
