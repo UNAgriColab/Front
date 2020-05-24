@@ -2,7 +2,7 @@
   <div class="content">
     <div class="md-layout">
       <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
+        class="md-layout-item md-medium-size-60 md-small-size-50 md-xsmall-size-80 md-size-65"
       >
         <form>
           <md-card>
@@ -19,7 +19,7 @@
                 <!-- Layout item list-->
                 <div class="md-layout-item md-small-size-100 md-size-100">
                   <md-field>
-                    <label for="paymentMethod">Modo de pago</label>
+                    <label>Modo de pago</label>
                     <md-select
                       v-model="order.paymentMethod"
                       name="paymentMethod"
@@ -55,14 +55,42 @@
               <div class="md-layout">
                 <div class="md-layout-item md-small-size-100 md-size-100">
                   <h3>Datos de envío</h3>
-                  <md-field maxlength="1">
-                    <label>Departamento</label>
-                    <md-input v-model="order.department"></md-input>
+                  <md-field>
+                    <label>departamento</label>
+                    <md-select
+                      v-model="order.department"
+                      name="departamentos"
+                      id="dep"
+                      md-dense
+                    >
+                      <div class="md">
+                        <md-option
+                          v-for="(data, index) in places.myJson"
+                          v-bind:key="index"
+                          v-bind:value="data.departamento"
+                        >
+                          {{ data.departamento }}
+                        </md-option>
+                      </div>
+                    </md-select>
                     <md-icon>location_city</md-icon>
                   </md-field>
-                  <md-field maxlength="1">
-                    <label>Ciudad</label>
-                    <md-input v-model="order.city"></md-input>
+                  <md-field>
+                    <label>ciudad</label>
+                    <md-select
+                      v-model="order.city"
+                      name="ciudades"
+                      id="ciudades"
+                      md-dense
+                    >
+                      <md-option
+                        v-for="(option, index2) in setOptions"
+                        v-bind:key="index2"
+                        v-bind:value="option"
+                      >
+                        {{ option }}
+                      </md-option>
+                    </md-select>
                     <md-icon>apartment</md-icon>
                   </md-field>
                   <md-field maxlength="1">
@@ -82,19 +110,30 @@
                   </md-field>
                 </div>
               </div>
-              <div class="md-layout">
-                <div class="md-layout-item md-small-size-100 md-size-100">
-                  <h3>¿Quieres decirle algo a tu vendedor?</h3>
-                  <md-field>
-                    <label>Descripción</label>
-                    <md-textarea v-model="order.description"></md-textarea>
-                    <md-icon>description</md-icon>
-                  </md-field>
-                </div>
-              </div>
             </md-card-content>
           </md-card>
-          <md-card>
+        </form>
+      </div>
+      <div
+        class="md-layout-item md-medium-size-40 md-small-size-50 md-xsmall-size-60 md-size-35"
+      >
+        <form>
+          <md-card class="md-double-line  md-elevation-24">
+            <md-card-header data-background-color="green">
+              <h4 class="title">¿Quieres decirle algo a tu vendedor?</h4>
+              <p class="category">
+                dile.....
+              </p>
+            </md-card-header>
+            <md-card-content>
+              <md-field>
+                <label>Descripción</label>
+                <md-textarea v-model="order.description"></md-textarea>
+                <md-icon>description</md-icon>
+              </md-field>
+            </md-card-content>
+          </md-card>
+          <md-card class="md-double-line  md-elevation-24">
             <md-card-header data-background-color="green">
               <h4 class="title">Resumen de tu compra</h4>
               <p class="category">
@@ -139,6 +178,7 @@
 
 <script>
 import http from "../http-common";
+import json from "./colombia.json";
 
 export default {
   name: "add-offer",
@@ -164,6 +204,9 @@ export default {
         details: "",
         neighbourhood: ""
       },
+      places: {
+        myJson: json
+      },
       submitted: false
     };
   },
@@ -171,7 +214,6 @@ export default {
     this.storage();
   },
   methods: {
-    /* eslint-disable no-console */
     storage() {
       if (localStorage.getItem("userSession")) {
         this.aux = JSON.parse(localStorage.getItem("userSession"));
@@ -179,7 +221,6 @@ export default {
         this.order.userEmail = this.aux.email;
       }
     },
-    /* eslint-disable no-console */
     saveOffer: function() {
       console.log("safeOffer");
       const data = {
@@ -207,6 +248,18 @@ export default {
         });
 
       this.submitted = true;
+    }
+  },
+  computed: {
+    setOptions: function() {
+      let ciudades;
+      let options = this.places.myJson;
+      for (let i = 0; i < 31; i++) {
+        if (this.order.department === options[i]["departamento"]) {
+          ciudades = options[i]["ciudades"];
+        }
+      }
+      return ciudades;
     }
   }
 };
