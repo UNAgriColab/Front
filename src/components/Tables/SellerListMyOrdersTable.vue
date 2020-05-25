@@ -117,7 +117,7 @@ export default {
     getOffers() {
       console.log("metodo get offers");
       axios
-        .get("http://localhost:8080/api/v1/order/seller/" + this.userEmail, {
+        .get("https://agricolab-un.appspot.com/api/v1/order/seller/" + this.userEmail, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },

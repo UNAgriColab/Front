@@ -88,10 +88,7 @@
                 </h3>
               </div>
               <div class="md-layout-item md-size-100 text-right">
-                <md-button
-                  v-on:click="saveRequest"
-                  class="md-raised md-success"
-                >
+                <md-button v-on:click="payOrder" class="md-raised md-success">
                   <md-icon>queue</md-icon> Comprar
                 </md-button>
               </div>
@@ -166,28 +163,7 @@ export default {
           console.log(e);
         });
     },
-    saveRequest() {
-      const data = {
-        userEmail: this.product.userEmail,
-        offerReference: this.product.path,
-        numberOfUnits: this.product.numberOfUnits,
-        description: this.product.description2
-      };
-      http
-        .post("/v1/order", data, {
-          headers: {
-            Authorization: `Bearer ${this.token}`
-          },
-          withCredentials: false
-        })
-        .then(response => {
-          console.log(response.data);
-        })
-        .catch(e => {
-          console.log(e);
-        });
-      this.submitted = true;
-    }
+    payOrder() {}
   }
 };
 </script>
