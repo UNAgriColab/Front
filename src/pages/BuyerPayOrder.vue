@@ -128,7 +128,7 @@
             <md-card-content>
               <md-field>
                 <label>Descripción</label>
-                <md-textarea v-model="order.description"></md-textarea>
+                <md-textarea v-model="order.description2"></md-textarea>
                 <md-icon>description</md-icon>
               </md-field>
             </md-card-content>
@@ -143,28 +143,29 @@
             <md-card-content>
               <p>
                 Vas a comprar {{ order.numberOfUnits }}
-                <span v-if="order.presentation === '1'">
+                <span v-if="order.presentation === 1">
                   Gramos
                 </span>
-                <span v-if="order.presentation === '2'">
+                <span v-if="order.presentation === 2">
                   Libras
                 </span>
-                <span v-if="order.presentation === '3'">
+                <span v-if="order.presentation === 3">
                   Kilogramos
                 </span>
-                <span v-if="order.presentation === '4'">
+                <span v-if="order.presentation === 4">
                   Arrobas
                 </span>
-                <span v-if="order.presentation === '5'">
+                <span v-if="order.presentation === 5">
                   Bultos
                 </span>
-                de {{ order.name }} con valor de {{ order.totalPrice }} para ser
+                de {{ order.productName }} con valor de
+                {{ order.numberOfUnits * order.pricePresentation }} para ser
                 enviadas al departamento de {{ order.department }} a la ciudad
                 de {{ order.city }}, {{ order.neighbourhood }} con dirección
                 {{ order.address }}, {{ order.details }}.
               </p>
               <div class="md-layout-item md-size-100 text-right">
-                <md-button class="md-raised md-success">
+                <md-button class="md-raised md-success" v-on:click="saveOrder">
                   <md-icon>done</md-icon> Termina tu compra
                 </md-button>
               </div>
@@ -185,24 +186,31 @@ export default {
   data: function() {
     return {
       order: {
-        id: "",
-        name: "",
-        user: "",
-        price: 0,
+        //oferta
+        ProductName: "",
+        presentation: "",
+        pricePresentation: 0,
         minQuantity: 0,
-        numberOfUnits: 0,
         description: "",
-        presentation: "3",
-        userEmail: "",
-        totalPrice: "",
+        id: "20",
+        state: "false",
+        sellerEmail: "",
+        //order
+        buyerEmail: "",
+        //id ->offerReference
+        numberOfUnits: 5,
+        description2: "",
 
-        paymentMethod: "",
         //mailing
         city: "",
         department: "",
         address: "",
         details: "",
-        neighbourhood: ""
+        neighbourhood: "",
+
+        //payment method
+        totalPrice: "",
+        paymentMethod: ""
       },
       places: {
         myJson: json
@@ -212,41 +220,67 @@ export default {
   },
   mounted() {
     this.storage();
+    this.leerAPI();
   },
   methods: {
     storage() {
       if (localStorage.getItem("userSession")) {
         this.aux = JSON.parse(localStorage.getItem("userSession"));
         this.token = this.aux.token;
-        this.order.userEmail = this.aux.email;
+        this.order.buyerEmail = this.aux.email;
       }
     },
-    saveOffer: function() {
-      console.log("safeOffer");
-      const data = {
-        userEmail: this.order.userEmail,
-        productName: this.order.productName,
-        presentation: this.order.presentation,
-        minQuantity: this.order.minQuantity,
-        pricePresentation: this.order.pricePresentation,
-        description: this.order.description
-      };
+    leerAPI() {
+      console.log(this.token);
+      console.log(`Bearer ${this.token}`);
       http
-        .post("/v1/offer", data, {
+        .get("/v1/offer/" + this.order.id, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
           withCredentials: false
         })
         .then(response => {
-          console.log("se espera respuesta");
-          this.order.id = response.data.id;
+          this.order.productName = response.data.productName;
+          this.order.presentation = response.data.presentation;
+          this.order.pricePresentation = response.data.pricePresentation;
+          this.order.minQuantity = response.data.minQuantity;
+          this.order.description = response.data.description;
+          this.order.state = response.data.state;
+          this.order.sellerEmail = response.data.sellerEmail;
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    saveOrder() {
+      const mailing = {
+        city: this.order.city,
+        department: this.order.department,
+        address: this.order.address,
+        details: this.order.details,
+        neighbourhood: this.order.neighbourhood
+      };
+      const data = {
+        buyerEmail: this.order.buyerEmail,
+        offerReference: this.order.id,
+        numberOfUnits: this.order.numberOfUnits,
+        description: this.order.description2,
+        mailing: mailing
+      };
+      http
+        .post("/v1/order", data, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
+        .then(response => {
           console.log(response.data);
         })
         .catch(e => {
           console.log(e);
         });
-
       this.submitted = true;
     }
   },
