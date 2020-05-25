@@ -67,15 +67,17 @@
         <md-table-cell md-label="Unidades" v-else>
           No asignado
         </md-table-cell>
-        <router-link to="/BuyerEditMyOrder" class="text-white">
-          <md-button
-            class="md-fab md-icon-button md-raised md-success"
-            :value="buyerOrder.id"
-            @click="addIdBuyerOrder(buyerOrder.id)"
-          >
-            <md-icon>create</md-icon>
-          </md-button>
-        </router-link>
+        <md-table-cell md-label="Edit">
+          <router-link to="/BuyerEditMyOrder" class="text-white">
+            <md-button
+              class="md-fab md-icon-button md-raised md-success"
+              :value="buyerOrder.id"
+              @click="addIdBuyerOrder(buyerOrder.id)"
+            >
+              <md-icon>create</md-icon>
+            </md-button>
+          </router-link>
+        </md-table-cell>
       </md-table-row>
     </md-table>
   </div>

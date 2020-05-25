@@ -16,6 +16,7 @@ import BuyerBuyProduct from "../pages/BuyBuyerProduct";
 import SellerOfferProduct from "../pages/SellerOfferProduct";
 import BuyerListAllOffers from "../pages/BuyerListAllOffers";
 import SellerListMyOrders from "../pages/SellerListMyOrders";
+import SellerListMyOrdersHist from "../pages/SellerListMyOrdersHist";
 import SellerEditMyOffer from "../pages/SellerEditMyOffer";
 import SellerEditMyOrder from "../pages/SellerEditMyOrder";
 import BuyerEditMyOrder from "../pages/BuyerEditMyOrder";
@@ -94,6 +95,11 @@ const routes = [
         path: "sellerListMyOrders",
         name: "Mis pedidos",
         component: SellerListMyOrders
+      },
+      {
+        path: "SellerListMyOrdersHist",
+        name: "Historial de mis pedidos",
+        component: SellerListMyOrdersHist
       },
       {
         path: "SellerListMyOffers",
