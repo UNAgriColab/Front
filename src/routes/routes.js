@@ -22,6 +22,7 @@ import SellerEditMyOrder from "../pages/SellerEditMyOrder";
 import BuyerEditMyOrder from "../pages/BuyerEditMyOrder";
 import SellerListMyOffers from "../pages/SellerListMyOffers";
 import BuyerListMyOrders from "../pages/BuyerListMyOrders";
+import BuyerListMyOrdersHist from "../pages/BuyerListMyOrdersHist";
 import BuyerPayOrder from "../pages/BuyerPayOrder";
 
 Vue.use(Router);
@@ -98,7 +99,7 @@ const routes = [
       },
       {
         path: "SellerListMyOrdersHist",
-        name: "Historial de mis pedidos",
+        name: "Historial de pedidos",
         component: SellerListMyOrdersHist
       },
       {
@@ -110,6 +111,11 @@ const routes = [
         path: "BuyerListMyOrders",
         name: "Mis solicitudes",
         component: BuyerListMyOrders
+      },
+      {
+        path: "BuyerListMyOrdersHist",
+        name: "Historial de solicitudes",
+        component: BuyerListMyOrdersHist
       },
       {
         path: "sellerEditMyOffer",

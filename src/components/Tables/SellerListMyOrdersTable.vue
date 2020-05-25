@@ -17,7 +17,7 @@
         v-bind:key="index"
       >
         <md-table-cell md-label="Imágen">
-          <md-icon style="color: #58b05c">shopping_cart</md-icon>
+          <md-icon style="color: #58b05c">storefront</md-icon>
         </md-table-cell>
         <md-table-cell md-label="Producto">
           {{ offer.productName }}
