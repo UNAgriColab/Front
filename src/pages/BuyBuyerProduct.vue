@@ -88,9 +88,14 @@
                 </h3>
               </div>
               <div class="md-layout-item md-size-100 text-right">
-                <md-button v-on:click="payOrder" class="md-raised md-success">
-                  <md-icon>queue</md-icon> Comprar
-                </md-button>
+                <router-link to="/BuyerPayOrder" class="text-white">
+                  <md-button
+                    class="md-raised md-success"
+                    @click="payOrder(product.path, product.numberOfUnits)"
+                  >
+                    <md-icon>queue</md-icon> Pagar
+                  </md-button>
+                </router-link>
               </div>
             </div>
           </md-card-content>
@@ -163,7 +168,10 @@ export default {
           console.log(e);
         });
     },
-    payOrder() {}
+    payOrder: function(id, numberOfUnits) {
+      localStorage.setItem("buyerOrderId", id);
+      localStorage.setItem("numberOfUnitsQuantity", numberOfUnits);
+    }
   }
 };
 </script>

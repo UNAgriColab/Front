@@ -192,13 +192,13 @@ export default {
         pricePresentation: 0,
         minQuantity: 0,
         description: "",
-        id: "20",
+        id: "",
         state: "false",
         sellerEmail: "",
         //order
         buyerEmail: "",
         //id ->offerReference
-        numberOfUnits: 5,
+        numberOfUnits: 0,
         description2: "",
 
         //mailing
@@ -228,6 +228,12 @@ export default {
         this.aux = JSON.parse(localStorage.getItem("userSession"));
         this.token = this.aux.token;
         this.order.buyerEmail = this.aux.email;
+      }
+      if (localStorage.getItem("buyerOrderId")) {
+        this.order.id = localStorage.getItem("buyerOrderId");
+      }
+      if (localStorage.getItem("numberOfUnitsQuantity")) {
+        this.order.numberOfUnits = localStorage.getItem("numberOfUnitsQuantity");
       }
     },
     leerAPI() {
