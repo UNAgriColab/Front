@@ -211,7 +211,7 @@ export default {
 
     deleteOffer() {
       http
-        .delete("v1/offer/del/" + this.offer.path, {
+        .delete("/v1/offer/del/" + this.offer.path, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },

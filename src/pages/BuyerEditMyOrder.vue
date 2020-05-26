@@ -60,6 +60,7 @@
               <md-steppers :md-active-step.sync="state.active" md-linear>
                 <md-step
                   id="first"
+                  :md-active-step="false"
                   md-label="En espera"
                   :md-editable="false"
                   :md-done.sync="state.first"
