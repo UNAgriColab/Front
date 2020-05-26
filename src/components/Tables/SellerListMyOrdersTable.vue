@@ -115,6 +115,7 @@ export default {
       }
     },
     getOffers() {
+      alert("hace el metodo")
       console.log("metodo get offers");
       axios
         .get("https://agricolab-un.appspot.com/api/v1/order/seller/" + this.userEmail, {

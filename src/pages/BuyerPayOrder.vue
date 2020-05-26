@@ -240,7 +240,7 @@ export default {
       console.log(this.token);
       console.log(`Bearer ${this.token}`);
       http
-        .get("/v1/offer/" + this.order.id, {
+        .get("https://agricolab-un.appspot.com/api/v1/offer/" + this.order.id, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
@@ -275,7 +275,7 @@ export default {
         mailing: mailing
       };
       http
-        .post("/v1/order", data, {
+        .post("https://agricolab-un.appspot.com/api/v1/order", data, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },

@@ -171,7 +171,7 @@ export default {
         description: this.offer.description
       };
       http
-        .post("/v1/offer", data, {
+        .post("https://agricolab-un.appspot.com/api/v1/offer", data, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },

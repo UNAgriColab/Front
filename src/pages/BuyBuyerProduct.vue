@@ -149,7 +149,7 @@ export default {
     },
     leerAPI() {
       http
-        .get("/v1/offer/" + this.product.path, {
+        .get("https://agricolab-un.appspot.com/api/v1/offer/" + this.product.path, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },

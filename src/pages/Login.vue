@@ -96,7 +96,7 @@ export default {
         password: this.user.password
       };
       http
-        .post("/auth", data)
+        .post("https://agricolab-un.appspot.com/api/auth", data)
         .then(response => {
           this.user.token = response.data;
           this.user.password = "";
@@ -104,7 +104,7 @@ export default {
           localStorage.setItem("userSession", JSON.stringify(this.user));
           console.log("log-in");
           if (localStorage.getItem("TokenSession")) {
-            this.$router.push("/dashboard");
+            this.$router.push("dashboard");
           }
         })
         .catch(e => {

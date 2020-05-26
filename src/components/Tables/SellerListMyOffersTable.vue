@@ -116,9 +116,9 @@ export default {
       }
     },
     getSellerOffers() {
-      console.log("Get Seller Offers");
+      console.log(this.email);
       axios
-        .get("/v1/offer/user/" + this.email, {
+        .get("https://agricolab-un.appspot.com/api/v1/offer/user/" + this.email, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
@@ -131,9 +131,7 @@ export default {
     },
     addIdOffer: function(Id) {
       let IdAux = Id;
-      alert(IdAux);
       localStorage.setItem("buyerOrderId", IdAux);
-      alert(IdAux);
     }
   }
 };

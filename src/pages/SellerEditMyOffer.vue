@@ -169,7 +169,7 @@ export default {
     },
     getOffer() {
       http
-        .get("/v1/offer/" + this.offer.path, {
+        .get("https://agricolab-un.appspot.com/api/v1/offer/" + this.offer.path, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },

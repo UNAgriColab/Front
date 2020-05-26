@@ -160,7 +160,7 @@ export default {
     },
     leerAPI() {
       http
-        .get("/v1/order/" + this.product.id, {
+        .get("https://agricolab-un.appspot.com/api/v1/order/" + this.product.id, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
@@ -190,7 +190,7 @@ export default {
       };
 
       http
-        .put("/v1/order/buyer", data, {
+        .put("https://agricolab-un.appspot.com/api/v1/order/buyer", data, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },

@@ -101,7 +101,7 @@ export default {
       }
       console.log("Get Buyer Orders");
       axios
-        .get("http://localhost:8080/api/v1/order/user/" + this.email, {
+        .get("https://agricolab-un.appspot.com/api/v1/order/user/" + this.email, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
