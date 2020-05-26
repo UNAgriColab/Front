@@ -56,6 +56,7 @@
                 Estado de la orden:
               </h2>
             </div>
+
             <div class="md-layout-item md-size-100 md-size-33">
               <md-steppers :md-active-step.sync="state.active" md-linear>
                 <md-step

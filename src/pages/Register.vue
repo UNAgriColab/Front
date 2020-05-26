@@ -15,7 +15,7 @@
             >
               <div class="md-layout-item md-small-size-100 md-size-100">
                 <md-field>
-                  <label for="username">Nombre</label>
+                  <label>Nombre</label>
                   <md-icon>portrait</md-icon>
                   <md-input
                     id="username"
@@ -28,7 +28,7 @@
               </div>
               <div class="md-layout-item md-small-size-100 md-size-100">
                 <md-field>
-                  <label for="email">Correo</label>
+                  <label>Correo</label>
                   <md-icon>mail_outline</md-icon>
                   <md-input
                     id="email"
@@ -41,7 +41,7 @@
               </div>
               <div class="md-layout-item md-small-size-100 md-size-100">
                 <md-field>
-                  <label for="age">Edad</label>
+                  <label>Edad</label>
                   <md-icon>date_range</md-icon>
                   <md-input
                     id="age"
@@ -55,7 +55,7 @@
               </div>
               <div class="md-layout-item md-small-size-100 md-size-100">
                 <md-field>
-                  <label for="password">Contraseña</label>
+                  <label>Contraseña</label>
                   <md-icon>lock_open</md-icon>
                   <md-input
                     id="password"
@@ -122,6 +122,11 @@ export default {
         .post("/v1/user", data)
         .then(response => {
           console.log(response.data);
+          if( JSON.stringify(response.data) == true){
+            this.$router.push("/login");
+          }else{
+            alert("no se pudo hacer")
+          }
         })
         .catch(e => {
           console.log(e);

@@ -32,11 +32,6 @@
         <p>Mis solicitudes</p>
       </sidebar-link>
 
-      <sidebar-link to="/BuyerPayOrder">
-        <md-icon>create</md-icon>
-        <p>Pagar mis solicitudes</p>
-      </sidebar-link>
-
       <div
         class="md-content md-theme-selection"
         style="background-color: rgba(90,178,94,0.7); margin-top: 12px"
