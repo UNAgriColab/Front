@@ -118,7 +118,7 @@ export default {
     getSellerOffers() {
       console.log("Get Seller Offers");
       axios
-        .get("https://agricolab-un.appspot.com/api/v1/offer/user/" + this.email, {
+        .get("/v1/offer/user/" + this.email, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
