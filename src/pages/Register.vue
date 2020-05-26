@@ -118,7 +118,6 @@ export default {
         age: this.user.age,
         password: this.user.password
       };
-
       http
         .post("/v1/user", data)
         .then(response => {
