@@ -105,7 +105,7 @@ export default {
     getOffers() {
       console.log("metodo get offers");
       axios
-        .get("/v1/order/seller/" + this.userEmail, {
+        .get("http://localhost:8080/api/v1/order/seller/" + this.userEmail, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },

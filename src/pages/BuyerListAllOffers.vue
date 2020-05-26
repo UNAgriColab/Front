@@ -66,7 +66,7 @@ export default {
 
       console.log(`Bearer ${this.token}`);
       axios
-        .get("/v1/offer", {
+        .get("https://agricolab-un.appspot.com/api/v1/offer", {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
