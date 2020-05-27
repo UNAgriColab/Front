@@ -137,7 +137,7 @@ export default {
     return {
       offer: {
         id: "",
-        userEmail: "",
+        sellerEmail: "",
         productName: "",
         presentation: "",
         minQuantity: "",
@@ -156,14 +156,14 @@ export default {
       if (localStorage.getItem("userSession")) {
         this.aux = JSON.parse(localStorage.getItem("userSession"));
         this.token = this.aux.token;
-        this.offer.userEmail = this.aux.email;
+        this.offer.sellerEmail = this.aux.email;
       }
     },
     /* eslint-disable no-console */
     saveOffer: function() {
       console.log("safeOffer");
       const data = {
-        userEmail: this.offer.userEmail,
+        sellerEmail: this.offer.sellerEmail,
         productName: this.offer.productName,
         presentation: this.offer.presentation,
         minQuantity: this.offer.minQuantity,
