@@ -79,9 +79,7 @@ export default {
         .catch(e => console.log(e));
     },
     addIdOffer: function(Id) {
-      let IdAux = Id;
-      alert(IdAux);
-      localStorage.setItem("buyerOrderId", IdAux);
+      localStorage.setItem("buyerOrderId", Id);
     }
   }
 };

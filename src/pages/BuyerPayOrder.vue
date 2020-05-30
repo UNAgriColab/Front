@@ -192,13 +192,13 @@ export default {
         pricePresentation: 0,
         minQuantity: 0,
         description: "",
-        id: "20",
+        id: "",
         state: "false",
         sellerEmail: "",
         //order
         buyerEmail: "",
         //id ->offerReference
-        numberOfUnits: 5,
+        numberOfUnits: 0,
         description2: "",
 
         //mailing
@@ -229,12 +229,18 @@ export default {
         this.token = this.aux.token;
         this.order.buyerEmail = this.aux.email;
       }
+      if (localStorage.getItem("buyerOrderId")) {
+        this.order.id = localStorage.getItem("buyerOrderId");
+      }
+      if (localStorage.getItem("numberOfUnitsQuantity")) {
+        this.order.numberOfUnits = localStorage.getItem("numberOfUnitsQuantity");
+      }
     },
     leerAPI() {
       console.log(this.token);
       console.log(`Bearer ${this.token}`);
       http
-        .get("/v1/offer/" + this.order.id, {
+        .get("https://agricolab-un.appspot.com/api/v1/offer/" + this.order.id, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
@@ -269,7 +275,7 @@ export default {
         mailing: mailing
       };
       http
-        .post("/v1/order", data, {
+        .post("https://agricolab-un.appspot.com/api/v1/order", data, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
