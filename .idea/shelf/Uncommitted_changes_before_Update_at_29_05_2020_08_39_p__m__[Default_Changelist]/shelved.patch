@@ -1,0 +1,70 @@
+Index: src/pages/Login.vue
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><template>\r\n  <div class=\"content\">\r\n    <div class=\"md-layout\">\r\n      <div class=\"md-layout-item\">\r\n        <md-card>\r\n          <md-card-header data-background-color=\"green\">\r\n            <h5 class=\"title text-center\">Ingresa tus datos</h5>\r\n          </md-card-header>\r\n\r\n          <md-card-content>\r\n            <form\r\n              class=\"pure-form pure-form-stacked\"\r\n              v-on:submit.prevent=\"saveLogin\"\r\n              id=\"form\"\r\n            >\r\n              <div class=\"md-layout-item md-small-size-100 md-size-100\">\r\n                <md-field>\r\n                  <label for=\"username\">Email</label>\r\n                  <md-icon>mail_outline</md-icon>\r\n                  <md-input\r\n                    id=\"username\"\r\n                    v-model=\"user.email\"\r\n                    type=\"text\"\r\n                    placeholder=\"Email\"\r\n                  >\r\n                  </md-input>\r\n                </md-field>\r\n              </div>\r\n\r\n              <div class=\"md-layout-item md-small-size-100 md-size-100\">\r\n                <md-field>\r\n                  <label for=\"password\">Contraseña</label>\r\n                  <md-icon>lock_open</md-icon>\r\n                  <md-input\r\n                    id=\"password\"\r\n                    v-model=\"user.password\"\r\n                    type=\"password\"\r\n                    placeholder=\"Contraseña\"\r\n                  >\r\n                  </md-input>\r\n                </md-field>\r\n              </div>\r\n                <div class=\"md-layout-item md-size-100 text-center\">\r\n                  <md-button\r\n                    v-on:click=\"saveLogin\"\r\n                    type=\"submit\"\r\n                    class=\"md-raised md-success\"\r\n                  >\r\n                    Ingresar\r\n                  </md-button>\r\n                </div>\r\n            </form>\r\n          </md-card-content>\r\n        </md-card>\r\n\r\n        <div class=\"md-layout\">\r\n          <div class=\"md-layout-item md-size-50 text-left\">\r\n            <router-link to=\"/register\" class=\"text-white\">\r\n              <small style=\"font-weight: initial\">\r\n                ¿Olvidaste tu contraseña?\r\n              </small>\r\n            </router-link>\r\n          </div>\r\n\r\n          <div class=\"md-layout-item md-size-50 text-right\">\r\n            <router-link to=\"/register\" class=\"text-white\">\r\n              <small style=\"font-weight: initial\">\r\n                Crea una nueva cuenta\r\n              </small>\r\n            </router-link>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</template>\r\n<script>\r\nimport http from \"../http-common\";\r\nimport router  from \"../routes/routes.js\";\r\nexport default {\r\n  name: \"login\",\r\n  data: function() {\r\n    return {\r\n      user: {\r\n        email: \"\",\r\n        password: \"\",\r\n        token: \"\"\r\n      },\r\n      submitData: false\r\n    };\r\n  },\r\n  methods: {\r\n    saveLogin: function() {\r\n      const data = {\r\n        email: this.user.email,\r\n        password: this.user.password\r\n      };\r\n      http\r\n        .post(\"/auth\", data)\r\n        .then(response => {\r\n          this.user.token = response.data;\r\n          this.user.password = \"\";\r\n          localStorage.setItem(\"TokenSession\", JSON.stringify(response.data));\r\n          localStorage.setItem(\"userSession\", JSON.stringify(this.user));\r\n          console.log(\"log-in\");\r\n          if (localStorage.getItem(\"TokenSession\")) {\r\n              this.$router.push('/dashboard');\r\n          }\r\n        })\r\n        .catch(e => {\r\n          console.log(e);\r\n        });\r\n      /*localStorage.setItem(\"userSession\", JSON.stringify(this.user));*/\r\n    }\r\n  }\r\n};\r\n</script>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/pages/Login.vue	(revision d414694fea79d207e929426aa914054d68455f52)
++++ src/pages/Login.vue	(date 1590527984885)
+@@ -40,15 +40,15 @@
+                   </md-input>
+                 </md-field>
+               </div>
+-                <div class="md-layout-item md-size-100 text-center">
+-                  <md-button
+-                    v-on:click="saveLogin"
+-                    type="submit"
+-                    class="md-raised md-success"
+-                  >
+-                    Ingresar
+-                  </md-button>
+-                </div>
++              <div class="md-layout-item md-size-100 text-center">
++                <md-button
++                  v-on:click="saveLogin"
++                  type="submit"
++                  class="md-raised md-success"
++                >
++                  Ingresar
++                </md-button>
++              </div>
+             </form>
+           </md-card-content>
+         </md-card>
+@@ -76,7 +76,7 @@
+ </template>
+ <script>
+ import http from "../http-common";
+-import router  from "../routes/routes.js";
++import router from "../routes/routes.js";
+ export default {
+   name: "login",
+   data: function() {
+@@ -104,7 +104,7 @@
+           localStorage.setItem("userSession", JSON.stringify(this.user));
+           console.log("log-in");
+           if (localStorage.getItem("TokenSession")) {
+-              this.$router.push('/dashboard');
++              this.$router.push("/dashboard");
+           }
+         })
+         .catch(e => {
+Index: src/pages/Register.vue
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><template>\r\n  <div class=\"content\">\r\n    <div class=\"md-layout\">\r\n      <div class=\"md-layout-item\">\r\n        <md-card>\r\n          <md-card-header data-background-color=\"green\">\r\n            <h5 class=\"title text-center\">Registra tus datos</h5>\r\n          </md-card-header>\r\n\r\n          <md-card-content>\r\n            <form\r\n              class=\"pure-form pure-form-stacked\"\r\n              v-on:submit.prevent=\"saveCustomer\"\r\n              id=\"form\"\r\n            >\r\n              <div class=\"md-layout-item md-small-size-100 md-size-100\">\r\n                <md-field>\r\n                  <label for=\"username\">Nombre</label>\r\n                  <md-icon>portrait</md-icon>\r\n                  <md-input\r\n                    id=\"username\"\r\n                    v-model=\"user.username\"\r\n                    type=\"text\"\r\n                    placeholder=\"Nombre\"\r\n                  >\r\n                  </md-input>\r\n                </md-field>\r\n              </div>\r\n              <div class=\"md-layout-item md-small-size-100 md-size-100\">\r\n                <md-field>\r\n                  <label for=\"email\">Correo</label>\r\n                  <md-icon>mail_outline</md-icon>\r\n                  <md-input\r\n                    id=\"email\"\r\n                    v-model=\"user.email\"\r\n                    type=\"text\"\r\n                    placeholder=\"Correo electrónico\"\r\n                  >\r\n                  </md-input>\r\n                </md-field>\r\n              </div>\r\n              <div class=\"md-layout-item md-small-size-100 md-size-100\">\r\n                <md-field>\r\n                  <label for=\"age\">Edad</label>\r\n                  <md-icon>date_range</md-icon>\r\n                  <md-input\r\n                    id=\"age\"\r\n                    v-model=\"user.age\"\r\n                    min=\"18\"\r\n                    type=\"number\"\r\n                    placeholder=\"Edad\"\r\n                  >\r\n                  </md-input>\r\n                </md-field>\r\n              </div>\r\n              <div class=\"md-layout-item md-small-size-100 md-size-100\">\r\n                <md-field>\r\n                  <label for=\"password\">Contraseña</label>\r\n                  <md-icon>lock_open</md-icon>\r\n                  <md-input\r\n                    id=\"password\"\r\n                    v-model=\"user.password\"\r\n                    type=\"password\"\r\n                    placeholder=\"Contraseña\"\r\n                  >\r\n                  </md-input>\r\n                </md-field>\r\n              </div>\r\n              <div class=\"md-layout-item md-size-100 text-center\">\r\n                <md-button\r\n                  v-on:click=\"saveCustomer\"\r\n                  type=\"submit\"\r\n                  class=\"md-raised md-success\"\r\n                >\r\n                  Registro\r\n                </md-button>\r\n              </div>\r\n            </form>\r\n          </md-card-content>\r\n        </md-card>\r\n\r\n        <div class=\"md-layout-item md-size-100 text-right\">\r\n          <router-link to=\"/login\" class=\"text-white\">\r\n            <small style=\"font-weight: initial\">\r\n              Ingresa a tu cuenta\r\n            </small>\r\n          </router-link>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</template>\r\n<script>\r\nimport http from \"../http-common\";\r\n\r\nexport default {\r\n  name: \"add-customer\",\r\n  data: function() {\r\n    return {\r\n      user: {\r\n        id: 0,\r\n        username: \"\",\r\n        email: \"\",\r\n        age: \"\",\r\n        password: \"\",\r\n        active: false\r\n      },\r\n      submitted: false\r\n    };\r\n  },\r\n  methods: {\r\n    /* eslint-disable no-console */\r\n    saveCustomer() {\r\n      console.log(\"Boton pulsado\");\r\n      const data = {\r\n        name: this.user.username,\r\n        email: this.user.email,\r\n        age: this.user.age,\r\n        password: this.user.password\r\n      };\r\n\r\n      http\r\n        .post(\"/v1/user\", data)\r\n        .then(response => {\r\n          console.log(response.data);\r\n        })\r\n        .catch(e => {\r\n          console.log(e);\r\n        });\r\n\r\n      this.submitted = true;\r\n    }\r\n  }\r\n};\r\n</script>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/pages/Register.vue	(revision d414694fea79d207e929426aa914054d68455f52)
++++ src/pages/Register.vue	(date 1590030043608)
+@@ -129,6 +129,7 @@
+         });
+ 
+       this.submitted = true;
++
+     }
+   }
+ };
+diff --git .idea/shelf/Uncommitted_changes_before_Checkout_at_13_05_2020_04_04_p__m___Default_Changelist_.xml .idea/shelf/Uncommitted_changes_before_Checkout_at_13_05_2020_04_04_p__m___Default_Changelist_.xml
