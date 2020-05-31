@@ -127,7 +127,7 @@ export default {
         productName: "",
         unit: "",
         totalPrice: 0,
-        state: 1,
+        state: 0,
         deliveryAdd: "",
 
         canceled: false
