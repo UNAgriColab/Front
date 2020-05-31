@@ -17,7 +17,7 @@
         v-bind:key="index"
       >
         <md-table-cell md-label="Imágen">
-          <md-icon style="color: #58b05c">shopping_cart</md-icon>
+          <md-icon style="color: #58b05c">storefront</md-icon>
         </md-table-cell>
         <md-table-cell md-label="Producto">
           {{ offer.productName }}
@@ -67,15 +67,17 @@
         <md-table-cell md-label="Unidades" v-else>
           No asignado
         </md-table-cell>
-        <router-link to="/SellerEditMyOrder" class="text-white">
-          <md-button
-            class="md-fab md-icon-button md-raised md-success"
-            :value="offer.id"
-            @click="addIdSellerOrder(offer.id)"
-          >
-            <md-icon>create</md-icon>
-          </md-button>
-        </router-link>
+        <md-table-cell md-label="Editar">
+          <router-link to="/SellerEditMyOrder" class="text-white">
+            <md-button
+              class="md-fab md-icon-button md-raised md-success"
+              :value="offer.id"
+              @click="addIdSellerOrder(offer.id)"
+            >
+              <md-icon>create</md-icon>
+            </md-button>
+          </router-link>
+        </md-table-cell>
       </md-table-row>
     </md-table>
   </div>
@@ -115,7 +117,7 @@ export default {
     getOffers() {
       console.log("metodo get offers");
       axios
-        .get("http://localhost:8080/api/v1/order/seller/" + this.userEmail, {
+        .get("https://agricolab-un.appspot.com/api/v1/order/seller/" + this.userEmail, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },

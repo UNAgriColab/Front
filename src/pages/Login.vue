@@ -40,7 +40,6 @@
                   </md-input>
                 </md-field>
               </div>
-              <router-link to="/dashboard" class="text-white">
                 <div class="md-layout-item md-size-100 text-center">
                   <md-button
                     v-on:click="saveLogin"
@@ -50,7 +49,6 @@
                     Ingresar
                   </md-button>
                 </div>
-              </router-link>
             </form>
           </md-card-content>
         </md-card>
@@ -78,7 +76,7 @@
 </template>
 <script>
 import http from "../http-common";
-
+import router  from "../routes/routes.js";
 export default {
   name: "login",
   data: function() {
@@ -92,12 +90,12 @@ export default {
     };
   },
   methods: {
-    saveLogin: async function() {
+    saveLogin: function() {
       const data = {
         email: this.user.email,
         password: this.user.password
       };
-      await http
+      http
         .post("/auth", data)
         .then(response => {
           this.user.token = response.data;
@@ -105,6 +103,10 @@ export default {
           localStorage.setItem("TokenSession", JSON.stringify(response.data));
           localStorage.setItem("userSession", JSON.stringify(this.user));
           console.log("log-in");
+          if (localStorage.getItem("TokenSession")) {
+              router.push({ name: 'Dashboard'})
+              //this.$router.push('/');
+          }
         })
         .catch(e => {
           console.log(e);

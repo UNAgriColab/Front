@@ -9,7 +9,6 @@
         <md-table-head>Precio total</md-table-head>
         <md-table-head>N° Ref</md-table-head>
         <md-table-head>Estado</md-table-head>
-        <md-table-head>Editar</md-table-head>
       </md-table-row>
       <md-table-row
         slot="md-table-row"
@@ -67,17 +66,6 @@
         <md-table-cell md-label="Unidades" v-else>
           No asignado
         </md-table-cell>
-        <md-table-cell md-label="Edit">
-          <router-link to="/BuyerEditMyOrder" class="text-white">
-            <md-button
-              class="md-fab md-icon-button md-raised md-success"
-              :value="buyerOrder.id"
-              @click="addIdBuyerOrder(buyerOrder.id)"
-            >
-              <md-icon>create</md-icon>
-            </md-button>
-          </router-link>
-        </md-table-cell>
       </md-table-row>
     </md-table>
   </div>
@@ -113,7 +101,7 @@ export default {
       }
       console.log("Get Buyer Orders");
       axios
-        .get("https://agricolab-un.appspot.com/api/v1/order/buyer/" + this.email, {
+        .get("https://agricolab-un.appspot.com/api/v1/order/buyer/actives/" + this.email, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },

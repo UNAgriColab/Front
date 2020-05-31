@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-table v-model="buyerOrders" :table-header-color="tableHeaderColor">
+    <md-table v-model="sellerOrders" :table-header-color="tableHeaderColor">
       <md-table-row>
         <md-table-head></md-table-head>
         <md-table-head>Producto</md-table-head>
@@ -9,74 +9,62 @@
         <md-table-head>Precio total</md-table-head>
         <md-table-head>N° Ref</md-table-head>
         <md-table-head>Estado</md-table-head>
-        <md-table-head>Editar</md-table-head>
       </md-table-row>
       <md-table-row
         slot="md-table-row"
-        v-for="(buyerOrder, index) in buyerOrders"
+        v-for="(offer, index) in offers"
         v-bind:key="index"
       >
         <md-table-cell md-label="Imágen">
-          <md-icon style="color: #58b05c">shopping_cart</md-icon>
+          <md-icon style="color: #58b05c">storefront</md-icon>
         </md-table-cell>
         <md-table-cell md-label="Producto">
-          {{ buyerOrder.productName }}
+          {{ offer.productName }}
         </md-table-cell>
         <md-table-cell md-label="Cantidad">
-          {{ buyerOrder.numberOfUnits }}
+          {{ offer.numberOfUnits }}
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-if="buyerOrder.unit === 1">
+        <md-table-cell md-label="Unidades" v-if="offer.unit === 1">
           Gramos
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.unit === 2">
+        <md-table-cell md-label="Unidades" v-else-if="offer.unit === 2">
           Libras
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.unit === 3">
+        <md-table-cell md-label="Unidades" v-else-if="offer.unit === 3">
           Kilogramos
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.unit === 4">
+        <md-table-cell md-label="Unidades" v-else-if="offer.unit === 4">
           Arrobas
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.unit === 5">
+        <md-table-cell md-label="Unidades" v-else-if="offer.unit === 5">
           Bultos
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-else>
           No asignado
         </md-table-cell>
         <md-table-cell md-label="Precio Total">
-          $ {{ buyerOrder.totalPrice.toFixed(2) }}
+          $ {{ offer.totalPrice.toFixed(2) }}
         </md-table-cell>
         <md-table-cell md-label="Producto">
-          {{ buyerOrder.offerReference }}
+          {{ offer.offerReference }}
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-if="buyerOrder.state === 0">
+        <md-table-cell md-label="Unidades" v-if="offer.state === 0">
           Cancelado
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 1">
+        <md-table-cell md-label="Unidades" v-else-if="offer.state === 1">
           En espera
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 2">
+        <md-table-cell md-label="Unidades" v-else-if="offer.state === 2">
           En proceso
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 3">
+        <md-table-cell md-label="Unidades" v-else-if="offer.state === 3">
           Enviado
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 4">
+        <md-table-cell md-label="Unidades" v-else-if="offer.state === 4">
           Recibido
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-else>
           No asignado
-        </md-table-cell>
-        <md-table-cell md-label="Edit">
-          <router-link to="/BuyerEditMyOrder" class="text-white">
-            <md-button
-              class="md-fab md-icon-button md-raised md-success"
-              :value="buyerOrder.id"
-              @click="addIdBuyerOrder(buyerOrder.id)"
-            >
-              <md-icon>create</md-icon>
-            </md-button>
-          </router-link>
         </md-table-cell>
       </md-table-row>
     </md-table>
@@ -87,7 +75,7 @@
 import axios from "axios";
 
 export default {
-  name: "simple-table",
+  name: "DoubleLine",
   props: {
     tableHeaderColor: {
       type: String,
@@ -96,36 +84,48 @@ export default {
   },
   data() {
     return {
-      buyerOrders: null,
-      email: "",
-      aux: null
+      sellerOrders: null,
+      userEmail: "",
+      offers: null,
+      order: null
     };
   },
   mounted() {
-    this.getBuyerOrders();
+    this.storage();
+    this.getOffers();
   },
   methods: {
-    getBuyerOrders() {
+    storage() {
       if (localStorage.getItem("userSession")) {
         this.aux = JSON.parse(localStorage.getItem("userSession"));
         this.token = this.aux.token;
-        this.email = this.aux.email;
+        this.userEmail = this.aux.email;
       }
-      console.log("Get Buyer Orders");
+    },
+    getOffers() {
+      console.log("metodo get offers");
       axios
-        .get("https://agricolab-un.appspot.com/api/v1/order/buyer/" + this.email, {
+        .get("https://agricolab-un.appspot.com/api/v1/order/seller/" + this.userEmail, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
           withCredentials: false
         })
         .then(response => {
-          this.buyerOrders = response.data;
+          console.log(response);
+          this.offers = response.data;
+          /*axios.get('http://localhost:8080/api/v1/offer/'+ response.data.offerReference)
+                          .then(response =>{
+        
+                            alert(response.data.offerReference)
+                            console.log(response);
+                            this.order=response.data
+                          })*/
         })
         .catch(e => console.log(e));
     },
-    addIdBuyerOrder: function(Id) {
-      localStorage.setItem("buyerOrderId", Id);
+    addIdSellerOrder: function(Id) {
+      localStorage.setItem("sellerOrderId", Id);
     }
   }
 };
