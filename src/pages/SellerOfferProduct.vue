@@ -14,50 +14,48 @@
             </md-card-header>
 
             <md-card-content>
-              <div class="md-layout">
-                <!-- Layout item list-->
-                <div class="md-layout-item md-small-size-100 md-size-100">
-                  <md-field>
-                    <label for="productName">Tipo de producto</label>
-                    <md-select
-                      v-model="offer.productName"
-                      name="productName"
-                      id="productName"
-                      md-dense
-                    >
-                      <md-optgroup label="Hortalizas">
-                        <md-option value="ACELGA">ACELGA</md-option>
-                        <md-option value="CEBOLLA CABEZONA BLANCA">
-                          CEBOLLA CABEZONA BLANCA
+              <div class="md-layout-item md-small-size-100 md-size-100">
+                <div class="md-layout">
+                  <div class="md-layout-item md-size-50">
+                    <md-field>
+                      <label>Categoria</label>
+                      <md-select
+                        v-model="products.categoria"
+                        name="categoria"
+                        id="cat"
+                        md-dense
+                      >
+                        <md-option
+                          v-for="(data, index) in json.myJson"
+                          v-bind:key="index"
+                          v-bind:value="data.categoria"
+                        >
+                          {{ data.categoria }}
                         </md-option>
-                      </md-optgroup>
-
-                      <md-optgroup label="Frutas">
-                        <md-option value="AGUACATE HASS">
-                          AGUACATE HASS
+                      </md-select>
+                      <md-icon>location_city</md-icon>
+                    </md-field>
+                  </div>
+                  <div class="md-layout-item md-size-50">
+                    <md-field>
+                      <label>producto</label>
+                      <md-select
+                        v-model="products.producto"
+                        name="productos"
+                        id="productos"
+                        md-dense
+                      >
+                        <md-option
+                          v-for="(option, index2) in setOptions"
+                          v-bind:key="index2"
+                          v-bind:value="option"
+                        >
+                          {{ option }}
                         </md-option>
-                        <md-option value="BANANO CRIOLLO">
-                          BANANO CRIOLLO
-                        </md-option>
-                        <md-option value="CURUBA BOYACENCE">
-                          CURUBA BOYACENCE
-                        </md-option>
-                        <md-option value="TOMATE DE ARBOL">
-                          TOMATE DE ARBOL
-                        </md-option>
-                      </md-optgroup>
-
-                      <md-optgroup label="Tuberculos">
-                        <md-option value="PAPA CRIOLLA LAVADA">
-                          PAPA CRIOLLA LAVADA
-                        </md-option>
-                        <md-option value="PAPA PASTUSA">PAPA PASTUSA</md-option>
-                        <md-option value="PAPA R12 INDUSTRIAL">
-                          PAPA R12 INDUSTRIAL
-                        </md-option>
-                      </md-optgroup>
-                    </md-select>
-                  </md-field>
+                      </md-select>
+                      <md-icon>apartment</md-icon>
+                    </md-field>
+                  </div>
                 </div>
               </div>
               <div class="md-layout">
@@ -130,6 +128,7 @@
 
 <script>
 import http from "../http-common";
+import json from "../jsons/productos.json";
 
 export default {
   name: "add-offer",
@@ -143,6 +142,13 @@ export default {
         minQuantity: "",
         pricePresentation: "",
         description: ""
+      },
+      json: {
+        myJson: json
+      },
+      products: {
+        categoria: "",
+        producto: ""
       },
       submitted: false
     };
@@ -188,6 +194,18 @@ export default {
 
       this.submitted = true;
     }
+  },
+  computed: {
+    setOptions: function() {
+      let productos;
+      let options = this.json.myJson;
+      for (let i = 0; i < 7; i++) {
+        if (this.products.categoria === options[i]["categoria"]) {
+          productos = options[i]["productos"];
+        }
+      }
+      return productos;
+    },
   }
 };
 </script>

@@ -10,7 +10,6 @@
           <md-card-content>
             <form
               class="pure-form pure-form-stacked"
-              v-on:submit.prevent="saveLogin"
               id="form"
             >
               <div class="md-layout-item md-small-size-100 md-size-100">
@@ -103,9 +102,10 @@ export default {
           localStorage.setItem("TokenSession", JSON.stringify(response.data));
           localStorage.setItem("userSession", JSON.stringify(this.user));
           console.log("log-in");
+
           if (localStorage.getItem("TokenSession")) {
-              router.push({ name: 'Dashboard'})
-              //this.$router.push('/');
+            //router.push({ name: 'Dashboard'})
+            this.$router.push("/dashboard");
           }
         })
         .catch(e => {

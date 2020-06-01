@@ -127,7 +127,8 @@ export default {
         state: 0,
         canceled: false,
         path: ""
-      }
+
+      },
     };
   },
   mounted() {

@@ -179,7 +179,7 @@
 
 <script>
 import http from "../http-common";
-import json from "./colombia.json";
+import json from "../jsons/colombia.json";
 
 export default {
   name: "add-offer",
