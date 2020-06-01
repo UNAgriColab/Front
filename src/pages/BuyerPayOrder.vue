@@ -233,7 +233,9 @@ export default {
         this.order.id = localStorage.getItem("buyerOrderId");
       }
       if (localStorage.getItem("numberOfUnitsQuantity")) {
-        this.order.numberOfUnits = localStorage.getItem("numberOfUnitsQuantity");
+        this.order.numberOfUnits = localStorage.getItem(
+          "numberOfUnitsQuantity"
+        );
       }
     },
     leerAPI() {

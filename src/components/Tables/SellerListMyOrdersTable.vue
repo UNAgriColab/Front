@@ -117,12 +117,16 @@ export default {
     getOffers() {
       console.log("metodo get offers");
       axios
-        .get("https://agricolab-un.appspot.com/api/v1/order/seller/" + this.userEmail, {
-          headers: {
-            Authorization: `Bearer ${this.token}`
-          },
-          withCredentials: false
-        })
+        .get(
+          "https://agricolab-un.appspot.com/api/v1/order/seller/" +
+            this.userEmail,
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`
+            },
+            withCredentials: false
+          }
+        )
         .then(response => {
           console.log(response);
           this.offers = response.data;

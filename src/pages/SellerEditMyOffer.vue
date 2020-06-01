@@ -169,12 +169,15 @@ export default {
     },
     getOffer() {
       http
-        .get("https://agricolab-un.appspot.com/api/v1/offer/" + this.offer.path, {
-          headers: {
-            Authorization: `Bearer ${this.token}`
-          },
-          withCredentials: false
-        })
+        .get(
+          "https://agricolab-un.appspot.com/api/v1/offer/" + this.offer.path,
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`
+            },
+            withCredentials: false
+          }
+        )
         .then(response => {
           this.offer.description = response.data.description;
           this.offer.id = response.data.id;

@@ -16,6 +16,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from "vue";
 import VueRouter from "vue-router";
+import Vue2Filters from "vue2-filters";
 import App from "./App";
 
 // router setup
@@ -44,6 +45,7 @@ Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
 Vue.use(Notifications);
+Vue.use(Vue2Filters);
 
 /* eslint-disable no-new */
 new Vue({

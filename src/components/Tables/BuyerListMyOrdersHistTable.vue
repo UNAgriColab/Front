@@ -101,12 +101,16 @@ export default {
       }
       console.log("Get Buyer Orders");
       axios
-        .get("https://agricolab-un.appspot.com/api/v1/order/buyer/actives/" + this.email, {
-          headers: {
-            Authorization: `Bearer ${this.token}`
-          },
-          withCredentials: false
-        })
+        .get(
+          "https://agricolab-un.appspot.com/api/v1/order/buyer/actives/" +
+            this.email,
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`
+            },
+            withCredentials: false
+          }
+        )
         .then(response => {
           this.buyerOrders = response.data;
         })

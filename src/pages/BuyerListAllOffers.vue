@@ -45,6 +45,7 @@
                   v-model="products.producto"
                   name="productos"
                   id="productos"
+                  :disabled="enableDropdown"
                   md-dense
                 >
                   <md-option
@@ -58,25 +59,35 @@
                 <md-icon>apartment</md-icon>
               </md-field>
             </div>
-            <md-button v-on:click="getProduct">Mostrar</md-button>
+            <md-button v-on:click="getProduct" :disabled="enableButton">
+              Mostrar
+            </md-button>
+            <div v-if="enable">
+              <md-field>
+                <!-- label for="unit">Unidad</label -->
+                <label>Ordenar por</label>
+                <md-select
+                  v-model="filter"
+                  name="Ordenar"
+                  id="Ordenar"
+                  md-dense
+                >
+                  <md-option value="1">
+                    Precio: De más bajo a más alto
+                  </md-option>
+                  <md-option value="2">
+                    Precio: De más alto a más bajo
+                  </md-option>
+                  <md-option value="3">Valoración de los clientes</md-option>
+                </md-select>
+              </md-field>
+            </div>
           </div>
         </div>
-        <!--
-        <md-button v-on:click="getOffers">Mostrar</md-button>
-        <ul>
-          <li class="list-group-item">
-            <input
-              type="text"
-              placeholder="Buscar"
-              class="form-control"
-              v-model="productName"
-            />
-          </li>
-        </ul>
-        -->
+
         <md-list
           class="md-double-line  md-elevation-24"
-          v-for="(offer, index) in offerName"
+          v-for="(offer, index) in sortedJson"
           v-bind:key="index"
         >
           <md-subheader>{{ offer.productName }}</md-subheader>
@@ -124,7 +135,10 @@ export default {
       tokenHeader: "",
       aux: "",
       productName: "",
-      name: "",
+      pricePresentation: "",
+      filter: "",
+      disable: true,
+      enable: false,
       json: {
         myJson: json
       },
@@ -137,6 +151,7 @@ export default {
   mounted() {
     console.log("Hola mounted");
     this.storage();
+    this.getOffers();
   },
   methods: {
     storage() {
@@ -166,7 +181,6 @@ export default {
       localStorage.setItem("buyerOrderId", Id);
     },
     getProduct: function() {
-      console.log(`Bearer ${this.token}`);
       axios
         .get(
           "https://agricolab-un.appspot.com/api/v1/offer/product/" +
@@ -179,9 +193,10 @@ export default {
           }
         )
         .then(response => {
-          console.log(response);
           this.offers = response.data;
-          console.log(this.offers);
+          if (this.offers !== "") {
+            this.enable = true;
+          }
         })
         .catch(e => console.log(e));
     }
@@ -197,12 +212,25 @@ export default {
       }
       return productos;
     },
-    offerName: function() {
-      return this.offers.filter(item => {
-        return item.productName
-          .toLowerCase()
-          .startsWith(this.productName.toLowerCase());
-      });
+    sortedJson: function() {
+      let sorted = this.offers;
+      if (this.filter === "1") {
+        return sorted.sort((t1, t2) =>
+          t1.pricePresentation < t2.pricePresentation ? 1 : -1
+        );
+      } else if (this.filter === "2") {
+        return sorted.sort((t1, t2) =>
+          t1.pricePresentation < t2.pricePresentation ? -1 : 1
+        );
+      } else {
+        return sorted;
+      }
+    },
+    enableDropdown: function() {
+      return this.products.categoria === "";
+    },
+    enableButton: function() {
+      return this.products.producto === "";
     }
   }
 };

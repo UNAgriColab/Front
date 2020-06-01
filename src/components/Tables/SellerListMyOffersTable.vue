@@ -118,20 +118,22 @@ export default {
     getSellerOffers() {
       console.log(this.email);
       axios
-        .get("https://agricolab-un.appspot.com/api/v1/offer/user/" + this.email, {
-          headers: {
-            Authorization: `Bearer ${this.token}`
-          },
-          withCredentials: false
-        })
+        .get(
+          "https://agricolab-un.appspot.com/api/v1/offer/user/" + this.email,
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`
+            },
+            withCredentials: false
+          }
+        )
         .then(response => {
           this.sellerOffers = response.data;
         })
         .catch(e => console.log(e));
     },
     addIdOffer: function(Id) {
-      let IdAux = Id;
-      localStorage.setItem("buyerOrderId", IdAux);
+      localStorage.setItem("buyerOrderId", Id);
     }
   }
 };

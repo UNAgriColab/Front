@@ -122,7 +122,7 @@ export default {
         .post("https://agricolab-un.appspot.com/api/v1/user", data)
         .then(response => {
           console.log(response.data);
-          if( JSON.stringify(response.data) == true){
+          if (JSON.stringify(response.data) === true) {
             this.$router.push("/login");
           }
         })

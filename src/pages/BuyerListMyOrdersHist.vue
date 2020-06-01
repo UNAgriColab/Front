@@ -3,7 +3,9 @@
     <div>
       <md-card>
         <md-card-header data-background-color="green">
-          <h4 class="title"><md-icon style="color: #FFFFFF">history</md-icon> Historial</h4>
+          <h4 class="title">
+            <md-icon style="color: #FFFFFF">history</md-icon>Historial
+          </h4>
           <p class="category">Solicitudes que has realizado</p>
         </md-card-header>
         <md-card-content>
