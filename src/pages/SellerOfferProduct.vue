@@ -40,7 +40,7 @@
                     <md-field>
                       <label>producto</label>
                       <md-select
-                        v-model="products.producto"
+                        v-model="offer.productName"
                         name="productos"
                         id="productos"
                         md-dense
@@ -205,7 +205,7 @@ export default {
         }
       }
       return productos;
-    },
+    }
   }
 };
 </script>

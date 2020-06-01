@@ -8,10 +8,7 @@
           </md-card-header>
 
           <md-card-content>
-            <form
-              class="pure-form pure-form-stacked"
-              id="form"
-            >
+            <form class="pure-form pure-form-stacked" id="form">
               <div class="md-layout-item md-small-size-100 md-size-100">
                 <md-field>
                   <label for="username">Email</label>
@@ -39,15 +36,15 @@
                   </md-input>
                 </md-field>
               </div>
-                <div class="md-layout-item md-size-100 text-center">
-                  <md-button
-                    v-on:click="saveLogin"
-                    type="submit"
-                    class="md-raised md-success"
-                  >
-                    Ingresar
-                  </md-button>
-                </div>
+              <div class="md-layout-item md-size-100 text-center">
+                <md-button
+                  v-on:click="saveLogin"
+                  type="submit"
+                  class="md-raised md-success"
+                >
+                  Ingresar
+                </md-button>
+              </div>
             </form>
           </md-card-content>
         </md-card>
@@ -75,7 +72,7 @@
 </template>
 <script>
 import http from "../http-common";
-import router  from "../routes/routes.js";
+import router from "../routes/routes.js";
 export default {
   name: "login",
   data: function() {

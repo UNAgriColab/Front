@@ -2,7 +2,6 @@
   <div class="content">
     <div class="md-layout">
       <div class="md-layout-item text-center">
-
         <div class="md-layout-item md-small-size-100 md-size-100">
           <div class="md-layout">
             <div
@@ -41,27 +40,28 @@
               md-xlarge-size-10"
             >
               <md-field>
-              <label>producto</label>
-              <md-select
-                v-model="products.producto"
-                name="productos"
-                id="productos"
-                md-dense
-              >
-                <md-option
-                  v-for="(option, index2) in setOptions"
-                  v-bind:key="index2"
-                  v-bind:value="option"
+                <label>producto</label>
+                <md-select
+                  v-model="products.producto"
+                  name="productos"
+                  id="productos"
+                  md-dense
                 >
-                  {{ option }}
-                </md-option>
-              </md-select>
-              <md-icon>apartment</md-icon>
-            </md-field>
+                  <md-option
+                    v-for="(option, index2) in setOptions"
+                    v-bind:key="index2"
+                    v-bind:value="option"
+                  >
+                    {{ option }}
+                  </md-option>
+                </md-select>
+                <md-icon>apartment</md-icon>
+              </md-field>
             </div>
+            <md-button v-on:click="getProduct">Mostrar</md-button>
           </div>
         </div>
-
+        <!--
         <md-button v-on:click="getOffers">Mostrar</md-button>
         <ul>
           <li class="list-group-item">
@@ -70,9 +70,10 @@
               placeholder="Buscar"
               class="form-control"
               v-model="productName"
-            >
+            />
           </li>
         </ul>
+        -->
         <md-list
           class="md-double-line  md-elevation-24"
           v-for="(offer, index) in offerName"
@@ -146,7 +147,6 @@ export default {
       }
     },
     getOffers: function() {
-
       console.log(`Bearer ${this.token}`);
       axios
         .get("https://agricolab-un.appspot.com/api/v1/offer", {
@@ -158,12 +158,32 @@ export default {
         .then(response => {
           console.log(response);
           this.offers = response.data;
-          console.log(this.offers)
+          console.log(this.offers);
         })
         .catch(e => console.log(e));
     },
     addIdOffer: function(Id) {
       localStorage.setItem("buyerOrderId", Id);
+    },
+    getProduct: function() {
+      console.log(`Bearer ${this.token}`);
+      axios
+        .get(
+          "https://agricolab-un.appspot.com/api/v1/offer/product/" +
+            this.products.producto,
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`
+            },
+            withCredentials: false
+          }
+        )
+        .then(response => {
+          console.log(response);
+          this.offers = response.data;
+          console.log(this.offers);
+        })
+        .catch(e => console.log(e));
     }
   },
   computed: {
@@ -178,9 +198,11 @@ export default {
       return productos;
     },
     offerName: function() {
-      return this.offers.filter((item) => {
-         return item.productName.toLowerCase().startsWith(this.productName.toLowerCase());
-      })
+      return this.offers.filter(item => {
+        return item.productName
+          .toLowerCase()
+          .startsWith(this.productName.toLowerCase());
+      });
     }
   }
 };

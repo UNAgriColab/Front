@@ -127,8 +127,7 @@ export default {
         state: 0,
         canceled: false,
         path: ""
-
-      },
+      }
     };
   },
   mounted() {
@@ -150,12 +149,15 @@ export default {
     },
     leerAPI() {
       http
-        .get("https://agricolab-un.appspot.com/api/v1/offer/" + this.product.path, {
-          headers: {
-            Authorization: `Bearer ${this.token}`
-          },
-          withCredentials: false
-        })
+        .get(
+          "https://agricolab-un.appspot.com/api/v1/offer/" + this.product.path,
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`
+            },
+            withCredentials: false
+          }
+        )
         .then(response => {
           this.product.price = response.data.pricePresentation;
           this.product.user = response.data.userEmail;
