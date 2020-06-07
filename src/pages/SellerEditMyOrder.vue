@@ -147,7 +147,6 @@ export default {
   mounted() {
     this.storage();
     this.leerAPI();
-    this.stepStage();
   },
   methods: {
     storage() {
