@@ -50,19 +50,29 @@
           {{ offer.offerReference }}
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-if="offer.state === 0">
-          Cancelado
+          <md-chip class="text-white" style="background-color: #cc2127">
+            <md-icon class="text-white">cancel</md-icon> Cancelado
+          </md-chip>
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-else-if="offer.state === 1">
-          En espera
+          <md-chip class="text-white" style="background-color: saddlebrown">
+            <md-icon class="text-white">timer</md-icon> En espera
+          </md-chip>
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-else-if="offer.state === 2">
-          En proceso
+          <md-chip class="text-white" style="background-color: #0d47a1">
+            <md-icon class="text-white">settings</md-icon> En proceso
+          </md-chip>
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-else-if="offer.state === 3">
-          Enviado
+          <md-chip class="text-white" style="background-color: goldenrod">
+            <md-icon class="text-white">local_shipping</md-icon> Enviado
+          </md-chip>
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-else-if="offer.state === 4">
-          Recibido
+          <md-chip class="md-primary text-white">
+            <md-icon class="text-white">beenhere</md-icon> Recibido
+          </md-chip>
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-else>
           No asignado
@@ -118,7 +128,7 @@ export default {
       console.log("metodo get offers");
       axios
         .get(
-          "https://agricolab-un.appspot.com/api/v1/order/seller/" +
+          "https://agricolab-un.appspot.com/api/v1/order/seller/actives/" +
             this.userEmail,
           {
             headers: {

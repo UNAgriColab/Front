@@ -49,19 +49,29 @@
           {{ buyerOrder.offerReference }}
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-if="buyerOrder.state === 0">
-          Cancelado
+          <md-chip class="text-white" style="background-color: #cc2127">
+            <md-icon class="text-white">cancel</md-icon> Cancelado
+          </md-chip>
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 1">
-          En espera
+          <md-chip class="text-white" style="background-color: saddlebrown">
+            <md-icon class="text-white">timer</md-icon> En espera
+          </md-chip>
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 2">
-          En proceso
+          <md-chip class="text-white" style="background-color: #0d47a1">
+            <md-icon class="text-white">settings</md-icon> En proceso
+          </md-chip>
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 3">
-          Enviado
+          <md-chip class="text-white" style="background-color: goldenrod">
+            <md-icon class="text-white">local_shipping</md-icon> Enviado
+          </md-chip>
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 4">
-          Recibido
+          <md-chip class="md-primary text-white">
+            <md-icon class="text-white">beenhere</md-icon> Recibido
+          </md-chip>
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-else>
           No asignado
@@ -102,7 +112,7 @@ export default {
       console.log("Get Buyer Orders");
       axios
         .get(
-          "https://agricolab-un.appspot.com/api/v1/order/buyer/actives/" +
+          "https://agricolab-un.appspot.com/api/v1/order/buyer/" +
             this.email,
           {
             headers: {
