@@ -47,7 +47,7 @@
           $ {{ buyerOrder.totalPrice.toFixed(2) }}
         </md-table-cell>
         <md-table-cell md-label="Producto">
-          {{ buyerOrder.offerReference }}
+          {{ buyerOrder.id }}
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-if="buyerOrder.state === 0">
           Cancelado

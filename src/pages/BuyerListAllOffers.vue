@@ -251,13 +251,13 @@ export default {
       localStorage.setItem("buyerOrderId", Id);
     },
     getProduct: function() {
-      if(this.products.maxPrice === ""){
+      if (this.products.maxPrice === "") {
         this.products.maxPrice = 0;
       }
-      if(this.products.minPrice === ""){
+      if (this.products.minPrice === "") {
         this.products.minPrice = 0;
       }
-      if(this.products.presentation === ""){
+      if (this.products.presentation === "") {
         this.products.presentation = 0;
       }
       console.log(
@@ -333,7 +333,7 @@ export default {
     },
     maxPriceMin: function() {
       return this.products.minPrice;
-    },
+    }
   }
 };
 </script>
