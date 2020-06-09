@@ -5,7 +5,7 @@
         <div class="md-toolbar-section-start">
           <md-list>
             <md-list-item href="#/user">
-              <p class="text-gray-light">
+              <p class="text-footer">
                 <i class="material-icons">eco</i>
                 Acerca de
               </p>
@@ -15,7 +15,7 @@
         <div class="md-toolbar-section-end">
           <md-list>
             <md-list-item href="#/login">
-              <p class="text-gray-light">
+              <p class="text-footer">
                 <i class="material-icons">copyright</i>
                 {{ new Date().getFullYear() }} AgriColab
               </p>
@@ -29,4 +29,9 @@
 <script>
 export default {};
 </script>
-<style></style>
+<style>
+.text-footer {
+  color: #1b5e20;
+  text-shadow: 1px 1px #ffffff;
+}
+</style>

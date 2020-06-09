@@ -3,17 +3,19 @@
     <div class="md-layout">
       <div class="md-layout-item md-size-20"></div>
       <div
-        class="md-layout-item md-size-40 md-small-size-45 md-medium-size-45 md-xsmall-size-100 md-alignment-center-center"
+        class="md-layout-item md-size-50 md-small-size-45 md-medium-size-45 md-xsmall-size-100 md-alignment-center-center"
       >
         <h1 class="title text-center" style="color: #4caf50">
-          <b>"El campo a un clic de distancia"</b>
+          <b>Ventas</b>
         </h1>
         <h2 class="title text-center" style="color: #4caf50"></h2>
         <h3 class="title text-center" style="margin-bottom: 15px">
-          <b style="color: #4caf50">Bienvenid@</b>
+          <b style="color: #4caf50">¿Eres productor del agro colombiano?</b>
+        </h3>
+        <h3>
           <b>
-            a la nueva plataforma para la compra y venta de productos agrícolas
-            del campo colombiano
+            Regístrate y podrás realizar ventas de tus productos agrícolas
+            reduciendo al mínimo los intermediarios.
           </b>
         </h3>
         <md-button
@@ -34,7 +36,7 @@
         </md-button>
       </div>
 
-      <div class="md-layout-item md-size-40"></div>
+      <div class="md-layout-item md-size-30"></div>
     </div>
   </div>
 </template>

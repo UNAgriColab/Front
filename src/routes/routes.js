@@ -10,7 +10,10 @@ import Notifications from "@/pages/Notifications.vue";
 
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+
 import IndexAgriColab from "../pages/IndexAgriColab";
+import IndexSeller from "../pages/IndexSeller";
+import IndexBuyer from "../pages/IndexBuyer";
 
 import BuyerBuyProduct from "../pages/BuyBuyerProduct";
 import SellerOfferProduct from "../pages/SellerOfferProduct";
@@ -37,6 +40,16 @@ const routes = [
         path: "indexAgriColab",
         name: "IndexAgriColab",
         component: IndexAgriColab
+      },
+      {
+        path: "indexSeller",
+        name: "IndexSeller",
+        component: IndexSeller
+      },
+      {
+        path: "indexBuyer",
+        name: "IndexBuyer",
+        component: IndexBuyer
       }
     ]
   },
