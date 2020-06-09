@@ -85,6 +85,11 @@
               Ingresa a tu cuenta
             </small>
           </router-link>
+          <md-dialog-alert
+                  :md-active.sync="confirmation"
+                  md-title="Usuario Registrado!"
+                  md-content="El <strong>usuario</strong> ha sido registrado con éxito."
+                  md-confirm-text="ok!"/>
         </div>
       </div>
     </div>
@@ -105,12 +110,14 @@ export default {
         password: "",
         active: false
       },
-      submitted: false
+      submitted: false,
+      confirmation: false
     };
   },
   methods: {
     /* eslint-disable no-console */
     saveCustomer() {
+      this.confirmation = true
       console.log("Boton pulsado");
       const data = {
         name: this.user.username,

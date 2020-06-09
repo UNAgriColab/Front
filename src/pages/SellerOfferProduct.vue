@@ -121,6 +121,11 @@
             </md-card-content>
           </md-card>
         </form>
+        <md-dialog-alert
+                :md-active.sync="confirmation"
+                md-title="¡Oferta Publicada!"
+                md-content="la nueva oferta ha sido registrada con éxito."
+                md-confirm-text="ok!"/>
       </div>
     </div>
   </div>
@@ -150,7 +155,8 @@ export default {
         categoria: "",
         producto: ""
       },
-      submitted: false
+      submitted: false,
+      confirmation: false
     };
   },
   mounted() {
@@ -187,6 +193,7 @@ export default {
           console.log("se espera respuesta");
           this.offer.id = response.data.id;
           console.log(response.data);
+          this.confirmation = true
         })
         .catch(e => {
           console.log(e);
