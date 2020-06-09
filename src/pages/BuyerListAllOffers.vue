@@ -19,6 +19,7 @@
                   name="categoria"
                   id="cat"
                   md-dense
+                  @md-selected="resetProductDropdown"
                 >
                   <md-option
                     v-for="(data, index) in json.myJson"
@@ -121,16 +122,19 @@
                 </md-select>
               </md-field>
             </div>
-            <div v-if="enable">
+            <div>
               <md-field>
                 <!-- label for="unit">Unidad</label -->
                 <label>Ordenar por</label>
                 <md-select
-                  v-model="filter"
+                  v-model="products.orderBy"
                   name="Ordenar"
                   id="Ordenar"
                   md-dense
                 >
+                  <md-option value="0">
+                    Seleccionar opción
+                  </md-option>
                   <md-option value="1">
                     Precio: De más bajo a más alto
                   </md-option>
@@ -149,7 +153,7 @@
 
         <md-list
           class="md-double-line  md-elevation-24"
-          v-for="(offer, index) in sortedJson"
+          v-for="(offer, index) in offers"
           v-bind:key="index"
         >
           <md-subheader>{{ offer.productName }}</md-subheader>
@@ -203,7 +207,6 @@ export default {
       aux: "",
       productName: "",
       pricePresentation: "",
-      filter: "",
       disable: true,
       enable: false,
       json: {
@@ -214,7 +217,8 @@ export default {
         producto: "",
         minPrice: "0",
         maxPrice: "0",
-        presentation: "0"
+        presentation: "0",
+        orderBy: "0"
       }
     };
   },
@@ -260,12 +264,9 @@ export default {
       if (this.products.presentation === "") {
         this.products.presentation = 0;
       }
-      console.log(
-        this.products.producto,
-        this.products.maxPrice,
-        this.products.presentation,
-        this.products.minPrice
-      );
+      if (this.products.orderBy === "") {
+        this.products.orderBy = 0;
+      }
       axios
         .get(
           "http://localhost:8080/api/v1/offer/" +
@@ -275,7 +276,9 @@ export default {
             "/" +
             this.products.presentation +
             "/" +
-            this.products.minPrice,
+            this.products.minPrice +
+            "/" +
+            this.products.orderBy,
           {
             headers: {
               Authorization: `Bearer ${this.token}`
@@ -290,40 +293,24 @@ export default {
           }
         })
         .catch(e => console.log(e));
+    },
+    resetProductDropdown: function() {
+      this.products.producto = "";
     }
   },
   computed: {
     setOptions: function() {
-      let categoria = this.products.categoria;
       let categoriaTemp;
-
       let productos;
       let options = this.json.myJson;
-
       for (let i = 0; i < 7; i++) {
         if (this.products.categoria === options[i]["categoria"]) {
           productos = options[i]["productos"];
           categoriaTemp = this.products.categoria;
         }
       }
-      if (categoria !== categoriaTemp) {
-        console.log("son iguales");
-      }
+
       return productos;
-    },
-    sortedJson: function() {
-      let sorted = this.offers;
-      if (this.filter === "1") {
-        return sorted.sort((t1, t2) =>
-          t1.pricePresentation < t2.pricePresentation ? 1 : -1
-        );
-      } else if (this.filter === "2") {
-        return sorted.sort((t1, t2) =>
-          t1.pricePresentation < t2.pricePresentation ? -1 : 1
-        );
-      } else {
-        return sorted;
-      }
     },
     enableDropdown: function() {
       return this.products.categoria === "";

@@ -62,6 +62,7 @@
                       name="departamentos"
                       id="dep"
                       md-dense
+                      @md-selected="resetProductDropdown"
                     >
                       <div class="md">
                         <md-option
@@ -210,7 +211,8 @@ export default {
 
         //payment method
         totalPrice: "",
-        paymentMethod: ""
+        paymentMethod: "",
+        counter: 0
       },
       places: {
         myJson: json
@@ -290,6 +292,13 @@ export default {
           console.log(e);
         });
       this.submitted = true;
+    },
+    resetProductDropdown: function() {
+      if (this.counter !== 0) {
+        this.places.city = "";
+      } else {
+        this.counter = 1;
+      }
     }
   },
   computed: {
