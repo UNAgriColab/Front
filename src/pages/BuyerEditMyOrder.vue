@@ -57,7 +57,10 @@
               </h2>
             </div>
 
-            <div class="md-layout-item md-size-100 md-size-33">
+            <div
+              v-if="state.active !== 'zero'"
+              class="md-layout-item md-size-100 md-size-33"
+            >
               <md-steppers :md-active-step.sync="state.active" md-linear>
                 <md-step
                   id="first"
@@ -97,6 +100,11 @@
                 </md-step>
               </md-steppers>
             </div>
+            <div v-if="state.active === 'zero'">
+              <h4>
+                Producto cancelado1
+              </h4>
+            </div>
             <div class="md-layout-item md-size-100 text-right">
               <md-button class="md-raised md-success" v-on:click="cancelOrder">
                 <md-icon>cancel</md-icon> cancelar producto
@@ -133,7 +141,7 @@ export default {
         canceled: false
       },
       state: {
-        active: "first",
+        active: "",
         first: false,
         second: false,
         third: false,
@@ -145,7 +153,6 @@ export default {
   mounted() {
     this.storage();
     this.leerAPI();
-    this.stepStage();
   },
   methods: {
     storage() {
@@ -181,10 +188,29 @@ export default {
           this.product.totalPrice = response.data.totalPrice;
           this.product.state = response.data.state;
           this.product.deliveryAdd = response.data.deliveryAdd;
+          this.stepChange();
         })
         .catch(e => {
           console.log(e);
         });
+    },
+    stepChange() {
+      if (this.product.state === 0) {
+        this.state.active = "zero";
+      }
+      if (this.product.state === 1) {
+        this.state.active = "first";
+      }
+      if (this.product.state === 2) {
+        this.state.active = "second";
+      }
+      if (this.product.state === 3) {
+        this.state.active = "third";
+      }
+
+      if (this.product.state === 4) {
+        this.state.active = "fourth";
+      }
     },
     cancelOrder() {
       const data = {
@@ -205,24 +231,6 @@ export default {
         .catch(e => {
           console.log(e);
         });
-    },
-    stepStage() {
-      if (this.product.state === 0) {
-        this.state.active = "zero";
-      }
-      if (this.product.state === 1) {
-        this.state.active = "first";
-      }
-      if (this.product.state === 2) {
-        this.state.active = "second";
-      }
-      if (this.product.state === 3) {
-        this.state.active = "third";
-      }
-
-      if (this.product.state === 4) {
-        this.state.active = "fourth";
-      }
     }
   },
   computed: {}

@@ -2,58 +2,72 @@
   <form>
     <md-card>
       <md-card-header :data-background-color="dataBackgroundColor">
-        <h4 class="title">Hola, Jorge Hernández</h4>
-        <p class="category">Actualiza tu perfil</p>
+        <h4 class="title">Hola, {{ user.name }}</h4>
+        <p class="category">Actualiza tu dirección y teléfono</p>
       </md-card-header>
 
       <md-card-content>
+        <h3>Datos de envío y de contacto</h3>
         <div class="md-layout">
-          <div class="md-layout-item md-small-size-100 md-size-50">
-            <md-field>
-              <label>Username</label>
-              <md-input v-model="username" type="text"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-50">
-            <md-field>
-              <label>Correo electrónico</label>
-              <md-input v-model="emailadress" type="email"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-50">
-            <md-field>
-              <label>Primer nombre</label>
-              <md-input v-model="firstname" type="text"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-50">
-            <md-field>
-              <label>Primer Apellido</label>
-              <md-input v-model="lastname" type="text"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-50">
-            <md-field>
-              <label>Dirección</label>
-              <md-input v-model="address" type="text"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-50">
+          <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
               <label>Teléfono</label>
               <md-input v-model="phone" type="number"></md-input>
+              <md-icon>call</md-icon>
             </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
-              <label>Ciudad</label>
-              <md-input v-model="city" type="text"></md-input>
+              <label>departamento</label>
+              <md-select
+                v-model="places.department"
+                name="departamentos"
+                id="dep"
+                @md-selected="resetProductDropdown"
+                md-dense
+              >
+                <div class="md">
+                  <md-option
+                    v-for="(data, index) in places.myJson"
+                    v-bind:key="index"
+                    v-bind:value="data.departamento"
+                  >
+                    {{ data.departamento }}
+                  </md-option>
+                </div>
+              </md-select>
+              <md-icon>location_city</md-icon>
             </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
-              <label>País</label>
-              <md-input v-model="country" type="text"></md-input>
+              <label>ciudad</label>
+              <md-select
+                v-model="places.city"
+                name="ciudades"
+                id="ciudades"
+                md-dense
+              >
+                <md-option
+                  v-for="(option, index2) in setOptions"
+                  v-bind:key="index2"
+                  v-bind:value="option"
+                >
+                  {{ option }}
+                </md-option>
+              </md-select>
+              <md-icon>apartment</md-icon>
+            </md-field>
+            <md-field maxlength="1">
+              <label>Barrio o vereda</label>
+              <md-input v-model="places.neighbourhood"></md-input>
+              <md-icon>people_outline</md-icon>
+            </md-field>
+            <md-field maxlength="1">
+              <label>Dirección</label>
+              <md-input v-model="places.address"></md-input>
+              <md-icon>house</md-icon>
+            </md-field>
+            <md-field maxlength="1">
+              <label>Detalles adicionales</label>
+              <md-input v-model="places.details"></md-input>
+              <md-icon>all_inclusive</md-icon>
             </md-field>
           </div>
           <div class="md-layout-item md-size-100">
@@ -63,9 +77,9 @@
             </md-field>
           </div>
           <div class="md-layout-item md-size-100 text-right">
-            <md-button class="md-raised md-success"
-              >Actualizar perfil</md-button
-            >
+            <md-button class="md-raised md-success" v-on:click="updateMailing">
+              Actualizar perfil
+            </md-button>
           </div>
         </div>
       </md-card-content>
@@ -73,6 +87,9 @@
   </form>
 </template>
 <script>
+import axios from "axios";
+import json from "../../jsons/colombia";
+
 export default {
   name: "edit-profile-form",
   props: {
@@ -83,17 +100,99 @@ export default {
   },
   data() {
     return {
-      username: null,
-      disabled: null,
-      emailadress: null,
-      lastname: null,
-      firstname: null,
-      address: null,
-      city: null,
-      country: null,
-      code: null,
-      aboutme: ""
+      user: [],
+      phone: null,
+      aboutme: "",
+      tokenHeader: "",
+      counter: 0,
+      places: {
+        myJson: json,
+        city: "",
+        department: "",
+        address: "",
+        details: "",
+        neighbourhood: ""
+      }
     };
+  },
+  mounted() {
+    this.storage();
+    this.getUser();
+  },
+  methods: {
+    storage() {
+      if (localStorage.getItem("userSession")) {
+        this.aux = JSON.parse(localStorage.getItem("userSession"));
+        this.token = this.aux.token;
+        this.tokenHeader = "Bearer " + this.token;
+        this.emailAdress = this.aux.email;
+      }
+    },
+    getUser: function() {
+      console.log(`Bearer ${this.token}`);
+      axios
+        .get("http://localhost:8080/api/v1/user/" + this.emailAdress, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
+        .then(response => {
+          this.user = response.data;
+          this.places.city = response.data.mailing.city;
+          this.places.department = response.data.mailing.department;
+          this.places.address = response.data.mailing.address;
+          this.places.details = response.data.mailing.details;
+          this.places.neighbourhood = response.data.mailing.neighbourhood;
+          console.log(this.user);
+        })
+        .catch(e => console.log(e));
+    },
+    updateMailing: function() {
+      const mailing = {
+        city: this.places.city,
+        department: this.places.department,
+        address: this.places.address,
+        details: this.places.details,
+        neighbourhood: this.places.neighbourhood
+      };
+      axios
+        .post(
+          "http://localhost:8080/api/v1/user/address/" + this.emailAdress,
+          mailing,
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`
+            },
+            withCredentials: false
+          }
+        )
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    resetProductDropdown: function() {
+      if (this.counter !== 0) {
+        this.places.city = "";
+      } else {
+        this.counter = 1;
+      }
+    }
+  },
+  computed: {
+    setOptions: function() {
+      let ciudades;
+      let options = this.places.myJson;
+      for (let i = 0; i < 31; i++) {
+        if (this.places.department === options[i]["departamento"]) {
+          ciudades = options[i]["ciudades"];
+        }
+      }
+      return ciudades;
+    }
   }
 };
 </script>
