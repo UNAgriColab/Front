@@ -86,10 +86,11 @@
             </small>
           </router-link>
           <md-dialog-alert
-                  :md-active.sync="confirmation"
-                  md-title="Usuario Registrado!"
-                  md-content="El <strong>usuario</strong> ha sido registrado con éxito."
-                  md-confirm-text="ok!"/>
+            :md-active.sync="confirmation"
+            md-title="Usuario Registrado!"
+            md-content="El <strong>usuario</strong> ha sido registrado con éxito."
+            md-confirm-text="ok!"
+          />
         </div>
       </div>
     </div>
@@ -117,7 +118,7 @@ export default {
   methods: {
     /* eslint-disable no-console */
     saveCustomer() {
-      this.confirmation = true
+      this.confirmation = true;
       console.log("Boton pulsado");
       const data = {
         name: this.user.username,
