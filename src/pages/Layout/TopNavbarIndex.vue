@@ -55,7 +55,7 @@ export default {
   methods: {
     toggleSidebar() {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
-    },
+    }
   }
 };
 </script>

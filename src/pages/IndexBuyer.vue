@@ -10,7 +10,9 @@
         </h1>
         <h2 class="title text-center" style="color: #4caf50"></h2>
         <h3 class="title text-center" style="margin-bottom: 15px">
-          <b style="color: #4caf50">¿Quieres consumir o distribuir productos agrícolas 100% colombianos?</b>
+          <b style="color: #4caf50">
+            ¿Quieres consumir o distribuir productos agrícolas 100% colombianos?
+          </b>
         </h3>
         <h3>
           <b>
