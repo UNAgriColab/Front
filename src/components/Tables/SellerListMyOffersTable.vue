@@ -69,16 +69,6 @@
               <md-icon>create</md-icon>
             </md-button>
           </router-link>
-
-          <router-link to="" class="text-white">
-            <md-button
-              class="md-fab md-icon-button md-raised md-danger"
-              :value="sellerOffer.id"
-              @click="addIdOffer(sellerOffer.id)"
-            >
-              <md-icon>delete</md-icon>
-            </md-button>
-          </router-link>
         </md-table-cell>
       </md-table-row>
     </md-table>
@@ -118,15 +108,12 @@ export default {
     getSellerOffers() {
       console.log(this.email);
       axios
-        .get(
-          "https://agricolab-un.appspot.com/api/v1/offer/user/" + this.email,
-          {
-            headers: {
-              Authorization: `Bearer ${this.token}`
-            },
-            withCredentials: false
-          }
-        )
+        .get("http://localhost:8080/api/v1/offer/user/" + this.email, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
         .then(response => {
           this.sellerOffers = response.data;
         })
