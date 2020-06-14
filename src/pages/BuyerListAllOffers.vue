@@ -3,152 +3,154 @@
     <div class="md-layout">
       <div class="md-layout-item text-center">
         <div class="md-layout-item md-small-size-100 md-size-100">
-          <div class="md-layout">
-            <div
-              class="md-layout-item
-              md-xsmall-size-35
-              md-small-size-25
-              md-medium-size-20
-              md-large-size-15
-              md-xlarge-size-10"
-            >
-              <md-field>
-                <label>Categoria</label>
-                <md-select
-                  v-model="products.categoria"
-                  name="categoria"
-                  id="cat"
-                  md-dense
-                  @md-selected="resetProductDropdown"
-                >
-                  <md-option
-                    v-for="(data, index) in json.myJson"
-                    v-bind:key="index"
-                    v-bind:value="data.categoria"
+          <md-content style="background-color: #e8f5e9">
+            <div class="md-layout">
+              <div
+                class="md-layout-item
+                md-xsmall-size-35
+                md-small-size-25
+                md-medium-size-20
+                md-large-size-15
+                md-xlarge-size-10"
+              >
+                <md-field>
+                  <label>Categoria</label>
+                  <md-select
+                    v-model="products.categoria"
+                    name="categoria"
+                    id="cat"
+                    md-dense
+                    @md-selected="resetProductDropdown"
                   >
-                    {{ data.categoria }}
-                  </md-option>
-                </md-select>
-                <md-icon>agriculture</md-icon>
-              </md-field>
-            </div>
-            <div
-              class="md-layout-item
-              md-xsmall-size-35
-              md-small-size-25
-              md-medium-size-20
-              md-large-size-15
-              md-xlarge-size-10"
-            >
-              <md-field>
-                <label>producto</label>
-                <md-select
-                  v-model="products.producto"
-                  name="productos"
-                  id="productos"
-                  :disabled="enableDropdown"
-                  md-dense
-                >
-                  <md-option
-                    v-for="(option, index2) in setOptions"
-                    v-bind:key="index2"
-                    v-bind:value="option"
+                    <md-option
+                      v-for="(data, index) in json.myJson"
+                      v-bind:key="index"
+                      v-bind:value="data.categoria"
+                    >
+                      {{ data.categoria }}
+                    </md-option>
+                  </md-select>
+                  <md-icon>agriculture</md-icon>
+                </md-field>
+              </div>
+              <div
+                class="md-layout-item
+                md-xsmall-size-35
+                md-small-size-25
+                md-medium-size-20
+                md-large-size-15
+                md-xlarge-size-10"
+              >
+                <md-field>
+                  <label>producto</label>
+                  <md-select
+                    v-model="products.producto"
+                    name="productos"
+                    id="productos"
+                    :disabled="enableDropdown"
+                    md-dense
                   >
-                    {{ option }}
-                  </md-option>
-                </md-select>
-                <md-icon>spa</md-icon>
-              </md-field>
+                    <md-option
+                      v-for="(option, index2) in setOptions"
+                      v-bind:key="index2"
+                      v-bind:value="option"
+                    >
+                      {{ option }}
+                    </md-option>
+                  </md-select>
+                  <md-icon>spa</md-icon>
+                </md-field>
+              </div>
+              <div
+                class="
+                md-layout-item
+                md-xsmall-size-35
+                md-small-size-30
+                md-medium-size-30
+                md-large-size-20
+                md-xlarge-size-15"
+              >
+                <md-field>
+                  <label>Precio mínimo unitario</label>
+                  <md-icon>attach_money</md-icon>
+                  <md-input v-model="products.minPrice" type="number" min="0">
+                  </md-input>
+                </md-field>
+              </div>
+              <div
+                class="
+                md-layout-item
+                md-xsmall-size-30
+                md-small-size-30
+                md-medium-size-30
+                md-large-size-20
+                md-xlarge-size-15"
+              >
+                <md-field>
+                  <label>Precio máximo unitario</label>
+                  <md-icon>attach_money</md-icon>
+                  <md-input
+                    v-model="products.maxPrice"
+                    type="number"
+                    :min="maxPriceMin"
+                  >
+                  </md-input>
+                </md-field>
+              </div>
+              <div
+                class="
+                md-layout-item
+                md-xsmall-size-30
+                md-small-size-30
+                md-medium-size-30
+                md-large-size-20
+                md-xlarge-size-15"
+              >
+                <md-field>
+                  <label>Unidad</label>
+                  <md-select
+                    v-model="products.presentation"
+                    name="presentation"
+                    id="presentation"
+                    md-dense
+                  >
+                    <md-option value="0">Seleccione una opción</md-option>
+                    <md-option value="1">Gramos</md-option>
+                    <md-option value="2">Libras</md-option>
+                    <md-option value="3">Kilogramos</md-option>
+                    <md-option value="4">Arrobas</md-option>
+                    <md-option value="5">Bultos(50 Kg)</md-option>
+                  </md-select>
+                </md-field>
+              </div>
+              <div>
+                <md-field>
+                  <!-- label for="unit">Unidad</label -->
+                  <label>Ordenar por</label>
+                  <md-select
+                    v-model="products.orderBy"
+                    name="Ordenar"
+                    id="Ordenar"
+                    md-dense
+                  >
+                    <md-option value="0">
+                      Seleccionar opción
+                    </md-option>
+                    <md-option value="1">
+                      Precio: De más bajo a más alto
+                    </md-option>
+                    <md-option value="2">
+                      Precio: De más alto a más bajo
+                    </md-option>
+                    <md-option value="3">Valoración de los clientes</md-option>
+                  </md-select>
+                </md-field>
+              </div>
+              <md-button v-on:click="getProduct" :disabled="enableButton">
+                Ordenar
+              </md-button>
             </div>
-            <div
-              class="
-              md-layout-item
-              md-xsmall-size-35
-              md-small-size-30
-              md-medium-size-30
-              md-large-size-20
-              md-xlarge-size-15"
-            >
-              <md-field>
-                <label>Precio mínimo unitario</label>
-                <md-icon>attach_money</md-icon>
-                <md-input v-model="products.minPrice" type="number" min="0">
-                </md-input>
-              </md-field>
-            </div>
-            <div
-              class="
-              md-layout-item
-              md-xsmall-size-30
-              md-small-size-30
-              md-medium-size-30
-              md-large-size-20
-              md-xlarge-size-15"
-            >
-              <md-field>
-                <label>Precio máximo unitario</label>
-                <md-icon>attach_money</md-icon>
-                <md-input
-                  v-model="products.maxPrice"
-                  type="number"
-                  :min="maxPriceMin"
-                >
-                </md-input>
-              </md-field>
-            </div>
-            <div
-              class="
-              md-layout-item
-              md-xsmall-size-30
-              md-small-size-30
-              md-medium-size-30
-              md-large-size-20
-              md-xlarge-size-15"
-            >
-              <md-field>
-                <label>Unidad</label>
-                <md-select
-                  v-model="products.presentation"
-                  name="presentation"
-                  id="presentation"
-                  md-dense
-                >
-                  <md-option value="0">Seleccione una opción</md-option>
-                  <md-option value="1">Gramos</md-option>
-                  <md-option value="2">Libras</md-option>
-                  <md-option value="3">Kilogramos</md-option>
-                  <md-option value="4">Arrobas</md-option>
-                  <md-option value="5">Bultos(50 Kg)</md-option>
-                </md-select>
-              </md-field>
-            </div>
-            <div>
-              <md-field>
-                <!-- label for="unit">Unidad</label -->
-                <label>Ordenar por</label>
-                <md-select
-                  v-model="products.orderBy"
-                  name="Ordenar"
-                  id="Ordenar"
-                  md-dense
-                >
-                  <md-option value="0">
-                    Seleccionar opción
-                  </md-option>
-                  <md-option value="1">
-                    Precio: De más bajo a más alto
-                  </md-option>
-                  <md-option value="2">
-                    Precio: De más alto a más bajo
-                  </md-option>
-                  <md-option value="3">Valoración de los clientes</md-option>
-                </md-select>
-              </md-field>
-            </div>
-            <md-button v-on:click="getProduct" :disabled="enableButton">
-              Buscar
-            </md-button>
-          </div>
+          </md-content>
         </div>
 
         <md-list

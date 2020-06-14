@@ -222,6 +222,7 @@ export default {
   },
   mounted() {
     this.storage();
+    this.getUser();
     this.leerAPI();
   },
   methods: {
@@ -239,6 +240,24 @@ export default {
           "numberOfUnitsQuantity"
         );
       }
+    },
+    getUser: function() {
+      console.log("http://localhost:8080/api/v1/user/" + this.order.buyerEmail);
+      http
+        .get("http://localhost:8080/api/v1/user/" + this.order.buyerEmail, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
+        .then(response => {
+          this.order.city = response.data.mailing.city;
+          this.order.department = response.data.mailing.department;
+          this.order.address = response.data.mailing.address;
+          this.order.details = response.data.mailing.details;
+          this.order.neighbourhood = response.data.mailing.neighbourhood;
+        })
+        .catch(e => console.log(e));
     },
     leerAPI() {
       console.log(this.token);
