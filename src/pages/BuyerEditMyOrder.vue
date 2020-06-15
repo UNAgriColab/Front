@@ -102,14 +102,127 @@
             </div>
             <div v-if="state.active === 'zero'">
               <h4>
-                Producto cancelado1
+                Producto cancelado
               </h4>
             </div>
-            <div class="md-layout-item md-size-100 text-right">
+            <div
+              v-if="product.state === 4"
+              class="md-layout-item md-size-100 text-right"
+            >
+              <div>
+                <md-dialog :md-active.sync="showDialog">
+                  <md-card>
+                    <md-card-header data-background-color="green">
+                      <h5 class="title text-center">Califica tu compra</h5>
+                    </md-card-header>
+                    <md-card-content>
+                      <div class="separator">
+                        <md-avatar
+                          class="md-avatar-icon md-large md-default"
+                          style="margin-left: 10px"
+                        >
+                          <md-icon> star</md-icon>
+                        </md-avatar>
+                        &nbsp;
+                        <md-avatar class="md-avatar-icon md-large md-default">
+                          <md-icon> star</md-icon>
+                        </md-avatar>
+                        &nbsp;
+                        <md-avatar class="md-avatar-icon md-large md-default">
+                          <md-icon> star</md-icon>
+                        </md-avatar>
+                        &nbsp;
+                        <md-avatar class="md-avatar-icon md-large md-default">
+                          <md-icon> star</md-icon>
+                        </md-avatar>
+                        &nbsp;
+                        <md-avatar
+                          class="md-avatar-icon md-large md-default"
+                          style="margin-right: 10px"
+                        >
+                          <md-icon> star</md-icon>
+                        </md-avatar>
+                      </div>
+                    </md-card-content>
+                    <form
+                      class="pure-form pure-form-stacked"
+                      v-on:submit.prevent="saveQualification"
+                      id="form"
+                    >
+                      <div class="md-layout-item md-small-size-100 md-size-100">
+                        <md-radio
+                          v-model="qualification.calificacion"
+                          :value="1"
+                          >1</md-radio
+                        >
+                        <md-radio
+                          v-model="qualification.calificacion"
+                          :value="2"
+                          >2</md-radio
+                        >
+                        <md-radio
+                          v-model="qualification.calificacion"
+                          :value="3"
+                          >3</md-radio
+                        >
+                        <md-radio
+                          v-model="qualification.calificacion"
+                          :value="4"
+                          >4</md-radio
+                        >
+                        <md-radio
+                          v-model="qualification.calificacion"
+                          :value="5"
+                          >5</md-radio
+                        >
+                        <md-field>
+                          <label>Comentario</label>
+                          <md-icon>chat</md-icon>
+                          <md-input
+                            id="commentario"
+                            v-model="qualification.commentario"
+                            type="text"
+                            placeholder="Comentario"
+                          >
+                          </md-input>
+                        </md-field>
+                      </div>
+
+                      <md-dialog-actions>
+                        <md-button
+                          class="md-primary"
+                          @click="showDialog = false"
+                          >Cancelar</md-button
+                        >
+                        <md-button
+                          class="md-primary"
+                          v-on:click="saveQualification"
+                          type="submit"
+                          @click="showDialog = false"
+                          >Enviar</md-button
+                        >
+                      </md-dialog-actions>
+                    </form>
+                  </md-card>
+                </md-dialog>
+                <md-button
+                  class="md-primary md-raised"
+                  @click="showDialog = true"
+                >
+                  <md-icon> star</md-icon>
+                  CALIFICACIÓN</md-button
+                >
+              </div>
+            </div>
+            <div
+              v-else-if="product.state === 1"
+              class="md-layout-item md-size-100 text-right"
+            >
               <md-button class="md-raised md-success" v-on:click="cancelOrder">
                 <md-icon>cancel</md-icon> cancelar producto
               </md-button>
             </div>
+            <div v-else class="md-layout-item md-size-100 text-right"></div>
           </md-card-content>
         </md-card>
       </div>
@@ -122,8 +235,9 @@ import http from "../http-common";
 
 export default {
   name: "product",
-  data() {
+  data: () => {
     return {
+      showDialog: false,
       product: {
         //orden
         offerReference: "",
@@ -147,6 +261,11 @@ export default {
         third: false,
         fourth: false,
         zero: false
+      },
+      qualification: {
+        calificacion: "",
+        commentario: "",
+        orderReference: ""
       }
     };
   },
@@ -231,6 +350,33 @@ export default {
         .catch(e => {
           console.log(e);
         });
+    },
+    saveQualification: function() {
+      console.log("Save Qualification");
+      const data = {
+        commentario: this.qualification.commentario,
+        orderReference: this.product.id,
+        calificacion: this.qualification.calificacion
+      };
+      console.log(data);
+      http
+        .post("http://localhost:8080/api/v1/order/qualification", data, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
+        .then(response => {
+          console.log(response.data);
+          if (JSON.stringify(response.data) === true) {
+            this.$router.push("/login");
+          }
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+      this.submitted = true;
     }
   },
   computed: {}
