@@ -27,6 +27,7 @@ import SellerListMyOffers from "../pages/SellerListMyOffers";
 import BuyerListMyOrders from "../pages/BuyerListMyOrders";
 import BuyerListMyOrdersHist from "../pages/BuyerListMyOrdersHist";
 import BuyerPayOrder from "../pages/BuyerPayOrder";
+import imagesProve from "../pages/imagesProve";
 
 Vue.use(Router);
 
@@ -149,6 +150,11 @@ const routes = [
         path: "buyerPayOrder",
         name: "Pagar orden",
         component: BuyerPayOrder
+      },
+      {
+        path: "imagesProve",
+        name: "Image prove",
+        component: imagesProve
       }
     ]
   }

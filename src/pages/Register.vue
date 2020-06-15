@@ -131,7 +131,6 @@ export default {
         .then(response => {
           console.log(response.data);
           if (JSON.stringify(response.data) === true) {
-
             saveLogin();
           }
         })
@@ -147,33 +146,33 @@ export default {
         password: this.user.password
       };
       http
-              .post("/auth", data)
-              .then(response => {
-                this.user.token = response.data;
-                this.user.password = "";
-                localStorage.setItem("TokenSession", JSON.stringify(response.data));
-                localStorage.setItem("userSession", JSON.stringify(this.user));
-                console.log("log-in");
+        .post("/auth", data)
+        .then(response => {
+          this.user.token = response.data;
+          this.user.password = "";
+          localStorage.setItem("TokenSession", JSON.stringify(response.data));
+          localStorage.setItem("userSession", JSON.stringify(this.user));
+          console.log("log-in");
 
-                if (localStorage.getItem("TokenSession")) {
-                  //router.push({ name: 'Dashboard'}) /BuyerListAllOffers
-                  this.$router.push("/BuyerListAllOffers");
-                  //this.$router.push("/dashboard");
-                }
-              })
-              .catch(e => {
-                console.log(e);
-              });
+          if (localStorage.getItem("TokenSession")) {
+            //router.push({ name: 'Dashboard'}) /BuyerListAllOffers
+            this.$router.push("/BuyerListAllOffers");
+            //this.$router.push("/dashboard");
+          }
+        })
+        .catch(e => {
+          console.log(e);
+        });
       /*localStorage.setItem("userSession", JSON.stringify(this.user));*/
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-  .md-progress-bar {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-  }
+.md-progress-bar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+}
 </style>
