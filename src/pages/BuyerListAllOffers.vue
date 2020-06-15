@@ -16,16 +16,16 @@
                 <md-field>
                   <label>Categoria</label>
                   <md-select
-                          v-model="products.categoria"
-                          name="categoria"
-                          id="cat"
-                          md-dense
-                          @md-selected="resetProductDropdown"
+                      v-model="products.categoria"
+                      name="categoria"
+                      id="cat"
+                      md-dense
+                      @md-selected="resetProductDropdown"
                   >
                     <md-option
-                            v-for="(data, index) in json.myJson"
-                            v-bind:key="index"
-                            v-bind:value="data.categoria"
+                        v-for="(data, index) in json.myJson"
+                        v-bind:key="index"
+                        v-bind:value="data.categoria"
                     >
                       {{ data.categoria }}
                     </md-option>
@@ -156,7 +156,8 @@
           </md-content>
         </div>
         <div >
-            <div class="md-layout md-gutter md-elevation-4" style="background: md-get-palette-color(green, 200);">
+            <!-- paginación -->
+            <div class="md-layout md-gutter md-elevation-4">
                 <div class="md-layout-item md-layout md-gutter">
                     <div class="md-layout-item"></div>
                     <div class="md-layout-item"></div>
@@ -165,15 +166,17 @@
 
                 <div class="md-layout-item md-layout md-gutter">
                     <div class="md-layout-item">
-                        <md-button class="md-icon-button md-primary">
+                        <md-button class="md-icon-button md-primary" @click="changePage(-1)">
                             <md-icon>chevron_left</md-icon>
                         </md-button>
                     </div>
                     <div class="md-layout-item">
-                        <md-content style="background-color: #eeeeee">Página 3</md-content>
+                        <md-button class="md-icon-button md-raised" @click="changePage(0)">
+                            <md-icon>home</md-icon>
+                        </md-button>
                     </div>
-                    <div class="md-layout-item">
-                        <md-button class="md-icon-button md-primary">
+                    <div class="md-layout-item" >
+                        <md-button class="md-icon-button md-primary" @click="changePage(1)">
                             <md-icon>chevron_right</md-icon>
                         </md-button>
                     </div>
@@ -182,8 +185,9 @@
                 <div class="md-layout-item md-layout md-gutter">
                     <div class="md-layout-item"></div>
                     <div class="md-layout-item"></div>
-                    <div class="md-layout-item"></div>
-                    <div class="md-layout-item"></div>
+                    <div class="md-layout-item">
+                        <md-content style="background-color: #eeeeee">pagina {{this.products.page}}</md-content>
+                    </div>
                 </div>
             </div>
         </div>
@@ -253,7 +257,12 @@
           minPrice: "0",
           maxPrice: "0",
           presentation: "0",
-          orderBy: "0"
+          orderBy: "0",
+          direction: "1",
+          pivote: "0",
+          index: 0,
+          page: 1
+
         }
       };
     },
@@ -313,7 +322,11 @@
                         "/" +
                         this.products.minPrice +
                         "/" +
-                        this.products.orderBy,
+                        this.products.orderBy +
+                        "/" +
+                        this.products.direction +
+                        "/" +
+                        this.products.pivote,
                         {
                           headers: {
                             Authorization: `Bearer ${this.token}`
@@ -331,6 +344,28 @@
       },
       resetProductDropdown: function() {
         this.products.producto = "";
+      },
+      changePage(change){
+        if ( this.products.page + change !== 0 ){
+            if(change === 0){
+                this.products.direction = 1;
+                this.products.pivote = 0;
+                this.products.page = 1;
+            }
+            if( change === -1){
+                this.products.direction = 0;
+                this.products.pivote = (this.products.index-1);
+                this.products.index=this.products.index-12;
+                this.products.page = this.products.page+change;
+            }
+            if( change === 1){
+                this.products.direction = 2;
+                this.products.pivote = (this.products.index);
+                this.products.index=this.products.index+12;
+                this.products.page = this.products.page+change;
+            }
+        }
+        getProduct();
       }
     },
     computed: {
