@@ -47,7 +47,7 @@
           $ {{ offer.totalPrice.toFixed(2) }}
         </md-table-cell>
         <md-table-cell md-label="Producto">
-          {{ offer.offerReference }}
+          {{ offer.id }}
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-if="offer.state === 0">
           <md-chip class="text-white" style="background-color: #cc2127">

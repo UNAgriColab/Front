@@ -106,7 +106,7 @@ export default {
       }
     },
     getSellerOffers() {
-      console.log(this.email);
+      console.log("http://localhost:8080/api/v1/offer/user/" + this.email);
       axios
         .get("http://localhost:8080/api/v1/offer/user/" + this.email, {
           headers: {

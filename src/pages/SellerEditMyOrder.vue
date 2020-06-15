@@ -56,7 +56,15 @@
                 Estado de la orden:
               </h2>
             </div>
-            <div class="md-layout-item md-size-100 md-size-33">
+            <div
+              v-if="
+                product.state === 1 ||
+                  product.state === 2 ||
+                  product.state === 3 ||
+                  product.state === 4
+              "
+              class="md-layout-item md-size-100 md-size-33"
+            >
               <md-steppers :md-active-step.sync="state.active" md-linear>
                 <md-step
                   id="first"
@@ -95,6 +103,12 @@
                   <p>Ya recibiste el producto</p>
                 </md-step>
               </md-steppers>
+            </div>
+            <div
+              v-if="product.state === 0"
+              class="md-layout-item md-size-100 md-size-33"
+            >
+              <h2>Cancelado</h2>
             </div>
             <div
               class="md-layout-item md-size-100 text-right"
@@ -166,6 +180,7 @@ export default {
         this.aux = JSON.parse(localStorage.getItem("userSession"));
         this.token = this.aux.token;
         this.product.userEmail = this.aux.email;
+        this.product.userEmail = this.aux.email;
       }
       if (localStorage.getItem("sellerOrderId")) {
         this.product.id = localStorage.getItem("sellerOrderId");
@@ -188,6 +203,7 @@ export default {
           this.product.numberOfUnits = response.data.numberOfUnits;
           this.product.description = response.data.description;
           this.product.id = response.data.id;
+
           this.product.sellerEmail = response.data.sellerEmail;
           this.product.productName = response.data.productName;
           this.product.unit = response.data.unit;
@@ -219,12 +235,14 @@ export default {
       }
     },
     cancelOrder() {
+      const data = {};
       http
         .put(
           "http://localhost:8080/api/v1/order/cancel/" +
             this.product.id +
             "/" +
             this.product.userEmail,
+          data,
           {
             headers: {
               Authorization: `Bearer ${this.token}`
@@ -242,12 +260,14 @@ export default {
       this.submitted = true;
     },
     updateOrder() {
+      const data = {};
       http
         .put(
           "http://localhost:8080/api/v1/order/update/" +
             this.product.id +
             "/" +
             this.product.userEmail,
+          data,
           {
             headers: {
               Authorization: `Bearer ${this.token}`
@@ -256,8 +276,6 @@ export default {
           }
         )
         .then(response => {
-          alert("envia");
-
           console.log(response.data);
         })
         .catch(e => {
