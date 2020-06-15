@@ -22,6 +22,9 @@
                     md-dense
                     @md-selected="resetProductDropdown"
                   >
+                    <md-option value="all">
+                      Todas
+                    </md-option>
                     <md-option
                       v-for="(data, index) in json.myJson"
                       v-bind:key="index"
@@ -315,6 +318,9 @@ export default {
       if (this.products.orderBy === "") {
         this.products.orderBy = 0;
       }
+      if (this.products.producto === "") {
+        this.products.producto = "all";
+      }
       axios
         .get(
           "http://localhost:8080/api/v1/offer/" +
@@ -372,7 +378,7 @@ export default {
           this.products.pivote = this.offers[9].id;
           this.products.page = this.products.page + change;
         }
-        getProduct();
+        this.getProduct();
       }
     }
   },
@@ -381,10 +387,14 @@ export default {
       let categoriaTemp;
       let productos;
       let options = this.json.myJson;
-      for (let i = 0; i < 7; i++) {
-        if (this.products.categoria === options[i]["categoria"]) {
-          productos = options[i]["productos"];
-          categoriaTemp = this.products.categoria;
+      if (this.products.categoria === "all") {
+        productos = ["all"];
+      } else {
+        for (let i = 0; i < 7; i++) {
+          if (this.products.categoria === options[i]["categoria"]) {
+            productos = options[i]["productos"];
+            categoriaTemp = this.products.categoria;
+          }
         }
       }
       return productos;
