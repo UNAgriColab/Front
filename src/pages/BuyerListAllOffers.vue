@@ -260,7 +260,6 @@
           orderBy: "0",
           direction: "1",
           pivote: "0",
-          index: 0,
           page: 1
 
         }
@@ -346,7 +345,9 @@
         this.products.producto = "";
       },
       changePage(change){
-        if ( this.products.page + change !== 0 ){
+        let keys = Object.keys(this.offers);
+        let len = keys.length;
+        if ( this.products.page + change !== 0  && this.offers !== "" && len === 10 ){
             if(change === 0){
                 this.products.direction = 1;
                 this.products.pivote = 0;
@@ -354,18 +355,16 @@
             }
             if( change === -1){
                 this.products.direction = 0;
-                this.products.pivote = (this.products.index-1);
-                this.products.index=this.products.index-12;
+                this.products.pivote = (this.offers[0].id);
                 this.products.page = this.products.page+change;
             }
             if( change === 1){
                 this.products.direction = 2;
-                this.products.pivote = (this.products.index);
-                this.products.index=this.products.index+12;
+                this.products.pivote = (this.offers[9].id);
                 this.products.page = this.products.page+change;
             }
+          getProduct();
         }
-        getProduct();
       }
     },
     computed: {
