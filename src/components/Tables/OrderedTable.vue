@@ -3,10 +3,9 @@
     <md-table v-model="users" :table-header-color="tableHeaderColor">
       <md-table-row slot="md-table-row" slot-scope="{ item }">
         <md-table-cell md-label="ID">{{ item.id }}</md-table-cell>
-        <md-table-cell md-label="Name">{{ item.name }}</md-table-cell>
-        <md-table-cell md-label="Salary">{{ item.salary }}</md-table-cell>
-        <md-table-cell md-label="Country">{{ item.country }}</md-table-cell>
-        <md-table-cell md-label="City">{{ item.city }}</md-table-cell>
+        <md-table-cell md-label="Producto">{{ item.name }}</md-table-cell>
+        <md-table-cell md-label="Cantidad">{{ item.salary }}</md-table-cell>
+        <md-table-cell md-label="Estado">{{ item.country }}</md-table-cell>
       </md-table-row>
     </md-table>
   </div>
@@ -27,31 +26,27 @@ export default {
       users: [
         {
           id: 1,
-          name: "Dakota Rice",
-          salary: "$36,738",
-          country: "Niger",
-          city: "Oud-Turnhout"
+          name: "Papa",
+          salary: "5",
+          country: "Enviado"
         },
         {
           id: 2,
-          name: "Minerva Hooper",
-          salary: "$23,738",
-          country: "Curaçao",
-          city: "Sinaai-Waas"
+          name: "Papa",
+          salary: "15",
+          country: "Enviado"
         },
         {
           id: 3,
-          name: "Sage Rodriguez",
-          salary: "$56,142",
-          country: "Netherlands",
-          city: "Overland Park"
+          name: "Papa",
+          salary: "20",
+          country: "Enviado"
         },
         {
           id: 4,
-          name: "Philip Chaney",
-          salary: "$38,735",
-          country: "Korea, South",
-          city: "Gloucester"
+          name: "Papa",
+          salary: "30",
+          country: "Enviado"
         }
       ]
     };
