@@ -192,17 +192,17 @@ export default {
       if (this.product.state === 0) {
         this.state.active = "zero";
       }
-      if (this.product.state === 1) {
+      if (this.product.state === 2) {
         this.state.active = "first";
       }
-      if (this.product.state === 2) {
+      if (this.product.state === 3) {
         this.state.active = "second";
       }
-      if (this.product.state === 3) {
+      if (this.product.state === 4) {
         this.state.active = "third";
       }
 
-      if (this.product.state === 4) {
+      if (this.product.state === 1) {
         this.state.active = "fourth";
       }
     },
