@@ -169,15 +169,12 @@ export default {
     },
     getOffer() {
       http
-        .get(
-          "https://agricolab-un.appspot.com/api/v1/offer/" + this.offer.path,
-          {
-            headers: {
-              Authorization: `Bearer ${this.token}`
-            },
-            withCredentials: false
-          }
-        )
+        .get("http://localhost:8080/api/v1/offer/" + this.offer.path, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
         .then(response => {
           this.offer.description = response.data.description;
           this.offer.id = response.data.id;
@@ -197,7 +194,7 @@ export default {
         id: this.offer.id
       };
       http
-        .put("/v1/offer/", data, {
+        .put("http://localhost:8080/api/v1/offer/", data, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
@@ -214,7 +211,7 @@ export default {
 
     deleteOffer() {
       http
-        .delete("/v1/offer/del/" + this.offer.path, {
+        .delete("http://localhost:8080/api/v1/offer/del/" + this.offer.path, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },

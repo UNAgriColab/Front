@@ -46,29 +46,29 @@
           $ {{ buyerOrder.totalPrice.toFixed(2) }}
         </md-table-cell>
         <md-table-cell md-label="Producto">
-          {{ buyerOrder.offerReference }}
+          {{ buyerOrder.id }}
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-if="buyerOrder.state === 0">
           <md-chip class="text-white" style="background-color: #cc2127">
             <md-icon class="text-white">cancel</md-icon> Cancelado
           </md-chip>
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 1">
+        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 2">
           <md-chip class="text-white" style="background-color: saddlebrown">
             <md-icon class="text-white">timer</md-icon> En espera
           </md-chip>
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 2">
+        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 3">
           <md-chip class="text-white" style="background-color: #0d47a1">
             <md-icon class="text-white">settings</md-icon> En proceso
           </md-chip>
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 3">
+        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 4">
           <md-chip class="text-white" style="background-color: goldenrod">
             <md-icon class="text-white">local_shipping</md-icon> Enviado
           </md-chip>
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 4">
+        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 1">
           <md-chip class="md-primary text-white">
             <md-icon class="text-white">beenhere</md-icon> Recibido
           </md-chip>
@@ -83,6 +83,7 @@
 
 <script>
 import axios from "axios";
+import EventBus from "../../event-bus";
 
 export default {
   name: "simple-table",
@@ -96,7 +97,13 @@ export default {
     return {
       buyerOrders: null,
       email: "",
-      aux: null
+      product: "all",
+      state: "-1",
+      aux: null,
+      temp: {
+        state: "-1",
+        product: "all"
+      }
     };
   },
   mounted() {
@@ -109,10 +116,20 @@ export default {
         this.token = this.aux.token;
         this.email = this.aux.email;
       }
-      console.log("Get Buyer Orders");
+      if (this.temp.state === "") {
+        this.temp.state = "-1";
+      }
+      if (this.temp.producto === "") {
+        this.temp.product = "all";
+      }
       axios
         .get(
-          "https://agricolab-un.appspot.com/api/v1/order/buyer/" + this.email,
+          "http://localhost:8080/api/v1/order/buyer/" +
+            this.email +
+            "/" +
+            this.temp.product +
+            "/" +
+            this.temp.state,
           {
             headers: {
               Authorization: `Bearer ${this.token}`
@@ -128,6 +145,15 @@ export default {
     addIdBuyerOrder: function(Id) {
       localStorage.setItem("buyerOrderId", Id);
     }
+  },
+  created() {
+    EventBus.$on("dataSend1", data => {
+      this.temp.product = data;
+    });
+    EventBus.$on("dataSend2", data => {
+      this.temp.state = data;
+    });
+    EventBus.$on("readFunction", this.getBuyerOrders);
   }
 };
 </script>

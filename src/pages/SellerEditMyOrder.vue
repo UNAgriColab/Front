@@ -96,10 +96,22 @@
                 </md-step>
               </md-steppers>
             </div>
-            <div class="md-layout-item md-size-100 text-right">
+            <div
+              class="md-layout-item md-size-100 text-right"
+              v-if="
+                product.state === 2 ||
+                  product.state === 3 ||
+                  product.state === 4
+              "
+            >
               <md-button class="md-raised md-success" v-on:click="cancelOrder">
                 cancelar producto
               </md-button>
+            </div>
+            <div
+              class="md-layout-item md-size-100 text-right"
+              v-if="product.state === 2 || product.state === 3"
+            >
               <md-button class="md-raised md-success" v-on:click="updateOrder">
                 Actualizar estado
               </md-button>
@@ -129,7 +141,7 @@ export default {
         productName: "",
         unit: "",
         totalPrice: 0,
-        state: 1,
+        state: "",
         deliveryAdd: "",
 
         canceled: true
@@ -192,33 +204,34 @@ export default {
       if (this.product.state === 0) {
         this.state.active = "zero";
       }
-      if (this.product.state === 1) {
+      if (this.product.state === 2) {
         this.state.active = "first";
       }
-      if (this.product.state === 2) {
+      if (this.product.state === 3) {
         this.state.active = "second";
       }
-      if (this.product.state === 3) {
+      if (this.product.state === 4) {
         this.state.active = "third";
       }
 
-      if (this.product.state === 4) {
+      if (this.product.state === 1) {
         this.state.active = "fourth";
       }
     },
     cancelOrder() {
-      const data = {
-        canceled: (this.product.canceled = false),
-        orderId: this.product.id
-      };
-
       http
-        .put("https://agricolab-un.appspot.com/api/v1/order/seller", data, {
-          headers: {
-            Authorization: `Bearer ${this.token}`
-          },
-          withCredentials: false
-        })
+        .put(
+          "http://localhost:8080/api/v1/order/cancel/" +
+            this.product.id +
+            "/" +
+            this.product.userEmail,
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`
+            },
+            withCredentials: false
+          }
+        )
         .then(response => {
           console.log(response.data);
         })
@@ -229,18 +242,19 @@ export default {
       this.submitted = true;
     },
     updateOrder() {
-      const data = {
-        canceled: (this.product.canceled = true),
-        orderId: this.product.id
-      };
-
       http
-        .put("https://agricolab-un.appspot.com/api/v1/order/seller", data, {
-          headers: {
-            Authorization: `Bearer ${this.token}`
-          },
-          withCredentials: false
-        })
+        .put(
+          "http://localhost:8080/api/v1/order/update/" +
+            this.product.id +
+            "/" +
+            this.product.userEmail,
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`
+            },
+            withCredentials: false
+          }
+        )
         .then(response => {
           alert("envia");
 

@@ -75,12 +75,10 @@
                     id="Ordenar"
                     md-dense
                   >
-                    <md-option value="-1">Seleccionar</md-option>
-                    <md-option value="0">Cancelado</md-option>
+                    <md-option value="-1">Todos</md-option>
                     <md-option value="2">En espera</md-option>
                     <md-option value="3">En proceso</md-option>
                     <md-option value="4">Enviado</md-option>
-                    <md-option value="1">Recibido</md-option>
                   </md-select>
                 </md-field>
               </div>

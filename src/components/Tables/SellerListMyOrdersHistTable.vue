@@ -46,29 +46,29 @@
           $ {{ offer.totalPrice.toFixed(2) }}
         </md-table-cell>
         <md-table-cell md-label="Producto">
-          {{ offer.offerReference }}
+          {{ offer.id }}
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-if="offer.state === 0">
           <md-chip class="text-white" style="background-color: #cc2127">
             <md-icon class="text-white">cancel</md-icon> Cancelado
           </md-chip>
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="offer.state === 1">
+        <md-table-cell md-label="Unidades" v-else-if="offer.state === 2">
           <md-chip class="text-white" style="background-color: saddlebrown">
             <md-icon class="text-white">timer</md-icon> En espera
           </md-chip>
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="offer.state === 2">
+        <md-table-cell md-label="Unidades" v-else-if="offer.state === 3">
           <md-chip class="text-white" style="background-color: #0d47a1">
             <md-icon class="text-white">settings</md-icon> En proceso
           </md-chip>
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="offer.state === 3">
+        <md-table-cell md-label="Unidades" v-else-if="offer.state === 4">
           <md-chip class="text-white" style="background-color: goldenrod">
             <md-icon class="text-white">local_shipping</md-icon> Enviado
           </md-chip>
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="offer.state === 4">
+        <md-table-cell md-label="Unidades" v-else-if="offer.state === 1">
           <md-chip class="md-primary text-white">
             <md-icon class="text-white">beenhere</md-icon> Recibido
           </md-chip>
@@ -83,6 +83,7 @@
 
 <script>
 import axios from "axios";
+import EventBus from "../../event-bus";
 
 export default {
   name: "DoubleLine",
@@ -97,27 +98,41 @@ export default {
       sellerOrders: null,
       userEmail: "",
       offers: null,
-      order: null
+      order: null,
+      email: "",
+      product: "all",
+      state: "-1",
+      aux: null,
+      temp: {
+        state: "-1",
+        product: "all"
+      }
     };
   },
   mounted() {
-    this.storage();
     this.getOffers();
   },
   methods: {
-    storage() {
+    getOffers() {
       if (localStorage.getItem("userSession")) {
         this.aux = JSON.parse(localStorage.getItem("userSession"));
         this.token = this.aux.token;
-        this.userEmail = this.aux.email;
+        this.email = this.aux.email;
       }
-    },
-    getOffers() {
-      console.log("metodo get offers");
+      if (this.temp.state === "") {
+        this.temp.state = "-1";
+      }
+      if (this.temp.producto === "") {
+        this.temp.product = "all";
+      }
       axios
         .get(
-          "https://agricolab-un.appspot.com/api/v1/order/seller/" +
-            this.userEmail,
+          "http://localhost:8080/api/v1/order/seller/" +
+            this.email +
+            "/" +
+            this.temp.product +
+            "/" +
+            this.temp.state,
           {
             headers: {
               Authorization: `Bearer ${this.token}`
@@ -126,21 +141,22 @@ export default {
           }
         )
         .then(response => {
-          console.log(response);
           this.offers = response.data;
-          /*axios.get('http://localhost:8080/api/v1/offer/'+ response.data.offerReference)
-                          .then(response =>{
-        
-                            alert(response.data.offerReference)
-                            console.log(response);
-                            this.order=response.data
-                          })*/
         })
         .catch(e => console.log(e));
     },
-    addIdSellerOrder: function(Id) {
-      localStorage.setItem("sellerOrderId", Id);
+    addIdBuyerOrder: function(Id) {
+      localStorage.setItem("buyerOrderId", Id);
     }
+  },
+  created() {
+    EventBus.$on("dataSend1", data => {
+      this.temp.product = data;
+    });
+    EventBus.$on("dataSend2", data => {
+      this.temp.state = data;
+    });
+    EventBus.$on("readFunction", this.getOffers);
   }
 };
 </script>
