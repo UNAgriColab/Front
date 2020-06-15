@@ -286,22 +286,6 @@ export default {
         this.tokenHeader = "Bearer " + this.token;
       }
     },
-    getOffers: function() {
-      console.log(`Bearer ${this.token}`);
-      axios
-        .get("http://localhost:8080/api/v1/offer", {
-          headers: {
-            Authorization: `Bearer ${this.token}`
-          },
-          withCredentials: false
-        })
-        .then(response => {
-          console.log(response);
-          this.offers = response.data;
-          console.log(this.offers);
-        })
-        .catch(e => console.log(e));
-    },
     addIdOffer: function(Id) {
       localStorage.setItem("buyerOrderId", Id);
     },
@@ -356,30 +340,22 @@ export default {
       this.products.producto = "";
     },
     changePage(change) {
-      let keys = Object.keys(this.offers);
-      let len = keys.length;
-      if (
-        this.products.page + change !== 0 &&
-        this.offers !== "" &&
-        len === 10
-      ) {
-        if (change === 0) {
-          this.products.direction = 1;
-          this.products.pivote = 0;
-          this.products.page = 1;
-        }
-        if (change === -1) {
-          this.products.direction = 0;
-          this.products.pivote = this.offers[0].id;
-          this.products.page = this.products.page + change;
-        }
-        if (change === 1) {
-          this.products.direction = 2;
-          this.products.pivote = this.offers[9].id;
-          this.products.page = this.products.page + change;
-        }
-        this.getProduct();
+      if (change === 0) {
+        this.products.direction = 1;
+        this.products.pivote = 0;
+        this.products.page = 1;
       }
+      if (change === -1) {
+        this.products.direction = 0;
+        this.products.pivote = this.offers[0].id;
+        this.products.page = this.products.page + change;
+      }
+      if (change === 1) {
+        this.products.direction = 2;
+        this.products.pivote = this.offers[9].id;
+        this.products.page = this.products.page + change;
+      }
+      this.getProduct();
     }
   },
   computed: {
