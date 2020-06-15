@@ -339,12 +339,14 @@ export default {
       }
     },
     cancelOrder() {
+      const data = {};
       http
         .put(
           "http://localhost:8080/api/v1/order/cancel/" +
             this.product.id +
             "/" +
             this.product.userEmail,
+          data,
           {
             headers: {
               Authorization: `Bearer ${this.token}`
@@ -362,12 +364,14 @@ export default {
       this.submitted = true;
     },
     updateOrder() {
+      const data = {};
       http
         .put(
           "http://localhost:8080/api/v1/order/update/" +
             this.product.id +
             "/" +
             this.product.userEmail,
+          data,
           {
             headers: {
               Authorization: `Bearer ${this.token}`
@@ -376,8 +380,6 @@ export default {
           }
         )
         .then(response => {
-          alert("envia");
-
           console.log(response.data);
         })
         .catch(e => {
