@@ -106,7 +106,7 @@
               </h4>
             </div>
             <div
-              v-if="product.state === 4"
+              v-if="product.state === 1"
               class="md-layout-item md-size-100 text-right"
             >
               <div>
@@ -215,14 +215,21 @@
               </div>
             </div>
             <div
-              v-else-if="product.state === 1"
               class="md-layout-item md-size-100 text-right"
+              v-if="product.state === 2"
             >
               <md-button class="md-raised md-success" v-on:click="cancelOrder">
                 <md-icon>cancel</md-icon> cancelar producto
               </md-button>
             </div>
-            <div v-else class="md-layout-item md-size-100 text-right"></div>
+            <div
+              class="md-layout-item md-size-100 text-right"
+              v-if="product.state === 4"
+            >
+              <md-button class="md-raised md-success" v-on:click="updateOrder">
+                Actualizar estado
+              </md-button>
+            </div>
           </md-card-content>
         </md-card>
       </div>
@@ -249,7 +256,7 @@ export default {
         productName: "",
         unit: "",
         totalPrice: 0,
-        state: 0,
+        state: "",
         deliveryAdd: "",
 
         canceled: false
@@ -317,34 +324,60 @@ export default {
       if (this.product.state === 0) {
         this.state.active = "zero";
       }
-      if (this.product.state === 1) {
+      if (this.product.state === 2) {
         this.state.active = "first";
       }
-      if (this.product.state === 2) {
+      if (this.product.state === 3) {
         this.state.active = "second";
       }
-      if (this.product.state === 3) {
+      if (this.product.state === 4) {
         this.state.active = "third";
       }
 
-      if (this.product.state === 4) {
+      if (this.product.state === 1) {
         this.state.active = "fourth";
       }
     },
     cancelOrder() {
-      const data = {
-        canceled: this.product.canceled,
-        orderId: this.product.id
-      };
-
       http
-        .put("https://agricolab-un.appspot.com/api/v1/order/buyer", data, {
-          headers: {
-            Authorization: `Bearer ${this.token}`
-          },
-          withCredentials: false
-        })
+        .put(
+          "http://localhost:8080/api/v1/order/cancel/" +
+            this.product.id +
+            "/" +
+            this.product.userEmail,
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`
+            },
+            withCredentials: false
+          }
+        )
         .then(response => {
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+      this.submitted = true;
+    },
+    updateOrder() {
+      http
+        .put(
+          "http://localhost:8080/api/v1/order/update/" +
+            this.product.id +
+            "/" +
+            this.product.userEmail,
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`
+            },
+            withCredentials: false
+          }
+        )
+        .then(response => {
+          alert("envia");
+
           console.log(response.data);
         })
         .catch(e => {
@@ -354,13 +387,13 @@ export default {
     saveQualification: function() {
       console.log("Save Qualification");
       const data = {
-        commentario: this.qualification.commentario,
+        comment: this.qualification.commentario,
         orderReference: this.product.id,
-        calificacion: this.qualification.calificacion
+        qualification: this.qualification.calificacion
       };
       console.log(data);
       http
-        .post("http://localhost:8080/api/v1/order/qualification", data, {
+        .put("http://localhost:8080/api/v1/order/qualification", data, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
@@ -375,7 +408,6 @@ export default {
         .catch(e => {
           console.log(e);
         });
-
       this.submitted = true;
     }
   },

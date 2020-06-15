@@ -16,7 +16,7 @@
                   <md-input
                     id="username"
                     v-model="user.email"
-                    type="text"
+                    type="email"
                     placeholder="Email"
                   >
                   </md-input>
