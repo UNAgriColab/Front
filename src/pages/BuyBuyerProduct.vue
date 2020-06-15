@@ -150,7 +150,7 @@ export default {
     leerAPI() {
       http
         .get(
-          "https://agricolab-un.appspot.com/api/v1/offer/" + this.product.path,
+          "http://localhost:8080/api/v1/offer/" + this.product.path,
           {
             headers: {
               Authorization: `Bearer ${this.token}`

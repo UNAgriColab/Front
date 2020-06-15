@@ -276,7 +276,7 @@ export default {
   mounted() {
     console.log("Hola mounted");
     this.storage();
-    this.getOffers();
+    this.getProduct();
   },
   methods: {
     storage() {
@@ -289,7 +289,7 @@ export default {
     getOffers: function() {
       console.log(`Bearer ${this.token}`);
       axios
-        .get("https://agricolab-un.appspot.com/api/v1/offer", {
+        .get("http://localhost:8080/api/v1/offer", {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
