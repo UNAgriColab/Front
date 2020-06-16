@@ -349,7 +349,7 @@ export default {
     changePage(change) {
       let keys = Object.keys(this.offers);
       let len = keys.length;
-      if (this.products.page + change !== 0 && len !== 10) {
+      if (this.products.page + change !== 0 ) {
         if (change === 0) {
           this.products.direction = 1;
           this.products.pivote = 0;
@@ -360,7 +360,7 @@ export default {
           this.products.pivote = this.offers[0].id;
           this.products.page = this.products.page + change;
         }
-        if (change === 1) {
+        if (change === 1 && len !== 10) {
           this.products.direction = 2;
           this.products.pivote = this.offers[9].id;
           this.products.page = this.products.page + change;
