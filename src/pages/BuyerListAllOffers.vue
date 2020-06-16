@@ -197,7 +197,7 @@
               <div class="md-layout-item"></div>
               <div class="md-layout-item">
                 <md-content style="background-color: #eeeeee">
-                  pagina {{ this.products.page }}
+                  <b> pagina {{ this.products.page }} </b>
                 </md-content>
               </div>
             </div>
