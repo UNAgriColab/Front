@@ -360,7 +360,7 @@ export default {
           this.products.pivote = this.offers[0].id;
           this.products.page = this.products.page + change;
         }
-        if (change === 1 && len !== 10) {
+        if (change === 1 && len === 10) {
           this.products.direction = 2;
           this.products.pivote = this.offers[9].id;
           this.products.page = this.products.page + change;
