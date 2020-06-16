@@ -353,10 +353,10 @@ export default {
         )
         .then(response => {
           console.log(response.data);
-          if (JSON.stringify(response.data) === true) {
+          if (JSON.stringify(response.data) === "true") {
             this.notifyVue("info");
           }
-          if (JSON.stringify(response.data) === false) {
+          if (JSON.stringify(response.data) === "false") {
             this.notifyVue("warning");
           }
         })
@@ -383,10 +383,10 @@ export default {
         )
         .then(response => {
           console.log(response.data);
-          if (JSON.stringify(response.data) === true) {
+          if (JSON.stringify(response.data) === "true") {
             this.notifyVue("success");
           }
-          if (JSON.stringify(response.data) === false) {
+          if (JSON.stringify(response.data) === "false") {
             this.notifyVue("warning");
           }
         })

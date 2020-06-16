@@ -218,7 +218,7 @@ export default {
           this.offer.productName = response.data.productName;
           this.offer.userEmail = response.data.userEmail;
         })
-        .catch(e =>{
+        .catch(e => {
           this.errorReq = e;
           this.notifyVue("danger");
           console.log(e);
@@ -240,10 +240,10 @@ export default {
         })
         .then(response => {
           console.log(response.data);
-          if (JSON.stringify(response.data) === true) {
+          if (JSON.stringify(response.data) === "true") {
             this.notifyVue("success");
           }
-          if (JSON.stringify(response.data) === false) {
+          if (JSON.stringify(response.data) === "false") {
             this.notifyVue("warning");
           }
         })
@@ -251,7 +251,6 @@ export default {
           console.log(e);
           this.errorReq = e;
           this.notifyVue("danger");
-
         });
     },
 
@@ -266,10 +265,10 @@ export default {
         .then(response => {
           console.log(response.data);
 
-          if (JSON.stringify(response.data) === true) {
+          if (JSON.stringify(response.data) === "true") {
             this.notifyVue("info");
           }
-          if (JSON.stringify(response.data) === false) {
+          if (JSON.stringify(response.data) === "false") {
             this.notifyVue("warning");
           }
         })
@@ -293,13 +292,12 @@ export default {
         })
         .then(function() {
           console.log("SUCCESS!!");
-          if (JSON.stringify(response.data) === true) {
+          if (JSON.stringify(response.data) === "true") {
             this.notifyVue("success");
           }
-          if (JSON.stringify(response.data) === false) {
+          if (JSON.stringify(response.data) === "false") {
             this.notifyVue("warning");
           }
-
         })
         .catch(e => {
           this.errorReq = e;
@@ -313,9 +311,9 @@ export default {
       if (AlertType === "success") {
         this.$notify({
           message:
-                  "La oferta N° <b>" +
-                  this.offer.id +
-                  "</b> ha sido actualizada con éxito. ",
+            "La oferta N° <b>" +
+            this.offer.id +
+            "</b> ha sido actualizada con éxito.",
           icon: "add_alert",
           horizontalAlign: "center",
           verticalAlign: "top",
@@ -325,9 +323,7 @@ export default {
       if (AlertType === "warning") {
         this.$notify({
           message:
-                  "La oferta N°" +
-                  this.offer.id + +
-                  " <b>no</b> ha sido actualizada.",
+            "La oferta N°" + this.offer.id + " <b>no</b> ha sido actualizada.",
           icon: "add_alert",
           horizontalAlign: "center",
           verticalAlign: "bottom",
