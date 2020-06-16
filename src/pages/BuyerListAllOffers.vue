@@ -149,7 +149,7 @@
                   </md-select>
                 </md-field>
               </div>
-              <md-button v-on:click="getProduct" :disabled="enableButton">
+              <md-button v-on:click="getOffers" :disabled="enableButton">
                 Ordenar
               </md-button>
             </div>
@@ -289,6 +289,12 @@ export default {
     addIdOffer: function(Id) {
       localStorage.setItem("buyerOrderId", Id);
     },
+    getOffers: function() {
+      this.products.direction = 1;
+      this.products.pivote = 0;
+      this.products.page = 1;
+      this.getProduct();
+    },
     getProduct: function() {
       if (this.products.maxPrice === "") {
         this.products.maxPrice = 0;
@@ -340,22 +346,26 @@ export default {
       this.products.producto = "";
     },
     changePage(change) {
-      if (change === 0) {
-        this.products.direction = 1;
-        this.products.pivote = 0;
-        this.products.page = 1;
+      let keys = Object.keys(this.offers);
+      let len = keys.length;
+      if (this.products.page + change !== 0 && len !== 10) {
+        if (change === 0) {
+          this.products.direction = 1;
+          this.products.pivote = 0;
+          this.products.page = 1;
+        }
+        if (change === -1) {
+          this.products.direction = 0;
+          this.products.pivote = this.offers[0].id;
+          this.products.page = this.products.page + change;
+        }
+        if (change === 1) {
+          this.products.direction = 2;
+          this.products.pivote = this.offers[9].id;
+          this.products.page = this.products.page + change;
+        }
+        this.getProduct();
       }
-      if (change === -1) {
-        this.products.direction = 0;
-        this.products.pivote = this.offers[0].id;
-        this.products.page = this.products.page + change;
-      }
-      if (change === 1) {
-        this.products.direction = 2;
-        this.products.pivote = this.offers[9].id;
-        this.products.page = this.products.page + change;
-      }
-      this.getProduct();
     }
   },
   computed: {
