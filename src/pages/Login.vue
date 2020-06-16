@@ -39,7 +39,6 @@
               <div class="md-layout-item md-size-100 text-center">
                 <md-button
                   v-on:click="saveLogin"
-                  type="submit"
                   class="md-raised md-success"
                 >
                   Ingresar
@@ -99,7 +98,6 @@ export default {
           localStorage.setItem("TokenSession", JSON.stringify(response.data));
           localStorage.setItem("userSession", JSON.stringify(this.user));
           console.log("log-in");
-
           if (localStorage.getItem("TokenSession")) {
             //router.push({ name: 'Dashboard'})
             this.$router.push("/dashboard");
