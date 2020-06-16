@@ -279,7 +279,6 @@ export default {
     };
   },
   mounted() {
-    console.log("Hola mounted");
     this.storage();
     this.getProduct();
   },
