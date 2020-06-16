@@ -6,7 +6,7 @@
     :style="sidebarStyle"
   >
     <div class="logo text-center">
-      <a href="#/login" class="simple-text logo-normal">
+      <a href="#/dashboard" class="simple-text logo-normal">
         <img :src="title" alt="logo agricolab" />
       </a>
     </div>
@@ -79,9 +79,5 @@ export default {
 };
 </script>
 <style>
-@media screen and (min-width: 991px) {
-  .nav-mobile-menu {
-    display: none;
-  }
-}
+@media screen and (min-width: 991px) {}
 </style>

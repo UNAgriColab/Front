@@ -139,7 +139,7 @@ export default {
         })
         .then(response => {
           this.user = response.data;
-          this.phone = response.data .phoneNumber;
+          this.phone = response.data.phoneNumber;
           this.places.city = response.data.mailing.city;
           this.places.department = response.data.mailing.department;
           this.places.address = response.data.mailing.address;
