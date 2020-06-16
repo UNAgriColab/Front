@@ -314,7 +314,7 @@ export default {
       }
       http
         .get(
-          "/v1/offer/" +
+          "/offer/" +
             this.products.producto +
             "/" +
             this.products.maxPrice +
