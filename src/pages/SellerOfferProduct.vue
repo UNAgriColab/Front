@@ -189,10 +189,14 @@ export default {
           this.offer.id = response.data.id;
           console.log(response.data);
           if (JSON.stringify(response.data) === true) {
-            this.notifyVue("success");
+            setTimeout(function() {
+              this.notifyVue("success");
+            }, 2000);
           }
           if (JSON.stringify(response.data) === false) {
-            this.notifyVue("warning");
+            setTimeout(function() {
+              this.notifyVue("warning");
+            }, 2000);
           }
         })
         .catch(e => {
@@ -230,7 +234,7 @@ export default {
       }
       if (AlertType === "danger") {
         this.$notify({
-          message: "Ha ocurrido un error" + this.errorReq + ".",
+          message: "Ha ocurrido un Error" + this.errorReq + ".",
           icon: "add_alert",
           horizontalAlign: "center",
           verticalAlign: "bottom",

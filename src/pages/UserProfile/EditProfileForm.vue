@@ -112,7 +112,8 @@ export default {
         address: "",
         details: "",
         neighbourhood: ""
-      }
+      },
+      errorReq: ""
     };
   },
   mounted() {
@@ -147,7 +148,11 @@ export default {
           this.places.neighbourhood = response.data.mailing.neighbourhood;
           console.log(this.user);
         })
-        .catch(e => console.log(e));
+        .catch(e => {
+          console.log(e);
+          this.errorReq = e;
+          this.notifyVue("danger");
+        });
     },
     updateMailing: function() {
       const mailing = {
@@ -166,10 +171,53 @@ export default {
         })
         .then(response => {
           console.log(response.data);
+          if (JSON.stringify(response.data) === true) {
+            this.notifyVue("success");
+          }
+          if (JSON.stringify(response.data) === false) {
+            this.notifyVue("warning");
+          }
         })
         .catch(e => {
           console.log(e);
+          this.errorReq = e;
+          this.notifyVue("danger");
         });
+    },
+    notifyVue(AlertType) {
+      if (AlertType === "success") {
+        this.$notify({
+          message:
+            "El perfil : <b>" +
+            this.emailAdress +
+            "</b> ha sido actualizado con éxito.",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "top",
+          type: AlertType
+        });
+      }
+      if (AlertType === "warning") {
+        this.$notify({
+          message:
+            "El perfil : " +
+            this.emailAdress +
+            " <b>no</b> ha sido actualizado.",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
+      }
+      if (AlertType === "danger") {
+        this.$notify({
+          message: "Ha ocurrido un error" + this.errorReq + ".",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
+      }
     },
     resetProductDropdown: function() {
       if (this.counter !== 0) {
