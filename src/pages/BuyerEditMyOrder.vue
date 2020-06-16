@@ -273,7 +273,8 @@ export default {
         calificacion: "",
         commentario: "",
         orderReference: ""
-      }
+      },
+      errorReq: ""
     };
   },
   mounted() {
@@ -315,6 +316,8 @@ export default {
         })
         .catch(e => {
           console.log(e);
+          this.errorReq = e;
+          this.notifyVue("danger");
         });
     },
     stepChange() {
@@ -350,9 +353,17 @@ export default {
         )
         .then(response => {
           console.log(response.data);
+          if (JSON.stringify(response.data) === true) {
+            this.notifyVue("info");
+          }
+          if (JSON.stringify(response.data) === false) {
+            this.notifyVue("warning");
+          }
         })
         .catch(e => {
           console.log(e);
+          this.errorReq = e;
+          this.notifyVue("danger");
         });
 
       this.submitted = true;
@@ -372,9 +383,17 @@ export default {
         )
         .then(response => {
           console.log(response.data);
+          if (JSON.stringify(response.data) === true) {
+            this.notifyVue("success");
+          }
+          if (JSON.stringify(response.data) === false) {
+            this.notifyVue("warning");
+          }
         })
         .catch(e => {
           console.log(e);
+          this.errorReq = e;
+          this.notifyVue("danger");
         });
     },
     saveQualification: function() {
@@ -400,8 +419,54 @@ export default {
         })
         .catch(e => {
           console.log(e);
+          this.errorReq = e;
+          this.notifyVue("danger");
         });
       this.submitted = true;
+    },
+    notifyVue(AlertType) {
+      if (AlertType === "success") {
+        this.$notify({
+          message:
+            "El perfil : <b>" +
+            this.product.productName +
+            "</b> ha sido actualizado con éxito.",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "top",
+          type: AlertType
+        });
+      }
+      if (AlertType === "warning") {
+        this.$notify({
+          message:
+            "El perfil : " +
+            this.product.productName +
+            " <b>no</b> ha sido actualizado.",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
+      }
+      if (AlertType === "info") {
+        this.$notify({
+          message: "La orden ha sido cancelada.",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
+      }
+      if (AlertType === "danger") {
+        this.$notify({
+          message: "Ha ocurrido un error" + this.errorReq + ".",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
+      }
     }
   },
   computed: {}
