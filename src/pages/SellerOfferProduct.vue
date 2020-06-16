@@ -121,12 +121,6 @@
             </md-card-content>
           </md-card>
         </form>
-        <md-dialog-alert
-          :md-active.sync="confirmation"
-          md-title="¡Oferta Publicada!"
-          md-content="la nueva oferta ha sido registrada con éxito."
-          md-confirm-text="ok!"
-        />
       </div>
     </div>
   </div>
@@ -157,7 +151,7 @@ export default {
         producto: ""
       },
       submitted: false,
-      confirmation: false
+      errorReq: ""
     };
   },
   mounted() {
@@ -194,13 +188,55 @@ export default {
           console.log("se espera respuesta");
           this.offer.id = response.data.id;
           console.log(response.data);
-          this.confirmation = true;
+          if (JSON.stringify(response.data) === true) {
+            this.notifyVue("success");
+          }
+          if (JSON.stringify(response.data) === false) {
+            this.notifyVue("warning");
+          }
         })
         .catch(e => {
           console.log(e);
+          this.errorReq = e;
+          this.notifyVue("danger");
         });
 
       this.submitted = true;
+    },
+    notifyVue(AlertType) {
+      if (AlertType === "success") {
+        this.$notify({
+          message:
+            "La oferta del producto: <b>" +
+            this.offer.productName +
+            "</b> ha sido publicada con éxito.",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "top",
+          type: AlertType
+        });
+      }
+      if (AlertType === "warning") {
+        this.$notify({
+          message:
+            "La oferta del producto: " +
+            this.offer.productName +
+            " <b>no</b> ha sido publicada.",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
+      }
+      if (AlertType === "danger") {
+        this.$notify({
+          message: "Ha ocurrido un error" + this.errorReq + ".",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
+      }
     }
   },
   computed: {

@@ -37,7 +37,11 @@
                 </md-field>
               </div>
               <div class="md-layout-item md-size-100 text-center">
-                <md-button v-on:click="saveLogin" class="md-raised md-success">
+                <md-button
+                  v-on:click="saveLogin"
+                  type="submit"
+                  class="md-raised md-success"
+                >
                   Ingresar
                 </md-button>
               </div>
@@ -64,6 +68,18 @@
         </div>
       </div>
     </div>
+    <md-dialog-alert
+            :md-active.sync="conflictReq"
+            md-title="Revise sus datos por favor"
+            md-content="Hemos tenido un incoveniente,Por favor revise los campos de registro."
+            md-confirm-text="ok!"
+    />
+    <md-dialog-alert
+            :md-active.sync="errorReq"
+            md-title="Error en la petición HTTP"
+            md-content="Por favor intente mas tarde."
+            md-confirm-text="ok!"
+    />
   </div>
 </template>
 <script>
@@ -78,30 +94,42 @@ export default {
         password: "",
         token: ""
       },
-      submitData: false
+      submitData: false,
+      conflictReq: false,
+      errorReq: false
     };
   },
+  mounted() {
+    this.clearStorage();
+  },
   methods: {
+    clearStorage() {
+      localStorage.clear();
+      this.user.email= "";
+      this.user.password= "";
+      this.user.token= "";
+    },
     saveLogin: function() {
       const data = {
         email: this.user.email,
         password: this.user.password
       };
       http
-        .post("/auth", data)
+        .post("http://localhost:8080/api/auth", data)
         .then(response => {
           this.user.token = response.data;
           this.user.password = "";
           localStorage.setItem("TokenSession", JSON.stringify(response.data));
           localStorage.setItem("userSession", JSON.stringify(this.user));
           console.log("log-in");
-          if (localStorage.getItem("TokenSession")) {
-            //router.push({ name: 'Dashboard'})
-            this.$router.push("/dashboard");
+          this.$router.push("/dashboard");
+          if (JSON.stringify(response.data) === false) {
+            this.conflictReq = true;
           }
         })
         .catch(e => {
           console.log(e);
+          this.errorReq= true;
         });
       /*localStorage.setItem("userSession", JSON.stringify(this.user));*/
     }

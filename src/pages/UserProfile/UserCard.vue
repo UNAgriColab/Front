@@ -15,7 +15,7 @@
       </p>
       <div>
         <h2>
-          Calificación promedio {{ user.qualification.toFixed() }} con
+          Calificación promedio {{ user.qualification.toFixed(2) }} con
           {{ user.numberOfReviews }} reseñas
         </h2>
       </div>
@@ -64,7 +64,8 @@ export default {
         })
         .catch(e => console.log(e));
     }
-  }
+  },
+  computed: {}
 };
 </script>
 <style></style>

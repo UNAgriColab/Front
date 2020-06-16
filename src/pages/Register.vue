@@ -93,7 +93,7 @@
           md-confirm-text="ok!"
         />
         <md-dialog-alert
-          :md-active.sync="confirmation"
+          :md-active.sync="conflictReq"
           md-title="Revise sus datos por favor"
           md-content="Hemos tenido un incoveniente,Por favor revise los campos de registro."
           md-confirm-text="ok!"
@@ -142,10 +142,11 @@ export default {
         .post("/user", data)
         .then(response => {
           console.log(response.data);
-          this.confirmation = JSON.stringify(response.data);
-          this.conflictReq = JSON.stringify(!response.data);
           if (JSON.stringify(response.data) === true) {
+            this.confirmation = JSON.stringify(response.data);
             this.saveLogin();
+          } else {
+            this.conflictReq = true;
           }
         })
         .catch(e => {
