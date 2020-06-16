@@ -168,6 +168,7 @@
                 <md-button
                   class="md-icon-button md-primary"
                   @click="changePage(-1)"
+                  :disabled="disableButtonPag"
                 >
                   <md-icon>chevron_left</md-icon>
                 </md-button>
@@ -176,6 +177,7 @@
                 <md-button
                   class="md-icon-button md-raised"
                   @click="changePage(0)"
+                  :disabled="disableButtonPag"
                 >
                   <md-icon>home</md-icon>
                 </md-button>
@@ -184,6 +186,7 @@
                 <md-button
                   class="md-icon-button md-primary"
                   @click="changePage(1)"
+                  :disabled="disableButtonPag"
                 >
                   <md-icon>chevron_right</md-icon>
                 </md-button>
@@ -258,6 +261,7 @@ export default {
       pricePresentation: "",
       disable: true,
       enable: false,
+      disableButtonPag: false,
       json: {
         myJson: json
       },
@@ -297,6 +301,7 @@ export default {
       this.getProduct();
     },
     getProduct: function() {
+      this.disableButtonPag = true;
       if (this.products.maxPrice === "") {
         this.products.maxPrice = 0;
       }
@@ -336,6 +341,7 @@ export default {
           }
         )
         .then(response => {
+          this.disableButtonPag = false;
           this.offers = response.data;
           if (this.offers !== "") {
             this.enable = true;
@@ -349,7 +355,7 @@ export default {
     changePage(change) {
       let keys = Object.keys(this.offers);
       let len = keys.length;
-      if (this.products.page + change !== 0 ) {
+      if (this.products.page + change !== 0) {
         if (change === 0) {
           this.products.direction = 1;
           this.products.pivote = 0;
