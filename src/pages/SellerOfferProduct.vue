@@ -188,12 +188,12 @@ export default {
           console.log("se espera respuesta");
           this.offer.id = response.data.id;
           console.log(response.data);
-          if (JSON.stringify(response.data) === true) {
+          if (JSON.stringify(response.data) === "true") {
             setTimeout(function() {
               this.notifyVue("success");
             }, 2000);
           }
-          if (JSON.stringify(response.data) === false) {
+          if (JSON.stringify(response.data) === "false") {
             setTimeout(function() {
               this.notifyVue("warning");
             }, 2000);
