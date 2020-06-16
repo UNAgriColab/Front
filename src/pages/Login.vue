@@ -115,7 +115,7 @@ export default {
         password: this.user.password
       };
       http
-        .post("http://localhost:8080/api/auth", data)
+        .post("http://localhost:8080/api/v1/auth", data)
         .then(response => {
           this.user.token = response.data;
           this.user.password = "";
