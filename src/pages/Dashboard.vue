@@ -11,12 +11,12 @@
 
           <template slot="content">
             <p class="category">Ventas</p>
-            <h3 class="title">25</h3>
+            <h3 class="title">{{ userData[1] }}</h3>
           </template>
 
           <template slot="footer">
             <div class="stats">
-              <a href="">
+              <a href="#/SellerListMyOrders">
                 <md-icon class="text-primary">playlist_add</md-icon>
                 Ir a mis pedidos</a
               >
@@ -35,13 +35,13 @@
           <template slot="content">
             <p class="category">Compras</p>
             <h3 class="title">
-              49
+              {{ userData[0] }}
             </h3>
           </template>
 
           <template slot="footer">
             <div class="stats">
-              <a href="">
+              <a href="#/BuyerListMyOrders">
                 <md-icon class="text-primary">add_to_photos</md-icon>
                 Ir a mis solicitudes</a
               >
@@ -59,12 +59,12 @@
 
           <template slot="content">
             <p class="category">Productos</p>
-            <h3 class="title">75</h3>
+            <h3 class="title">{{ userData[3] }}</h3>
           </template>
 
           <template slot="footer">
             <div class="stats">
-              <a href="">
+              <a href="#/BuyerListAllOffers">
                 <md-icon class="text-primary">shopping_cart</md-icon>
                 Ir a la lista de productos</a
               >
@@ -82,12 +82,12 @@
 
           <template slot="content">
             <p class="category">Mi perfil</p>
-            <h3 class="title">1/5</h3>
+            <h3 class="title">{{ userData[2] }}<small> Pendiente</small></h3>
           </template>
 
           <template slot="footer">
             <div class="stats">
-              <a href="">
+              <a href="#/user">
                 <md-icon class="text-primary">person</md-icon>
                 Actualizar</a
               >
@@ -127,6 +127,7 @@
 
 <script>
 import { StatsCard, OrderedTable } from "@/components";
+import http from "../http-common";
 
 export default {
   components: {
@@ -135,11 +136,33 @@ export default {
   },
   data() {
     return {
-      emailsSubscriptionChart: {
-        data: {},
-        options: {}
-      }
+      userData: {},
+      options: {}
     };
+  },
+
+  mounted() {
+    this.getUserData();
+  },
+  methods: {
+    getUserData() {
+      if (localStorage.getItem("userSession")) {
+        this.aux = JSON.parse(localStorage.getItem("userSession"));
+        this.token = this.aux.token;
+        this.email = this.aux.email;
+      }
+      http
+        .get("/user/dashboard/" + this.email, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
+        .then(response => {
+          this.userData = response.data;
+        })
+        .catch(e => console.log(e));
+    }
   }
 };
 </script>
