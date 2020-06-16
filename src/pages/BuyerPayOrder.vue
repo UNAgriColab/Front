@@ -242,9 +242,9 @@ export default {
       }
     },
     getUser: function() {
-      console.log("http://localhost:8080/api/v1/user/" + this.order.buyerEmail);
+      console.log("/user/" + this.order.buyerEmail);
       http
-        .get("http://localhost:8080/api/v1/user/" + this.order.buyerEmail, {
+        .get("/user/" + this.order.buyerEmail, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
@@ -263,7 +263,7 @@ export default {
       console.log(this.token);
       console.log(`Bearer ${this.token}`);
       http
-        .get("http://localhost:8080/api/v1/offer/" + this.order.id, {
+        .get("/offer/" + this.order.id, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
@@ -298,7 +298,7 @@ export default {
         mailing: mailing
       };
       http
-        .post("http://localhost:8080/api/v1/order", data, {
+        .post("/order", data, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },

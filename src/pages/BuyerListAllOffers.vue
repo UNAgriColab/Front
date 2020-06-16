@@ -6,7 +6,7 @@
           <md-content style="background-color: #e8f5e9">
             <div class="md-layout">
               <div
-                      class="md-layout-item
+                class="md-layout-item
                 md-xsmall-size-35
                 md-small-size-25
                 md-medium-size-20
@@ -16,19 +16,19 @@
                 <md-field>
                   <label>Categoria</label>
                   <md-select
-                          v-model="products.categoria"
-                          name="categoria"
-                          id="cat"
-                          md-dense
-                          @md-selected="resetProductDropdown"
+                    v-model="products.categoria"
+                    name="categoria"
+                    id="cat"
+                    md-dense
+                    @md-selected="resetProductDropdown"
                   >
                     <md-option value="all">
                       Todas
                     </md-option>
                     <md-option
-                            v-for="(data, index) in json.myJson"
-                            v-bind:key="index"
-                            v-bind:value="data.categoria"
+                      v-for="(data, index) in json.myJson"
+                      v-bind:key="index"
+                      v-bind:value="data.categoria"
                     >
                       {{ data.categoria }}
                     </md-option>
@@ -37,7 +37,7 @@
                 </md-field>
               </div>
               <div
-                      class="md-layout-item
+                class="md-layout-item
                 md-xsmall-size-35
                 md-small-size-25
                 md-medium-size-20
@@ -47,16 +47,16 @@
                 <md-field>
                   <label>producto</label>
                   <md-select
-                          v-model="products.producto"
-                          name="productos"
-                          id="productos"
-                          :disabled="enableDropdown"
-                          md-dense
+                    v-model="products.producto"
+                    name="productos"
+                    id="productos"
+                    :disabled="enableDropdown"
+                    md-dense
                   >
                     <md-option
-                            v-for="(option, index2) in setOptions"
-                            v-bind:key="index2"
-                            v-bind:value="option"
+                      v-for="(option, index2) in setOptions"
+                      v-bind:key="index2"
+                      v-bind:value="option"
                     >
                       {{ option }}
                     </md-option>
@@ -65,7 +65,7 @@
                 </md-field>
               </div>
               <div
-                      class="
+                class="
                 md-layout-item
                 md-xsmall-size-35
                 md-small-size-30
@@ -81,7 +81,7 @@
                 </md-field>
               </div>
               <div
-                      class="
+                class="
                 md-layout-item
                 md-xsmall-size-30
                 md-small-size-30
@@ -93,15 +93,15 @@
                   <label>Precio máximo unitario</label>
                   <md-icon>attach_money</md-icon>
                   <md-input
-                          v-model="products.maxPrice"
-                          type="number"
-                          :min="maxPriceMin"
+                    v-model="products.maxPrice"
+                    type="number"
+                    :min="maxPriceMin"
                   >
                   </md-input>
                 </md-field>
               </div>
               <div
-                      class="
+                class="
                 md-layout-item
                 md-xsmall-size-30
                 md-small-size-30
@@ -112,10 +112,10 @@
                 <md-field>
                   <label>Unidad</label>
                   <md-select
-                          v-model="products.presentation"
-                          name="presentation"
-                          id="presentation"
-                          md-dense
+                    v-model="products.presentation"
+                    name="presentation"
+                    id="presentation"
+                    md-dense
                   >
                     <md-option value="0">Seleccione una opción</md-option>
                     <md-option value="1">Gramos</md-option>
@@ -131,10 +131,10 @@
                   <!-- label for="unit">Unidad</label -->
                   <label>Ordenar por</label>
                   <md-select
-                          v-model="products.orderBy"
-                          name="Ordenar"
-                          id="Ordenar"
-                          md-dense
+                    v-model="products.orderBy"
+                    name="Ordenar"
+                    id="Ordenar"
+                    md-dense
                   >
                     <md-option value="0">
                       Seleccionar opción
@@ -166,24 +166,24 @@
             <div class="md-layout-item md-layout md-gutter">
               <div class="md-layout-item">
                 <md-button
-                        class="md-icon-button md-primary"
-                        @click="changePage(-1)"
+                  class="md-icon-button md-primary"
+                  @click="changePage(-1)"
                 >
                   <md-icon>chevron_left</md-icon>
                 </md-button>
               </div>
               <div class="md-layout-item">
                 <md-button
-                        class="md-icon-button md-raised"
-                        @click="changePage(0)"
+                  class="md-icon-button md-raised"
+                  @click="changePage(0)"
                 >
                   <md-icon>home</md-icon>
                 </md-button>
               </div>
               <div class="md-layout-item">
                 <md-button
-                        class="md-icon-button md-primary"
-                        @click="changePage(1)"
+                  class="md-icon-button md-primary"
+                  @click="changePage(1)"
                 >
                   <md-icon>chevron_right</md-icon>
                 </md-button>
@@ -201,9 +201,9 @@
           </div>
         </div>
         <md-list
-                class="md-double-line  md-elevation-24"
-                v-for="(offer, index) in offers"
-                v-bind:key="index"
+          class="md-double-line  md-elevation-24"
+          v-for="(offer, index) in offers"
+          v-bind:key="index"
         >
           <md-subheader>{{ offer.productName }}</md-subheader>
           <md-divider></md-divider>
@@ -228,9 +228,9 @@
             </div>
             <router-link to="/BuyerBuyProduct" class="text-white">
               <md-button
-                      class="md-primary md-icon-button md-list-action"
-                      :value="offer.id"
-                      @click="addIdOffer(offer.id)"
+                class="md-primary md-icon-button md-list-action"
+                :value="offer.id"
+                @click="addIdOffer(offer.id)"
               >
                 <md-icon>shopping_cart</md-icon>
               </md-button>
@@ -243,157 +243,160 @@
 </template>
 
 <script>
-  import axios from "axios";
-  import json from "../jsons/productos.json";
-  export default {
-    name: "DoubleLine",
-    data() {
-      return {
-        offers: [],
-        token: "",
-        tokenHeader: "",
-        aux: "",
-        productName: "",
-        pricePresentation: "",
-        disable: true,
-        enable: false,
-        json: {
-          myJson: json
-        },
-        products: {
-          categoria: "",
-          producto: "",
-          minPrice: "0",
-          maxPrice: "0",
-          presentation: "0",
-          orderBy: "0",
-          direction: "1",
-          pivote: "0",
-          page: 1
-        }
-      };
+import json from "../jsons/productos.json";
+import http from "../http-common";
+
+export default {
+  name: "DoubleLine",
+  data() {
+    return {
+      offers: [],
+      token: "",
+      tokenHeader: "",
+      aux: "",
+      productName: "",
+      pricePresentation: "",
+      disable: true,
+      enable: false,
+      json: {
+        myJson: json
+      },
+      products: {
+        categoria: "",
+        producto: "",
+        minPrice: "0",
+        maxPrice: "0",
+        presentation: "0",
+        orderBy: "0",
+        direction: "1",
+        pivote: "0",
+        page: 1
+      }
+    };
+  },
+  mounted() {
+    console.log("Hola mounted");
+    this.storage();
+    this.getProduct();
+  },
+  methods: {
+    storage() {
+      if (localStorage.getItem("userSession")) {
+        this.aux = JSON.parse(localStorage.getItem("userSession"));
+        this.token = this.aux.token;
+        this.tokenHeader = "Bearer " + this.token;
+      }
     },
-    mounted() {
-      console.log("Hola mounted");
-      this.storage();
+    addIdOffer: function(Id) {
+      localStorage.setItem("buyerOrderId", Id);
+    },
+    getOffers: function() {
+      this.products.direction = 1;
+      this.products.pivote = 0;
+      this.products.page = 1;
       this.getProduct();
     },
-    methods: {
-      storage() {
-        if (localStorage.getItem("userSession")) {
-          this.aux = JSON.parse(localStorage.getItem("userSession"));
-          this.token = this.aux.token;
-          this.tokenHeader = "Bearer " + this.token;
-        }
-      },
-      addIdOffer: function(Id) {
-        localStorage.setItem("buyerOrderId", Id);
-      },
-      getOffers: function() {
-        this.products.direction = 1;
-        this.products.pivote = 0;
-        this.products.page = 1;
-        this.getProduct();
-      },
-      getProduct: function() {
-        if (this.products.maxPrice === "") {
-          this.products.maxPrice = 0;
-        }
-        if (this.products.minPrice === "") {
-          this.products.minPrice = 0;
-        }
-        if (this.products.presentation === "") {
-          this.products.presentation = 0;
-        }
-        if (this.products.orderBy === "") {
-          this.products.orderBy = 0;
-        }
-        if (this.products.producto === "") {
-          this.products.producto = "all";
-        }
-        axios
-                .get(
-                        "http://localhost:8080/api/v1/offer/" +
-                        this.products.producto +
-                        "/" +
-                        this.products.maxPrice +
-                        "/" +
-                        this.products.presentation +
-                        "/" +
-                        this.products.minPrice +
-                        "/" +
-                        this.products.orderBy +
-                        "/" +
-                        this.products.direction +
-                        "/" +
-                        this.products.pivote,
-                        {
-                          headers: {
-                            Authorization: `Bearer ${this.token}`
-                          },
-                          withCredentials: false
-                        }
-                )
-                .then(response => {
-                  this.offers = response.data;
-                  if (this.offers !== "") {
-                    this.enable = true;
-                  }
-                })
-                .catch(e => console.log(e));
-      },
-      resetProductDropdown: function() {
-        this.products.producto = "";
-      },
-      changePage(change) {
-        if (this.products.page + change !== 0) {
-          if (change === 0) {
-            this.products.direction = 1;
-            this.products.pivote = 0;
-            this.products.page = 1;
-          }
-          if (change === -1) {
-            this.products.direction = 0;
-            this.products.pivote = this.offers[0].id;
-            this.products.page = this.products.page + change;
-          }
-          if (change === 1 && this.offers !== "") {
-            this.products.direction = 2;
-            this.products.pivote = this.offers[9].id;
-            this.products.page = this.products.page + change;
-          }
-          this.getProduct();
-        }
+    getProduct: function() {
+      if (this.products.maxPrice === "") {
+        this.products.maxPrice = 0;
       }
-    },
-    computed: {
-      setOptions: function() {
-        let categoriaTemp;
-        let productos;
-        let options = this.json.myJson;
-        if (this.products.categoria === "all") {
-          productos = ["all"];
-        } else {
-          for (let i = 0; i < 7; i++) {
-            if (this.products.categoria === options[i]["categoria"]) {
-              productos = options[i]["productos"];
-              categoriaTemp = this.products.categoria;
-            }
+      if (this.products.minPrice === "") {
+        this.products.minPrice = 0;
+      }
+      if (this.products.presentation === "") {
+        this.products.presentation = 0;
+      }
+      if (this.products.orderBy === "") {
+        this.products.orderBy = 0;
+      }
+      if (this.products.producto === "") {
+        this.products.producto = "all";
+      }
+      http
+        .get(
+          "/offer/" +
+            this.products.producto +
+            "/" +
+            this.products.maxPrice +
+            "/" +
+            this.products.presentation +
+            "/" +
+            this.products.minPrice +
+            "/" +
+            this.products.orderBy +
+            "/" +
+            this.products.direction +
+            "/" +
+            this.products.pivote,
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`
+            },
+            withCredentials: false
           }
+        )
+        .then(response => {
+          this.offers = response.data;
+          if (this.offers !== "") {
+            this.enable = true;
+          }
+        })
+        .catch(e => console.log(e));
+    },
+    resetProductDropdown: function() {
+      this.products.producto = "";
+    },
+    changePage(change) {
+      let keys = Object.keys(this.offers);
+      let len = keys.length;
+      if (this.products.page + change !== 0 && len !== 10) {
+        if (change === 0) {
+          this.products.direction = 1;
+          this.products.pivote = 0;
+          this.products.page = 1;
         }
-        return productos;
-      },
-      enableDropdown: function() {
-        return this.products.categoria === "";
-      },
-      enableButton: function() {
-        return this.products.producto === "";
-      },
-      maxPriceMin: function() {
-        return this.products.minPrice;
+        if (change === -1) {
+          this.products.direction = 0;
+          this.products.pivote = this.offers[0].id;
+          this.products.page = this.products.page + change;
+        }
+        if (change === 1) {
+          this.products.direction = 2;
+          this.products.pivote = this.offers[9].id;
+          this.products.page = this.products.page + change;
+        }
+        this.getProduct();
       }
     }
-  };
+  },
+  computed: {
+    setOptions: function() {
+      let categoriaTemp;
+      let productos;
+      let options = this.json.myJson;
+      if (this.products.categoria === "all") {
+        productos = ["all"];
+      } else {
+        for (let i = 0; i < 7; i++) {
+          if (this.products.categoria === options[i]["categoria"]) {
+            productos = options[i]["productos"];
+            categoriaTemp = this.products.categoria;
+          }
+        }
+      }
+      return productos;
+    },
+    enableDropdown: function() {
+      return this.products.categoria === "";
+    },
+    enableButton: function() {
+      return this.products.producto === "";
+    },
+    maxPriceMin: function() {
+      return this.products.minPrice;
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>

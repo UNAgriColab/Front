@@ -1,7 +1,7 @@
 <template>
   <md-card class="md-card-profile">
     <div class="md-card-avatar">
-      <img class="img" :src="cardUserImage" />
+      <img class="img" alt="" :src="cardUserImage" />
     </div>
 
     <md-card-content>
@@ -23,7 +23,7 @@
   </md-card>
 </template>
 <script>
-import axios from "axios";
+import http from "../../http-common";
 
 export default {
   name: "user-card",
@@ -52,8 +52,8 @@ export default {
       }
     },
     getUser: function() {
-      axios
-        .get("http://localhost:8080/api/v1/user/" + this.emailAdress, {
+      http
+        .get("/user/" + this.emailAdress, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },

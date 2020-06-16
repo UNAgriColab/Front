@@ -104,7 +104,6 @@
 
 <script>
 import { SellerListMyOrdersHistTable } from "@/components";
-import axios from "axios";
 import json from "../jsons/productos.json";
 import EventBus from "../event-bus";
 

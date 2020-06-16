@@ -184,7 +184,7 @@ export default {
         description: this.offer.description
       };
       http
-        .post("http://localhost:8080/api/v1/offer", data, {
+        .post("/offer", data, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },

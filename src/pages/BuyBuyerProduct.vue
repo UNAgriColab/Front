@@ -149,7 +149,7 @@ export default {
     },
     leerAPI() {
       http
-        .get("http://localhost:8080/api/v1/offer/" + this.product.path, {
+        .get("/offer/" + this.product.path, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
