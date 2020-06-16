@@ -37,10 +37,7 @@
                 </md-field>
               </div>
               <div class="md-layout-item md-size-100 text-center">
-                <md-button
-                  v-on:click="saveLogin"
-                  class="md-raised md-success"
-                >
+                <md-button v-on:click="saveLogin" class="md-raised md-success">
                   Ingresar
                 </md-button>
               </div>
