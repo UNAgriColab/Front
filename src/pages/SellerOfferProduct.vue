@@ -108,11 +108,7 @@
                   </md-field>
                 </div>
                 <div class="md-layout-item md-size-100 text-right">
-                  <md-button
-                    v-on:click="saveOffer"
-                    class="md-raised md-success"
-                    type="submit"
-                  >
+                  <md-button v-on:click="saveOffer">
                     <md-icon>library_add_check</md-icon>
                     Publicar oferta
                   </md-button>

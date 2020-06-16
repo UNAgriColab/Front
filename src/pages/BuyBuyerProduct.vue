@@ -65,7 +65,7 @@
                   <md-input
                     id="numberOfUnits"
                     type="Number"
-                    min="1"
+                    min="product.minQuantity"
                     required
                     v-model="product.numberOfUnits"
                     name="numberOfUnits"
@@ -208,6 +208,41 @@ export default {
     },
     loadImage() {
       return this.product.images2[0];
+    },
+    notifyVue(AlertType) {
+      if (AlertType === "success") {
+        this.$notify({
+          message:
+            "La oferta del producto: <b>" +
+            this.offer.productName +
+            "</b> ha sido publicada con éxito.",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "top",
+          type: AlertType
+        });
+      }
+      if (AlertType === "warning") {
+        this.$notify({
+          message:
+            "La oferta del producto: " +
+            this.offer.productName +
+            " <b>no</b> ha sido publicada.",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
+      }
+      if (AlertType === "danger") {
+        this.$notify({
+          message: "Ha ocurrido un Error" + this.errorReq + ".",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
+      }
     }
   },
   computed: {}
