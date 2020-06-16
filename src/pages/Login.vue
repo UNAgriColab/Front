@@ -69,16 +69,16 @@
       </div>
     </div>
     <md-dialog-alert
-            :md-active.sync="conflictReq"
-            md-title="Revise sus datos por favor"
-            md-content="Hemos tenido un incoveniente,Por favor revise los campos de registro."
-            md-confirm-text="ok!"
+      :md-active.sync="conflictReq"
+      md-title="Revise sus datos por favor"
+      md-content="Hemos tenido un incoveniente,Por favor revise los campos de registro."
+      md-confirm-text="ok!"
     />
     <md-dialog-alert
-            :md-active.sync="errorReq"
-            md-title="Error en la petición HTTP"
-            md-content="Por favor intente mas tarde."
-            md-confirm-text="ok!"
+      :md-active.sync="errorReq"
+      md-title="Error en la petición HTTP"
+      md-content="Por favor intente mas tarde."
+      md-confirm-text="ok!"
     />
   </div>
 </template>
@@ -105,9 +105,9 @@ export default {
   methods: {
     clearStorage() {
       localStorage.clear();
-      this.user.email= "";
-      this.user.password= "";
-      this.user.token= "";
+      this.user.email = "";
+      this.user.password = "";
+      this.user.token = "";
     },
     saveLogin: function() {
       const data = {
@@ -129,7 +129,7 @@ export default {
         })
         .catch(e => {
           console.log(e);
-          this.errorReq= true;
+          this.errorReq = true;
         });
       /*localStorage.setItem("userSession", JSON.stringify(this.user));*/
     }

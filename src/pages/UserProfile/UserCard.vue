@@ -16,7 +16,7 @@
       <div>
         <h2>
           Calificación promedio {{ user.qualification.toFixed(2) }} con
-          {{ user.numberOfReviews }} reseñas
+          {{ user.numberOfReviews }} reseñas1
         </h2>
       </div>
     </md-card-content>

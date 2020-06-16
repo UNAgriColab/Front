@@ -349,7 +349,7 @@ export default {
     changePage(change) {
       let keys = Object.keys(this.offers);
       let len = keys.length;
-      if (this.products.page + change !== 0 ) {
+      if (this.products.page + change !== 0) {
         if (change === 0) {
           this.products.direction = 1;
           this.products.pivote = 0;
@@ -390,7 +390,11 @@ export default {
       return this.products.categoria === "";
     },
     enableButton: function() {
-      return this.products.producto === "";
+      if (this.products.categoria === "all") {
+        return false;
+      } else {
+        return this.products.producto === "";
+      }
     },
     maxPriceMin: function() {
       return this.products.minPrice;

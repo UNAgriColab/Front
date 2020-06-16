@@ -12,7 +12,7 @@
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
               <label>Teléfono</label>
-              <md-input v-model="phone" type="number"></md-input>
+              <md-input v-model="phone"></md-input>
               <md-icon>call</md-icon>
             </md-field>
             <md-field>
