@@ -182,6 +182,7 @@ export default {
         id: "",
         path: ""
       },
+      errorReq: "",
       file: ""
     };
   },
@@ -217,7 +218,11 @@ export default {
           this.offer.productName = response.data.productName;
           this.offer.userEmail = response.data.userEmail;
         })
-        .catch(e => console.log(e));
+        .catch(e =>{
+          this.errorReq = e;
+          this.notifyVue("danger");
+          console.log(e);
+        });
     },
     updateOffer() {
       const data = {
@@ -234,11 +239,19 @@ export default {
           withCredentials: false
         })
         .then(response => {
-          alert("edita");
           console.log(response.data);
+          if (JSON.stringify(response.data) === true) {
+            this.notifyVue("success");
+          }
+          if (JSON.stringify(response.data) === false) {
+            this.notifyVue("warning");
+          }
         })
         .catch(e => {
           console.log(e);
+          this.errorReq = e;
+          this.notifyVue("danger");
+
         });
     },
 
@@ -251,11 +264,19 @@ export default {
           withCredentials: false
         })
         .then(response => {
-          alert("elimina");
           console.log(response.data);
+
+          if (JSON.stringify(response.data) === true) {
+            this.notifyVue("info");
+          }
+          if (JSON.stringify(response.data) === false) {
+            this.notifyVue("warning");
+          }
         })
         .catch(e => {
           console.log(e);
+          this.errorReq = e;
+          this.notifyVue("danger");
         });
       location.reload(true);
     },
@@ -272,13 +293,65 @@ export default {
         })
         .then(function() {
           console.log("SUCCESS!!");
+          if (JSON.stringify(response.data) === true) {
+            this.notifyVue("success");
+          }
+          if (JSON.stringify(response.data) === false) {
+            this.notifyVue("warning");
+          }
+
         })
-        .catch(function() {
-          console.log("FAILURE!!");
+        .catch(e => {
+          this.errorReq = e;
+          this.notifyVue("danger");
         });
     },
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
+    },
+    notifyVue(AlertType) {
+      if (AlertType === "success") {
+        this.$notify({
+          message:
+                  "La oferta N° <b>" +
+                  this.offer.id +
+                  "</b> ha sido actualizada con éxito. ",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "top",
+          type: AlertType
+        });
+      }
+      if (AlertType === "warning") {
+        this.$notify({
+          message:
+                  "La oferta N°" +
+                  this.offer.id + +
+                  " <b>no</b> ha sido actualizada.",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
+      }
+      if (AlertType === "info") {
+        this.$notify({
+          message: "La oferta ha sido Eliminada.",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
+      }
+      if (AlertType === "danger") {
+        this.$notify({
+          message: "Ha ocurrido un error" + this.errorReq + ".",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
+      }
     }
   }
 };
