@@ -1,141 +1,173 @@
 <template>
   <div class="content">
-    <md-card>
-      <md-card-header data-background-color="green">
-        <h4 class="title">Edita tu producto</h4>
-        <p class="category">
-          Información necesaria para la edición de una oferta
-        </p>
-      </md-card-header>
+    <div>
+      <md-card>
+        <md-card-header data-background-color="green">
+          <h4 class="title">Edita tu producto</h4>
+          <p class="category">
+            Información necesaria para la edición de una oferta ({{ offer.id }})
+          </p>
+        </md-card-header>
 
-      <md-card-content>
-        <div class="md-layout">
-          <div class="md-layout-item md-small-size-100 md-size-100">
-            <md-field>
-              <label for="user">Usuario</label><br />
-              <md-input v-model="offer.userEmail" disabled></md-input>
-            </md-field>
+        <md-card-content>
+          <div class="md-layout">
+            <div class="md-layout-item md-small-size-100 md-size-100">
+              <md-field>
+                <label for="user">Usuario</label><br />
+                <md-input v-model="offer.userEmail" disabled></md-input>
+              </md-field>
+            </div>
           </div>
-        </div>
-        <div class="md-layout">
-          <!-- Layout item list-->
-          <div class="md-layout-item md-small-size-100 md-size-100">
-            <md-field>
-              <label for="productName">Tipo de producto</label>
-              <md-select
-                v-model="offer.productName"
-                name="productName"
-                id="productName"
-                md-dense
-                disabled
+          <div class="md-layout">
+            <!-- Layout item list-->
+            <div class="md-layout-item md-small-size-100 md-size-100">
+              <md-field>
+                <label for="productName">Tipo de producto</label>
+                <md-select
+                  v-model="offer.productName"
+                  name="productName"
+                  id="productName"
+                  md-dense
+                  disabled
+                >
+                  <md-optgroup label="Hortalizas">
+                    <md-option value="ACELGA">ACELGA</md-option>
+                    <md-option value="CEBOLLA CABEZONA BLANCA">
+                      CEBOLLA CABEZONA BLANCA
+                    </md-option>
+                  </md-optgroup>
+
+                  <md-optgroup label="Frutas">
+                    <md-option value="AGUACATE HASS">AGUACATE HASS</md-option>
+                    <md-option value="BANANO CRIOLLO">BANANO CRIOLLO</md-option>
+                    <md-option value="CURUBA BOYACENCE">
+                      CURUBA BOYACENCE
+                    </md-option>
+                    <md-option value="TOMATE DE ARBOL">
+                      TOMATE DE ARBOL
+                    </md-option>
+                  </md-optgroup>
+
+                  <md-optgroup label="Tuberculos">
+                    <md-option value="PAPA CRIOLLA LAVADA">
+                      PAPA CRIOLLA LAVADA
+                    </md-option>
+                    <md-option value="PAPA PASTUSA">PAPA PASTUSA</md-option>
+                    <md-option value="PAPA R12 INDUSTRIAL">
+                      PAPA R12 INDUSTRIAL
+                    </md-option>
+                  </md-optgroup>
+                </md-select>
+              </md-field>
+            </div>
+          </div>
+          <div class="md-layout">
+            <!-- Layout item -->
+            <div class="md-layout-item md-small-size-100 md-size-33">
+              <md-field>
+                <!-- label for="unit">Unidad</label -->
+                <label for="presentation">Unidad</label>
+                <md-select
+                  v-model="offer.presentation"
+                  name="presentation"
+                  id="presentation"
+                  md-dense
+                  disabled
+                >
+                  <md-option value="1">Gramos</md-option>
+                  <md-option value="2">Libras</md-option>
+                  <md-option value="3">Kilogramos</md-option>
+                  <md-option value="4">Arrobas</md-option>
+                  <md-option value="5">Bultos(50 Kg)</md-option>
+                </md-select>
+              </md-field>
+            </div>
+            <div class="md-layout-item md-small-size-100 md-size-33">
+              <md-field>
+                <label for="minQuantity">Numero mínimo de unidades</label>
+                <md-input
+                  id="minQuantity"
+                  v-model="offer.minQuantity"
+                  min="1"
+                  type="number"
+                  placeholder="unidades"
+                ></md-input>
+              </md-field>
+            </div>
+            <div class="md-layout-item md-small-size-100 md-size-33">
+              <md-field>
+                <label>Precio por unidad</label>
+                <md-input
+                  v-model="offer.pricePresentation"
+                  type="number"
+                  min="1"
+                ></md-input>
+                <md-icon>attach_money</md-icon>
+              </md-field>
+            </div>
+            <div class="md-layout-item md-size-100">
+              <md-field maxlength="5">
+                <label>Descripción</label>
+                <md-textarea v-model="offer.description"></md-textarea>
+                <md-icon>description</md-icon>
+              </md-field>
+            </div>
+            <div class="md-layout-item md-size-100 text-right">
+              <md-button
+                v-on:click="deleteOffer"
+                class="md-raised md-danger"
+                type="submit"
+                style="margin-right: 10px"
               >
-                <md-optgroup label="Hortalizas">
-                  <md-option value="ACELGA">ACELGA</md-option>
-                  <md-option value="CEBOLLA CABEZONA BLANCA">
-                    CEBOLLA CABEZONA BLANCA
-                  </md-option>
-                </md-optgroup>
-
-                <md-optgroup label="Frutas">
-                  <md-option value="AGUACATE HASS">AGUACATE HASS</md-option>
-                  <md-option value="BANANO CRIOLLO">BANANO CRIOLLO</md-option>
-                  <md-option value="CURUBA BOYACENCE">
-                    CURUBA BOYACENCE
-                  </md-option>
-                  <md-option value="TOMATE DE ARBOL">TOMATE DE ARBOL</md-option>
-                </md-optgroup>
-
-                <md-optgroup label="Tuberculos">
-                  <md-option value="PAPA CRIOLLA LAVADA">
-                    PAPA CRIOLLA LAVADA
-                  </md-option>
-                  <md-option value="PAPA PASTUSA">PAPA PASTUSA</md-option>
-                  <md-option value="PAPA R12 INDUSTRIAL">
-                    PAPA R12 INDUSTRIAL
-                  </md-option>
-                </md-optgroup>
-              </md-select>
-            </md-field>
-          </div>
-        </div>
-        <div class="md-layout">
-          <!-- Layout item -->
-          <div class="md-layout-item md-small-size-100 md-size-33">
-            <md-field>
-              <!-- label for="unit">Unidad</label -->
-              <label for="presentation">Unidad</label>
-              <md-select
-                v-model="offer.presentation"
-                name="presentation"
-                id="presentation"
-                md-dense
-                disabled
+                <md-icon>delete</md-icon>
+                Eliminar
+              </md-button>
+              <md-button
+                v-on:click="updateOffer"
+                class="md-raised md-success"
+                type="submit"
               >
-                <md-option value="1">Gramos</md-option>
-                <md-option value="2">Libras</md-option>
-                <md-option value="3">Kilogramos</md-option>
-                <md-option value="4">Arrobas</md-option>
-                <md-option value="5">Bultos(50 Kg)</md-option>
-              </md-select>
-            </md-field>
+                <md-icon>create</md-icon>
+                Editar
+              </md-button>
+            </div>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
-            <md-field>
-              <label for="minQuantity">Numero mínimo de unidades</label>
-              <md-input
-                id="minQuantity"
-                v-model="offer.minQuantity"
-                min="1"
-                type="number"
-                placeholder="unidades"
-              ></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
-            <md-field>
-              <label>Precio por unidad</label>
-              <md-input
-                v-model="offer.pricePresentation"
-                type="number"
-                min="1"
-              ></md-input>
-              <md-icon>attach_money</md-icon>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-size-100">
-            <md-field maxlength="5">
-              <label>Descripción</label>
-              <md-textarea v-model="offer.description"></md-textarea>
-              <md-icon>description</md-icon>
-            </md-field>
-          </div>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div>
+      <md-card>
+        <md-card-header data-background-color="green">
+          <h4 class="title">Añade imágenes a tu producto</h4>
+        </md-card-header>
+        <md-card-content>
+          <label>
+            <input
+              type="file"
+              id="file"
+              ref="file"
+              v-on:change="handleFileUpload()"
+            />
+          </label>
           <div class="md-layout-item md-size-100 text-right">
             <md-button
-              v-on:click="deleteOffer"
-              class="md-raised md-danger"
+              v-on:click="submitFile()"
+              class="md-raised md-success"
               type="submit"
               style="margin-right: 10px"
             >
-              <md-icon>delete</md-icon>
-              Eliminar
-            </md-button>
-            <md-button
-              v-on:click="updateOffer"
-              class="md-raised md-success"
-              type="submit"
-            >
-              <md-icon>create</md-icon>
-              Editar
+              Submit
             </md-button>
           </div>
-        </div>
-      </md-card-content>
-    </md-card>
+        </md-card-content>
+      </md-card>
+    </div>
   </div>
 </template>
 
 <script>
 import http from "../http-common";
+import axios from "axios";
 export default {
   name: "offer",
   data() {
@@ -149,7 +181,8 @@ export default {
         description: "",
         id: "",
         path: ""
-      }
+      },
+      file: ""
     };
   },
   mounted() {
@@ -225,6 +258,31 @@ export default {
           console.log(e);
         });
       location.reload(true);
+    },
+    submitFile() {
+      let formData = new FormData();
+      formData.append("file", this.file);
+      axios
+        .post(
+          "http://localhost:8080/api/v1/photo/upload/" + this.offer.id,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${this.token}`
+            },
+            withCredentials: false
+          }
+        )
+        .then(function() {
+          console.log("SUCCESS!!");
+        })
+        .catch(function() {
+          console.log("FAILURE!!");
+        });
+    },
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0];
     }
   }
 };
