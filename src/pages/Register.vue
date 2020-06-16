@@ -85,20 +85,31 @@
               Ingresa a tu cuenta
             </small>
           </router-link>
-          <md-dialog-alert
-            :md-active.sync="confirmation"
-            md-title="Usuario Registrado!"
-            md-content="El <strong>usuario</strong> ha sido registrado con éxito."
-            md-confirm-text="ok!"
-          />
         </div>
+        <md-dialog-alert
+          :md-active.sync="confirmation"
+          md-title="Usuario Registrado con exito!"
+          md-content="El <strong>usuario</strong> ha sido registrado con éxito.."
+          md-confirm-text="ok!"
+        />
+        <md-dialog-alert
+          :md-active.sync="confirmation"
+          md-title="Revise sus datos por favor"
+          md-content="Hemos tenido un incoveniente,Por favor revise los campos de registro."
+          md-confirm-text="ok!"
+        />
+        <md-dialog-alert
+          :md-active.sync="errorReq"
+          md-title="Error en la petición HTTP"
+          md-content="Por favor intente mas tarde."
+          md-confirm-text="ok!"
+        />
       </div>
     </div>
   </div>
 </template>
 <script>
 import http from "../http-common";
-
 export default {
   name: "add-customer",
   data: function() {
@@ -112,13 +123,14 @@ export default {
         active: false
       },
       submitted: false,
-      confirmation: false
+      confirmation: false,
+      conflictReq: false,
+      errorReq: false
     };
   },
   methods: {
     /* eslint-disable no-console */
     saveCustomer() {
-      this.confirmation = true;
       console.log("Boton pulsado");
       const data = {
         name: this.user.username,
@@ -130,14 +142,16 @@ export default {
         .post("https://agricolab-un.appspot.com/api/v1/user", data)
         .then(response => {
           console.log(response.data);
+          this.confirmation = JSON.stringify(response.data);
+          this.conflictReq = JSON.stringify(!response.data);
           if (JSON.stringify(response.data) === true) {
-            saveLogin();
+            this.saveLogin();
           }
         })
         .catch(e => {
-          console.log(e);
+          this.errorReq = true;
+          console.log("error:" + e);
         });
-
       this.submitted = true;
     },
     saveLogin: function() {
@@ -153,11 +167,10 @@ export default {
           localStorage.setItem("TokenSession", JSON.stringify(response.data));
           localStorage.setItem("userSession", JSON.stringify(this.user));
           console.log("log-in");
-
           if (localStorage.getItem("TokenSession")) {
             //router.push({ name: 'Dashboard'}) /BuyerListAllOffers
             this.$router.push("/BuyerListAllOffers");
-            //this.$router.push("/dashboard");
+            //this.$router.push("/dshboard");
           }
         })
         .catch(e => {
