@@ -37,11 +37,7 @@
                 </md-field>
               </div>
               <div class="md-layout-item md-size-100 text-center">
-                <md-button
-                  v-on:click="saveLogin"
-                  type="submit"
-                  class="md-raised md-success"
-                >
+                <md-button v-on:click="saveLogin">
                   Ingresar
                 </md-button>
               </div>
@@ -122,10 +118,10 @@ export default {
           localStorage.setItem("TokenSession", JSON.stringify(response.data));
           localStorage.setItem("userSession", JSON.stringify(this.user));
           console.log("log-in");
-          this.$router.push("/dashboard");
           if (JSON.stringify(response.data) === false) {
             this.conflictReq = true;
           }
+          this.$router.push("/dashboard");
         })
         .catch(e => {
           console.log(e);
