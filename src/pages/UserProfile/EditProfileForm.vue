@@ -101,7 +101,7 @@ export default {
   data() {
     return {
       user: [],
-      phone: null,
+      phone: "",
       aboutme: "",
       tokenHeader: "",
       counter: 0,
