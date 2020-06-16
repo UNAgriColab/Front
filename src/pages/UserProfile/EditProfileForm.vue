@@ -173,7 +173,7 @@ export default {
           console.log(response.data);
           if (JSON.stringify(response.data) === "true") {
             this.notifyVue("success");
-          //}
+          }
           if (JSON.stringify(response.data) === "false") {
             this.notifyVue("warning");
           }
