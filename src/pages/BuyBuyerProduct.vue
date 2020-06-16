@@ -118,7 +118,7 @@ export default {
         user: "",
         price: 0,
         minQuantity: 0,
-        numberOfUnits: 0,
+        numberOfUnits: 1,
         description: "",
         presentation: "",
         userEmail: "",
