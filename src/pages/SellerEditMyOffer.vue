@@ -167,7 +167,7 @@
 
 <script>
 import http from "../http-common";
-import axios from "axios";
+
 export default {
   name: "offer",
   data() {
@@ -202,7 +202,7 @@ export default {
     },
     getOffer() {
       http
-        .get("http://localhost:8080/api/v1/offer/" + this.offer.path, {
+        .get("/offer/" + this.offer.path, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
@@ -227,7 +227,7 @@ export default {
         id: this.offer.id
       };
       http
-        .put("http://localhost:8080/api/v1/offer/", data, {
+        .put("/offer/", data, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
@@ -244,7 +244,7 @@ export default {
 
     deleteOffer() {
       http
-        .delete("http://localhost:8080/api/v1/offer/del/" + this.offer.path, {
+        .delete("/offer/del/" + this.offer.path, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
@@ -262,18 +262,14 @@ export default {
     submitFile() {
       let formData = new FormData();
       formData.append("file", this.file);
-      axios
-        .post(
-          "http://localhost:8080/api/v1/photo/upload/" + this.offer.id,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${this.token}`
-            },
-            withCredentials: false
-          }
-        )
+      http
+        .post("/photo/upload/" + this.offer.id, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
         .then(function() {
           console.log("SUCCESS!!");
         })

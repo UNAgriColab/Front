@@ -243,8 +243,9 @@
 </template>
 
 <script>
-import axios from "axios";
 import json from "../jsons/productos.json";
+import http from "../http-common";
+
 export default {
   name: "DoubleLine",
   data() {
@@ -311,9 +312,9 @@ export default {
       if (this.products.producto === "") {
         this.products.producto = "all";
       }
-      axios
+      http
         .get(
-          "http://localhost:8080/api/v1/offer/" +
+          "/v1/offer/" +
             this.products.producto +
             "/" +
             this.products.maxPrice +

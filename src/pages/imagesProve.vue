@@ -26,7 +26,6 @@
 <script>
 import http from "../http-common";
 import json from "../jsons/productos.json";
-import axios from "axios";
 
 export default {
   name: "add-offer",
@@ -50,8 +49,8 @@ export default {
     submitFile() {
       let formData = new FormData();
       formData.append("file", this.file);
-      axios
-        .post("http://localhost:8080/api/v1/photo/upload/1", formData, {
+      http
+        .post("/photo/upload/1", formData, {
           headers: {
             "Content-Type": "multipart/form-data"
           }

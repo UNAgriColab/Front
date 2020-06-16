@@ -1,4 +1,4 @@
-<template>
+1<template>
   <div class="content">
     <div>
       <div class="md-layout-item md-small-size-100 md-size-100">
@@ -116,7 +116,6 @@
 
 <script>
 import { SellerListMyOrdersTable } from "@/components";
-import axios from "axios";
 import json from "../jsons/productos.json";
 import EventBus from "../event-bus";
 

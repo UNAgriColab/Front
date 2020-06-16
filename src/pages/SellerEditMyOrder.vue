@@ -188,15 +188,12 @@ export default {
     },
     leerAPI() {
       http
-        .get(
-          "https://agricolab-un.appspot.com/api/v1/order/" + this.product.id,
-          {
-            headers: {
-              Authorization: `Bearer ${this.token}`
-            },
-            withCredentials: false
-          }
-        )
+        .get("/order/" + this.product.id, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
         .then(response => {
           this.product.offerReference = response.data.offerReference;
           this.product.buyerEmail = response.data.buyerEmail;
@@ -238,10 +235,7 @@ export default {
       const data = {};
       http
         .put(
-          "http://localhost:8080/api/v1/order/cancel/" +
-            this.product.id +
-            "/" +
-            this.product.userEmail,
+          "/order/cancel/" + this.product.id + "/" + this.product.userEmail,
           data,
           {
             headers: {
@@ -263,10 +257,7 @@ export default {
       const data = {};
       http
         .put(
-          "http://localhost:8080/api/v1/order/update/" +
-            this.product.id +
-            "/" +
-            this.product.userEmail,
+          "/order/update/" + this.product.id + "/" + this.product.userEmail,
           data,
           {
             headers: {

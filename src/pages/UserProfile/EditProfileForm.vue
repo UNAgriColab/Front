@@ -87,7 +87,7 @@
   </form>
 </template>
 <script>
-import axios from "axios";
+import http from "../../http-common";
 import json from "../../jsons/colombia";
 
 export default {
@@ -130,8 +130,8 @@ export default {
     },
     getUser: function() {
       console.log(`Bearer ${this.token}`);
-      axios
-        .get("http://localhost:8080/api/v1/user/" + this.emailAdress, {
+      http
+        .get("/user/" + this.emailAdress, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
@@ -156,17 +156,13 @@ export default {
         details: this.places.details,
         neighbourhood: this.places.neighbourhood
       };
-      axios
-        .post(
-          "http://localhost:8080/api/v1/user/address/" + this.emailAdress,
-          mailing,
-          {
-            headers: {
-              Authorization: `Bearer ${this.token}`
-            },
-            withCredentials: false
-          }
-        )
+      http
+        .post("/user/address/" + this.emailAdress, mailing, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
         .then(response => {
           console.log(response.data);
         })

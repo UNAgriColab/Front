@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import http from "../../http-common";
 import EventBus from "../../event-bus";
 
 export default {
@@ -125,9 +125,9 @@ export default {
       if (this.temp.producto === "") {
         this.temp.product = "all";
       }
-      axios
+      http
         .get(
-          "http://localhost:8080/api/v1/order/seller/" +
+          "/order/seller/" +
             this.email +
             "/" +
             this.temp.product +

@@ -127,7 +127,7 @@ export default {
         password: this.user.password
       };
       http
-        .post("https://agricolab-un.appspot.com/api/v1/user", data)
+        .post("/user", data)
         .then(response => {
           console.log(response.data);
           if (JSON.stringify(response.data) === true) {
