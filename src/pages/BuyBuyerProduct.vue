@@ -37,6 +37,14 @@
             </p>
           </div>
         </md-card>
+        <md-card>
+          <md-card-header data-background-color="green">
+            <h2>Hola</h2>
+          </md-card-header>
+          <md-card-content>
+            <h2>Hola 2</h2>
+          </md-card-content>
+        </md-card>
       </div>
       <div
         class="md-layout-item md-medium-size-40 md-small-size-50 md-xsmall-size-60 md-size-35"

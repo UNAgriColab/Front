@@ -157,7 +157,7 @@ export default {
         neighbourhood: this.places.neighbourhood
       };
       http
-        .post("/user/address/" + this.emailAdress, mailing, {
+        .put("/user/address/" + this.emailAdress + "/" + this.phone, mailing, {
           headers: {
             Authorization: `Bearer ${this.token}`
           },
