@@ -198,6 +198,7 @@ export default {
     payOrder: function(id, numberOfUnits) {
       localStorage.setItem("buyerOrderId", id);
       localStorage.setItem("numberOfUnitsQuantity", numberOfUnits);
+      this.notifyVue("success");
     },
     readImages() {
       for (let i = 0; i < this.product.images.length; i++) {
@@ -206,16 +207,11 @@ export default {
           this.product.images[i];
       }
     },
-    loadImage() {
-      return this.product.images2[0];
-    },
     notifyVue(AlertType) {
       if (AlertType === "success") {
         this.$notify({
           message:
-            "La oferta del producto: <b>" +
-            this.offer.productName +
-            "</b> ha sido publicada con éxito.",
+            "Gracias por la compra del producto" + this.product.name + "</b>.",
           icon: "add_alert",
           horizontalAlign: "center",
           verticalAlign: "top",
@@ -243,6 +239,9 @@ export default {
           type: AlertType
         });
       }
+    },
+    loadImage() {
+      return this.product.images2[0];
     }
   },
   computed: {}
