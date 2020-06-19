@@ -65,7 +65,7 @@
                   <md-input
                     id="numberOfUnits"
                     type="Number"
-                    min="product.minQuantity"
+                    min="{{product.minQuantity}}"
                     required
                     v-model="product.numberOfUnits"
                     name="numberOfUnits"
@@ -198,6 +198,7 @@ export default {
     payOrder: function(id, numberOfUnits) {
       localStorage.setItem("buyerOrderId", id);
       localStorage.setItem("numberOfUnitsQuantity", numberOfUnits);
+      this.notifyVue("success");
     },
     readImages() {
       for (let i = 0; i < this.product.images.length; i++) {
@@ -205,9 +206,6 @@ export default {
           "https://storage.googleapis.com/agricolab-un.appspot.com/" +
           this.product.images[i];
       }
-    },
-    loadImage() {
-      return this.product.images2[0];
     },
     notifyVue(AlertType) {
       if (AlertType === "success") {
@@ -243,6 +241,9 @@ export default {
           type: AlertType
         });
       }
+    },
+    loadImage() {
+      return this.product.images2[0];
     }
   },
   computed: {}
