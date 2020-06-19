@@ -65,7 +65,7 @@
                   <md-input
                     id="numberOfUnits"
                     type="Number"
-                    min="product.minQuantity"
+                    min="{{product.minQuantity}}"
                     required
                     v-model="product.numberOfUnits"
                     name="numberOfUnits"
