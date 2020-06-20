@@ -142,7 +142,7 @@ export default {
         .post("/user", data)
         .then(response => {
           console.log(response.data);
-          if (JSON.stringify(response.data) === true) {
+          if (JSON.stringify(response.data) === "true") {
             this.confirmation = JSON.stringify(response.data);
             this.saveLogin();
           } else {

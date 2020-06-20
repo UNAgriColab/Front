@@ -42,7 +42,7 @@
             <h2>Imagenes</h2>
           </md-card-header>
           <md-card-content>
-            <img :src="product.images[0]" alt="" />
+            <img :src="loadImage" alt="" />
           </md-card-content>
         </md-card>
       </div>
@@ -65,7 +65,7 @@
                   <md-input
                     id="numberOfUnits"
                     type="Number"
-                    min="1"
+                    min="{{product.minQuantity}}"
                     required
                     v-model="product.numberOfUnits"
                     name="numberOfUnits"
@@ -201,6 +201,50 @@ export default {
     payOrder: function(id, numberOfUnits) {
       localStorage.setItem("buyerOrderId", id);
       localStorage.setItem("numberOfUnitsQuantity", numberOfUnits);
+      this.notifyVue("success");
+    },
+    readImages() {
+      for (let i = 0; i < this.product.images.length; i++) {
+        this.product.images2[i] =
+          "https://storage.googleapis.com/agricolab-un.appspot.com/" +
+          this.product.images[i];
+      }
+    },
+    notifyVue(AlertType) {
+      if (AlertType === "success") {
+        this.$notify({
+          message:
+            "Gracias por la compra del producto" + this.product.name + "</b>.",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "top",
+          type: AlertType
+        });
+      }
+      if (AlertType === "warning") {
+        this.$notify({
+          message:
+            "La oferta del producto: " +
+            this.offer.productName +
+            " <b>no</b> ha sido publicada.",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
+      }
+      if (AlertType === "danger") {
+        this.$notify({
+          message: "Ha ocurrido un Error" + this.errorReq + ".",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
+      }
+    },
+    loadImage() {
+      return this.product.images2[0];
     }
   },
   computed: {}
