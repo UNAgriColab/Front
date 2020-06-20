@@ -43,7 +43,6 @@
           </md-card-header>
           <md-card-content>
             <img :src="product.images[0]" alt="" />
-            <img :src="product.images[1]" alt="" />
           </md-card-content>
         </md-card>
       </div>

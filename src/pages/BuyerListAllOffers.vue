@@ -3,7 +3,7 @@
     <div class="md-layout">
       <div class="md-layout-item text-center">
         <div class="md-layout-item md-small-size-100 md-size-100">
-          <md-content style="background-color: #e8f5e9">
+          <md-content style="background-color: #ffffff">
             <div class="md-layout">
               <div
                 class="md-layout-item
@@ -157,7 +157,7 @@
           <md-content style="background-color: #d0ffd0"></md-content>
         </div>
         <div>
-          <div class="md-layout md-gutter md-elevation-4">
+          <div class="md-layout md-gutter">
             <div class="md-layout-item md-layout md-gutter">
               <div class="md-layout-item"></div>
               <div class="md-layout-item"></div>
