@@ -196,8 +196,11 @@
               <div class="md-layout-item"></div>
               <div class="md-layout-item"></div>
               <div class="md-layout-item">
-                <md-content style="background-color: #eeeeee">
-                  <b> pagina {{ this.products.page }} </b>
+                <md-content
+                  class="md-alignment-bottom-center"
+                  style="margin-top:0.5em; background-color: #eeeeee;"
+                >
+                  pagina {{ this.products.page }}
                 </md-content>
               </div>
             </div>
@@ -240,6 +243,56 @@
             </router-link>
           </md-list-item>
         </md-list>
+        <div>
+          <div class="md-layout md-gutter">
+            <div class="md-layout-item md-layout md-gutter">
+              <div class="md-layout-item"></div>
+              <div class="md-layout-item"></div>
+              <div class="md-layout-item"></div>
+            </div>
+            <div class="md-layout-item md-layout md-gutter">
+              <div class="md-layout-item">
+                <md-button
+                  class="md-icon-button md-primary"
+                  @click="changePage(-1)"
+                  :disabled="disableButtonPag"
+                >
+                  <md-icon>chevron_left</md-icon>
+                </md-button>
+              </div>
+              <div class="md-layout-item">
+                <md-button
+                  class="md-icon-button md-raised"
+                  @click="changePage(0)"
+                  :disabled="disableButtonPag"
+                >
+                  <md-icon>home</md-icon>
+                </md-button>
+              </div>
+              <div class="md-layout-item">
+                <md-button
+                  class="md-icon-button md-primary"
+                  @click="changePage(1)"
+                  :disabled="disableButtonPag"
+                >
+                  <md-icon>chevron_right</md-icon>
+                </md-button>
+              </div>
+            </div>
+            <div class="md-layout-item md-layout md-gutter">
+              <div class="md-layout-item"></div>
+              <div class="md-layout-item"></div>
+              <div class="md-layout-item">
+                <md-content
+                  class="md-alignment-bottom-center"
+                  style="margin-top:0.5em; background-color: #eeeeee;"
+                >
+                  pagina {{ this.products.page }}
+                </md-content>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
