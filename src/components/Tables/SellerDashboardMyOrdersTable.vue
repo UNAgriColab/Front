@@ -138,20 +138,12 @@ export default {
         this.temp.product = "all";
       }
       http
-        .get(
-          "/order/seller/actives/" +
-            this.email +
-            "/" +
-            this.temp.product +
-            "/" +
-            this.temp.state,
-          {
-            headers: {
-              Authorization: `Bearer ${this.token}`
-            },
-            withCredentials: false
-          }
-        )
+        .get("/order/ventas/" + this.email, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
         .then(response => {
           this.offers = response.data;
         })
@@ -160,15 +152,6 @@ export default {
     addIdSellerOrder: function(Id) {
       localStorage.setItem("sellerOrderId", Id);
     }
-  },
-  created() {
-    EventBus.$on("dataSend1", data => {
-      this.temp.product = data;
-    });
-    EventBus.$on("dataSend2", data => {
-      this.temp.state = data;
-    });
-    EventBus.$on("readFunction", this.getOffers);
   }
 };
 </script>

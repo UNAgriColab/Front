@@ -1,4 +1,4 @@
-1<template>
+<template>
   <div class="content">
     <div>
       <div class="md-layout-item md-small-size-100 md-size-100">
