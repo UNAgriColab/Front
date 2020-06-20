@@ -42,7 +42,8 @@
             <h2>Imagenes</h2>
           </md-card-header>
           <md-card-content>
-            <img :src="loadImage" alt="" />
+            <img :src="product.images[0]" alt="" />
+            <img :src="product.images[1]" alt="" />
           </md-card-content>
         </md-card>
       </div>
@@ -135,15 +136,13 @@ export default {
         state: 0,
         canceled: false,
         path: "",
-        images: [],
-        images2: []
+        images: []
       }
     };
   },
   mounted() {
     this.storage();
     this.leerAPI();
-    this.readImage();
   },
   methods: {
     /* eslint-disable no-console */
@@ -159,6 +158,7 @@ export default {
       }
     },
     leerAPI() {
+      this.readImage();
       http
         .get("/offer/" + this.product.path, {
           headers: {
@@ -189,7 +189,11 @@ export default {
         })
         .then(response => {
           this.product.images = response.data;
-          this.readImages();
+          for (let i = 0; i < this.product.images.length; i++) {
+            this.product.images[i] =
+              "https://storage.googleapis.com/agricolab-un.appspot.com/" +
+              this.product.images[i];
+          }
         })
         .catch(e => {
           console.log(e);
@@ -198,16 +202,6 @@ export default {
     payOrder: function(id, numberOfUnits) {
       localStorage.setItem("buyerOrderId", id);
       localStorage.setItem("numberOfUnitsQuantity", numberOfUnits);
-    },
-    readImages() {
-      for (let i = 0; i < this.product.images.length; i++) {
-        this.product.images2[i] =
-          "https://storage.googleapis.com/agricolab-un.appspot.com/" +
-          this.product.images[i];
-      }
-    },
-    loadImage() {
-      return this.product.images2[0];
     }
   },
   computed: {}
