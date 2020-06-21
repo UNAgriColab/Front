@@ -53,6 +53,7 @@
         <md-table-cell md-label="Unidades" v-else>
           No asignado
         </md-table-cell>
+
         <md-table-cell md-label="Cantidad mínima">
           {{ sellerOffer.minQuantity }}
         </md-table-cell>
