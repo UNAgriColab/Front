@@ -99,6 +99,7 @@
                   <md-button
                     class="md-raised md-success"
                     @click="payOrder(product.path, product.numberOfUnits)"
+                    :disabled="checkMinQuantity"
                   >
                     <md-icon>queue</md-icon> Pagar
                   </md-button>
@@ -134,7 +135,11 @@ export default {
         canceled: false,
         path: "",
         images: []
-      }
+      },
+      aux: "",
+      token: "",
+      disableButton: true
+
     };
   },
   mounted() {
@@ -242,6 +247,14 @@ export default {
         return this.product.images[0];
       } else {
         return null;
+      }
+    },
+    checkMinQuantity: function() {
+      if (product.minQuantity < product.numberOfUnits){
+        return false;
+      } else {
+        return true;
+
       }
     }
   }
