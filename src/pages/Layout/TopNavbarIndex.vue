@@ -5,16 +5,6 @@
         <img :src="logo" alt="Agricolab" />
       </div>
       <div class="md-toolbar-section-end">
-        <md-button
-          class="md-just-icon md-simple md-toolbar-toggle"
-          :class="{ toggled: $sidebar.showSidebar }"
-          @click="toggleSidebar"
-        >
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </md-button>
-
         <div class="md-collapse">
           <md-list>
             <md-list-item>
@@ -52,11 +42,7 @@ export default {
     }
   },
   data() {},
-  methods: {
-    toggleSidebar() {
-      this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
-    }
-  }
+  methods: {}
 };
 </script>
 
