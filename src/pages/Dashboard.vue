@@ -170,8 +170,14 @@ export default {
 
   mounted() {
     this.getUserData();
+    this.storage();
   },
   methods: {
+    storage() {
+      if (!localStorage.getItem("userSession")) {
+        this.$router.push("/login");
+      }
+    },
     getUserData() {
       if (localStorage.getItem("userSession")) {
         this.aux = JSON.parse(localStorage.getItem("userSession"));

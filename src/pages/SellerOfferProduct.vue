@@ -160,6 +160,8 @@ export default {
         this.aux = JSON.parse(localStorage.getItem("userSession"));
         this.token = this.aux.token;
         this.offer.sellerEmail = this.aux.email;
+      } else {
+        this.$router.push("/login");
       }
     },
     /* eslint-disable no-console */
