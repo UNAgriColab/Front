@@ -181,6 +181,8 @@ export default {
         this.token = this.aux.token;
         this.product.userEmail = this.aux.email;
         this.product.userEmail = this.aux.email;
+      } else {
+        this.$router.push("/login");
       }
       if (localStorage.getItem("sellerOrderId")) {
         this.product.id = localStorage.getItem("sellerOrderId");

@@ -341,6 +341,8 @@ export default {
         this.aux = JSON.parse(localStorage.getItem("userSession"));
         this.token = this.aux.token;
         this.tokenHeader = "Bearer " + this.token;
+      } else {
+        this.$router.push("/login");
       }
     },
     addIdOffer: function(Id) {
