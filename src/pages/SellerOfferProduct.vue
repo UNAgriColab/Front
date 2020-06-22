@@ -38,7 +38,7 @@
                   </div>
                   <div class="md-layout-item md-size-50">
                     <md-field>
-                      <label>producto</label>
+                      <label>Producto</label>
                       <md-select
                         v-model="offer.productName"
                         name="productos"

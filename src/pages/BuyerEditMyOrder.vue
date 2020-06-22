@@ -76,9 +76,7 @@
         <md-card>
           <md-card-header data-background-color="green">
             <div>
-              <h2>
-                Estado de la orden
-              </h2>
+              <h2 class="title">Estado de la orden</h2>
               <p class="category">
                 Actualiza el estado de tu orden
               </p>

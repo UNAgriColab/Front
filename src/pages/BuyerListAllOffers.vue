@@ -46,7 +46,7 @@
                   md-xlarge-size-10"
                 >
                   <md-field>
-                    <label>producto</label>
+                    <label>Producto</label>
                     <md-select
                       v-model="products.producto"
                       name="productos"
@@ -204,7 +204,7 @@
                   class="md-alignment-bottom-center"
                   style="margin-top:0.5em; background-color: #eeeeee;"
                 >
-                  pagina {{ this.products.page }}
+                  Página {{ this.products.page }}
                 </md-content>
               </div>
             </div>
@@ -223,6 +223,7 @@
             <img src="../assets/img/logo/icon.png" alt="" />
             <md-content>
               <div class="md-list-item-text">
+                <span>${{ offer.pricePresentation }}</span>
                 <span v-if="offer.presentation === 1">
                   Oferta en: Gramos
                 </span>
@@ -235,9 +236,6 @@
                 <span v-if="offer.presentation === 4">Oferta en: Arrobas</span>
                 <span v-if="offer.presentation === 5">Oferta en: Bultos</span>
                 <span> Cantidad mínima: {{ offer.minQuantity }}</span>
-                <span>
-                  ${{ offer.pricePresentation }}
-                </span>
               </div>
               <router-link to="/BuyerBuyProduct" class="text-white">
                 <md-button
@@ -296,7 +294,7 @@
                   class="md-alignment-bottom-center"
                   style="margin-top:0.5em; background-color: #eeeeee;"
                 >
-                  pagina {{ this.products.page }}
+                  Página {{ this.products.page }}
                 </md-content>
               </div>
             </div>

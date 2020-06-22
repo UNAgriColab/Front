@@ -1,7 +1,7 @@
 <template>
   <md-card class="md-card-profile">
     <div class="md-card-avatar">
-      <img class="img" alt="" :src="cardUserImage" />
+      <img class="img" alt="" src="../../assets/img/logo/icon.png" />
     </div>
 
     <md-card-content>
