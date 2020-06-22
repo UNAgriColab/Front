@@ -4,20 +4,24 @@
       <div class="md-toolbar-row">
         <div class="md-toolbar-section-start">
           <md-list>
-            <md-list-item href="#/user">
+            <md-list-item>
               <p class="text-footer">
                 <i class="material-icons">eco</i>
-                Acerca de
+              </p>
+              <p class="text-footer">
+                {{ new Date().getFullYear() }}
               </p>
             </md-list-item>
           </md-list>
         </div>
         <div class="md-toolbar-section-end">
           <md-list>
-            <md-list-item href="#/login">
+            <md-list-item>
               <p class="text-footer">
                 <i class="material-icons">copyright</i>
-                {{ new Date().getFullYear() }} AgriColab
+              </p>
+              <p class="text-footer">
+                AgriColab
               </p>
             </md-list-item>
           </md-list>
