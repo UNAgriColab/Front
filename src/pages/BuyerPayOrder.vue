@@ -231,6 +231,8 @@ export default {
         this.aux = JSON.parse(localStorage.getItem("userSession"));
         this.token = this.aux.token;
         this.order.buyerEmail = this.aux.email;
+      } else {
+        this.$router.push("/login");
       }
       if (localStorage.getItem("buyerOrderId")) {
         this.order.id = localStorage.getItem("buyerOrderId");

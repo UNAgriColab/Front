@@ -131,8 +131,15 @@ export default {
   components: {
     SellerListMyOrdersHistTable
   },
-  mounted() {},
+  mounted() {
+    this.storage();
+  },
   methods: {
+    storage() {
+      if (!localStorage.getItem("userSession")) {
+        this.$router.push("/login");
+      }
+    },
     getProduct: function() {
       if (this.products.state === "") {
         this.products.state = -1;

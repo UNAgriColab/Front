@@ -1,4 +1,4 @@
-1<template>
+<template>
   <div class="content">
     <div>
       <div class="md-layout-item md-small-size-100 md-size-100">
@@ -143,8 +143,15 @@ export default {
   components: {
     SellerListMyOrdersTable
   },
-  mounted() {},
+  mounted() {
+    this.storage();
+  },
   methods: {
+    storage() {
+      if (!localStorage.getItem("userSession")) {
+        this.$router.push("/login");
+      }
+    },
     getProduct: function() {
       if (this.products.state === "") {
         this.products.state = -1;

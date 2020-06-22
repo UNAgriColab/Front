@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-table v-model="buyerOrders" :table-header-color="tableHeaderColor">
+    <md-table v-model="sellerOrders" :table-header-color="tableHeaderColor">
       <md-table-row>
         <md-table-head></md-table-head>
         <md-table-head>Producto</md-table-head>
@@ -13,75 +13,63 @@
       </md-table-row>
       <md-table-row
         slot="md-table-row"
-        v-for="(buyerOrder, index) in buyerOrders"
+        v-for="(offer, index) in offers"
         v-bind:key="index"
       >
         <md-table-cell md-label="Imágen">
-          <md-icon style="color: #58b05c">shopping_cart</md-icon>
+          <md-icon style="color: #58b05c">storefront</md-icon>
         </md-table-cell>
         <md-table-cell md-label="Producto">
-          {{ buyerOrder.productName }}
+          {{ offer.productName }}
         </md-table-cell>
         <md-table-cell md-label="Cantidad">
-          {{ buyerOrder.numberOfUnits }}
+          {{ offer.numberOfUnits }}
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-if="buyerOrder.presentation === 1">
+        <md-table-cell md-label="Unidades" v-if="offer.presentation === 1">
           Gramos
         </md-table-cell>
-        <md-table-cell
-          md-label="Unidades"
-          v-else-if="buyerOrder.presentation === 2"
-        >
+        <md-table-cell md-label="Unidades" v-else-if="offer.presentation === 2">
           Libras
         </md-table-cell>
-        <md-table-cell
-          md-label="Unidades"
-          v-else-if="buyerOrder.presentation === 3"
-        >
+        <md-table-cell md-label="Unidades" v-else-if="offer.presentation === 3">
           Kilogramos
         </md-table-cell>
-        <md-table-cell
-          md-label="Unidades"
-          v-else-if="buyerOrder.presentation === 4"
-        >
+        <md-table-cell md-label="Unidades" v-else-if="offer.presentation === 4">
           Arrobas
         </md-table-cell>
-        <md-table-cell
-          md-label="Unidades"
-          v-else-if="buyerOrder.presentation === 5"
-        >
+        <md-table-cell md-label="Unidades" v-else-if="offer.presentation === 5">
           Bultos
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-else>
           No asignado
         </md-table-cell>
         <md-table-cell md-label="Precio Total">
-          $ {{ buyerOrder.totalPrice.toFixed(2) }}
+          $ {{ offer.totalPrice.toFixed(2) }}
         </md-table-cell>
         <md-table-cell md-label="Producto">
-          {{ buyerOrder.id }}
+          {{ offer.id }}
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-if="buyerOrder.state === 0">
+        <md-table-cell md-label="Unidades" v-if="offer.state === 0">
           <md-chip class="text-white" style="background-color: #cc2127">
             <md-icon class="text-white">cancel</md-icon> Cancelado
           </md-chip>
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 2">
+        <md-table-cell md-label="Unidades" v-else-if="offer.state === 2">
           <md-chip class="text-white" style="background-color: saddlebrown">
             <md-icon class="text-white">timer</md-icon> En espera
           </md-chip>
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 3">
+        <md-table-cell md-label="Unidades" v-else-if="offer.state === 3">
           <md-chip class="text-white" style="background-color: #0d47a1">
             <md-icon class="text-white">settings</md-icon> En proceso
           </md-chip>
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 4">
+        <md-table-cell md-label="Unidades" v-else-if="offer.state === 4">
           <md-chip class="text-white" style="background-color: goldenrod">
             <md-icon class="text-white">local_shipping</md-icon> Enviado
           </md-chip>
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.state === 1">
+        <md-table-cell md-label="Unidades" v-else-if="offer.state === 1">
           <md-chip class="md-primary text-white">
             <md-icon class="text-white">beenhere</md-icon> Recibido
           </md-chip>
@@ -89,12 +77,12 @@
         <md-table-cell md-label="Unidades" v-else>
           No asignado
         </md-table-cell>
-        <md-table-cell md-label="Edit">
-          <router-link to="/BuyerEditMyOrder" class="text-white">
+        <md-table-cell md-label="Editar">
+          <router-link to="/SellerEditMyOrder" class="text-white">
             <md-button
               class="md-fab md-icon-button md-raised md-success"
-              :value="buyerOrder.id"
-              @click="addIdBuyerOrder(buyerOrder.id)"
+              :value="offer.id"
+              @click="addIdSellerOrder(offer.id)"
             >
               <md-icon>create</md-icon>
             </md-button>
@@ -106,21 +94,23 @@
 </template>
 
 <script>
-import EventBus from "../../event-bus";
 import http from "../../http-common";
+import EventBus from "../../event-bus";
 
 export default {
-  name: "simple-table",
+  name: "DoubleLine",
   props: {
     tableHeaderColor: {
       type: String,
-      default: "",
-      propA: "a"
+      default: ""
     }
   },
   data() {
     return {
-      buyerOrders: null,
+      sellerOrders: null,
+      userEmail: "",
+      offers: null,
+      order: null,
       email: "",
       product: "all",
       state: "-1",
@@ -132,10 +122,10 @@ export default {
     };
   },
   mounted() {
-    this.getBuyerOrders();
+    this.getOffers();
   },
   methods: {
-    getBuyerOrders() {
+    getOffers() {
       if (localStorage.getItem("userSession")) {
         this.aux = JSON.parse(localStorage.getItem("userSession"));
         this.token = this.aux.token;
@@ -148,37 +138,20 @@ export default {
         this.temp.product = "all";
       }
       http
-        .get(
-          "/order/buyer/actives/" +
-            this.email +
-            "/" +
-            this.temp.product +
-            "/" +
-            this.temp.state,
-          {
-            headers: {
-              Authorization: `Bearer ${this.token}`
-            },
-            withCredentials: false
-          }
-        )
+        .get("/order/ventas/" + this.email, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
         .then(response => {
-          this.buyerOrders = response.data;
+          this.offers = response.data;
         })
         .catch(e => console.log(e));
     },
-    addIdBuyerOrder: function(Id) {
-      localStorage.setItem("buyerOrderId", Id);
+    addIdSellerOrder: function(Id) {
+      localStorage.setItem("sellerOrderId", Id);
     }
-  },
-  created() {
-    EventBus.$on("dataSend1", data => {
-      this.temp.product = data;
-    });
-    EventBus.$on("dataSend2", data => {
-      this.temp.state = data;
-    });
-    EventBus.$on("readFunction", this.getBuyerOrders);
   }
 };
 </script>

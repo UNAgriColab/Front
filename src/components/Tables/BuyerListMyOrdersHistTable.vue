@@ -24,19 +24,31 @@
         <md-table-cell md-label="Cantidad">
           {{ buyerOrder.numberOfUnits }}
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-if="buyerOrder.unit === 1">
+        <md-table-cell md-label="Unidades" v-if="buyerOrder.presentation === 1">
           Gramos
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.unit === 2">
+        <md-table-cell
+          md-label="Unidades"
+          v-else-if="buyerOrder.presentation === 2"
+        >
           Libras
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.unit === 3">
+        <md-table-cell
+          md-label="Unidades"
+          v-else-if="buyerOrder.presentation === 3"
+        >
           Kilogramos
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.unit === 4">
+        <md-table-cell
+          md-label="Unidades"
+          v-else-if="buyerOrder.presentation === 4"
+        >
           Arrobas
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="buyerOrder.unit === 5">
+        <md-table-cell
+          md-label="Unidades"
+          v-else-if="buyerOrder.presentation === 5"
+        >
           Bultos
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-else>

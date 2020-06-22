@@ -65,7 +65,7 @@
                   <md-input
                     id="numberOfUnits"
                     type="Number"
-                    min="1"
+                    min="product.minQuantity"
                     required
                     v-model="product.numberOfUnits"
                     name="numberOfUnits"
@@ -150,8 +150,9 @@ export default {
         this.aux = JSON.parse(localStorage.getItem("userSession"));
         this.token = this.aux.token;
         this.product.userEmail = this.aux.email;
+      } else {
+        this.$router.push("/login");
       }
-      console.log(localStorage.getItem("buyerOrderId"));
       if (localStorage.getItem("buyerOrderId")) {
         this.product.path = localStorage.getItem("buyerOrderId");
       }

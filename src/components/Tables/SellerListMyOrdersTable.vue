@@ -25,19 +25,19 @@
         <md-table-cell md-label="Cantidad">
           {{ offer.numberOfUnits }}
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-if="offer.unit === 1">
+        <md-table-cell md-label="Unidades" v-if="offer.presentation === 1">
           Gramos
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="offer.unit === 2">
+        <md-table-cell md-label="Unidades" v-else-if="offer.presentation === 2">
           Libras
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="offer.unit === 3">
+        <md-table-cell md-label="Unidades" v-else-if="offer.presentation === 3">
           Kilogramos
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="offer.unit === 4">
+        <md-table-cell md-label="Unidades" v-else-if="offer.presentation === 4">
           Arrobas
         </md-table-cell>
-        <md-table-cell md-label="Unidades" v-else-if="offer.unit === 5">
+        <md-table-cell md-label="Unidades" v-else-if="offer.presentation === 5">
           Bultos
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-else>

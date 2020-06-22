@@ -96,6 +96,22 @@
         </stats-card>
       </div>
       <div
+        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
+      >
+        <md-card>
+          <md-card-header data-background-color="green">
+            <h4 class="title">Sugerencias</h4>
+            <p class="category">Productos sugeridos</p>
+          </md-card-header>
+          <md-card-content>
+            <buyer-suggested-offers-table
+              table-header-color="green"
+            ></buyer-suggested-offers-table>
+          </md-card-content>
+        </md-card>
+      </div>
+
+      <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
       >
         <md-card>
@@ -104,7 +120,9 @@
             <p class="category">Resumen de las últimas ventas realizadas</p>
           </md-card-header>
           <md-card-content>
-            <ordered-table table-header-color="green"></ordered-table>
+            <seller-dashboard-my-orders-table
+              table-header-color="green"
+            ></seller-dashboard-my-orders-table>
           </md-card-content>
         </md-card>
       </div>
@@ -117,7 +135,9 @@
             <p class="category">Resumen de las últimas compras realizadas</p>
           </md-card-header>
           <md-card-content>
-            <ordered-table table-header-color="orange"></ordered-table>
+            <buyer-dashboard-my-orders-table
+              table-header-color="orange"
+            ></buyer-dashboard-my-orders-table>
           </md-card-content>
         </md-card>
       </div>
@@ -126,13 +146,20 @@
 </template>
 
 <script>
-import { StatsCard, OrderedTable } from "@/components";
+import {
+  StatsCard,
+  BuyerSuggestedOffersTable,
+  BuyerDashboardMyOrdersTable,
+  SellerDashboardMyOrdersTable
+} from "@/components";
 import http from "../http-common";
 
 export default {
   components: {
     StatsCard,
-    OrderedTable
+    BuyerSuggestedOffersTable,
+    BuyerDashboardMyOrdersTable,
+    SellerDashboardMyOrdersTable
   },
   data() {
     return {
@@ -143,8 +170,14 @@ export default {
 
   mounted() {
     this.getUserData();
+    this.storage();
   },
   methods: {
+    storage() {
+      if (!localStorage.getItem("userSession")) {
+        this.$router.push("/login");
+      }
+    },
     getUserData() {
       if (localStorage.getItem("userSession")) {
         this.aux = JSON.parse(localStorage.getItem("userSession"));
