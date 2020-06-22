@@ -14,7 +14,7 @@
 
       <div
         class="md-content md-theme-selection"
-        style="background-color: rgba(90,178,94,0.7); margin-top: 12px"
+        style="background-color: rgba(90,178,94,0.35); margin-top: 12px"
       >
         <h5 style="color: #FFFFFF">
           <md-icon>shopping_cart</md-icon>
@@ -34,7 +34,7 @@
 
       <div
         class="md-content md-theme-selection"
-        style="background-color: rgba(90,178,94,0.7); margin-top: 12px"
+        style="background-color: rgba(90,178,94,0.35); margin-top: 12px"
       >
         <h5 style="color: #FFFFFF">
           <md-icon>store</md-icon>

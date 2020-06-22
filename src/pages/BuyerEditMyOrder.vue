@@ -2,61 +2,89 @@
   <div class="content">
     <div class="md-layout">
       <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-60"
+        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
         <md-card>
           <md-card-header data-background-color="green">
             <h4 class="title">Edita tu solicitud</h4>
-            <p class="category">
-              Información necesaria para la edición de una solicitud
-            </p>
           </md-card-header>
           <md-card-content>
-            <div id="product">
-              <div class="product">
-                <div class="md-layout-item md-size-100 md-size-50">
-                  <h1 class="title">{{ product.productName }}</h1>
-                  <p class="category">Comprador: {{ product.buyerEmail }}</p>
-                  <p class="category">Id de la orden: {{ product.id }}</p>
-                  <p class="category">
-                    Id de la oferta referenciada {{ product.offerReference }}
-                  </p>
-                  <h3 class="title">
-                    {{ product.numberOfUnits }}
-                    <span v-if="product.unit === 1">
-                      Gramos pedidos.
-                    </span>
-                    <span v-if="product.unit === 2">
-                      Libras pedidas.
-                    </span>
-                    <span v-if="product.unit === 3">
-                      Kilogramos pedidos.
-                    </span>
-                    <span v-if="product.unit === 4">
-                      Arrobas pedidas.
-                    </span>
-                    <span v-if="product.unit === 5">
-                      Bultos pedidos.
-                    </span>
-                  </h3>
-                  <h4 class="title">
-                    Precio total final: ${{ product.totalPrice }}
-                  </h4>
-                </div>
+            <p class="category">
+              Agrega información necesaria para la edición de una solicitud.
+            </p>
+          </md-card-content>
+        </md-card>
+      </div>
+      <div class="md-layout-item md-medium-size-60">
+        <md-card>
+          <md-card-header data-background-color="green">
+            <div class="product">
+              <div class="md-layout-item md-size-100 md-size-33">
+                <h1 class="title">{{ product.productName }}</h1>
+                <p class="category">Vendedor: {{ product.sellerEmail }}</p>
+                <p class="category">Id de la orden: {{ product.id }}</p>
               </div>
             </div>
+          </md-card-header>
+          <md-card-content>
+            <div>
+              <div>
+                <h3 class="title">
+                  {{ product.numberOfUnits }}
+                  <span v-if="product.presentation === 1">
+                    Gramos pedidos.
+                  </span>
+                  <span v-if="product.presentation === 2">
+                    Libras pedidas.
+                  </span>
+                  <span v-if="product.presentation === 3">
+                    Kilogramos pedidos.
+                  </span>
+                  <span v-if="product.presentation === 4">
+                    Arrobas pedidas.
+                  </span>
+                  <span v-if="product.presentation === 5">
+                    Bultos pedidos.
+                  </span>
+                </h3>
+                <h4 class="title">
+                  Precio total final: ${{ product.totalPrice }}
+                </h4>
+              </div>
+            </div>
+          </md-card-content>
+        </md-card>
+      </div>
+      <div class="md-layout-item md-size-40">
+        <md-card>
+          <md-card-header data-background-color="green">
             <h2 class="title">Descripción</h2>
+            <p class="category">De: {{ product.buyerEmail }}</p>
+          </md-card-header>
+          <md-card-content>
             <div class="md-layout-item md-size-100 md-size-33">
               <p class="category">
                 {{ product.description }}
               </p>
             </div>
+          </md-card-content>
+        </md-card>
+      </div>
+      <div
+        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
+      >
+        <md-card>
+          <md-card-header data-background-color="green">
             <div>
               <h2>
-                Estado de la orden:
+                Estado de la orden
               </h2>
+              <p class="category">
+                Actualiza el estado de tu orden
+              </p>
             </div>
-
+          </md-card-header>
+          <md-card-content>
             <div
               v-if="state.active !== 'zero'"
               class="md-layout-item md-size-100 md-size-33"
@@ -254,7 +282,7 @@ export default {
         id: "",
         sellerEmail: "",
         productName: "",
-        unit: "",
+        presentation: "",
         totalPrice: 0,
         state: "",
         deliveryAdd: "",
@@ -308,7 +336,7 @@ export default {
           this.product.id = response.data.id;
           this.product.sellerEmail = response.data.sellerEmail;
           this.product.productName = response.data.productName;
-          this.product.unit = response.data.unit;
+          this.product.presentation = response.data.presentation;
           this.product.totalPrice = response.data.totalPrice;
           this.product.state = response.data.state;
           this.product.deliveryAdd = response.data.deliveryAdd;

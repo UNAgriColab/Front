@@ -3,157 +3,161 @@
     <div class="md-layout">
       <div class="md-layout-item text-center">
         <div class="md-layout-item md-small-size-100 md-size-100">
-          <md-content style="background-color: #ffffff">
-            <div class="md-layout">
-              <div
-                class="md-layout-item
-                md-xsmall-size-35
-                md-small-size-25
-                md-medium-size-20
-                md-large-size-15
-                md-xlarge-size-10"
-              >
-                <md-field>
-                  <label>Categoria</label>
-                  <md-select
-                    v-model="products.categoria"
-                    name="categoria"
-                    id="cat"
-                    md-dense
-                    @md-selected="resetProductDropdown"
-                  >
-                    <md-option value="all">
-                      Todas
-                    </md-option>
-                    <md-option
-                      v-for="(data, index) in json.myJson"
-                      v-bind:key="index"
-                      v-bind:value="data.categoria"
+          <md-card>
+            <md-card-content>
+              <div class="md-layout">
+                <div
+                  class="md-layout-item
+                  md-xsmall-size-35
+                  md-small-size-25
+                  md-medium-size-20
+                  md-large-size-15
+                  md-xlarge-size-10"
+                >
+                  <md-field>
+                    <label>Categoria</label>
+                    <md-select
+                      v-model="products.categoria"
+                      name="categoria"
+                      id="cat"
+                      md-dense
+                      @md-selected="resetProductDropdown"
                     >
-                      {{ data.categoria }}
-                    </md-option>
-                  </md-select>
-                  <md-icon>agriculture</md-icon>
-                </md-field>
-              </div>
-              <div
-                class="md-layout-item
-                md-xsmall-size-35
-                md-small-size-25
-                md-medium-size-20
-                md-large-size-15
-                md-xlarge-size-10"
-              >
-                <md-field>
-                  <label>producto</label>
-                  <md-select
-                    v-model="products.producto"
-                    name="productos"
-                    id="productos"
-                    :disabled="enableDropdown"
-                    md-dense
-                  >
-                    <md-option
-                      v-for="(option, index2) in setOptions"
-                      v-bind:key="index2"
-                      v-bind:value="option"
+                      <md-option value="all">
+                        Todas
+                      </md-option>
+                      <md-option
+                        v-for="(data, index) in json.myJson"
+                        v-bind:key="index"
+                        v-bind:value="data.categoria"
+                      >
+                        {{ data.categoria }}
+                      </md-option>
+                    </md-select>
+                    <md-icon>agriculture</md-icon>
+                  </md-field>
+                </div>
+                <div
+                  class="md-layout-item
+                  md-xsmall-size-35
+                  md-small-size-25
+                  md-medium-size-20
+                  md-large-size-15
+                  md-xlarge-size-10"
+                >
+                  <md-field>
+                    <label>producto</label>
+                    <md-select
+                      v-model="products.producto"
+                      name="productos"
+                      id="productos"
+                      :disabled="enableDropdown"
+                      md-dense
                     >
-                      {{ option }}
-                    </md-option>
-                  </md-select>
-                  <md-icon>spa</md-icon>
-                </md-field>
+                      <md-option
+                        v-for="(option, index2) in setOptions"
+                        v-bind:key="index2"
+                        v-bind:value="option"
+                      >
+                        {{ option }}
+                      </md-option>
+                    </md-select>
+                    <md-icon>spa</md-icon>
+                  </md-field>
+                </div>
+                <div
+                  class="
+                  md-layout-item
+                  md-xsmall-size-35
+                  md-small-size-30
+                  md-medium-size-30
+                  md-large-size-20
+                  md-xlarge-size-15"
+                >
+                  <md-field>
+                    <label>Precio mínimo unitario</label>
+                    <md-icon>attach_money</md-icon>
+                    <md-input v-model="products.minPrice" type="number" min="0">
+                    </md-input>
+                  </md-field>
+                </div>
+                <div
+                  class="
+                  md-layout-item
+                  md-xsmall-size-30
+                  md-small-size-30
+                  md-medium-size-30
+                  md-large-size-20
+                  md-xlarge-size-15"
+                >
+                  <md-field>
+                    <label>Precio máximo unitario</label>
+                    <md-icon>attach_money</md-icon>
+                    <md-input
+                      v-model="products.maxPrice"
+                      type="number"
+                      :min="maxPriceMin"
+                    >
+                    </md-input>
+                  </md-field>
+                </div>
+                <div
+                  class="
+                  md-layout-item
+                  md-xsmall-size-30
+                  md-small-size-30
+                  md-medium-size-30
+                  md-large-size-20
+                  md-xlarge-size-15"
+                >
+                  <md-field>
+                    <label>Unidad</label>
+                    <md-select
+                      v-model="products.presentation"
+                      name="presentation"
+                      id="presentation"
+                      md-dense
+                    >
+                      <md-option value="0">Seleccione una opción</md-option>
+                      <md-option value="1">Gramos</md-option>
+                      <md-option value="2">Libras</md-option>
+                      <md-option value="3">Kilogramos</md-option>
+                      <md-option value="4">Arrobas</md-option>
+                      <md-option value="5">Bultos(50 Kg)</md-option>
+                    </md-select>
+                  </md-field>
+                </div>
+                <div>
+                  <md-field>
+                    <!-- label for="unit">Unidad</label -->
+                    <label>Ordenar por</label>
+                    <md-select
+                      v-model="products.orderBy"
+                      name="Ordenar"
+                      id="Ordenar"
+                      md-dense
+                    >
+                      <md-option value="0">
+                        Seleccionar opción
+                      </md-option>
+                      <md-option value="1">
+                        Precio: De más bajo a más alto
+                      </md-option>
+                      <md-option value="2">
+                        Precio: De más alto a más bajo
+                      </md-option>
+                      <md-option value="3">
+                        Valoración de los clientes
+                      </md-option>
+                    </md-select>
+                  </md-field>
+                </div>
+                <md-button v-on:click="getOffers" :disabled="enableButton">
+                  Ordenar
+                </md-button>
               </div>
-              <div
-                class="
-                md-layout-item
-                md-xsmall-size-35
-                md-small-size-30
-                md-medium-size-30
-                md-large-size-20
-                md-xlarge-size-15"
-              >
-                <md-field>
-                  <label>Precio mínimo unitario</label>
-                  <md-icon>attach_money</md-icon>
-                  <md-input v-model="products.minPrice" type="number" min="0">
-                  </md-input>
-                </md-field>
-              </div>
-              <div
-                class="
-                md-layout-item
-                md-xsmall-size-30
-                md-small-size-30
-                md-medium-size-30
-                md-large-size-20
-                md-xlarge-size-15"
-              >
-                <md-field>
-                  <label>Precio máximo unitario</label>
-                  <md-icon>attach_money</md-icon>
-                  <md-input
-                    v-model="products.maxPrice"
-                    type="number"
-                    :min="maxPriceMin"
-                  >
-                  </md-input>
-                </md-field>
-              </div>
-              <div
-                class="
-                md-layout-item
-                md-xsmall-size-30
-                md-small-size-30
-                md-medium-size-30
-                md-large-size-20
-                md-xlarge-size-15"
-              >
-                <md-field>
-                  <label>Unidad</label>
-                  <md-select
-                    v-model="products.presentation"
-                    name="presentation"
-                    id="presentation"
-                    md-dense
-                  >
-                    <md-option value="0">Seleccione una opción</md-option>
-                    <md-option value="1">Gramos</md-option>
-                    <md-option value="2">Libras</md-option>
-                    <md-option value="3">Kilogramos</md-option>
-                    <md-option value="4">Arrobas</md-option>
-                    <md-option value="5">Bultos(50 Kg)</md-option>
-                  </md-select>
-                </md-field>
-              </div>
-              <div>
-                <md-field>
-                  <!-- label for="unit">Unidad</label -->
-                  <label>Ordenar por</label>
-                  <md-select
-                    v-model="products.orderBy"
-                    name="Ordenar"
-                    id="Ordenar"
-                    md-dense
-                  >
-                    <md-option value="0">
-                      Seleccionar opción
-                    </md-option>
-                    <md-option value="1">
-                      Precio: De más bajo a más alto
-                    </md-option>
-                    <md-option value="2">
-                      Precio: De más alto a más bajo
-                    </md-option>
-                    <md-option value="3">Valoración de los clientes</md-option>
-                  </md-select>
-                </md-field>
-              </div>
-              <md-button v-on:click="getOffers" :disabled="enableButton">
-                Ordenar
-              </md-button>
-            </div>
-          </md-content>
+            </md-card-content>
+          </md-card>
           <md-content style="background-color: #d0ffd0"></md-content>
         </div>
         <div>
@@ -208,36 +212,41 @@
           v-for="(offer, index) in offers"
           v-bind:key="index"
         >
-          <md-subheader>{{ offer.productName }}</md-subheader>
+          <md-header>
+            <h3>{{ offer.productName }}</h3>
+          </md-header>
           <md-divider></md-divider>
           <md-list-item>
-            <md-icon class="md-primary md-size-2x">storefront</md-icon>
-
-            <div class="md-list-item-text">
-              <span> Precio: {{ offer.pricePresentation }}</span>
-              <span v-if="offer.presentation === 1">Oferta en: Gramos</span>
-              <span v-if="offer.presentation === 2">Oferta en: Libras</span>
-              <span v-if="offer.presentation === 3">Oferta en: Kilogramos</span>
-              <span v-if="offer.presentation === 4">Oferta en: Arrobas</span>
-              <span v-if="offer.presentation === 5">Oferta en: Bultos</span>
-              <span> Mínimo que puedes pedir: {{ offer.minQuantity }}</span>
-            </div>
-          </md-list-item>
-
-          <md-list-item class="md-inset md-expand">
-            <div class="md-list-item-text">
-              <h4>Descripción:</h4>
-              <span>{{ offer.description }}</span>
-            </div>
-            <router-link to="/BuyerBuyProduct" class="text-white">
-              <md-button
-                class="md-primary md-icon-button md-list-action"
-                :value="offer.id"
-                @click="addIdOffer(offer.id)"
-              >
-                <md-icon>shopping_cart</md-icon>
-              </md-button>
-            </router-link>
+            <img src="../assets/img/logo/icon.png" alt="" />
+            <md-content>
+              <div class="md-list-item-text">
+                <span v-if="offer.presentation === 1">
+                  Oferta en: Gramos
+                </span>
+                <span v-if="offer.presentation === 2">
+                  Oferta en: Libras
+                </span>
+                <span v-if="offer.presentation === 3">
+                  Oferta en: Kilogramos
+                </span>
+                <span v-if="offer.presentation === 4">Oferta en: Arrobas</span>
+                <span v-if="offer.presentation === 5">Oferta en: Bultos</span>
+                <span> Cantidad mínima: {{ offer.minQuantity }}</span>
+                <span>
+                  ${{ offer.pricePresentation }}
+                </span>
+              </div>
+              <router-link to="/BuyerBuyProduct" class="text-white">
+                <md-button
+                  class="md-primary md-list-action"
+                  :value="offer.id"
+                  @click="addIdOffer(offer.id)"
+                >
+                  Pide
+                  <md-icon>shopping_cart</md-icon>
+                </md-button>
+              </router-link>
+            </md-content>
           </md-list-item>
         </md-list>
       </div>

@@ -44,7 +44,7 @@
 
     &,
     &.md-default{
-        @include btn-styles($light-green);
+        @include btn-styles($green);
     }
 
     &.md-primary{
