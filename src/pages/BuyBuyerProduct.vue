@@ -7,34 +7,19 @@
         <md-card>
           <md-card-header data-background-color="green">
             <h1 class="title">{{ product.name }}</h1>
-            <p class="category">{{ product.user }}</p>
-          </md-card-header>
-        </md-card>
-        <md-card>
-          <md-card-header data-background-color="green">
             <h4 class="title">Descripción del producto</h4>
-            <p class="category">
-              Detalles de la oferta seleccionada
-            </p>
+            <p class="category">{{ product.sellerEmail }}</p>
           </md-card-header>
-          <div
-            class="md-layout-item md-size-100 md-size-50"
-            style="margin-top: 15px"
-          >
-            <span>
-              Lo minimo que puedes pedir son {{ product.minQuantity }} unidades
-            </span>
-          </div>
-          <div
-            class="md-layout-item md-size-100 md-size-50"
-            style="margin-top: 15px"
-          >
-            <h4 class="title">Precio: {{ product.price }}</h4>
-          </div>
           <div class="md-layout-item md-size-100 md-size-100">
             <p class="category">
               {{ product.description }}
             </p>
+          </div>
+          <div
+            class="md-layout-item md-size-100 md-size-50"
+            style="margin-top: 15px"
+          >
+            <h2 class="title">Precio: {{ product.price }}</h2>
           </div>
         </md-card>
         <md-card>
@@ -42,7 +27,12 @@
             <h2>Imagenes</h2>
           </md-card-header>
           <md-card-content>
-            <img :src="loadImage" alt="" />
+            <div v-if="loadImage !== null">
+              <img :src="loadImage" alt="" />
+            </div>
+            <div v-if="loadImage === null">
+              <h3>Esta oferta no tiene imagen disponible</h3>
+            </div>
           </md-card-content>
         </md-card>
       </div>
@@ -59,13 +49,13 @@
           </md-card-header>
           <md-card-content>
             <div class="md-layout">
-              <div class="md-layout-item md-small-size-100 md-size-50">
+              <div class="md-layout-item md-size-50">
                 <md-field>
                   <label>Numero de unidades</label>
                   <md-input
                     id="numberOfUnits"
                     type="Number"
-                    min="product.minQuantity"
+                    :min="product.minQuantity"
                     required
                     v-model="product.numberOfUnits"
                     name="numberOfUnits"
@@ -73,27 +63,36 @@
                   </md-input>
                 </md-field>
               </div>
-              <div class="md-layout-item md-small-size-100 md-size-50">
+              <div class="md-layout-item md-size-50">
                 <span v-if="product.presentation === 1">
                   Gramos pedidos.
                 </span>
-                <span v-if="product.presentation === 2">
+                <span v-else-if="product.presentation === 2">
                   Libras pedidas.
                 </span>
-                <span v-if="product.presentation === 3">
+                <span v-else-if="product.presentation === 3">
                   Kilogramos pedidos.
                 </span>
-                <span v-if="product.presentation === 4">
+                <span v-else-if="product.presentation === 4">
                   Arrobas pedidas.
                 </span>
-                <span v-if="product.presentation === 5">
+                <span v-else-if="product.presentation === 5">
                   Bultos pedidos.
                 </span>
               </div>
+              <div
+                class="md-layout-item md-size-100 md-size-50"
+                style="margin-top: 15px"
+              >
+                <span>
+                  Lo minimo que puedes pedir son {{ product.minQuantity }}
+                  unidades
+                </span>
+              </div>
               <div class="md-layout-item md-size-100 md-size-33">
-                <h3 class="title">
+                <h2 class="title">
                   Precio final: {{ product.numberOfUnits * product.price }}
-                </h3>
+                </h2>
               </div>
               <div class="md-layout-item md-size-100 text-right">
                 <router-link to="/BuyerPayOrder" class="text-white">
@@ -123,13 +122,12 @@ export default {
       product: {
         id: "",
         name: "",
-        user: "",
+        sellerEmail: "",
         price: 0,
         minQuantity: 0,
         numberOfUnits: 1,
         description: "",
         presentation: "",
-        userEmail: "",
         totalPrice: "",
         description2: "",
         state: 0,
@@ -149,7 +147,7 @@ export default {
       if (localStorage.getItem("userSession")) {
         this.aux = JSON.parse(localStorage.getItem("userSession"));
         this.token = this.aux.token;
-        this.product.userEmail = this.aux.email;
+        this.product.sellerEmail = this.aux.email;
       } else {
         this.$router.push("/login");
       }
@@ -168,7 +166,7 @@ export default {
         })
         .then(response => {
           this.product.price = response.data.pricePresentation;
-          this.product.user = response.data.userEmail;
+          this.product.sellerEmail = response.data.sellerEmail;
           this.product.name = response.data.productName;
           this.product.minQuantity = response.data.minQuantity;
           this.product.presentation = response.data.presentation;
@@ -189,10 +187,10 @@ export default {
         })
         .then(response => {
           this.product.images = response.data;
-          for (let i = 0; i < this.product.images.length; i++) {
-            this.product.images[i] =
+          if (this.product.images[0] !== undefined) {
+            this.product.images[0] =
               "https://storage.googleapis.com/agricolab-un.appspot.com/" +
-              this.product.images[i];
+              this.product.images[0];
           }
         })
         .catch(e => {
@@ -203,13 +201,6 @@ export default {
       localStorage.setItem("buyerOrderId", id);
       localStorage.setItem("numberOfUnitsQuantity", numberOfUnits);
       this.notifyVue("success");
-    },
-    readImages() {
-      for (let i = 0; i < this.product.images.length; i++) {
-        this.product.images2[i] =
-          "https://storage.googleapis.com/agricolab-un.appspot.com/" +
-          this.product.images[i];
-      }
     },
     notifyVue(AlertType) {
       if (AlertType === "success") {
@@ -243,11 +234,16 @@ export default {
           type: AlertType
         });
       }
-    },
-    loadImage() {
-      return this.product.images2[0];
     }
   },
-  computed: {}
+  computed: {
+    loadImage() {
+      if (this.product.images[0] !== undefined) {
+        return this.product.images[0];
+      } else {
+        return null;
+      }
+    }
+  }
 };
 </script>

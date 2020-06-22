@@ -11,53 +11,10 @@
 
         <md-card-content>
           <div class="md-layout">
-            <div class="md-layout-item md-small-size-100 md-size-100">
-              <md-field>
-                <label for="user">Usuario</label><br />
-                <md-input v-model="offer.userEmail" disabled></md-input>
-              </md-field>
-            </div>
-          </div>
-          <div class="md-layout">
             <!-- Layout item list-->
             <div class="md-layout-item md-small-size-100 md-size-100">
-              <md-field>
-                <label for="productName">Tipo de producto</label>
-                <md-select
-                  v-model="offer.productName"
-                  name="productName"
-                  id="productName"
-                  md-dense
-                  disabled
-                >
-                  <md-optgroup label="Hortalizas">
-                    <md-option value="ACELGA">ACELGA</md-option>
-                    <md-option value="CEBOLLA CABEZONA BLANCA">
-                      CEBOLLA CABEZONA BLANCA
-                    </md-option>
-                  </md-optgroup>
-
-                  <md-optgroup label="Frutas">
-                    <md-option value="AGUACATE HASS">AGUACATE HASS</md-option>
-                    <md-option value="BANANO CRIOLLO">BANANO CRIOLLO</md-option>
-                    <md-option value="CURUBA BOYACENCE">
-                      CURUBA BOYACENCE
-                    </md-option>
-                    <md-option value="TOMATE DE ARBOL">
-                      TOMATE DE ARBOL
-                    </md-option>
-                  </md-optgroup>
-
-                  <md-optgroup label="Tuberculos">
-                    <md-option value="PAPA CRIOLLA LAVADA">
-                      PAPA CRIOLLA LAVADA
-                    </md-option>
-                    <md-option value="PAPA PASTUSA">PAPA PASTUSA</md-option>
-                    <md-option value="PAPA R12 INDUSTRIAL">
-                      PAPA R12 INDUSTRIAL
-                    </md-option>
-                  </md-optgroup>
-                </md-select>
+              <md-field v-model="offer.productName">
+                {{ offer.productName }}
               </md-field>
             </div>
           </div>
@@ -66,13 +23,12 @@
             <div class="md-layout-item md-small-size-100 md-size-33">
               <md-field>
                 <!-- label for="unit">Unidad</label -->
-                <label for="presentation">Unidad</label>
+                <label>Unidad</label>
                 <md-select
                   v-model="offer.presentation"
                   name="presentation"
                   id="presentation"
                   md-dense
-                  disabled
                 >
                   <md-option value="1">Gramos</md-option>
                   <md-option value="2">Libras</md-option>
@@ -84,7 +40,7 @@
             </div>
             <div class="md-layout-item md-small-size-100 md-size-33">
               <md-field>
-                <label for="minQuantity">Numero mínimo de unidades</label>
+                <label>Numero mínimo de unidades</label>
                 <md-input
                   id="minQuantity"
                   v-model="offer.minQuantity"
@@ -141,14 +97,29 @@
           <h4 class="title">Añade imágenes a tu producto</h4>
         </md-card-header>
         <md-card-content>
-          <label>
-            <input
-              type="file"
-              id="file"
-              ref="file"
-              v-on:change="handleFileUpload()"
-            />
-          </label>
+          <div v-if="loadImage !== null">
+            <h4>Esta es la imagen actual de su producto</h4>
+            <img :src="loadImage" alt="" />
+          </div>
+          <div v-if="loadImage === null">
+            <h3>Esta oferta aún no tiene una imagen disponible</h3>
+          </div>
+          <div>
+            <label>
+              <input
+                type="file"
+                id="file"
+                ref="file"
+                v-on:change="handleFileUpload()"
+              />
+            </label>
+          </div>
+          <div>
+            <p>
+              Recuerde que si ya tiene una imagen seleccionada y sube otra esta
+              será reemplazada.
+            </p>
+          </div>
           <div class="md-layout-item md-size-100 text-right">
             <md-button
               v-on:click="submitFile()"
@@ -156,7 +127,7 @@
               type="submit"
               style="margin-right: 10px"
             >
-              Submit
+              Enviar imagen
             </md-button>
           </div>
         </md-card-content>
@@ -180,7 +151,8 @@ export default {
         pricePresentation: 0,
         description: "",
         id: "",
-        path: ""
+        path: "",
+        images: []
       },
       errorReq: "",
       file: ""
@@ -204,6 +176,7 @@ export default {
       }
     },
     getOffer() {
+      this.readImage();
       http
         .get("/offer/" + this.offer.path, {
           headers: {
@@ -228,6 +201,7 @@ export default {
     },
     updateOffer() {
       const data = {
+        presentation: this.offer.presentation,
         minQuantity: this.offer.minQuantity,
         pricePresentation: this.offer.pricePresentation,
         description: this.offer.description,
@@ -255,7 +229,6 @@ export default {
           this.notifyVue("danger");
         });
     },
-
     deleteOffer() {
       http
         .delete("/offer/del/" + this.offer.path, {
@@ -306,6 +279,26 @@ export default {
           this.notifyVue("danger");
         });
     },
+    readImage() {
+      http
+        .get("/photo/list/" + this.offer.path, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
+          },
+          withCredentials: false
+        })
+        .then(response => {
+          this.offer.images = response.data;
+          if (this.offer.images[0] !== undefined) {
+            this.offer.images[0] =
+              "https://storage.googleapis.com/agricolab-un.appspot.com/" +
+              this.offer.images[0];
+          }
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
     },
@@ -349,6 +342,15 @@ export default {
           verticalAlign: "bottom",
           type: AlertType
         });
+      }
+    }
+  },
+  computed: {
+    loadImage() {
+      if (this.offer.images[0] !== undefined) {
+        return this.offer.images[0];
+      } else {
+        return null;
       }
     }
   }

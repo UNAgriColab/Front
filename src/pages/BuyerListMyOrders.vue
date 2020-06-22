@@ -3,90 +3,92 @@
     <div>
       <div class="md-layout">
         <div class="md-layout-item md-small-size-100 md-size-100">
-          <md-content style="background-color: #e8f5e9">
-            <div class="md-layout">
-              <div
-                class="md-layout-item
-                md-xsmall-size-35
-                md-small-size-25
-                md-medium-size-20
-                md-large-size-15
-                md-xlarge-size-10"
-              >
-                <md-field>
-                  <label>Categoria</label>
-                  <md-select
-                    v-model="products.categoria"
-                    name="categoria"
-                    id="cat"
-                    md-dense
-                    @md-selected="resetProductDropdown"
-                  >
-                    <md-option value="all">
-                      Todas
-                    </md-option>
-                    <md-option
-                      v-for="(data, index) in json.myJson"
-                      v-bind:key="index"
-                      v-bind:value="data.categoria"
+          <md-card style="background-color: #e8f5e9">
+            <md-card-content>
+              <div class="md-layout">
+                <div
+                  class="md-layout-item
+                  md-xsmall-size-35
+                  md-small-size-25
+                  md-medium-size-20
+                  md-large-size-15
+                  md-xlarge-size-10"
+                >
+                  <md-field>
+                    <label>Categoria</label>
+                    <md-select
+                      v-model="products.categoria"
+                      name="categoria"
+                      id="cat"
+                      md-dense
+                      @md-selected="resetProductDropdown"
                     >
-                      {{ data.categoria }}
-                    </md-option>
-                  </md-select>
-                  <md-icon>agriculture</md-icon>
-                </md-field>
-              </div>
-              <div
-                class="md-layout-item
-                md-xsmall-size-35
-                md-small-size-25
-                md-medium-size-20
-                md-large-size-15
-                md-xlarge-size-10"
-              >
-                <md-field>
-                  <label>producto</label>
-                  <md-select
-                    v-model="products.producto"
-                    name="productos"
-                    id="productos"
-                    :disabled="enableDropdown"
-                    md-dense
-                  >
-                    <md-option
-                      v-for="(option, index2) in setOptions"
-                      v-bind:key="index2"
-                      v-bind:value="option"
+                      <md-option value="all">
+                        Todas
+                      </md-option>
+                      <md-option
+                        v-for="(data, index) in json.myJson"
+                        v-bind:key="index"
+                        v-bind:value="data.categoria"
+                      >
+                        {{ data.categoria }}
+                      </md-option>
+                    </md-select>
+                    <md-icon>agriculture</md-icon>
+                  </md-field>
+                </div>
+                <div
+                  class="md-layout-item
+                  md-xsmall-size-35
+                  md-small-size-25
+                  md-medium-size-20
+                  md-large-size-15
+                  md-xlarge-size-10"
+                >
+                  <md-field>
+                    <label>producto</label>
+                    <md-select
+                      v-model="products.producto"
+                      name="productos"
+                      id="productos"
+                      :disabled="enableDropdown"
+                      md-dense
                     >
-                      {{ option }}
-                    </md-option>
-                  </md-select>
-                  <md-icon>spa</md-icon>
-                </md-field>
-              </div>
+                      <md-option
+                        v-for="(option, index2) in setOptions"
+                        v-bind:key="index2"
+                        v-bind:value="option"
+                      >
+                        {{ option }}
+                      </md-option>
+                    </md-select>
+                    <md-icon>spa</md-icon>
+                  </md-field>
+                </div>
 
-              <div>
-                <md-field>
-                  <!-- label for="unit">Unidad</label -->
-                  <label>Estado</label>
-                  <md-select
-                    v-model="products.state"
-                    name="Ordenar"
-                    id="Ordenar"
-                    md-dense
-                  >
-                    <md-option value="-1">Todos</md-option>
-                    <md-option value="2">En espera</md-option>
-                    <md-option value="3">En proceso</md-option>
-                    <md-option value="4">Enviado</md-option>
-                  </md-select>
-                </md-field>
+                <div>
+                  <md-field>
+                    <!-- label for="unit">Unidad</label -->
+                    <label>Estado</label>
+                    <md-select
+                      v-model="products.state"
+                      name="Ordenar"
+                      id="Ordenar"
+                      md-dense
+                    >
+                      <md-option value="-1">Todos</md-option>
+                      <md-option value="2">En espera</md-option>
+                      <md-option value="3">En proceso</md-option>
+                      <md-option value="4">Enviado</md-option>
+                    </md-select>
+                  </md-field>
+                </div>
+                <md-button v-on:click="getProduct">
+                  Ordenar
+                </md-button>
               </div>
-              <md-button v-on:click="getProduct">
-                Ordenar
-              </md-button>
-            </div>
-          </md-content>
+            </md-card-content>
+          </md-card>
         </div>
         <div
           class="md-layout-item md-medium-size-100 md-small-size-100 md-xsmall-size-100 md-size-100 text-right"

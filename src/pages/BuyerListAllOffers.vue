@@ -3,7 +3,7 @@
     <div class="md-layout">
       <div class="md-layout-item text-center">
         <div class="md-layout-item md-small-size-100 md-size-100">
-          <md-card>
+          <md-card style="background-color: #e8f5e9">
             <md-card-content>
               <div class="md-layout">
                 <div
@@ -215,9 +215,7 @@
           v-for="(offer, index) in offers"
           v-bind:key="index"
         >
-          <md-header>
-            <h3>{{ offer.productName }}</h3>
-          </md-header>
+          <h3>{{ offer.productName }}</h3>
           <md-divider></md-divider>
           <md-list-item>
             <img src="../assets/img/logo/icon.png" alt="" />

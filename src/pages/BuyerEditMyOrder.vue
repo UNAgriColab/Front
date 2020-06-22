@@ -1,20 +1,6 @@
 <template>
   <div class="content">
     <div class="md-layout">
-      <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
-      >
-        <md-card>
-          <md-card-header data-background-color="green">
-            <h4 class="title">Edita tu solicitud</h4>
-          </md-card-header>
-          <md-card-content>
-            <p class="category">
-              Agrega información necesaria para la edición de una solicitud.
-            </p>
-          </md-card-content>
-        </md-card>
-      </div>
       <div class="md-layout-item md-medium-size-60">
         <md-card>
           <md-card-header data-background-color="green">
@@ -58,7 +44,7 @@
       <div class="md-layout-item md-size-40">
         <md-card>
           <md-card-header data-background-color="green">
-            <h2 class="title">Descripción</h2>
+            <h2 class="title">Tus observaciones</h2>
             <p class="category">De: {{ product.buyerEmail }}</p>
           </md-card-header>
           <md-card-content>

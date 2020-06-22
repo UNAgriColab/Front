@@ -15,7 +15,7 @@
       </p>
       <div>
         <h2>
-          Calificación promedio {{ user.qualification.toFixed(2) }} con
+          Calificación promedio {{ user.qualification }} con
           {{ user.numberOfReviews }} reseñas
         </h2>
       </div>
@@ -61,6 +61,7 @@ export default {
         })
         .then(response => {
           this.user = response.data;
+          this.user.qualification = this.user.qualification.toFixed(2);
         })
         .catch(e => console.log(e));
     }
