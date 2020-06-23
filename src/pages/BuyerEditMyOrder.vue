@@ -492,10 +492,10 @@ export default {
     },
 
     stars: function($star) {
-      for (let $i = 1; $i <= 5; $i++){
+      for (let $i = 1; $i <= 5; $i++) {
         document.getElementById("star" + $i).style.backgroundColor = "#9e9e9e";
       }
-      for (let $x = 1; $x <= $star; $x++){
+      for (let $x = 1; $x <= $star; $x++) {
         document.getElementById("star" + $x).style.backgroundColor = "#eeb933";
       }
     }

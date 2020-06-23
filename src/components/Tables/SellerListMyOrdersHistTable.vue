@@ -1,14 +1,18 @@
 <template>
   <div>
-    <md-table v-model="sellerOrders" :table-header-color="tableHeaderColor">
+    <md-table
+      v-model="sellerOrders"
+      :table-header-color="tableHeaderColor"
+      style="text-align: center"
+    >
       <md-table-row>
         <md-table-head></md-table-head>
-        <md-table-head>Producto</md-table-head>
-        <md-table-head>Cantidad</md-table-head>
-        <md-table-head>Unidades</md-table-head>
-        <md-table-head>Precio total</md-table-head>
-        <md-table-head>N° Ref</md-table-head>
-        <md-table-head>Estado</md-table-head>
+        <md-table-head style="text-align: center">Producto</md-table-head>
+        <md-table-head style="text-align: center">Cantidad</md-table-head>
+        <md-table-head style="text-align: center">Unidades</md-table-head>
+        <md-table-head style="text-align: center">Precio total</md-table-head>
+        <md-table-head style="text-align: center">N° Ref</md-table-head>
+        <md-table-head> Estado</md-table-head>
       </md-table-row>
       <md-table-row
         slot="md-table-row"
