@@ -21,12 +21,12 @@
           Compras
         </h5>
       </div>
-
+      <button @click="toggleSidebar">
       <sidebar-link to="/BuyerListAllOffers">
         <md-icon>shopping_cart</md-icon>
         <p>Lista de productos</p>
       </sidebar-link>
-
+      </button>
       <sidebar-link to="/BuyerListMyOrders">
         <md-icon>add_to_photos</md-icon>
         <p>Mis solicitudes</p>
@@ -85,6 +85,11 @@ export default {
       sidebarBackground: "green",
       sidebarBackgroundImage: require("@/assets/img/sidebar-5.jpeg")
     };
+  },
+  methods: {
+    toggleSidebar() {
+      this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
+    }
   }
 };
 </script>
