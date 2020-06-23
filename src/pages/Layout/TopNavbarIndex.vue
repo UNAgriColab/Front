@@ -17,7 +17,7 @@
 
         <div class="md-collapse">
           <md-list>
-            <md-list-item href="#/login">
+            <md-list-item>
               <md-button
                 to="/indexBuyer"
                 class="md-button md-list-action md-success"
@@ -27,7 +27,7 @@
                 Compra
               </md-button>
             </md-list-item>
-            <md-list-item href="#/register">
+            <md-list-item>
               <md-button
                 to="/indexSeller"
                 class="md-button md-list-action md-success"
