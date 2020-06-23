@@ -64,6 +64,10 @@
         </div>
       </div>
     </div>
+    <md-progress-spinner
+      md-mode="indeterminate"
+      v-if="this.requestTime"
+    ></md-progress-spinner>
     <md-dialog-alert
       :md-active.sync="conflictReq"
       md-title="Revise sus datos por favor"
@@ -92,7 +96,8 @@ export default {
       },
       submitData: false,
       conflictReq: false,
-      errorReq: false
+      errorReq: false,
+      requestTime: false
     };
   },
   mounted() {
@@ -106,6 +111,7 @@ export default {
       this.user.token = "";
     },
     saveLogin: function() {
+      this.requestTime = true;
       const data = {
         email: this.user.email,
         password: this.user.password
@@ -121,6 +127,7 @@ export default {
           if (JSON.stringify(response.data) === false) {
             this.conflictReq = true;
           }
+          this.requestTime = false;
           this.$router.push("/dashboard");
         })
         .catch(e => {
