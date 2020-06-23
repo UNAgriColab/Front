@@ -21,16 +21,37 @@
           Compras
         </h5>
       </div>
+      <button
+        @click="toggleSidebar"
+        style="
+        background-color: transparent;
+        background-repeat: no-repeat;
+        border: none;
+        overflow: hidden;
+        outline:none;
+          "
+      >
+        <sidebar-link to="/BuyerListAllOffers">
+          <md-icon>shopping_cart</md-icon>
+          <p>Lista de productos</p>
+        </sidebar-link>
+      </button>
 
-      <sidebar-link to="/BuyerListAllOffers">
-        <md-icon>shopping_cart</md-icon>
-        <p>Lista de productos</p>
-      </sidebar-link>
-
-      <sidebar-link to="/BuyerListMyOrders">
-        <md-icon>add_to_photos</md-icon>
-        <p>Mis solicitudes</p>
-      </sidebar-link>
+      <button
+        @click="toggleSidebar"
+        style="
+        background-color: transparent;
+        background-repeat: no-repeat;
+        border: none;
+        overflow: hidden;
+        outline:none;
+          "
+      >
+        <sidebar-link to="/BuyerListMyOrders">
+          <md-icon>add_to_photos</md-icon>
+          <p>Mis solicitudes</p>
+        </sidebar-link>
+      </button>
 
       <div
         class="md-content md-theme-selection"
@@ -41,21 +62,53 @@
           Ventas
         </h5>
       </div>
+      <button
+        @click="toggleSidebar"
+        style="
+        background-color: transparent;
+        background-repeat: no-repeat;
+        border: none;
+        overflow: hidden;
+        outline:none;
+          "
+      >
+        <sidebar-link to="/SellerOfferProduct">
+          <md-icon>store</md-icon>
+          <p>Vende productos</p>
+        </sidebar-link>
+      </button>
 
-      <sidebar-link to="/SellerOfferProduct">
-        <md-icon>store</md-icon>
-        <p>Vende productos</p>
-      </sidebar-link>
+      <button
+        @click="toggleSidebar"
+        style="
+        background-color: transparent;
+        background-repeat: no-repeat;
+        border: none;
+        overflow: hidden;
+        outline:none;
+          "
+      >
+        <sidebar-link to="/SellerListMyOffers">
+          <md-icon>spa</md-icon>
+          <p>Mis productos</p>
+        </sidebar-link>
+      </button>
 
-      <sidebar-link to="/SellerListMyOffers">
-        <md-icon>spa</md-icon>
-        <p>Mis productos</p>
-      </sidebar-link>
-
-      <sidebar-link to="/SellerListMyOrders">
-        <md-icon>list</md-icon>
-        <p>Lista de pedidos</p>
-      </sidebar-link>
+      <button
+        @click="toggleSidebar"
+        style="
+        background-color: transparent;
+        background-repeat: no-repeat;
+        border: none;
+        overflow: hidden;
+        outline:none;
+          "
+      >
+        <sidebar-link to="/SellerListMyOrders">
+          <md-icon>list</md-icon>
+          <p>Lista de pedidos</p>
+        </sidebar-link>
+      </button>
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>
@@ -85,6 +138,11 @@ export default {
       sidebarBackground: "green",
       sidebarBackgroundImage: require("@/assets/img/sidebar-5.jpeg")
     };
+  },
+  methods: {
+    toggleSidebar() {
+      this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
+    }
   }
 };
 </script>
