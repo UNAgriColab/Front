@@ -48,7 +48,7 @@ export default {
         padding: "5%"
       },
       styleFooter: {
-        padding: "5%"
+        marginTop: "10%"
       }
     };
   }
