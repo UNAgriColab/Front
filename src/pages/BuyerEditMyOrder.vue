@@ -118,7 +118,7 @@
               </h4>
             </div>
             <div
-              v-if="product.state === 1"
+              v-if="product.state === 1 && product.qualification === 0"
               class="md-layout-item md-size-100 text-right"
             >
               <div>
@@ -127,94 +127,100 @@
                     <md-card-header data-background-color="green">
                       <h5 class="title text-center">Califica tu compra</h5>
                     </md-card-header>
-                    <md-card-content>
-                      <div class="separator">
-                        <md-avatar
-                          class="md-avatar-icon md-large md-default"
-                          style="margin-left: 10px"
+                    <md-content>
+                      <form
+                        class="pure-form pure-form-stacked"
+                        v-on:submit.prevent="saveQualification"
+                        id="form"
+                      >
+                        <div
+                          class="md-layout-item md-small-size-100 md-size-100"
                         >
-                          <md-icon> star</md-icon>
-                        </md-avatar>
-                        &nbsp;
-                        <md-avatar class="md-avatar-icon md-large md-default">
-                          <md-icon> star</md-icon>
-                        </md-avatar>
-                        &nbsp;
-                        <md-avatar class="md-avatar-icon md-large md-default">
-                          <md-icon> star</md-icon>
-                        </md-avatar>
-                        &nbsp;
-                        <md-avatar class="md-avatar-icon md-large md-default">
-                          <md-icon> star</md-icon>
-                        </md-avatar>
-                        &nbsp;
-                        <md-avatar
-                          class="md-avatar-icon md-large md-default"
-                          style="margin-right: 10px"
-                        >
-                          <md-icon> star</md-icon>
-                        </md-avatar>
-                      </div>
-                    </md-card-content>
-                    <form
-                      class="pure-form pure-form-stacked"
-                      v-on:submit.prevent="saveQualification"
-                      id="form"
-                    >
-                      <div class="md-layout-item md-small-size-100 md-size-100">
-                        <md-radio
-                          v-model="qualification.calificacion"
-                          :value="1"
-                          >1</md-radio
-                        >
-                        <md-radio
-                          v-model="qualification.calificacion"
-                          :value="2"
-                          >2</md-radio
-                        >
-                        <md-radio
-                          v-model="qualification.calificacion"
-                          :value="3"
-                          >3</md-radio
-                        >
-                        <md-radio
-                          v-model="qualification.calificacion"
-                          :value="4"
-                          >4</md-radio
-                        >
-                        <md-radio
-                          v-model="qualification.calificacion"
-                          :value="5"
-                          >5</md-radio
-                        >
-                        <md-field>
-                          <label>Comentario</label>
-                          <md-icon>chat</md-icon>
-                          <md-input
-                            id="commentario"
-                            v-model="qualification.commentario"
-                            type="text"
-                            placeholder="Comentario"
+                          <md-radio
+                            v-on:change="stars(1)"
+                            v-model="qualification.calificacion"
+                            :value="1"
+                            ><md-avatar
+                              id="star1"
+                              class="md-avatar-icon md-large md-default"
+                            >
+                              <md-icon> star</md-icon>
+                            </md-avatar></md-radio
                           >
-                          </md-input>
-                        </md-field>
-                      </div>
 
-                      <md-dialog-actions>
-                        <md-button
-                          class="md-primary"
-                          @click="showDialog = false"
-                          >Cancelar</md-button
-                        >
-                        <md-button
-                          class="md-primary"
-                          v-on:click="saveQualification"
-                          type="submit"
-                          @click="showDialog = false"
-                          >Enviar</md-button
-                        >
-                      </md-dialog-actions>
-                    </form>
+                          <md-radio
+                            v-on:change="stars(2)"
+                            v-model="qualification.calificacion"
+                            :value="2"
+                            ><md-avatar
+                              id="star2"
+                              class="md-avatar-icon md-large md-default"
+                            >
+                              <md-icon class="md-morph-initial"> star</md-icon>
+                            </md-avatar></md-radio
+                          >
+                          <md-radio
+                            v-on:change="stars(3)"
+                            v-model="qualification.calificacion"
+                            :value="3"
+                            ><md-avatar
+                              id="star3"
+                              class="md-avatar-icon md-large md-default"
+                            >
+                              <md-icon> star</md-icon>
+                            </md-avatar></md-radio
+                          >
+                          <md-radio
+                            v-on:change="stars(4)"
+                            v-model="qualification.calificacion"
+                            :value="4"
+                            ><md-avatar
+                              id="star4"
+                              class="md-avatar-icon md-large md-default"
+                            >
+                              <md-icon> star</md-icon>
+                            </md-avatar></md-radio
+                          >
+                          <md-radio
+                            v-on:change="stars(5)"
+                            v-model="qualification.calificacion"
+                            :value="5"
+                            ><md-avatar
+                              id="star5"
+                              class="md-avatar-icon md-large md-default"
+                            >
+                              <md-icon> star</md-icon>
+                            </md-avatar></md-radio
+                          >
+                          <md-field style="margin-top: 35px">
+                            <label>Comentario</label>
+                            <md-icon>chat</md-icon>
+                            <md-input
+                              id="commentario"
+                              v-model="qualification.commentario"
+                              type="text"
+                              placeholder="Comentario"
+                            >
+                            </md-input>
+                          </md-field>
+                        </div>
+
+                        <md-dialog-actions>
+                          <md-button
+                            class="md-primary"
+                            @click="showDialog = false"
+                            >Cancelar</md-button
+                          >
+                          <md-button
+                            class="md-primary"
+                            v-on:click="saveQualification"
+                            type="submit"
+                            @click="showDialog = false"
+                            >Enviar</md-button
+                          >
+                        </md-dialog-actions>
+                      </form>
+                    </md-content>
                   </md-card>
                 </md-dialog>
                 <md-button
@@ -266,6 +272,7 @@ export default {
         id: "",
         sellerEmail: "",
         productName: "",
+        qualification: "",
         presentation: "",
         totalPrice: 0,
         state: "",
@@ -325,6 +332,7 @@ export default {
           this.product.presentation = response.data.presentation;
           this.product.totalPrice = response.data.totalPrice;
           this.product.state = response.data.state;
+          this.product.qualification = response.data.qualification;
           this.product.deliveryAdd = response.data.deliveryAdd;
           this.stepChange();
         })
@@ -480,6 +488,15 @@ export default {
           verticalAlign: "bottom",
           type: AlertType
         });
+      }
+    },
+
+    stars: function($star) {
+      for (let $i = 1; $i <= 5; $i++){
+        document.getElementById("star" + $i).style.backgroundColor = "#9e9e9e";
+      }
+      for (let $x = 1; $x <= $star; $x++){
+        document.getElementById("star" + $x).style.backgroundColor = "#eeb933";
       }
     }
   },
