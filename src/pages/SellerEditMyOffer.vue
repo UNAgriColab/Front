@@ -266,7 +266,7 @@ export default {
           withCredentials: false
         })
         .then(function(response) {
-          console.log(response.data)
+          console.log(response.data);
           if (JSON.stringify(response.data) === "true") {
             this.notifyVue("success");
           }

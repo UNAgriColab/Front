@@ -211,29 +211,54 @@
           </div>
         </div>
         <md-list
-          class="md-double-line  md-elevation-24"
+          style="margin-top: 10px; margin-left: 25%; margin-right: 25%"
+          class="md-elevation-24"
           v-for="(offer, index) in offers"
           v-bind:key="index"
         >
-          <h3>{{ offer.productName }}</h3>
+          <h3 style="color: #1b5e20">{{ offer.productName }}</h3>
           <md-divider></md-divider>
-          <md-list-item>
-            <img src="../assets/img/logo/icon.png" alt="" />
-            <md-content>
+          <div class="md-layout">
+            <div class="md-layout-item">
+              <img src="../assets/img/logo/icon.png" alt="" />
+            </div>
+            <div class="md-layout-item">
+              <h4>Cantidad mínima</h4>
+              <span>{{ offer.minQuantity }}</span>
+              <span v-if="offer.presentation === 1">
+                Gramos
+              </span>
+              <span v-if="offer.presentation === 2">
+                Libras
+              </span>
+              <span v-if="offer.presentation === 3">
+                Kilogramos
+              </span>
+              <span v-if="offer.presentation === 4">
+                Arrobas
+              </span>
+              <span v-if="offer.presentation === 5">
+                Bultos
+              </span>
+            </div>
+            <div class="md-layout-item">
               <div class="md-list-item-text">
-                <span>${{ offer.pricePresentation }}</span>
+                <h3>${{ offer.pricePresentation }}</h3>
                 <span v-if="offer.presentation === 1">
-                  Oferta en: Gramos
+                  / Gramo
                 </span>
                 <span v-if="offer.presentation === 2">
-                  Oferta en: Libras
+                  / Libra
                 </span>
                 <span v-if="offer.presentation === 3">
-                  Oferta en: Kilogramos
+                  / Kilogramo
                 </span>
-                <span v-if="offer.presentation === 4">Oferta en: Arrobas</span>
-                <span v-if="offer.presentation === 5">Oferta en: Bultos</span>
-                <span> Cantidad mínima: {{ offer.minQuantity }}</span>
+                <span v-if="offer.presentation === 4">
+                  / Arroba
+                </span>
+                <span v-if="offer.presentation === 5">
+                  / Bulto
+                </span>
               </div>
               <router-link to="/BuyerBuyProduct" class="text-white">
                 <md-button
@@ -245,8 +270,8 @@
                   <md-icon>shopping_cart</md-icon>
                 </md-button>
               </router-link>
-            </md-content>
-          </md-list-item>
+            </div>
+          </div>
         </md-list>
         <div>
           <div class="md-layout md-gutter">

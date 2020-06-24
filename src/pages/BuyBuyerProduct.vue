@@ -139,7 +139,6 @@ export default {
       aux: "",
       token: "",
       disableButton: true
-
     };
   },
   mounted() {
@@ -250,12 +249,7 @@ export default {
       }
     },
     checkMinQuantity: function() {
-      if (product.minQuantity < product.numberOfUnits){
-        return false;
-      } else {
-        return true;
-
-      }
+      return product.minQuantity >= product.numberOfUnits;
     }
   }
 };
