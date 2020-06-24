@@ -55,7 +55,7 @@
                   <md-input
                     id="numberOfUnits"
                     type="Number"
-                    :min="product.minQuantity"
+                    :min="this.product.minQuantity"
                     required
                     v-model="product.numberOfUnits"
                     name="numberOfUnits"
@@ -99,7 +99,7 @@
                   <md-button
                     class="md-raised md-success"
                     @click="payOrder(product.path, product.numberOfUnits)"
-                    :disabled="checkMinQuantity"
+                    :disabled="this.product.numberOfUnits < this.product.minQuantity"
                   >
                     <md-icon>queue</md-icon> Pagar
                   </md-button>
@@ -138,7 +138,6 @@ export default {
       },
       aux: "",
       token: "",
-      disableButton: true
     };
   },
   mounted() {
@@ -210,7 +209,7 @@ export default {
       if (AlertType === "success") {
         this.$notify({
           message:
-            "Gracias por la compra del producto" + this.product.name + "</b>.",
+            "Se seleccionaron: " + this.product.numberOfUnits + " unidades de " + this.product.name + "</b>.",
           icon: "add_alert",
           horizontalAlign: "center",
           verticalAlign: "top",
@@ -247,9 +246,6 @@ export default {
       } else {
         return null;
       }
-    },
-    checkMinQuantity: function() {
-      return product.minQuantity >= product.numberOfUnits;
     }
   }
 };

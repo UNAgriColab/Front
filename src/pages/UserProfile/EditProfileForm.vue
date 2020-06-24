@@ -193,7 +193,7 @@ export default {
             "</b> ha sido actualizado con éxito.",
           icon: "add_alert",
           horizontalAlign: "center",
-          verticalAlign: "top",
+          verticalAlign: "bottom",
           type: AlertType
         });
       }

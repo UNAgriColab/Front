@@ -70,14 +70,14 @@
     ></md-progress-spinner>
     <md-dialog-alert
       :md-active.sync="conflictReq"
-      md-title="Revise sus datos por favor"
-      md-content="Hemos tenido un incoveniente,Por favor revise los campos de registro."
+      md-title="Conflicto en el usuario"
+      md-content=" Usuario o contraseña invalida. "
       md-confirm-text="ok!"
     />
     <md-dialog-alert
       :md-active.sync="errorReq"
-      md-title="Error en la petición HTTP"
-      md-content="Por favor intente mas tarde."
+      md-title="Error HTTP"
+      md-content=".    se presento un error en la petición Http  ."
       md-confirm-text="ok!"
     />
   </div>
@@ -119,18 +119,20 @@ export default {
       http
         .post("/auth", data)
         .then(response => {
+          console.log("Res:" + response)
           this.user.token = response.data;
           this.user.password = "";
           localStorage.setItem("TokenSession", JSON.stringify(response.data));
           localStorage.setItem("userSession", JSON.stringify(this.user));
           console.log("log-in");
-          if (JSON.stringify(response.data) === false) {
+          if (response.data === "") {
             this.conflictReq = true;
           }
           this.requestTime = false;
           this.$router.push("/dashboard");
         })
         .catch(e => {
+          this.requestTime = false;
           console.log(e);
           this.errorReq = true;
         });

@@ -24,6 +24,7 @@
                         name="categoria"
                         id="cat"
                         md-dense
+                        required
                       >
                         <md-option
                           v-for="(data, index) in json.myJson"
@@ -44,6 +45,7 @@
                         name="productos"
                         id="productos"
                         md-dense
+                        required
                       >
                         <md-option
                           v-for="(option, index2) in setOptions"
@@ -69,6 +71,7 @@
                       name="presentation"
                       id="presentation"
                       md-dense
+                      required
                     >
                       <md-option value="1">Gramos</md-option>
                       <md-option value="2">Libras</md-option>
@@ -79,14 +82,16 @@
                   </md-field>
                 </div>
                 <div class="md-layout-item md-small-size-100 md-size-33">
-                  <md-field>
+                  <md-field >
                     <label for="minQuantity">Numero mínimo de unidades</label>
                     <md-input
                       id="minQuantity"
                       v-model="offer.minQuantity"
                       min="1"
                       type="number"
+                      required
                     ></md-input>
+                    <span class="md-error">no puede estar Vacio</span>
                   </md-field>
                 </div>
                 <div class="md-layout-item md-small-size-100 md-size-33">
@@ -96,6 +101,7 @@
                       v-model="offer.pricePresentation"
                       type="number"
                       min="1"
+                      required
                     ></md-input>
                     <md-icon>attach_money</md-icon>
                   </md-field>
@@ -187,14 +193,9 @@ export default {
           this.offer.id = response.data.id;
           console.log(response.data);
           if (JSON.stringify(response.data) === "true") {
-            setTimeout(function() {
               this.notifyVue("success");
-            }, 2000);
-          }
-          if (JSON.stringify(response.data) === "false") {
-            setTimeout(function() {
+          } else {
               this.notifyVue("warning");
-            }, 2000);
           }
         })
         .catch(e => {
@@ -214,7 +215,7 @@ export default {
             "</b> ha sido publicada con éxito.",
           icon: "add_alert",
           horizontalAlign: "center",
-          verticalAlign: "top",
+          verticalAlign: "bottom",
           type: AlertType
         });
       }

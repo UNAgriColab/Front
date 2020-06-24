@@ -257,11 +257,7 @@ export default {
   },
   methods: {
     storage() {
-      if (localStorage.getItem("userSession")) {
-        this.aux = JSON.parse(localStorage.getItem("userSession"));
-        this.token = this.aux.token;
-        this.product.userEmail = this.aux.email;
-      } else {
+      if (!localStorage.getItem("userSession")) {
         this.$router.push("/login");
       }
       if (localStorage.getItem("buyerOrderId")) {
@@ -417,9 +413,9 @@ export default {
       if (AlertType === "warning") {
         this.$notify({
           message:
-            "El perfil : " +
+            "La solicitud del producto : " +
             this.product.productName +
-            " <b>no</b> ha sido actualizado.",
+            " <b>no</b> no se encuentra.",
           icon: "add_alert",
           horizontalAlign: "center",
           verticalAlign: "bottom",
@@ -428,11 +424,11 @@ export default {
       }
       if (AlertType === "info") {
         this.$notify({
-          message: "La orden ha sido cancelada.",
+          message: "La orden #" + product.id + " ha sido cancelada.",
           icon: "add_alert",
           horizontalAlign: "center",
           verticalAlign: "bottom",
-          type: AlertType
+          type: "success"
         });
       }
       if (AlertType === "danger") {

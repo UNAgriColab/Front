@@ -26,6 +26,7 @@ import routes from "./routes/routes";
 import GlobalComponents from "./globalComponents";
 import GlobalDirectives from "./globalDirectives";
 import Notifications from "./components/NotificationPlugin";
+import Vuelidate from "vuelidate";
 
 // MaterialDashboard plugin
 import MaterialDashboard from "./material-dashboard";
@@ -46,7 +47,7 @@ Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
 Vue.use(Notifications);
 Vue.use(Vue2Filters);
-
+Vue.use(Vuelidate);
 /* eslint-disable no-new */
 new Vue({
   el: "#app",

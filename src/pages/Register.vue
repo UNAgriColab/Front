@@ -22,6 +22,7 @@
                     v-model="user.username"
                     type="text"
                     placeholder="Nombre"
+                    required
                   >
                   </md-input>
                 </md-field>
@@ -35,6 +36,7 @@
                     v-model="user.email"
                     type="text"
                     placeholder="Correo electrónico"
+                    required
                   >
                   </md-input>
                 </md-field>
@@ -49,6 +51,7 @@
                     min="18"
                     type="number"
                     placeholder="Edad"
+                    required
                   >
                   </md-input>
                 </md-field>
@@ -62,6 +65,7 @@
                     v-model="user.password"
                     type="password"
                     placeholder="Contraseña"
+                    required
                   >
                   </md-input>
                 </md-field>
@@ -86,6 +90,10 @@
             </small>
           </router-link>
         </div>
+        <md-progress-spinner
+          md-mode="indeterminate"
+          v-if="this.requestTime"
+        ></md-progress-spinner>
         <md-dialog-alert
           :md-active.sync="confirmation"
           md-title="Usuario Registrado con exito!"
@@ -94,14 +102,14 @@
         />
         <md-dialog-alert
           :md-active.sync="conflictReq"
-          md-title="Revise sus datos por favor"
-          md-content="Hemos tenido un incoveniente,Por favor revise los campos de registro."
+          md-title="Conflicto en el Registro "
+          md-content="  Usuario invalido o duplicado. "
           md-confirm-text="ok!"
         />
         <md-dialog-alert
           :md-active.sync="errorReq"
-          md-title="Error en la petición HTTP"
-          md-content="Por favor intente mas tarde."
+          md-title="Error HTTP"
+          md-content=" se presento un error en la petición Http  ."
           md-confirm-text="ok!"
         />
       </div>
@@ -125,12 +133,14 @@ export default {
       submitted: false,
       confirmation: false,
       conflictReq: false,
-      errorReq: false
+      errorReq: false,
+      requestTime: false
     };
   },
   methods: {
     /* eslint-disable no-console */
     saveCustomer() {
+      this.requestTime = true;
       console.log("Boton pulsado");
       const data = {
         name: this.user.username,
@@ -144,9 +154,10 @@ export default {
           console.log(response.data);
           if (JSON.stringify(response.data) === "true") {
             this.confirmation = JSON.stringify(response.data);
-            this.saveLogin();
+            this.loginIn();
           } else {
             this.conflictReq = true;
+            this.requestTime = false;
           }
         })
         .catch(e => {
@@ -155,7 +166,7 @@ export default {
         });
       this.submitted = true;
     },
-    saveLogin: function() {
+    loginIn: function() {
       const data = {
         email: this.user.email,
         password: this.user.password
@@ -169,13 +180,14 @@ export default {
           localStorage.setItem("userSession", JSON.stringify(this.user));
           console.log("log-in");
           if (localStorage.getItem("TokenSession")) {
-            //router.push({ name: 'Dashboard'}) /BuyerListAllOffers
-            this.$router.push("/BuyerListAllOffers");
-            //this.$router.push("/dshboard");
+            this.requestTime = false;
+            this.$router.push("/dashboard");
           }
         })
         .catch(e => {
           console.log(e);
+          this.errorReq = true;
+          this.requestTime = true;
         });
       /*localStorage.setItem("userSession", JSON.stringify(this.user));*/
     }
