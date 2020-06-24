@@ -265,8 +265,8 @@ export default {
           },
           withCredentials: false
         })
-        .then(function() {
-          console.log("SUCCESS!!");
+        .then(function(response) {
+          console.log(response.data)
           if (JSON.stringify(response.data) === "true") {
             this.notifyVue("success");
           }
