@@ -167,7 +167,10 @@
               <div class="md-layout-item"></div>
               <div class="md-layout-item"></div>
             </div>
-            <div class="md-layout-item md-layout md-gutter">
+            <div
+              class="md-layout-item md-layout md-gutter"
+              style="margin-bottom: 20px; margin-top: 20px"
+            >
               <div class="md-layout-item">
                 <md-button
                   class="md-icon-button md-primary"
@@ -211,7 +214,7 @@
           </div>
         </div>
         <md-list
-          style="margin-top: 10px; margin-left: 25%; margin-right: 25%"
+          style="margin-top: 10px; margin-left: 20%; margin-right: 20%; margin-bottom: 10px"
           class="md-elevation-24"
           v-for="(offer, index) in offers"
           v-bind:key="index"
@@ -280,7 +283,10 @@
               <div class="md-layout-item"></div>
               <div class="md-layout-item"></div>
             </div>
-            <div class="md-layout-item md-layout md-gutter">
+            <div
+              class="md-layout-item md-layout md-gutter"
+              style="margin-top: 20px; margin-bottom: 20px"
+            >
               <div class="md-layout-item">
                 <md-button
                   class="md-icon-button md-primary"
