@@ -123,7 +123,7 @@
             >
               <div>
                 <md-dialog :md-active.sync="showDialog">
-                  <md-card>
+                  <md-card style="width: 370px">
                     <md-card-header data-background-color="green">
                       <h5 class="title text-center">Califica tu compra</h5>
                     </md-card-header>
@@ -136,63 +136,14 @@
                         <div
                           class="md-layout-item md-small-size-100 md-size-100"
                         >
-                          <md-radio
-                            v-on:change="stars(1)"
+                          <star-rating
+                            style="margin: 15px"
                             v-model="qualification.calificacion"
-                            :value="1"
-                            ><md-avatar
-                              id="star1"
-                              class="md-avatar-icon md-large md-default"
-                            >
-                              <md-icon> star</md-icon>
-                            </md-avatar></md-radio
-                          >
+                            :increment="0.5"
+                            :fixed-points="1"
+                          ></star-rating>
 
-                          <md-radio
-                            v-on:change="stars(2)"
-                            v-model="qualification.calificacion"
-                            :value="2"
-                            ><md-avatar
-                              id="star2"
-                              class="md-avatar-icon md-large md-default"
-                            >
-                              <md-icon class="md-morph-initial"> star</md-icon>
-                            </md-avatar></md-radio
-                          >
-                          <md-radio
-                            v-on:change="stars(3)"
-                            v-model="qualification.calificacion"
-                            :value="3"
-                            ><md-avatar
-                              id="star3"
-                              class="md-avatar-icon md-large md-default"
-                            >
-                              <md-icon> star</md-icon>
-                            </md-avatar></md-radio
-                          >
-                          <md-radio
-                            v-on:change="stars(4)"
-                            v-model="qualification.calificacion"
-                            :value="4"
-                            ><md-avatar
-                              id="star4"
-                              class="md-avatar-icon md-large md-default"
-                            >
-                              <md-icon> star</md-icon>
-                            </md-avatar></md-radio
-                          >
-                          <md-radio
-                            v-on:change="stars(5)"
-                            v-model="qualification.calificacion"
-                            :value="5"
-                            ><md-avatar
-                              id="star5"
-                              class="md-avatar-icon md-large md-default"
-                            >
-                              <md-icon> star</md-icon>
-                            </md-avatar></md-radio
-                          >
-                          <md-field style="margin-top: 35px">
+                          <md-field>
                             <label>Comentario</label>
                             <md-icon>chat</md-icon>
                             <md-input
@@ -257,8 +208,12 @@
 
 <script>
 import http from "../http-common";
+import { StarRating } from "vue-rate-it";
 
 export default {
+  components: {
+    StarRating
+  },
   name: "product",
   data: () => {
     return {
