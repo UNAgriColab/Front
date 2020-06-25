@@ -100,7 +100,7 @@
                     class="md-raised md-success"
                     @click="payOrder(product.path, product.numberOfUnits)"
                     :disabled="
-                      this.product.numberOfUnits < this.product.minQuantity
+                       this.product.numberOfUnits < this.product.minQuantity
                     "
                   >
                     <md-icon>queue</md-icon> Pagar
