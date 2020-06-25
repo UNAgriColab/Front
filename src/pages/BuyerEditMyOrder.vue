@@ -328,6 +328,7 @@ export default {
           console.log(response.data);
           if (JSON.stringify(response.data) === "true") {
             this.notifyVue("info");
+            window.location.reload();
           }
           if (JSON.stringify(response.data) === "false") {
             this.notifyVue("warning");
@@ -358,6 +359,7 @@ export default {
           console.log(response.data);
           if (JSON.stringify(response.data) === "true") {
             this.notifyVue("success");
+            window.location.reload();
           }
           if (JSON.stringify(response.data) === "false") {
             this.notifyVue("warning");
@@ -386,8 +388,9 @@ export default {
         })
         .then(response => {
           console.log(response.data);
-          if (JSON.stringify(response.data) === true) {
-            this.$router.push("/login");
+          if (JSON.stringify(response.data) === "true") {
+            this.notifyVue("star");
+            window.location.reload();
           }
         })
         .catch(e => {
@@ -404,6 +407,15 @@ export default {
             "El perfil : <b>" +
             this.product.productName +
             "</b> ha sido actualizado con éxito.",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "top",
+          type: AlertType
+        });
+      }
+      if (AlertType === "star") {
+        this.$notify({
+          message: "La calificación ha sido guardada con éxito.",
           icon: "add_alert",
           horizontalAlign: "center",
           verticalAlign: "top",

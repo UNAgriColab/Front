@@ -180,7 +180,8 @@ export default {
         third: false,
         fourth: false,
         zero: false
-      }
+      },
+      errorReq: ""
     };
   },
   mounted() {
@@ -225,6 +226,8 @@ export default {
           this.stepChange();
         })
         .catch(e => {
+          this.errorReq = e;
+          this.notifyVue("danger");
           console.log(e);
         });
     },
@@ -261,8 +264,16 @@ export default {
         )
         .then(response => {
           console.log(response.data);
+          if (JSON.stringify(response.data) === "true") {
+            this.notifyVue("info");
+          }
+          if (JSON.stringify(response.data) === "false") {
+            this.notifyVue("warning");
+          }
         })
         .catch(e => {
+          this.errorReq = e;
+          this.notifyVue("danger");
           console.log(e);
         });
 
@@ -283,11 +294,61 @@ export default {
         )
         .then(response => {
           console.log(response.data);
+          if (JSON.stringify(response.data) === "true") {
+            window.location.reload();
+          }
+          if (JSON.stringify(response.data) === "false") {
+            this.notifyVue("warning");
+          }
         })
         .catch(e => {
+          this.errorReq = e;
+          this.notifyVue("danger");
           console.log(e);
         });
       this.submitted = true;
+    },
+    notifyVue(AlertType) {
+      if (AlertType === "success") {
+        this.$notify({
+          message:
+            "La oferta N° <b>" +
+            this.product.id +
+            "</b> ha sido actualizada con éxito.",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "top",
+          type: AlertType
+        });
+      }
+      if (AlertType === "warning") {
+        this.$notify({
+          message:
+            "La orden N°" + this.product.id + " <b>no</b> ha sido actualizada.",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
+      }
+      if (AlertType === "info") {
+        this.$notify({
+          message: "La Orden ha sido Cancelada con éxito.",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
+      }
+      if (AlertType === "danger") {
+        this.$notify({
+          message: "Ha ocurrido un error" + this.errorReq + ".",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
+      }
     }
   }
 };

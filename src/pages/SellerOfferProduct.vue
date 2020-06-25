@@ -82,7 +82,7 @@
                   </md-field>
                 </div>
                 <div class="md-layout-item md-small-size-100 md-size-33">
-                  <md-field >
+                  <md-field>
                     <label for="minQuantity">Numero mínimo de unidades</label>
                     <md-input
                       id="minQuantity"
@@ -130,6 +130,7 @@
 
 <script>
 import http from "../http-common";
+import router from "../routes/routes.js";
 import json from "../jsons/productos.json";
 
 export default {
@@ -193,9 +194,10 @@ export default {
           this.offer.id = response.data.id;
           console.log(response.data);
           if (JSON.stringify(response.data) === "true") {
-              this.notifyVue("success");
+            this.notifyVue("success");
+            this.$router.push("/SellerListMyOffers");
           } else {
-              this.notifyVue("warning");
+            this.notifyVue("warning");
           }
         })
         .catch(e => {

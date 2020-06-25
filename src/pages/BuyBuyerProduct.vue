@@ -99,7 +99,9 @@
                   <md-button
                     class="md-raised md-success"
                     @click="payOrder(product.path, product.numberOfUnits)"
-                    :disabled="this.product.numberOfUnits < this.product.minQuantity"
+                    :disabled="
+                      this.product.numberOfUnits < this.product.minQuantity
+                    "
                   >
                     <md-icon>queue</md-icon> Pagar
                   </md-button>
@@ -137,7 +139,7 @@ export default {
         images: []
       },
       aux: "",
-      token: "",
+      token: ""
     };
   },
   mounted() {
@@ -209,7 +211,11 @@ export default {
       if (AlertType === "success") {
         this.$notify({
           message:
-            "Se seleccionaron: " + this.product.numberOfUnits + " unidades de " + this.product.name + "</b>.",
+            "Se seleccionaron: " +
+            this.product.numberOfUnits +
+            " unidades de " +
+            this.product.name +
+            "</b>.",
           icon: "add_alert",
           horizontalAlign: "center",
           verticalAlign: "top",

@@ -118,6 +118,7 @@
 </template>
 <script>
 import http from "../http-common";
+import router from "../routes/routes.js";
 export default {
   name: "add-customer",
   data: function() {
