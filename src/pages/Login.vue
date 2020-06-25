@@ -77,7 +77,7 @@
     <md-dialog-alert
       :md-active.sync="errorReq"
       md-title="Error HTTP"
-      md-content=".    se presento un error en la petición Http  ."
+      md-content="    se presento un error en la petición Http  "
       md-confirm-text="ok!"
     />
   </div>
@@ -119,14 +119,18 @@ export default {
       http
         .post("/auth", data)
         .then(response => {
-          console.log("Res:" + response);
+          console.log("Respuesta:" + response);
           this.user.token = response.data;
           this.user.password = "";
           localStorage.setItem("TokenSession", JSON.stringify(response.data));
           localStorage.setItem("userSession", JSON.stringify(this.user));
           console.log("log-in");
-          if (response.data === "") {
+          if (
+            JSON.stringify(response.data.message) ===
+            "invalid username/password"
+          ) {
             this.conflictReq = true;
+            this.requestTime = false;
           }
           this.requestTime = false;
           this.$router.push("/dashboard");
