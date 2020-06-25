@@ -58,7 +58,7 @@
                 <div class="md-layout-item md-small-size-100 md-size-100">
                   <h3>Datos de envío</h3>
                   <md-field>
-                    <label>departamento</label>
+                    <label>Departamento</label>
                     <md-select
                       v-model="order.department"
                       name="departamentos"
@@ -81,7 +81,7 @@
                     <span class="md-error">El departamento es necesario</span>
                   </md-field>
                   <md-field>
-                    <label>ciudad</label>
+                    <label>Ciudad</label>
                     <md-select
                       v-model="order.city"
                       name="ciudades"
@@ -171,11 +171,13 @@
                   Bultos
                 </span>
                 de {{ order.productName }} con valor de
-                {{ order.numberOfUnits * order.pricePresentation }} para ser
-                enviadas al departamento de {{ order.department }} a la ciudad
-                de {{ order.city }}, {{ order.neighbourhood }} con dirección
-                {{ order.address }}, {{ order.details }}.
+                {{ order.numberOfUnits * order.pricePresentation }}.
               </p>
+              <p>
+                Para ser enviadas al departamento de {{ order.department }} a la
+                ciudad de {{ order.city }}, {{ order.neighbourhood }}.
+              </p>
+              <p>Con dirección {{ order.address }}, {{ order.details }}.</p>
               <div class="md-layout-item md-size-100 text-right">
                 <md-button class="md-raised md-success" @click="saveOrder">
                   <md-icon>done</md-icon> Termina tu compra
