@@ -12,9 +12,9 @@
           </md-card-header>
           <md-card-content>
             <div class="md-layout-item md-size-100 md-size-100">
-              <p class="category">
+              <h4>
                 {{ product.description }}
-              </p>
+              </h4>
             </div>
             <div v-if="product.qualification !== 0">
               <h3>Calificación del producto: {{ product.qualification }}</h3>
