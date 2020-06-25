@@ -103,17 +103,17 @@
                 </h2>
               </div>
               <div class="md-layout-item md-size-100 text-right">
-                <router-link to="/BuyerPayOrder" class="text-white">
-                  <md-button
-                    class="md-raised md-success"
-                    @click="payOrder(product.path, product.numberOfUnits)"
-                    :disabled="
-                      this.product.numberOfUnits < this.product.minQuantity
-                    "
-                  >
+                <md-button
+                  class="md-raised md-success"
+                  @click="payOrder(product.path, product.numberOfUnits)"
+                  :disabled="
+                    this.product.numberOfUnits < this.product.minQuantity
+                  "
+                >
+                  <router-link to="/BuyerPayOrder" class="text-white">
                     <md-icon>queue</md-icon> Pagar
-                  </md-button>
-                </router-link>
+                  </router-link>
+                </md-button>
               </div>
             </div>
           </md-card-content>
