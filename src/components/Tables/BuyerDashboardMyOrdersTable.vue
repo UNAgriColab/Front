@@ -1,6 +1,23 @@
 <template>
   <div>
+    <md-card style="text-align: center" v-if="buyerOrders.length === 0">
+      <md-card-header data-background-color="green">
+        <h4 class="title">No tienes compras activas</h4>
+        <p class="category">Revisa tu historial</p>
+        <md-button
+          href="#/BuyerListMyOrdersHist"
+          class="md-raised"
+          style="margin-top: 10px"
+        >
+          <md-icon class="md-plain">history</md-icon>
+          <md-icon class="md-plain">shopping_cart</md-icon>
+          Historial
+        </md-button>
+      </md-card-header>
+    </md-card>
+
     <md-table
+      v-else
       v-model="buyerOrders"
       :table-header-color="tableHeaderColor"
       style="text-align: center"
