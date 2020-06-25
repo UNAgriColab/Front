@@ -10,17 +10,25 @@
             <h4 class="title">Descripción del producto</h4>
             <p class="category">{{ product.sellerEmail }}</p>
           </md-card-header>
-          <div class="md-layout-item md-size-100 md-size-100">
-            <p class="category">
-              {{ product.description }}
-            </p>
-          </div>
-          <div
-            class="md-layout-item md-size-100 md-size-50"
-            style="margin-top: 15px"
-          >
-            <h2 class="title">Precio: {{ product.price }}</h2>
-          </div>
+          <md-card-content>
+            <div class="md-layout-item md-size-100 md-size-100">
+              <p class="category">
+                {{ product.description }}
+              </p>
+            </div>
+            <div v-if="product.qualification !== 0">
+              <h3>Calificación del producto: {{ product.qualification }}</h3>
+            </div>
+            <div v-if="product.qualification === 0">
+              <h3>Este producto no tiene calificación</h3>
+            </div>
+            <div
+              class="md-layout-item md-size-100 md-size-50"
+              style="margin-top: 15px"
+            >
+              <h2 class="title">Precio: {{ product.price }}</h2>
+            </div>
+          </md-card-content>
         </md-card>
         <md-card>
           <md-card-header data-background-color="green">
@@ -134,6 +142,7 @@ export default {
         totalPrice: "",
         description2: "",
         state: 0,
+        qualification: 0,
         canceled: false,
         path: "",
         images: []
@@ -177,6 +186,7 @@ export default {
           this.product.presentation = response.data.presentation;
           this.product.description = response.data.description;
           this.product.state = response.data.state;
+          this.product.qualification = response.data.qualification;
         })
         .catch(e => {
           console.log(e);
