@@ -317,7 +317,7 @@ export default {
       const data = {};
       http
         .put(
-          "/order/cancel/" + this.product.id + "/" + this.product.userEmail,
+          "/order/cancel/" + this.product.id + "/" + this.product.buyerEmail,
           data,
           {
             headers: {
@@ -348,7 +348,7 @@ export default {
       const data = {};
       http
         .put(
-          "/order/update/" + this.product.id + "/" + this.product.userEmail,
+          "/order/update/" + this.product.id + "/" + this.product.buyerEmail,
           data,
           {
             headers: {
