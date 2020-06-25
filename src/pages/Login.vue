@@ -119,7 +119,7 @@ export default {
       http
         .post("/auth", data)
         .then(response => {
-          console.log("Res:" + response)
+          console.log("Res:" + response);
           this.user.token = response.data;
           this.user.password = "";
           localStorage.setItem("TokenSession", JSON.stringify(response.data));

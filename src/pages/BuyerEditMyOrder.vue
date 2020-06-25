@@ -261,6 +261,8 @@ export default {
         this.$router.push("/login");
       }
       if (localStorage.getItem("buyerOrderId")) {
+        this.aux = JSON.parse(localStorage.getItem("userSession"));
+        this.token = this.aux.token;
         this.product.id = localStorage.getItem("buyerOrderId");
       }
     },
