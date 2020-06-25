@@ -131,7 +131,7 @@
                   product.state === 4
               "
             >
-              <md-button class="md-raised md-success" v-on:click="cancelOrder">
+              <md-button class="md-raised md-accent" v-on:click="cancelOrder">
                 cancelar producto
               </md-button>
             </div>
@@ -266,10 +266,12 @@ export default {
           console.log(response.data);
           if (JSON.stringify(response.data) === "true") {
             this.notifyVue("info");
+            window.location.reload();
           }
           if (JSON.stringify(response.data) === "false") {
             this.notifyVue("warning");
           }
+          window.location.reload();
         })
         .catch(e => {
           this.errorReq = e;

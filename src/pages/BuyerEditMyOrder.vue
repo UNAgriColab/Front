@@ -187,7 +187,7 @@
               class="md-layout-item md-size-100 text-right"
               v-if="product.state === 2"
             >
-              <md-button class="md-raised md-success" v-on:click="cancelOrder">
+              <md-button class="md-raised md-accent" v-on:click="cancelOrder">
                 <md-icon>cancel</md-icon> cancelar producto
               </md-button>
             </div>
@@ -330,11 +330,11 @@ export default {
           console.log(response.data);
           if (JSON.stringify(response.data) === "true") {
             this.notifyVue("info");
-            window.location.reload();
           }
           if (JSON.stringify(response.data) === "false") {
             this.notifyVue("warning");
           }
+          window.location.reload();
         })
         .catch(e => {
           console.log(e);
@@ -438,7 +438,7 @@ export default {
       }
       if (AlertType === "info") {
         this.$notify({
-          message: "La orden #" + product.id + " ha sido cancelada.",
+          message: "La orden #" + this.product.id + " ha sido cancelada.",
           icon: "add_alert",
           horizontalAlign: "center",
           verticalAlign: "bottom",
