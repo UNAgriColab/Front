@@ -187,7 +187,7 @@
               class="md-layout-item md-size-100 text-right"
               v-if="product.state === 2"
             >
-              <md-button class="md-raised md-accent" v-on:click="cancelOrder">
+              <md-button class="md-raised md-danger" v-on:click="cancelOrder">
                 <md-icon>cancel</md-icon> cancelar producto
               </md-button>
             </div>
