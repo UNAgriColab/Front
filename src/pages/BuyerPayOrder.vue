@@ -170,7 +170,7 @@
                 <span v-if="order.presentation === 5">
                   Bultos
                 </span>
-                de {{ order.productName }} con valor de
+                de {{ order.productName }} con valor de $
                 {{ order.numberOfUnits * order.pricePresentation }}.
               </p>
               <p>
