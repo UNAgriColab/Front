@@ -70,6 +70,9 @@
                   </md-input>
                   <span class="md-error">Minimo 1 Mayuscula y 1 numero </span>
                 </md-field>
+                <p>
+                  La contraseña debe tener al menos una mayúscula y un número
+                </p>
               </div>
               <div class="md-layout-item md-size-100 text-center">
                 <md-button
