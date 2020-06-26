@@ -136,7 +136,7 @@ export default {
         .catch(e => {
           this.requestTime = false;
           console.log(e);
-          this.errorReq = true;
+          this.conflictReq = true;
         });
     }
   }
