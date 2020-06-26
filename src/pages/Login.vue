@@ -119,28 +119,25 @@ export default {
       http
         .post("/auth", data)
         .then(response => {
-          console.log("Respuesta:" + response);
-          this.user.token = response.data;
-          this.user.password = "";
-          localStorage.setItem("TokenSession", JSON.stringify(response.data));
-          localStorage.setItem("userSession", JSON.stringify(this.user));
-          console.log("log-in");
-          if (
-            JSON.stringify(response.data.message) ===
-            "invalid username/password"
-          ) {
+          if (typeof response.data.message === "undefined") {
+            console.log("Respuesta:" + response);
+            this.user.token = response.data;
+            this.user.password = "";
+            localStorage.setItem("TokenSession", JSON.stringify(response.data));
+            localStorage.setItem("userSession", JSON.stringify(this.user));
+            console.log("log-in");
+            this.requestTime = false;
+            this.$router.push("/dashboard");
+          } else {
             this.conflictReq = true;
             this.requestTime = false;
           }
-          this.requestTime = false;
-          this.$router.push("/dashboard");
         })
         .catch(e => {
           this.requestTime = false;
           console.log(e);
-          this.errorReq = true;
+          this.conflictReq = true;
         });
-      /*localStorage.setItem("userSession", JSON.stringify(this.user));*/
     }
   }
 };

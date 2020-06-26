@@ -217,7 +217,7 @@ export default {
             "</b> ha sido publicada con éxito.",
           icon: "add_alert",
           horizontalAlign: "center",
-          verticalAlign: "bottom",
+          verticalAlign: "top",
           type: AlertType
         });
       }
@@ -229,7 +229,7 @@ export default {
             " <b>no</b> ha sido publicada.",
           icon: "add_alert",
           horizontalAlign: "center",
-          verticalAlign: "bottom",
+          verticalAlign: "top",
           type: AlertType
         });
       }
@@ -238,7 +238,7 @@ export default {
           message: "Ha ocurrido un Error" + this.errorReq + ".",
           icon: "add_alert",
           horizontalAlign: "center",
-          verticalAlign: "bottom",
+          verticalAlign: "top",
           type: AlertType
         });
       }
@@ -248,7 +248,7 @@ export default {
     setOptions: function() {
       let productos;
       let options = this.json.myJson;
-      for (let i = 0; i < 7; i++) {
+      for (let i = 0; i < 8; i++) {
         if (this.products.categoria === options[i]["categoria"]) {
           productos = options[i]["productos"];
         }
