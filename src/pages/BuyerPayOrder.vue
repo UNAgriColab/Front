@@ -182,9 +182,7 @@
                 <md-button
                   class="md-raised md-success"
                   @click="saveOrder"
-                 :disabled="
-                    this.order.buyerEmail === this.order.sellerEmail
-                  "
+                  :disabled="this.order.buyerEmail === this.order.sellerEmail"
                 >
                   <md-icon>done</md-icon> Termina tu compra
                 </md-button>
