@@ -324,6 +324,7 @@ export default {
         myJson: json
       },
       products: {
+        sellerEmail: "",
         categoria: "",
         producto: "",
         minPrice: "0",
@@ -346,6 +347,7 @@ export default {
         this.aux = JSON.parse(localStorage.getItem("userSession"));
         this.token = this.aux.token;
         this.tokenHeader = "Bearer " + this.token;
+        this.products.sellerEmail = this.aux.email;
       } else {
         this.$router.push("/login");
       }
@@ -379,6 +381,8 @@ export default {
       http
         .get(
           "/offer/" +
+            this.products.sellerEmail +
+            "/" +
             this.products.producto +
             "/" +
             this.products.maxPrice +
