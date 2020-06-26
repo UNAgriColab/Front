@@ -99,7 +99,7 @@
               </div>
               <div class="md-layout-item md-size-100 md-size-33">
                 <h2 class="title">
-                  Precio final: {{ product.numberOfUnits * product.price }}
+                  Precio final: ${{ product.numberOfUnits * product.price }}
                 </h2>
               </div>
               <div class="md-layout-item md-size-100 text-right">
