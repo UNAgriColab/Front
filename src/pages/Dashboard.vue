@@ -114,7 +114,7 @@
       <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
       >
-        <md-card>
+        <md-card v-if="userData[1] > 0">
           <md-card-header data-background-color="green">
             <h4 class="title">Ventas</h4>
             <p class="category">Resumen de las últimas ventas realizadas</p>
@@ -125,20 +125,49 @@
             ></seller-dashboard-my-orders-table>
           </md-card-content>
         </md-card>
+        <md-card style="text-align: center" v-else>
+          <md-card-header data-background-color="green">
+            <h4 class="title">Aún no has realizado ventas</h4>
+            <p class="category">Oferta tu primer producto ahora</p>
+            <md-button
+              href="#/SellerOfferProduct"
+              class="md-raised"
+              style="margin-top: 10px"
+            >
+              <md-icon class="md-plain">store</md-icon>
+              Oferta
+            </md-button>
+          </md-card-header>
+        </md-card>
       </div>
       <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
       >
-        <md-card>
-          <md-card-header data-background-color="orange">
+        <md-card v-if="userData[0] > 0">
+          <md-card-header data-background-color="green">
             <h4 class="title">Compras</h4>
             <p class="category">Resumen de las últimas compras realizadas</p>
           </md-card-header>
           <md-card-content>
             <buyer-dashboard-my-orders-table
-              table-header-color="orange"
+              table-header-color="green"
             ></buyer-dashboard-my-orders-table>
           </md-card-content>
+        </md-card>
+
+        <md-card style="text-align: center" v-else>
+          <md-card-header data-background-color="green">
+            <h4 class="title">Aún no has realizado compras</h4>
+            <p class="category">Realiza tu primer compra ahora</p>
+            <md-button
+              href="#/BuyerListAllOffers"
+              class="md-raised"
+              style="margin-top: 10px"
+            >
+              <md-icon class="md-plain">shopping_cart</md-icon>
+              Compra
+            </md-button>
+          </md-card-header>
         </md-card>
       </div>
     </div>

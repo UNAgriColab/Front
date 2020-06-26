@@ -40,8 +40,7 @@ export default {
         padding: "5%"
       },
       styleFooter: {
-        marginTop: "8%",
-        marginBottom: "5%",
+        marginTop: "13%",
         textColor: "#4caf50"
       },
       styleNavbar: {

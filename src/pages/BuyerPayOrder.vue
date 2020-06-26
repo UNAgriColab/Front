@@ -25,6 +25,7 @@
                       name="paymentMethod"
                       id="paymentMethod"
                       md-dense
+                      required
                     >
                       <md-optgroup label="Crédito">
                         <md-option value="Visa">Visa</md-option>
@@ -49,6 +50,7 @@
                         <md-option value="Pagatodo">Pago en pagatodo</md-option>
                       </md-optgroup>
                     </md-select>
+                    <span class="md-error">el metodo de pago es necesario</span>
                   </md-field>
                 </div>
               </div>
@@ -56,13 +58,14 @@
                 <div class="md-layout-item md-small-size-100 md-size-100">
                   <h3>Datos de envío</h3>
                   <md-field>
-                    <label>departamento</label>
+                    <label>Departamento</label>
                     <md-select
                       v-model="order.department"
                       name="departamentos"
                       id="dep"
                       md-dense
                       @md-selected="resetProductDropdown"
+                      required
                     >
                       <div class="md">
                         <md-option
@@ -75,14 +78,16 @@
                       </div>
                     </md-select>
                     <md-icon>location_city</md-icon>
+                    <span class="md-error">El departamento es necesario</span>
                   </md-field>
                   <md-field>
-                    <label>ciudad</label>
+                    <label>Ciudad</label>
                     <md-select
                       v-model="order.city"
                       name="ciudades"
                       id="ciudades"
                       md-dense
+                      required
                     >
                       <md-option
                         v-for="(option, index2) in setOptions"
@@ -93,17 +98,23 @@
                       </md-option>
                     </md-select>
                     <md-icon>apartment</md-icon>
+                    <span class="md-error">
+                      La ciudad o municipio son necesarios
+                    </span>
                   </md-field>
                   <md-field maxlength="1">
                     <label>Barrio o vereda</label>
-                    <md-input v-model="order.neighbourhood"></md-input>
+                    <md-input required v-model="order.neighbourhood"></md-input>
                     <md-icon>people_outline</md-icon>
+                    <span class="md-error">Este campo es necesario</span>
                   </md-field>
                   <md-field maxlength="1">
                     <label>Dirección</label>
-                    <md-input v-model="order.address"></md-input>
+                    <md-input required v-model="order.address"></md-input>
                     <md-icon>house</md-icon>
+                    <span class="md-error">Este campo es necesario</span>
                   </md-field>
+
                   <md-field maxlength="1">
                     <label>Detalles adicionales</label>
                     <md-input v-model="order.details"></md-input>
@@ -160,13 +171,15 @@
                   Bultos
                 </span>
                 de {{ order.productName }} con valor de
-                {{ order.numberOfUnits * order.pricePresentation }} para ser
-                enviadas al departamento de {{ order.department }} a la ciudad
-                de {{ order.city }}, {{ order.neighbourhood }} con dirección
-                {{ order.address }}, {{ order.details }}.
+                {{ order.numberOfUnits * order.pricePresentation }}.
               </p>
+              <p>
+                Para ser enviadas al departamento de {{ order.department }} a la
+                ciudad de {{ order.city }}, {{ order.neighbourhood }}.
+              </p>
+              <p>Con dirección {{ order.address }}, {{ order.details }}.</p>
               <div class="md-layout-item md-size-100 text-right">
-                <md-button class="md-raised md-success" v-on:click="saveOrder">
+                <md-button class="md-raised md-success" @click="saveOrder">
                   <md-icon>done</md-icon> Termina tu compra
                 </md-button>
               </div>
@@ -188,7 +201,7 @@ export default {
     return {
       order: {
         //oferta
-        ProductName: "",
+        productName: "",
         presentation: "",
         pricePresentation: 0,
         minQuantity: 0,
@@ -216,6 +229,13 @@ export default {
       },
       places: {
         myJson: json
+      },
+      validation: {
+        paymentMethodIsInvalid: false,
+        departmentIsInvalid: false,
+        cityIsInvalid: false,
+        neighbourhoodIsInvalid: false,
+        addressIsInvalid: false
       },
       submitted: false
     };
@@ -282,6 +302,7 @@ export default {
         })
         .catch(e => {
           console.log(e);
+          this.notifyVue("danger");
         });
     },
     saveOrder() {
@@ -307,9 +328,13 @@ export default {
           withCredentials: false
         })
         .then(response => {
-          console.log(response.data);
+          if (JSON.stringify(response.data) === "true") {
+            this.notifyVue("success");
+            this.$router.push("/BuyerListMyOrders");
+          }
         })
         .catch(e => {
+          this.notifyVue("danger");
           console.log(e);
         });
       this.submitted = true;
@@ -319,6 +344,43 @@ export default {
         this.places.city = "";
       } else {
         this.counter = 1;
+      }
+    },
+    notifyVue(AlertType) {
+      if (AlertType === "success") {
+        this.$notify({
+          message:
+            "Compra exitosa de: " +
+            this.order.numberOfUnits +
+            " unidades de <b>" +
+            this.order.productName +
+            "</b> .",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
+      }
+      if (AlertType === "warning") {
+        this.$notify({
+          message:
+            "la orden del producto: <b>" +
+            this.order.ProductName +
+            " <b>no</b> ha sido comprada.",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
+      }
+      if (AlertType === "danger") {
+        this.$notify({
+          message: "Ha ocurrido un error " + this.errorReq + ".",
+          icon: "add_alert",
+          horizontalAlign: "center",
+          verticalAlign: "bottom",
+          type: AlertType
+        });
       }
     }
   },

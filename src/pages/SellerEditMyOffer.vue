@@ -252,7 +252,6 @@ export default {
           this.errorReq = e;
           this.notifyVue("danger");
         });
-      location.reload(true);
     },
     submitFile() {
       let formData = new FormData();
@@ -265,10 +264,10 @@ export default {
           },
           withCredentials: false
         })
-        .then(function() {
-          console.log("SUCCESS!!");
+        .then(function(response) {
+          console.log(response.data);
           if (JSON.stringify(response.data) === "true") {
-            this.notifyVue("success");
+            window.location.reload();
           }
           if (JSON.stringify(response.data) === "false") {
             this.notifyVue("warning");

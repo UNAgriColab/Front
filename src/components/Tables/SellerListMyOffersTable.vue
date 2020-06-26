@@ -1,13 +1,21 @@
 <template>
   <div>
-    <md-table v-model="sellerOffers" :table-header-color="tableHeaderColor">
+    <md-table
+      v-model="sellerOffers"
+      :table-header-color="tableHeaderColor"
+      style="text-align: center"
+    >
       <md-table-row>
         <md-table-head></md-table-head>
-        <md-table-head>Producto</md-table-head>
-        <md-table-head>Unidades</md-table-head>
-        <md-table-head>Cantidad mínima</md-table-head>
-        <md-table-head>Precio por presentación</md-table-head>
-        <md-table-head>Acciones</md-table-head>
+        <md-table-head style="text-align: center">Producto</md-table-head>
+        <md-table-head style="text-align: center">Unidades</md-table-head>
+        <md-table-head style="text-align: center"
+          >Cantidad mínima</md-table-head
+        >
+        <md-table-head style="text-align: center"
+          >Precio por presentación</md-table-head
+        >
+        <md-table-head>Editar</md-table-head>
       </md-table-row>
       <md-table-row
         slot="md-table-row"

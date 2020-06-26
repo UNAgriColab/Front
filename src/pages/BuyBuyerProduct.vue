@@ -10,17 +10,25 @@
             <h4 class="title">Descripción del producto</h4>
             <p class="category">{{ product.sellerEmail }}</p>
           </md-card-header>
-          <div class="md-layout-item md-size-100 md-size-100">
-            <p class="category">
-              {{ product.description }}
-            </p>
-          </div>
-          <div
-            class="md-layout-item md-size-100 md-size-50"
-            style="margin-top: 15px"
-          >
-            <h2 class="title">Precio: {{ product.price }}</h2>
-          </div>
+          <md-card-content>
+            <div class="md-layout-item md-size-100 md-size-100">
+              <h4>
+                {{ product.description }}
+              </h4>
+            </div>
+            <div v-if="product.qualification !== 0">
+              <h3>Calificación del producto: {{ product.qualification }}</h3>
+            </div>
+            <div v-if="product.qualification === 0">
+              <h3>Este producto no tiene calificación</h3>
+            </div>
+            <div
+              class="md-layout-item md-size-100 md-size-50"
+              style="margin-top: 15px"
+            >
+              <h2 class="title">Precio: {{ product.price }}</h2>
+            </div>
+          </md-card-content>
         </md-card>
         <md-card>
           <md-card-header data-background-color="green">
@@ -55,7 +63,7 @@
                   <md-input
                     id="numberOfUnits"
                     type="Number"
-                    :min="product.minQuantity"
+                    :min="this.product.minQuantity"
                     required
                     v-model="product.numberOfUnits"
                     name="numberOfUnits"
@@ -95,14 +103,17 @@
                 </h2>
               </div>
               <div class="md-layout-item md-size-100 text-right">
-                <router-link to="/BuyerPayOrder" class="text-white">
-                  <md-button
-                    class="md-raised md-success"
-                    @click="payOrder(product.path, product.numberOfUnits)"
-                  >
+                <md-button
+                  class="md-raised md-success"
+                  @click="payOrder(product.path, product.numberOfUnits)"
+                  :disabled="
+                    this.product.numberOfUnits < this.product.minQuantity
+                  "
+                >
+                  <router-link to="/BuyerPayOrder" class="text-white">
                     <md-icon>queue</md-icon> Pagar
-                  </md-button>
-                </router-link>
+                  </router-link>
+                </md-button>
               </div>
             </div>
           </md-card-content>
@@ -131,10 +142,13 @@ export default {
         totalPrice: "",
         description2: "",
         state: 0,
+        qualification: 0,
         canceled: false,
         path: "",
         images: []
-      }
+      },
+      aux: "",
+      token: ""
     };
   },
   mounted() {
@@ -172,6 +186,7 @@ export default {
           this.product.presentation = response.data.presentation;
           this.product.description = response.data.description;
           this.product.state = response.data.state;
+          this.product.qualification = response.data.qualification;
         })
         .catch(e => {
           console.log(e);
@@ -206,7 +221,11 @@ export default {
       if (AlertType === "success") {
         this.$notify({
           message:
-            "Gracias por la compra del producto" + this.product.name + "</b>.",
+            "Se seleccionaron: " +
+            this.product.numberOfUnits +
+            " unidades de " +
+            this.product.name +
+            "</b>.",
           icon: "add_alert",
           horizontalAlign: "center",
           verticalAlign: "top",

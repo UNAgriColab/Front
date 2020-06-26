@@ -1,14 +1,19 @@
 <template>
   <div>
-    <md-table v-model="buyerOrders" :table-header-color="tableHeaderColor">
+    <md-table
+      v-model="buyerOrders"
+      :table-header-color="tableHeaderColor"
+      style="text-align: center"
+    >
       <md-table-row>
         <md-table-head></md-table-head>
-        <md-table-head>Producto</md-table-head>
-        <md-table-head>Cantidad</md-table-head>
-        <md-table-head>Unidades</md-table-head>
-        <md-table-head>Precio total</md-table-head>
-        <md-table-head>N° Ref</md-table-head>
-        <md-table-head>Estado</md-table-head>
+        <md-table-head style="text-align: center">Producto</md-table-head>
+        <md-table-head style="text-align: center">Cantidad</md-table-head>
+        <md-table-head style="text-align: center">Unidades</md-table-head>
+        <md-table-head style="text-align: center">Precio total</md-table-head>
+        <md-table-head style="text-align: center">N° Ref</md-table-head>
+        <md-table-head style="text-align: center">Estado</md-table-head>
+        <md-table-head>Ver</md-table-head>
       </md-table-row>
       <md-table-row
         slot="md-table-row"
@@ -87,6 +92,17 @@
         </md-table-cell>
         <md-table-cell md-label="Unidades" v-else>
           No asignado
+        </md-table-cell>
+        <md-table-cell md-label="Ver">
+          <router-link to="/BuyerEditMyOrder" class="text-white">
+            <md-button
+              class="md-fab md-icon-button md-raised md-success"
+              :value="buyerOrder.id"
+              @click="addIdBuyerOrder(buyerOrder.id)"
+            >
+              <md-icon>loupe</md-icon>
+            </md-button>
+          </router-link>
         </md-table-cell>
       </md-table-row>
     </md-table>

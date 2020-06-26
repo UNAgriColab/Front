@@ -5,19 +5,9 @@
         <img :src="logo" alt="Agricolab" />
       </div>
       <div class="md-toolbar-section-end">
-        <md-button
-          class="md-just-icon md-simple md-toolbar-toggle"
-          :class="{ toggled: $sidebar.showSidebar }"
-          @click="toggleSidebar"
-        >
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </md-button>
-
         <div class="md-collapse">
           <md-list>
-            <md-list-item href="#/login">
+            <md-list-item>
               <md-button
                 to="/indexBuyer"
                 class="md-button md-list-action md-success"
@@ -27,7 +17,7 @@
                 Compra
               </md-button>
             </md-list-item>
-            <md-list-item href="#/register">
+            <md-list-item>
               <md-button
                 to="/indexSeller"
                 class="md-button md-list-action md-success"
@@ -52,11 +42,7 @@ export default {
     }
   },
   data() {},
-  methods: {
-    toggleSidebar() {
-      this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
-    }
-  }
+  methods: {}
 };
 </script>
 

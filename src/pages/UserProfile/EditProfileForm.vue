@@ -16,7 +16,7 @@
               <md-icon>call</md-icon>
             </md-field>
             <md-field>
-              <label>departamento</label>
+              <label>Departamento</label>
               <md-select
                 v-model="places.department"
                 name="departamentos"
@@ -37,7 +37,7 @@
               <md-icon>location_city</md-icon>
             </md-field>
             <md-field>
-              <label>ciudad</label>
+              <label>Ciudad</label>
               <md-select
                 v-model="places.city"
                 name="ciudades"
@@ -193,7 +193,7 @@ export default {
             "</b> ha sido actualizado con éxito.",
           icon: "add_alert",
           horizontalAlign: "center",
-          verticalAlign: "top",
+          verticalAlign: "bottom",
           type: AlertType
         });
       }

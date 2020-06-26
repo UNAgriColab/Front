@@ -1,14 +1,35 @@
 <template>
   <div>
-    <md-table v-model="sellerOrders" :table-header-color="tableHeaderColor">
+    <md-card style="text-align: center" v-if="offers.length === 0">
+      <md-card-header data-background-color="green">
+        <h4 class="title">No tienes ventas activas</h4>
+        <p class="category">Revisa tu historial</p>
+        <md-button
+          href="#/SellerListMyOrdersHist"
+          class="md-raised"
+          style="margin-top: 10px"
+        >
+          <md-icon class="md-plain">history</md-icon>
+          <md-icon class="md-plain">store</md-icon>
+          Historial
+        </md-button>
+      </md-card-header>
+    </md-card>
+
+    <md-table
+      v-else
+      v-model="sellerOrders"
+      :table-header-color="tableHeaderColor"
+      style="text-align: center"
+    >
       <md-table-row>
         <md-table-head></md-table-head>
-        <md-table-head>Producto</md-table-head>
-        <md-table-head>Cantidad</md-table-head>
-        <md-table-head>Unidades</md-table-head>
-        <md-table-head>Precio total</md-table-head>
-        <md-table-head>N° Ref</md-table-head>
-        <md-table-head>Estado</md-table-head>
+        <md-table-head style="text-align: center">Producto</md-table-head>
+        <md-table-head style="text-align: center">Cantidad</md-table-head>
+        <md-table-head style="text-align: center">Unidades</md-table-head>
+        <md-table-head style="text-align: center">Precio total</md-table-head>
+        <md-table-head style="text-align: center">N° Ref</md-table-head>
+        <md-table-head style="text-align: center">Estado</md-table-head>
         <md-table-head>Editar</md-table-head>
       </md-table-row>
       <md-table-row

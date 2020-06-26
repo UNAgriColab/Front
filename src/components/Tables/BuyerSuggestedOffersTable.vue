@@ -1,13 +1,18 @@
 <template>
   <div>
-    <md-table v-model="buyerSuggested" :table-header-color="tableHeaderColor">
+    <md-table
+      v-model="buyerSuggested"
+      :table-header-color="tableHeaderColor"
+      style="text-align: center"
+    >
       <md-table-row>
         <md-table-head></md-table-head>
-        <md-table-head>Producto</md-table-head>
-        <md-table-head>Cantidad</md-table-head>
-        <md-table-head>Unidades</md-table-head>
-        <md-table-head>Precio total</md-table-head>
-        <md-table-head>N° Ref</md-table-head>
+        <md-table-head style="text-align: center">Producto</md-table-head>
+        <md-table-head style="text-align: center">Cantidad</md-table-head>
+        <md-table-head style="text-align: center">Unidades</md-table-head>
+        <md-table-head style="text-align: center">Precio total</md-table-head>
+        <md-table-head style="text-align: center">N° Ref</md-table-head>
+        <md-table-head>Ver</md-table-head>
       </md-table-row>
       <md-table-row
         slot="md-table-row"
@@ -46,6 +51,17 @@
         </md-table-cell>
         <md-table-cell md-label="Producto">
           {{ offer.id }}
+        </md-table-cell>
+        <md-table-cell md-label="Editar">
+          <router-link to="/BuyerBuyProduct" class="text-white">
+            <md-button
+              class="md-fab md-icon-button md-raised md-success"
+              :value="offer.id"
+              @click="addIdOffer(offer.id)"
+            >
+              <md-icon>shopping_cart</md-icon>
+            </md-button>
+          </router-link>
         </md-table-cell>
       </md-table-row>
     </md-table>
@@ -107,6 +123,9 @@ export default {
           this.offers = response.data;
         })
         .catch(e => console.log(e));
+    },
+    addIdOffer: function(Id) {
+      localStorage.setItem("buyerOrderId", Id);
     }
   }
 };

@@ -64,16 +64,20 @@
         </div>
       </div>
     </div>
+    <md-progress-spinner
+      md-mode="indeterminate"
+      v-if="this.requestTime"
+    ></md-progress-spinner>
     <md-dialog-alert
       :md-active.sync="conflictReq"
-      md-title="Revise sus datos por favor"
-      md-content="Hemos tenido un incoveniente,Por favor revise los campos de registro."
+      md-title="Conflicto en el usuario"
+      md-content=" Usuario o contraseña invalida. "
       md-confirm-text="ok!"
     />
     <md-dialog-alert
       :md-active.sync="errorReq"
-      md-title="Error en la petición HTTP"
-      md-content="Por favor intente mas tarde."
+      md-title="Error HTTP"
+      md-content="    se presento un error en la petición Http  "
       md-confirm-text="ok!"
     />
   </div>
@@ -92,7 +96,8 @@ export default {
       },
       submitData: false,
       conflictReq: false,
-      errorReq: false
+      errorReq: false,
+      requestTime: false
     };
   },
   mounted() {
@@ -106,6 +111,7 @@ export default {
       this.user.token = "";
     },
     saveLogin: function() {
+      this.requestTime = true;
       const data = {
         email: this.user.email,
         password: this.user.password
@@ -113,17 +119,24 @@ export default {
       http
         .post("/auth", data)
         .then(response => {
+          console.log("Respuesta:" + response);
           this.user.token = response.data;
           this.user.password = "";
           localStorage.setItem("TokenSession", JSON.stringify(response.data));
           localStorage.setItem("userSession", JSON.stringify(this.user));
           console.log("log-in");
-          if (JSON.stringify(response.data) === false) {
+          if (
+            JSON.stringify(response.data.message) ===
+            "invalid username/password"
+          ) {
             this.conflictReq = true;
+            this.requestTime = false;
           }
+          this.requestTime = false;
           this.$router.push("/dashboard");
         })
         .catch(e => {
+          this.requestTime = false;
           console.log(e);
           this.errorReq = true;
         });
