@@ -68,6 +68,7 @@
                     required
                   >
                   </md-input>
+                  <span class="md-error">Minimo 1 Mayuscula y 1 numero </span>
                 </md-field>
               </div>
               <div class="md-layout-item md-size-100 text-center">

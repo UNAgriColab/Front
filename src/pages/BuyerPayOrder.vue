@@ -170,7 +170,7 @@
                 <span v-if="order.presentation === 5">
                   Bultos
                 </span>
-                de {{ order.productName }} con valor de
+                de {{ order.productName }} con valor de $
                 {{ order.numberOfUnits * order.pricePresentation }}.
               </p>
               <p>
@@ -179,7 +179,13 @@
               </p>
               <p>Con dirección {{ order.address }}, {{ order.details }}.</p>
               <div class="md-layout-item md-size-100 text-right">
-                <md-button class="md-raised md-success" @click="saveOrder">
+                <md-button
+                  class="md-raised md-success"
+                  @click="saveOrder"
+                 :disabled="
+                    this.order.buyerEmail === this.order.sellerEmail
+                  "
+                >
                   <md-icon>done</md-icon> Termina tu compra
                 </md-button>
               </div>
