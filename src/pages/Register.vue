@@ -69,9 +69,9 @@
                   >
                   </md-input>
                 </md-field>
-                <span>
+                <p>
                   La contraseña debe tener al menos una mayúscula y un número
-                </span>
+                </p>
               </div>
               <div class="md-layout-item md-size-100 text-center">
                 <md-button
